@@ -186,11 +186,11 @@ table.spec tr:nth-child(even){background:#f8fafc}
       <div class="space-y-4 text-sm font-space text-gray-600">
         <div class="flex items-start gap-3">
           <span class="font-bold text-neo-black" style="min-width:170px">Ce qui est fourni</span>
-          <span>Spec BCC v0.3.0 de Bruno : 4 scripts SQL, doc technique 24 pages, payloads JSON, workflows N8N document&eacute;s. + 3 endpoints Advice d&eacute;j&agrave; cod&eacute;s c&ocirc;t&eacute; Advice v2.</span>
+          <span>Spec BCC v0.3.0 de Bruno : 4 scripts SQL, doc technique 24 pages, payloads JSON. + 3 endpoints Advice d&eacute;j&agrave; cod&eacute;s c&ocirc;t&eacute; Advice v2.</span>
         </div>
         <div class="flex items-start gap-3">
           <span class="font-bold text-neo-black" style="min-width:170px">Pr&eacute;requis</span>
-          <span>Infra serveur Hetzner (devis s&eacute;par&eacute;, sera d&eacute;j&agrave; en place). N8N install&eacute; sur ce serveur.</span>
+          <span>Infra serveur Hetzner (devis s&eacute;par&eacute;, sera d&eacute;j&agrave; en place).</span>
         </div>
         <div class="flex items-start gap-3">
           <span class="font-bold text-neo-black" style="min-width:170px">R&eacute;sultat</span>
@@ -655,7 +655,7 @@ table.spec tr:nth-child(even){background:#f8fafc}
         </div>
         <h4 class="font-grotesk font-bold text-lg mb-3">Regex + Scoring JS</h4>
         <div class="space-y-2 text-sm font-space text-gray-600">
-          <div>&bull; N8N Function node</div>
+          <div>&bull; Fonction TypeScript (regex + scoring)</div>
           <div>&bull; Pattern matching + scoring par mots-cl&eacute;s</div>
           <div>&bull; Moins pr&eacute;cis mais aucun co&ucirc;t API</div>
           <div>&bull; Utilis&eacute; quand : timeout Claude, quota d&eacute;pass&eacute;, cas &eacute;vidents</div>
@@ -888,26 +888,37 @@ table.spec tr:nth-child(even){background:#f8fafc}
 
 
 <!-- ============================================ -->
-<!-- 22 / WORKFLOWS N8N &mdash; SCAN -->
+<!-- 22 / CRON 1 &mdash; SCAN EMAILS -->
 <!-- ============================================ -->
 <section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4" style="color:#2980B9">22 / WORKFLOW N8N 1 &mdash; SCAN P&Eacute;RIODIQUE</div>
-      <h2 class="font-grotesk text-3xl sm:text-4xl font-bold mb-8">10 nodes, toutes les 8h.</h2>
+      <div class="section-number mb-4" style="color:#2980B9">22 / CRON 1 &mdash; SCAN P&Eacute;RIODIQUE</div>
+      <h2 class="font-grotesk text-3xl sm:text-4xl font-bold mb-4">Code direct, toutes les 8h.</h2>
+      <p class="text-sm text-gray-500 font-space mb-6">Pas de N8N. Tout est en TypeScript dans l'app Next.js, comme les crons d'Advice (relances, sync Google). M&ecirc;me pattern, m&ecirc;me fiabilit&eacute;.</p>
     </div>
     <div class="anim neo-card p-6 sm:p-8">
+      <div class="p-3 bg-neo-gray text-xs font-mono mb-4" style="line-height:1.6">
+        <span style="color:#888">// app/api/cron/sentinel/scan/route.ts</span><br>
+        <span style="color:#2980B9">export async function</span> GET(request: Request) {<br>
+        &nbsp;&nbsp;<span style="color:#888">// V&eacute;rifier CRON_SECRET</span><br>
+        &nbsp;&nbsp;<span style="color:#888">// ...</span><br>
+        }
+      </div>
       <div class="space-y-2">
-        <div class="flex items-start gap-3 p-3 bg-neo-gray neo-border-2 text-sm font-space"><span class="step-num text-xs" style="width:28px;height:28px;font-size:.7rem">1</span><div><strong>Cron trigger</strong> &mdash; Toutes les 8h (configurable par courtier)</div></div>
-        <div class="flex items-start gap-3 p-3 bg-neo-gray neo-border-2 text-sm font-space"><span class="step-num text-xs" style="width:28px;height:28px;font-size:.7rem">2</span><div><strong>GET courtiers</strong> &mdash; Fetch courtiers actifs depuis Supabase</div></div>
-        <div class="flex items-start gap-3 p-3 bg-neo-gray neo-border-2 text-sm font-space"><span class="step-num text-xs" style="width:28px;height:28px;font-size:.7rem">3</span><div><strong>Loop par courtier</strong> &mdash; It&eacute;ration sur chaque courtier actif</div></div>
-        <div class="flex items-start gap-3 p-3 bg-neo-gray neo-border-2 text-sm font-space"><span class="step-num text-xs" style="width:28px;height:28px;font-size:.7rem">4</span><div><strong>Fetch emails</strong> &mdash; Appel API selon le provider (M365 Graph ou Gmail API)</div></div>
-        <div class="flex items-start gap-3 p-3 bg-neo-gray neo-border-2 text-sm font-space"><span class="step-num text-xs" style="width:28px;height:28px;font-size:.7rem">5</span><div><strong>Pr&eacute;-filtre</strong> &mdash; Function node : exclure newsletters, spam, noreply</div></div>
-        <div class="flex items-start gap-3 p-3 bg-neo-gray neo-border-2 text-sm font-space"><span class="step-num text-xs" style="width:28px;height:28px;font-size:.7rem">6</span><div><strong>Classify</strong> &mdash; AI Agent (Option A) ou Function (Option B) selon la strat&eacute;gie hybride</div></div>
-        <div class="flex items-start gap-3 p-3 bg-neo-gray neo-border-2 text-sm font-space"><span class="step-num text-xs" style="width:28px;height:28px;font-size:.7rem">7</span><div><strong>INSERT email_detections</strong> &mdash; Cr&eacute;ation de la d&eacute;tection dans la table ma&icirc;tre</div></div>
-        <div class="flex items-start gap-3 p-3 bg-neo-gray neo-border-2 text-sm font-space"><span class="step-num text-xs" style="width:28px;height:28px;font-size:.7rem">8</span><div><strong>INSERT d&eacute;tail</strong> &mdash; Cr&eacute;ation dans la table sp&eacute;cifique (reclamation/rgpd/besoin/ambassadeur)</div></div>
-        <div class="flex items-start gap-3 p-3 bg-neo-gray neo-border-2 text-sm font-space"><span class="step-num text-xs" style="width:28px;height:28px;font-size:.7rem">9</span><div><strong>LOG scan_logs</strong> &mdash; Stats du scan : nb emails, nb d&eacute;tections, erreurs</div></div>
-        <div class="flex items-start gap-3 p-3 bg-neo-gray neo-border-2 text-sm font-space"><span class="step-num text-xs" style="width:28px;height:28px;font-size:.7rem;background:#C0392B">10</span><div><strong>NOTIFY</strong> &mdash; Webhook/email si d&eacute;tection critique ou d&eacute;lai approchant</div></div>
+        <div class="flex items-start gap-3 p-3 bg-neo-gray neo-border-2 text-sm font-space"><span class="step-num text-xs" style="width:28px;height:28px;font-size:.7rem">1</span><div><strong>Cron trigger</strong> &mdash; Appel HTTP toutes les 8h via cron syst&egrave;me (Hetzner) ou vercel.json</div></div>
+        <div class="flex items-start gap-3 p-3 bg-neo-gray neo-border-2 text-sm font-space"><span class="step-num text-xs" style="width:28px;height:28px;font-size:.7rem">2</span><div><strong>Fetch courtiers</strong> &mdash; Supabase query : tous les courtiers actifs avec leur provider email</div></div>
+        <div class="flex items-start gap-3 p-3 bg-neo-gray neo-border-2 text-sm font-space"><span class="step-num text-xs" style="width:28px;height:28px;font-size:.7rem">3</span><div><strong>Loop par courtier</strong> &mdash; for...of s&eacute;quentiel (pas de surcharge API)</div></div>
+        <div class="flex items-start gap-3 p-3 bg-neo-gray neo-border-2 text-sm font-space"><span class="step-num text-xs" style="width:28px;height:28px;font-size:.7rem">4</span><div><strong>Fetch emails</strong> &mdash; Microsoft Graph API ou Gmail API selon le provider du courtier</div></div>
+        <div class="flex items-start gap-3 p-3 bg-neo-gray neo-border-2 text-sm font-space"><span class="step-num text-xs" style="width:28px;height:28px;font-size:.7rem">5</span><div><strong>Pr&eacute;-filtre</strong> &mdash; Fonction TypeScript : exclure newsletters, spam, noreply, emails du courtier</div></div>
+        <div class="flex items-start gap-3 p-3 bg-neo-gray neo-border-2 text-sm font-space"><span class="step-num text-xs" style="width:28px;height:28px;font-size:.7rem">6</span><div><strong>Classify</strong> &mdash; Claude API (Option A) avec fallback regex (Option B) si timeout</div></div>
+        <div class="flex items-start gap-3 p-3 bg-neo-gray neo-border-2 text-sm font-space"><span class="step-num text-xs" style="width:28px;height:28px;font-size:.7rem">7</span><div><strong>INSERT email_detections</strong> &mdash; Supabase insert dans la table ma&icirc;tre</div></div>
+        <div class="flex items-start gap-3 p-3 bg-neo-gray neo-border-2 text-sm font-space"><span class="step-num text-xs" style="width:28px;height:28px;font-size:.7rem">8</span><div><strong>INSERT d&eacute;tail</strong> &mdash; Insert dans la table sp&eacute;cifique (reclamation/rgpd/besoin/ambassadeur)</div></div>
+        <div class="flex items-start gap-3 p-3 bg-neo-gray neo-border-2 text-sm font-space"><span class="step-num text-xs" style="width:28px;height:28px;font-size:.7rem">9</span><div><strong>Forward vers Advice</strong> &mdash; fetch() vers les endpoints Advice (d&eacute;j&agrave; cod&eacute;s par Bruno)</div></div>
+        <div class="flex items-start gap-3 p-3 bg-neo-gray neo-border-2 text-sm font-space"><span class="step-num text-xs" style="width:28px;height:28px;font-size:.7rem;background:#C0392B">10</span><div><strong>LOG + NOTIFY</strong> &mdash; Insert scan_logs + notification si d&eacute;tection critique</div></div>
+      </div>
+      <div class="mt-6 p-4 border-l-4 text-sm font-space" style="border-color:#2980B9;background:rgba(41,128,185,.05)">
+        <strong>Pourquoi pas N8N ?</strong> M&ecirc;me pattern que les 5 crons d'Advice (relances, sync Google, concurrents, tokens, alertes). Tout en TypeScript, tout dans Git, tout d&eacute;buggable. Pas de service suppl&eacute;mentaire &agrave; installer/maintenir.
       </div>
     </div>
   </div>
@@ -915,13 +926,14 @@ table.spec tr:nth-child(even){background:#f8fafc}
 
 
 <!-- ============================================ -->
-<!-- 23 / WORKFLOW N8N &mdash; D&Eacute;LAIS -->
+<!-- 23 / CRON 2 &mdash; SURVEILLANCE D&Eacute;LAIS -->
 <!-- ============================================ -->
 <section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4" style="color:#2980B9">23 / WORKFLOW N8N 2 &mdash; SURVEILLANCE D&Eacute;LAIS</div>
-      <h2 class="font-grotesk text-3xl sm:text-4xl font-bold mb-8">Tous les jours &agrave; 9h.</h2>
+      <div class="section-number mb-4" style="color:#2980B9">23 / CRON 2 &mdash; SURVEILLANCE D&Eacute;LAIS</div>
+      <h2 class="font-grotesk text-3xl sm:text-4xl font-bold mb-4">Tous les jours &agrave; 9h.</h2>
+      <p class="text-sm text-gray-500 font-space mb-6">Route API : <code class="bg-neo-gray px-2 py-0.5">/api/cron/sentinel/deadlines</code></p>
     </div>
     <div class="anim neo-card p-6 sm:p-8">
       <table class="spec">
@@ -933,6 +945,7 @@ table.spec tr:nth-child(even){background:#f8fafc}
           <tr><td>Besoin : urgence='critique' + statut='nouveau' + &gt;24h</td><td>Escalade : "Besoin critique non trait&eacute;"</td><td style="color:#F39C12;font-weight:700">HAUTE</td></tr>
         </tbody>
       </table>
+      <div class="mt-4 p-3 bg-neo-gray text-xs font-space"><strong>Utilise la vue SQL <code>v_alertes_delais</code></strong> d&eacute;j&agrave; fournie dans la spec BCC. Une seule query pour r&eacute;cup&eacute;rer toutes les alertes.</div>
     </div>
   </div>
 </section>
@@ -1116,8 +1129,8 @@ table.spec tr:nth-child(even){background:#f8fafc}
         <div class="chk-todo">13. POST vers /api/v1/advice/rgpd</div>
         <div class="chk-todo">14. POST vers /api/v1/advice/ambassador</div>
         <div class="chk-todo">15. SENTINEL_SHARED_SECRET validation</div>
-        <div class="chk-todo">16. Workflow N8N : scan p&eacute;riodique (10 nodes)</div>
-        <div class="chk-todo">17. Workflow N8N : surveillance d&eacute;lais (daily)</div>
+        <div class="chk-todo">16. Cron scan emails (/api/cron/sentinel/scan) toutes les 8h</div>
+        <div class="chk-todo">17. Cron surveillance d&eacute;lais (/api/cron/sentinel/deadlines) daily 9h</div>
         <div class="chk-todo">18. Dashboard page 1 : compteurs + alertes + timeline</div>
         <div class="chk-todo">19. Dashboard pages 2-5 : tables filtrables par cat&eacute;gorie</div>
         <div class="chk-todo">20. Dashboard page 6 : historique + scan logs</div>
@@ -1158,7 +1171,7 @@ table.spec tr:nth-child(even){background:#f8fafc}
         </div>
         <div class="flex items-start gap-3 p-3 bg-neo-gray neo-border-2">
           <span style="color:#C0392B;font-weight:700">&#10007;</span>
-          <div><strong>Installation N8N</strong> &mdash; Fait dans le devis Infra (serveur Hetzner). Pr&eacute;requis.</div>
+          <div><strong>Infra serveur</strong> &mdash; Fait dans le devis Infra (serveur Hetzner). Pr&eacute;requis.</div>
         </div>
       </div>
     </div>
@@ -1203,30 +1216,30 @@ table.spec tr:nth-child(even){background:#f8fafc}
 
 
 <!-- ============================================ -->
-<!-- 31 / PRODUCTION &mdash; N8N HARDENING -->
+<!-- 31 / PRODUCTION &mdash; CRON HARDENING -->
 <!-- ============================================ -->
 <section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4" style="color:#C0392B">31 / PRODUCTION &mdash; N8N HARDENING <span class="tag-prod">PROD</span></div>
-      <h2 class="font-grotesk text-3xl sm:text-4xl font-bold mb-8">Robustesse des workflows.</h2>
+      <div class="section-number mb-4" style="color:#C0392B">31 / PRODUCTION &mdash; CRON HARDENING <span class="tag-prod">PROD</span></div>
+      <h2 class="font-grotesk text-3xl sm:text-4xl font-bold mb-8">Robustesse des crons.</h2>
     </div>
     <div class="anim neo-card p-6 sm:p-8">
       <div class="grid sm:grid-cols-2 gap-6">
         <div>
           <h4 class="font-grotesk font-bold mb-3">Error handling</h4>
           <div class="text-sm font-space text-gray-600 space-y-2">
-            <div>&bull; Try/catch sur chaque node</div>
+            <div>&bull; Try/catch sur chaque &eacute;tape du pipeline</div>
             <div>&bull; Retry 3x avec backoff exponentiel</div>
-            <div>&bull; Dead letter queue pour emails non trait&eacute;s</div>
+            <div>&bull; Dead letter queue pour emails non trait&eacute;s (table d&eacute;di&eacute;e)</div>
           </div>
         </div>
         <div>
           <h4 class="font-grotesk font-bold mb-3">Ops</h4>
           <div class="text-sm font-space text-gray-600 space-y-2">
-            <div>&bull; Rotation automatique des credentials</div>
-            <div>&bull; Cron health check (ping workflow toutes les heures)</div>
-            <div>&bull; Alertes si workflow &eacute;choue 3x cons&eacute;cutives</div>
+            <div>&bull; Refresh automatique des tokens OAuth</div>
+            <div>&bull; Health check endpoint (/api/sentinel/health)</div>
+            <div>&bull; Alertes si cron &eacute;choue 3x cons&eacute;cutives</div>
           </div>
         </div>
       </div>
@@ -1285,7 +1298,7 @@ table.spec tr:nth-child(even){background:#f8fafc}
         <div class="flex items-start gap-3 p-3 bg-white neo-border-2"><strong class="min-w-[140px]">Headers</strong><span>CSP + HSTS + X-Frame-Options + X-Content-Type-Options</span></div>
         <div class="flex items-start gap-3 p-3 bg-white neo-border-2"><strong class="min-w-[140px]">Input sanitization</strong><span>Tous les champs email sanitiz&eacute;s avant stockage (XSS, injection SQL)</span></div>
         <div class="flex items-start gap-3 p-3 bg-white neo-border-2"><strong class="min-w-[140px]">Tokens</strong><span>Chiffrement v&eacute;rification des tokens OAuth stock&eacute;s</span></div>
-        <div class="flex items-start gap-3 p-3 bg-white neo-border-2"><strong class="min-w-[140px]">N8N isolation</strong><span>Cl&eacute; service_role isol&eacute;e dans N8N credentials, jamais dans le code</span></div>
+        <div class="flex items-start gap-3 p-3 bg-white neo-border-2"><strong class="min-w-[140px]">Service role</strong><span>Cl&eacute; SUPABASE_SERVICE_ROLE_KEY uniquement c&ocirc;t&eacute; serveur, jamais expos&eacute;e c&ocirc;t&eacute; client</span></div>
       </div>
     </div>
   </div>
@@ -1305,7 +1318,7 @@ table.spec tr:nth-child(even){background:#f8fafc}
       <table class="spec">
         <thead><tr><th>Cas</th><th>Solution</th></tr></thead>
         <tbody>
-          <tr><td>M365 webhook expiry (3 jours)</td><td>Auto-renew via cron N8N avant expiration</td></tr>
+          <tr><td>M365 webhook expiry (3 jours)</td><td>Auto-renew via cron avant expiration</td></tr>
           <tr><td>Gmail polling fallback</td><td>Si push notifications Google &eacute;chouent, fallback sur polling toutes les 8h</td></tr>
           <tr><td>Claude timeout / erreur</td><td>Fallback regex automatique + flag "v&eacute;rification manuelle"</td></tr>
           <tr><td>Email en doublon</td><td>D&eacute;doublonnage par email_id (UNIQUE constraint)</td></tr>
@@ -1330,9 +1343,9 @@ table.spec tr:nth-child(even){background:#f8fafc}
     <div class="anim neo-card p-6 sm:p-8">
       <div class="grid sm:grid-cols-2 gap-6">
         <div>
-          <h4 class="font-grotesk font-bold mb-3">N8N</h4>
+          <h4 class="font-grotesk font-bold mb-3">Crons</h4>
           <div class="text-sm font-space text-gray-600 space-y-2">
-            <div>&bull; Loop courtiers sans timeout (pagination interne)</div>
+            <div>&bull; Loop courtiers s&eacute;quentiel sans timeout</div>
             <div>&bull; Stagger scans : 30s de d&eacute;calage entre courtiers</div>
             <div>&bull; scan_logs par courtier (tra&ccedil;abilit&eacute;)</div>
           </div>
@@ -1373,7 +1386,7 @@ table.spec tr:nth-child(even){background:#f8fafc}
       <div class="neo-card p-5">
         <h4 class="font-grotesk font-bold mb-3">Documentation</h4>
         <div class="text-sm font-space text-gray-600 space-y-2">
-          <div>&bull; README technique pour chaque workflow N8N</div>
+          <div>&bull; README technique pour chaque cron route</div>
           <div>&bull; Guide d'ajout d'un nouveau courtier</div>
           <div>&bull; Runbook incident : que faire si le scan &eacute;choue</div>
           <div>&bull; Architecture decision records (ADR)</div>
@@ -1397,10 +1410,10 @@ table.spec tr:nth-child(even){background:#f8fafc}
       <div class="chk space-y-1 text-sm">
         <div class="chk-todo">1. Rebrand dashboard BrokerONE (couleurs, logo, favicon)</div>
         <div class="chk-todo">2. Rebrand notifications email (templates HTML)</div>
-        <div class="chk-todo">3. N8N : try/catch sur chaque node</div>
-        <div class="chk-todo">4. N8N : retry 3x avec backoff exponentiel</div>
-        <div class="chk-todo">5. N8N : dead letter queue</div>
-        <div class="chk-todo">6. N8N : credential rotation + health check cron</div>
+        <div class="chk-todo">3. Try/catch sur chaque &eacute;tape du pipeline</div>
+        <div class="chk-todo">4. Retry 3x avec backoff exponentiel</div>
+        <div class="chk-todo">5. Dead letter queue (table emails non trait&eacute;s)</div>
+        <div class="chk-todo">6. Token refresh auto + health check endpoint</div>
         <div class="chk-todo">7. Dashboard : responsive 6 pages</div>
         <div class="chk-todo">8. Dashboard : &eacute;tats loading / empty / error</div>
         <div class="chk-todo">9. Dashboard : animations realtime + push notifications</div>
@@ -1435,7 +1448,7 @@ table.spec tr:nth-child(even){background:#f8fafc}
         <div class="grid sm:grid-cols-2 gap-4">
           <div class="p-3 bg-neo-gray neo-border-2">
             <div class="font-mono text-[10px] font-bold mb-1" style="color:#2980B9">S1 &mdash; JOURS 1-3</div>
-            <div class="text-xs font-space text-gray-600">Setup Supabase (4 scripts SQL, RLS, Realtime) + premiers workflows N8N (cron, fetch courtiers)</div>
+            <div class="text-xs font-space text-gray-600">Setup Supabase (4 scripts SQL, RLS, Realtime) + connecteurs email (M365/Gmail OAuth)</div>
           </div>
           <div class="p-3 bg-neo-gray neo-border-2">
             <div class="font-mono text-[10px] font-bold mb-1" style="color:#2980B9">S2 &mdash; JOURS 4-7</div>
@@ -1457,7 +1470,7 @@ table.spec tr:nth-child(even){background:#f8fafc}
         <div class="grid sm:grid-cols-2 gap-4">
           <div class="p-3 bg-neo-gray neo-border-2">
             <div class="font-mono text-[10px] font-bold mb-1" style="color:#C0392B">S5 &mdash; JOURS 15-18</div>
-            <div class="text-xs font-space text-gray-600">Rebrand BrokerONE + N8N hardening (error handling, retry, DLQ) + dashboard polish (responsive, animations)</div>
+            <div class="text-xs font-space text-gray-600">Rebrand BrokerONE + cron hardening (error handling, retry, DLQ) + dashboard polish (responsive, animations)</div>
           </div>
           <div class="p-3 bg-neo-gray neo-border-2">
             <div class="font-mono text-[10px] font-bold mb-1" style="color:#C0392B">S6 &mdash; JOURS 19-22</div>
@@ -1533,7 +1546,7 @@ table.spec tr:nth-child(even){background:#f8fafc}
         </div>
         <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
           <div class="step-num" style="width:28px;height:28px;font-size:.7rem">4</div>
-          <div><strong>N8N d&eacute;j&agrave; install&eacute;</strong> &mdash; Fait dans le devis Infra (serveur Hetzner) ou acc&egrave;s &agrave; N8N cloud.</div>
+          <div><strong>Serveur Hetzner pr&ecirc;t</strong> &mdash; Fait dans le devis Infra. Crons d&eacute;clench&eacute;s via crontab syst&egrave;me ou vercel.json.</div>
         </div>
       </div>
     </div>
@@ -1558,7 +1571,7 @@ table.spec tr:nth-child(even){background:#f8fafc}
         </div>
         <div class="flex items-start gap-4">
           <div class="font-grotesk font-bold text-2xl" style="color:#2980B9;min-width:32px">2</div>
-          <div><h4 class="font-bold text-sm mb-1">Fourniture des acc&egrave;s</h4><p class="text-sm text-gray-500 font-space">Comptes email de test, acc&egrave;s Supabase, N8N pr&ecirc;t.</p></div>
+          <div><h4 class="font-bold text-sm mb-1">Fourniture des acc&egrave;s</h4><p class="text-sm text-gray-500 font-space">Comptes email de test (M365 et/ou Gmail), acc&egrave;s Supabase.</p></div>
         </div>
         <div class="flex items-start gap-4">
           <div class="font-grotesk font-bold text-2xl" style="color:#2980B9;min-width:32px">3</div>
