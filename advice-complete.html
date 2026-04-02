@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Advice Production — 3 Devis — Baptiste Fort</title>
+<title>Advice Production &mdash; 4 500&euro; &mdash; Baptiste Fort</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -38,15 +38,22 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 .tag-mvp{background:#1D6A45;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
 .tag-prod{background:#C0392B;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
 .tag-done{background:#0a0a0a;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
-.tag-infra{background:#1E3A5F;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
-.tag-crm{background:#8E44AD;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
+.tag-out{background:#999;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
+.tag-yes{background:#1D6A45;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
+.tag-no{background:#666;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
 @keyframes count-up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .stat-card:hover .stat-number{animation:count-up .3s ease}
-.part-divider{position:relative;padding:60px 0;text-align:center}
-.part-divider::before{content:'';position:absolute;left:50%;top:0;width:3px;height:30px;background:#C0392B;transform:translateX(-50%)}
 .devis-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;border:2px solid #0a0a0a}
 .timeline-line{position:relative;padding-left:40px}.timeline-line::before{content:'';position:absolute;left:15px;top:0;bottom:0;width:3px;background:#e2e8f0}
 .timeline-dot{position:absolute;left:8px;width:18px;height:18px;border-radius:50%;border:3px solid #0a0a0a;background:#fff;z-index:1}
+.code-block{background:#1a1a2e;color:#e0e0e0;font-family:'JetBrains Mono',monospace;font-size:12px;padding:16px 20px;border:2px solid #0a0a0a;overflow-x:auto;line-height:1.6}
+.code-block .kw{color:#C0392B;font-weight:700}.code-block .str{color:#27ae60}.code-block .cm{color:#666;font-style:italic}.code-block .fn{color:#3498db}
+.flow-arrow{display:flex;align-items:center;justify-content:center;padding:8px 0;color:#C0392B;font-size:20px;font-weight:700}
+.retention-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-bottom:1px solid #e2e8f0;font-size:13px}
+.retention-row:last-child{border-bottom:0}
+.retention-row>div{padding:10px 12px;font-family:'Space Mono',monospace}
+.retention-header{background:#0a0a0a;color:#fff;font-weight:700}
+.retention-header>div{padding:10px 12px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.05em}
 </style>
 </head>
 <body>
@@ -60,19 +67,20 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
   <div class="flex items-center justify-between h-14">
     <div class="flex items-center gap-3">
       <div class="neo-card-sm px-3 py-1 font-mono text-sm font-bold" style="background:#C0392B;color:#fff;border-color:#C0392B">A</div>
-      <span class="font-grotesk font-bold text-sm hidden sm:block">Advice &mdash; 3 Devis Production</span>
+      <span class="font-grotesk font-bold text-sm hidden sm:block">Advice &mdash; Production 4 500&euro;</span>
     </div>
     <div class="hidden lg:flex items-center gap-1 text-xs font-space">
-      <a href="#exec-summary" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Devis</a>
-      <a href="#mvp-recap" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">MVP</a>
+      <a href="#exec-summary" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Sommaire</a>
+      <a href="#recap" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Recap</a>
       <a href="#bruno-email" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Email</a>
-      <a href="#devis-1" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Infra</a>
-      <a href="#devis-2" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Production</a>
-      <a href="#devis-3" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">CRM</a>
-      <a href="#budget-total" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Budget</a>
+      <a href="#merge" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Merge</a>
+      <a href="#rebrand" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Rebrand</a>
+      <a href="#multilingue" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">NL</a>
+      <a href="#checklist" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Checklist</a>
+      <a href="#budget" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Budget</a>
       <a href="#next-steps" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Next</a>
     </div>
-    <div class="font-mono text-xs text-gray-400">reste 11 500&euro;</div>
+    <div class="font-mono text-xs text-gray-400">4 500&euro; HT</div>
   </div>
 </div>
 </nav>
@@ -80,34 +88,31 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 <!-- TICKER -->
 <div class="fixed top-[56px] left-0 right-0 z-40 text-white py-1.5 ticker-wrap" style="background:#C0392B;border-bottom:3px solid #0a0a0a">
 <div class="ticker marquee">
-  <span class="mx-8 text-xs font-space">ADVICE &mdash; 3 DEVIS &mdash; INFRA 2 500&euro; + PROD 6 500&euro; + CRM 2 500&euro;</span>
+  <span class="mx-8 text-xs font-space">ADVICE PRODUCTION &mdash; 4 500&euro;</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">MVP 7 500&euro; PAY&Eacute; &#10003;</span>
+  <span class="mx-8 text-xs font-space">MVP D&Eacute;J&Agrave; PAY&Eacute;</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">RESTE 11 500&euro;</span>
+  <span class="mx-8 text-xs font-space">CODE V2 BRUNO FOURNI</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">INFRA + PRODUCTION + CRM BRIO</span>
+  <span class="mx-8 text-xs font-space">~12 JOURS &mdash; 3 SPRINTS &mdash; 20 LIVRABLES</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">TOTAL 19 000&euro; (7 500 PAY&Eacute;S)</span>
+  <span class="mx-8 text-xs font-space">PR&Eacute;REQUIS : MIGRATION INFRA (DEVIS S&Eacute;PAR&Eacute;)</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">~20 JOURS DE TRAVAIL</span>
+  <span class="mx-8 text-xs font-space">ADVICE PRODUCTION &mdash; 4 500&euro;</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">ADVICE &mdash; 3 DEVIS &mdash; INFRA 2 500&euro; + PROD 6 500&euro; + CRM 2 500&euro;</span>
+  <span class="mx-8 text-xs font-space">MVP D&Eacute;J&Agrave; PAY&Eacute;</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">MVP 7 500&euro; PAY&Eacute; &#10003;</span>
+  <span class="mx-8 text-xs font-space">CODE V2 BRUNO FOURNI</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">RESTE 11 500&euro;</span>
+  <span class="mx-8 text-xs font-space">~12 JOURS &mdash; 3 SPRINTS &mdash; 20 LIVRABLES</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">INFRA + PRODUCTION + CRM BRIO</span>
-  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">TOTAL 19 000&euro; (7 500 PAY&Eacute;S)</span>
-  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">~20 JOURS DE TRAVAIL</span>
+  <span class="mx-8 text-xs font-space">PR&Eacute;REQUIS : MIGRATION INFRA (DEVIS S&Eacute;PAR&Eacute;)</span>
 </div>
 </div>
 
+
 <!-- ============================================ -->
-<!-- 01 — HELLO -->
+<!-- 01 / HELLO -->
 <!-- ============================================ -->
 <section class="min-h-screen flex items-center justify-center pt-32 pb-20 px-4 relative overflow-hidden">
   <div class="absolute inset-0 stripe-bg opacity-30"></div>
@@ -115,17 +120,19 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
     <div class="anim">
       <div class="section-number mb-6">01 / HELLO</div>
       <div class="flex items-center gap-3 mb-6 flex-wrap">
-        <span class="tag-mvp">MVP 7 500&euro; &#10003;</span>
-        <span class="tag-infra">INFRA 2 500&euro;</span>
-        <span class="tag-prod">PROD 6 500&euro;</span>
-        <span class="tag-crm">CRM 2 500&euro;</span>
+        <span class="tag-mvp">MVP 7 500&euro; PAY&Eacute; &#10003;</span>
+        <span class="tag-done">CODE V2 FOURNI &#10003;</span>
+        <span class="tag-prod">PRODUCTION 4 500&euro;</span>
       </div>
       <h1 class="font-grotesk text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] mb-8">
-        Advice passe<br>en production.
+        Le MVP est pay&eacute;.<br>
+        Le code v2 est fourni.<br>
+        <span style="color:#C0392B">Voici la production.</span>
       </h1>
       <div class="text-lg sm:text-xl text-gray-500 font-space leading-relaxed mb-8 space-y-4">
-        <p>Voici le plan bas&eacute; sur <strong class="text-neo-black">ta liste du 30 mars</strong>.</p>
-        <p>3 devis, 3 phases. Migration infra, mise en production, puis CRM Brio. Le MVP est pay&eacute;, le code v2 est fourni &mdash; on passe &agrave; la suite.</p>
+        <p>Ce document couvre uniquement <strong class="text-neo-black">la mise en production d'Advice</strong> &mdash; 4 500&euro; HT.</p>
+        <p>Chaque point de ton email du 30 mars est couvert, mapp&eacute;, et d&eacute;taill&eacute;.</p>
+        <p class="text-sm" style="color:#999">La migration infra et le CRM Brio sont des devis s&eacute;par&eacute;s.</p>
       </div>
     </div>
     <div class="anim">
@@ -134,68 +141,70 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
   </div>
 </section>
 
+
 <!-- ============================================ -->
-<!-- 02 — EXEC SUMMARY -->
+<!-- 02 / EXEC SUMMARY -->
 <!-- ============================================ -->
 <section id="exec-summary" class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
       <div class="section-number mb-4" style="color:#C0392B">02 / R&Eacute;SUM&Eacute; EX&Eacute;CUTIF</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">3 devis, 3 phases.</h2>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le point de situation.</h2>
     </div>
     <div class="anim neo-card p-6 sm:p-8" style="border-left:6px solid #C0392B">
       <div class="space-y-5">
         <div class="flex items-start gap-4">
-          <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center font-grotesk font-bold text-xl text-white" style="background:#1E3A5F;border:2px solid #0a0a0a">1</div>
+          <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center font-grotesk font-bold text-xl text-white" style="background:#1D6A45;border:2px solid #0a0a0a">&#10003;</div>
           <div>
-            <h4 class="font-bold text-sm mb-1">Devis 1 &mdash; Migration Infra <span class="tag-infra">2 500&euro;</span> <span class="devis-pill" style="background:#fff3cd;color:#856404;border-color:#856404">PR&Eacute;REQUIS</span></h4>
-            <p class="text-sm text-gray-500 font-space">Hetzner, Nginx, SSL, DNS, migration site vitrine, PM2/Docker. <strong>3-4 jours.</strong> Bloque tout le reste.</p>
+            <h4 class="font-bold text-sm mb-1">MVP v1 (Baptiste) <span class="tag-mvp">7 500&euro; PAY&Eacute;</span></h4>
+            <p class="text-sm text-gray-500 font-space">UI compl&egrave;te, 40+ routes, campagnes, scraping, OAuth, IA, onboarding. <strong>Livr&eacute; et pay&eacute;.</strong></p>
           </div>
         </div>
         <div class="flex items-start gap-4">
-          <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center font-grotesk font-bold text-xl text-white" style="background:#C0392B;border:2px solid #0a0a0a">2</div>
+          <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center font-grotesk font-bold text-xl text-white" style="background:#0a0a0a;border:2px solid #0a0a0a">&#10003;</div>
           <div>
-            <h4 class="font-bold text-sm mb-1">Devis 2 &mdash; Advice Production <span class="tag-prod">6 500&euro;</span> <span class="devis-pill" style="background:#C0392B;color:#fff;border-color:#C0392B">PRINCIPAL</span></h4>
-            <p class="text-sm text-gray-500 font-space">Merge v1+v2, rebrand BrokerONE, multilingue NL, mentions l&eacute;gales, GDPR, multi-tenant M365, polish. <strong>12-15 jours.</strong></p>
+            <h4 class="font-bold text-sm mb-1">Code v2 (Bruno) <span class="tag-done">FOURNI</span></h4>
+            <p class="text-sm text-gray-500 font-space">3 endpoints Sentinel, 441 lignes prompts IA, 4 tables SQL, types Zod, config FR/BE. <strong>Fourni gratuitement.</strong></p>
           </div>
         </div>
         <div class="flex items-start gap-4">
-          <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center font-grotesk font-bold text-xl text-white" style="background:#8E44AD;border:2px solid #0a0a0a">3</div>
+          <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center font-grotesk font-bold text-xl text-white" style="background:#C0392B;border:2px solid #0a0a0a">&#9654;</div>
           <div>
-            <h4 class="font-bold text-sm mb-1">Devis 3 &mdash; CRM Brio <span class="tag-crm">2 500&euro;</span> <span class="devis-pill" style="background:#f0f0f0;color:#666;border-color:#999">APR&Egrave;S PROD</span></h4>
-            <p class="text-sm text-gray-500 font-space">API Brio (Portima), Openbox, sync clients, webhooks. <strong>3-5 jours.</strong> Apr&egrave;s que les premiers courtiers testent.</p>
+            <h4 class="font-bold text-sm mb-1">Advice Production <span class="tag-prod">4 500&euro; &Agrave; FAIRE</span></h4>
+            <p class="text-sm text-gray-500 font-space">Merge v1+v2, rebrand, multilingue NL, GDPR, M365, mentions l&eacute;gales, polish. <strong>~10-12 jours, 3 sprints.</strong></p>
           </div>
         </div>
         <div class="pt-4" style="border-top:2px dashed #e2e8f0">
           <div class="flex items-start gap-4">
-            <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center font-grotesk font-bold text-xl" style="background:#fff;border:2px solid #0a0a0a">&#8721;</div>
+            <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center font-grotesk font-bold text-xl" style="background:#fff3cd;border:2px solid #856404;color:#856404">!</div>
             <div>
-              <h4 class="font-bold text-sm mb-1">Total restant : <strong>11 500&euro; HT</strong></h4>
-              <p class="text-sm text-gray-500 font-space">MVP 7 500&euro; d&eacute;j&agrave; pay&eacute;. Total global : 19 000&euro; HT.</p>
+              <h4 class="font-bold text-sm mb-1">Pr&eacute;requis : Migration infra <span class="devis-pill" style="background:#fff3cd;color:#856404;border-color:#856404">DEVIS S&Eacute;PAR&Eacute;</span></h4>
+              <p class="text-sm text-gray-500 font-space">La mise en production n&eacute;cessite d'abord la migration infra (Hetzner, Nginx, SSL, DNS). C'est un devis &agrave; part.</p>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="anim grid sm:grid-cols-4 gap-4 mt-8">
-      <div class="neo-card p-4 text-center stat-card"><div class="text-xs text-gray-400 font-space mb-1">MVP pay&eacute;</div><div class="font-space font-bold text-3xl stat-number" style="color:#1D6A45">7 500&euro;</div></div>
-      <div class="neo-card p-4 text-center stat-card"><div class="text-xs text-gray-400 font-space mb-1">Restant</div><div class="font-space font-bold text-3xl stat-number" style="color:#C0392B">11 500&euro;</div></div>
-      <div class="neo-card p-4 text-center stat-card"><div class="text-xs text-gray-400 font-space mb-1">Dur&eacute;e totale</div><div class="font-space font-bold text-3xl stat-number">~20j</div></div>
-      <div class="neo-card p-4 text-center stat-card"><div class="text-xs text-gray-400 font-space mb-1">Total global</div><div class="font-space font-bold text-3xl stat-number">19 000&euro;</div></div>
+      <div class="neo-card p-4 text-center stat-card"><div class="text-xs text-gray-400 font-space mb-1">MVP</div><div class="font-space font-bold text-2xl stat-number" style="color:#1D6A45">7 500&euro;</div><div class="text-xs font-space" style="color:#1D6A45">PAY&Eacute;</div></div>
+      <div class="neo-card p-4 text-center stat-card"><div class="text-xs text-gray-400 font-space mb-1">Production</div><div class="font-space font-bold text-2xl stat-number" style="color:#C0392B">4 500&euro;</div><div class="text-xs font-space" style="color:#C0392B">&Agrave; FAIRE</div></div>
+      <div class="neo-card p-4 text-center stat-card"><div class="text-xs text-gray-400 font-space mb-1">Dur&eacute;e</div><div class="font-space font-bold text-2xl stat-number">~12j</div><div class="text-xs font-space text-gray-400">3 SPRINTS</div></div>
+      <div class="neo-card p-4 text-center stat-card"><div class="text-xs text-gray-400 font-space mb-1">Livrables</div><div class="font-space font-bold text-2xl stat-number">20</div><div class="text-xs font-space text-gray-400">ITEMS</div></div>
     </div>
   </div>
 </section>
 
+
 <!-- ============================================ -->
-<!-- 03-04 — MVP RECAP -->
+<!-- 03 / RECAP V1 (Baptiste) -->
 <!-- ============================================ -->
-<section id="mvp-recap" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
+<section id="recap" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto text-white">
     <div class="anim">
       <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">03 / CE QUI EXISTE D&Eacute;J&Agrave;</div>
       <div class="flex items-center gap-3 mb-4"><span class="tag-mvp">MVP LIVR&Eacute;</span><span class="tag-done">CODE V2 FOURNI</span></div>
-      <h2 class="font-grotesk text-4xl sm:text-6xl font-bold mb-6">MVP v1 (Baptiste)<br>+ Code v2 (Bruno).</h2>
-      <p class="text-lg font-space" style="color:rgba(255,255,255,.7)">Tout ce qui a d&eacute;j&agrave; &eacute;t&eacute; construit et pay&eacute;, plus ce que Bruno a fourni gratuitement.</p>
+      <h2 class="font-grotesk text-4xl sm:text-6xl font-bold mb-6">V1 Baptiste + V2 Bruno.</h2>
+      <p class="text-lg font-space" style="color:rgba(255,255,255,.7)">Un rappel rapide de ce qui est d&eacute;j&agrave; construit. Tu connais les deux c&ocirc;t&eacute;s.</p>
     </div>
   </div>
 </section>
@@ -203,104 +212,172 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 <section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4" style="color:#1D6A45">MVP V1 &mdash; BAPTISTE &mdash; 7 500&euro; PAY&Eacute;</div>
-      <h2 class="font-grotesk text-3xl sm:text-4xl font-bold mb-6">Ce que fait Advice aujourd'hui.</h2>
+      <div class="section-number mb-4" style="color:#1D6A45">V1 &mdash; BAPTISTE &mdash; 7 500&euro; PAY&Eacute;</div>
+      <h2 class="font-grotesk text-3xl sm:text-4xl font-bold mb-6">Advice aujourd'hui.</h2>
     </div>
     <div class="anim grid sm:grid-cols-2 gap-3 mb-8">
-      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="tag-mvp">&#10003;</span><span class="text-sm font-space">Onboarding 7 &eacute;tapes + config auto</span></div>
-      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="tag-mvp">&#10003;</span><span class="text-sm font-space">Dashboard complet, KPIs cliquables</span></div>
-      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="tag-mvp">&#10003;</span><span class="text-sm font-space">Sollicitations (manuel, CSV, webhook)</span></div>
-      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="tag-mvp">&#10003;</span><span class="text-sm font-space">Relances auto J+0, J+2, J+5</span></div>
-      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="tag-mvp">&#10003;</span><span class="text-sm font-space">Page tampon brand&eacute;e + routage intelligent</span></div>
-      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="tag-mvp">&#10003;</span><span class="text-sm font-space">Analyse IA (sentiment, th&egrave;mes, frictions)</span></div>
+      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="tag-mvp">&#10003;</span><span class="text-sm font-space">UI compl&egrave;te, 40+ routes</span></div>
+      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="tag-mvp">&#10003;</span><span class="text-sm font-space">Campagnes (manuel, CSV, webhook)</span></div>
+      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="tag-mvp">&#10003;</span><span class="text-sm font-space">Scraping Google Reviews (Apify)</span></div>
+      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="tag-mvp">&#10003;</span><span class="text-sm font-space">OAuth M365 + Gmail + cascade</span></div>
+      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="tag-mvp">&#10003;</span><span class="text-sm font-space">Analyse IA (sentiment, th&egrave;mes)</span></div>
       <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="tag-mvp">&#10003;</span><span class="text-sm font-space">3 r&eacute;ponses Google IA (pro, empathique, direct)</span></div>
       <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="tag-mvp">&#10003;</span><span class="text-sm font-space">Registre ACPR/FSMA + export Excel</span></div>
-      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="tag-mvp">&#10003;</span><span class="text-sm font-space">Scraping Google Reviews (Apify)</span></div>
-      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="tag-mvp">&#10003;</span><span class="text-sm font-space">Email OAuth (M365 + Gmail) + cascade</span></div>
+      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="tag-mvp">&#10003;</span><span class="text-sm font-space">Onboarding 7 &eacute;tapes + config auto</span></div>
+      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="tag-mvp">&#10003;</span><span class="text-sm font-space">Relances auto J+0, J+2, J+5</span></div>
+      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="tag-mvp">&#10003;</span><span class="text-sm font-space">Page tampon brand&eacute;e + routage intelligent</span></div>
       <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="tag-mvp">&#10003;</span><span class="text-sm font-space">Alertes auto + suggestion IA + 3 statuts</span></div>
       <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="tag-mvp">&#10003;</span><span class="text-sm font-space">Veille concurrentielle hebdomadaire</span></div>
-      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="tag-mvp">&#10003;</span><span class="text-sm font-space">Analytiques + filtres + funnel</span></div>
-      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="tag-mvp">&#10003;</span><span class="text-sm font-space">S&eacute;curit&eacute; : AES-256, RLS, CSP</span></div>
-      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="tag-mvp">&#10003;</span><span class="text-sm font-space">40+ routes, 13 tables, 5 cron jobs</span></div>
-      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="tag-mvp">&#10003;</span><span class="text-sm font-space">Param&egrave;tres (11 onglets)</span></div>
     </div>
+
+    <!-- 04 / CODE V2 BRUNO -->
     <div class="anim">
       <div class="section-number mb-4" style="color:#1E3A5F">04 / CODE V2 &mdash; FOURNI PAR BRUNO &mdash; GRATUIT</div>
       <h2 class="font-grotesk text-3xl sm:text-4xl font-bold mb-6">Backend v2 pr&ecirc;t &agrave; int&eacute;grer.</h2>
     </div>
     <div class="anim grid sm:grid-cols-3 gap-4">
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-3"><span class="tag-done">FOURNI &#10003;</span></div><h4 class="font-bold text-sm mb-2">3 endpoints Sentinel</h4><p class="text-xs text-gray-500 font-space">R&eacute;clamation, RGPD, Ambassador. Auth par shared secret.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-3"><span class="tag-done">FOURNI &#10003;</span></div><h4 class="font-bold text-sm mb-2">441 lignes de prompts IA</h4><p class="text-xs text-gray-500 font-space">AR ACPR, 3 tons Google, 6 templates RGPD.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-3"><span class="tag-done">FOURNI &#10003;</span></div><h4 class="font-bold text-sm mb-2">4 tables SQL + RLS</h4><p class="text-xs text-gray-500 font-space">Migration pr&ecirc;te, triggers, fonctions.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-3"><span class="tag-done">FOURNI &#10003;</span></div><h4 class="font-bold text-sm mb-2">Types TS + Zod</h4><p class="text-xs text-gray-500 font-space">Validators pour chaque endpoint.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-3"><span class="tag-done">FOURNI &#10003;</span></div><h4 class="font-bold text-sm mb-2">Config dynamique FR/BE</h4><p class="text-xs text-gray-500 font-space">ACPR/CNIL vs FSMA/APD auto.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-3"><span class="tag-done">FOURNI &#10003;</span></div><h4 class="font-bold text-sm mb-2">Rate limiting</h4><p class="text-xs text-gray-500 font-space">Protection anti-abus configur&eacute;e.</p></div>
+      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-3"><span class="tag-done">FOURNI &#10003;</span></div><h4 class="font-bold text-sm mb-2">3 endpoints Sentinel</h4><p class="text-xs text-gray-500 font-space">POST /reclamation, POST /rgpd, POST /ambassador. Auth par shared secret + Zod validation.</p></div>
+      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-3"><span class="tag-done">FOURNI &#10003;</span></div><h4 class="font-bold text-sm mb-2">441 lignes de prompts IA</h4><p class="text-xs text-gray-500 font-space">AR ACPR 2024-R-02, r&eacute;ponse 3 tons, 6 templates RGPD (acc&egrave;s, portabilit&eacute;, rectification, opposition, directives, refus).</p></div>
+      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-3"><span class="tag-done">FOURNI &#10003;</span></div><h4 class="font-bold text-sm mb-2">4 tables SQL + RLS</h4><p class="text-xs text-gray-500 font-space">reclamations_advice, demandes_droits_advice, ambassadeurs_advice, sentinel_logs. Triggers + fonctions.</p></div>
+      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-3"><span class="tag-done">FOURNI &#10003;</span></div><h4 class="font-bold text-sm mb-2">Types TS + Zod</h4><p class="text-xs text-gray-500 font-space">Interfaces TypeScript + validateurs Zod pour chaque endpoint et chaque table.</p></div>
+      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-3"><span class="tag-done">FOURNI &#10003;</span></div><h4 class="font-bold text-sm mb-2">Config dynamique FR/BE</h4><p class="text-xs text-gray-500 font-space">reg-config.ts : switch ACPR/CNIL (France) vs FSMA/APD (Belgique) automatique selon pays.</p></div>
+      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-3"><span class="tag-done">FOURNI &#10003;</span></div><h4 class="font-bold text-sm mb-2">Rate limiting</h4><p class="text-xs text-gray-500 font-space">Protection anti-abus configur&eacute;e sur chaque endpoint public.</p></div>
     </div>
     <div class="anim neo-card p-5 mt-6" style="border-left:6px solid #1E3A5F">
-      <p class="text-sm font-space text-gray-600"><strong>R&eacute;sum&eacute; :</strong> MVP v1 (Baptiste) = toute l'UI + fonctionnalit&eacute;s. Code v2 (Bruno) = backend avanc&eacute;. Les 3 devis ci-dessous couvrent l'int&eacute;gration, la mise en production et le CRM.</p>
+      <p class="text-sm font-space text-gray-600"><strong>R&eacute;sum&eacute; :</strong> V1 = toute l'app UI + fonctionnalit&eacute;s (pay&eacute;). V2 = backend avanc&eacute; (fourni). Le devis ci-dessous couvre l'int&eacute;gration des deux + toutes les demandes de ton email du 30 mars.</p>
     </div>
   </div>
 </section>
 
+
 <!-- ============================================ -->
-<!-- 05 — BRUNO'S EMAIL -->
+<!-- 05 / L'EMAIL DE BRUNO -->
 <!-- ============================================ -->
 <section id="bruno-email" class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4" style="color:#C0392B">05 / EMAIL DU 30 MARS</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Ta liste, nos devis.</h2>
-      <p class="text-gray-600 font-space mb-8">Chaque point de ton email du 30 mars est mapp&eacute; sur un devis. Rien n'est oubli&eacute;.</p>
+      <div class="section-number mb-4" style="color:#C0392B">05 / EMAIL DU 30 MARS &mdash; POINT PAR POINT</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Ta liste, nos sections.</h2>
+      <p class="text-gray-600 font-space mb-8">Chaque item de ton email est mapp&eacute; sur une section de ce devis. Ce qui n'est pas Advice Production est clairement identifi&eacute;.</p>
     </div>
+
+    <div class="anim space-y-3 mb-8">
+      <div class="font-mono text-xs font-bold mb-2 pl-2" style="color:#1D6A45">INCLUS DANS CE DEVIS (4 500&euro;)</div>
+      <div class="neo-card p-4 flex items-start gap-4">
+        <span class="tag-yes flex-shrink-0">&#10003;</span>
+        <div class="flex-1">
+          <h4 class="font-bold text-sm">Multi-comptes Microsoft / tenant</h4>
+          <p class="text-xs text-gray-400 font-space">Chaque courtier connecte son propre M365</p>
+        </div>
+        <span class="text-xs font-mono text-gray-400 flex-shrink-0">&rarr; Section 12</span>
+      </div>
+      <div class="neo-card p-4 flex items-start gap-4">
+        <span class="tag-yes flex-shrink-0">&#10003;</span>
+        <div class="flex-1">
+          <h4 class="font-bold text-sm">Multilingue NL</h4>
+          <p class="text-xs text-gray-400 font-space">"Au moins n&eacute;erlandais pour la Belgique"</p>
+        </div>
+        <span class="text-xs font-mono text-gray-400 flex-shrink-0">&rarr; Section 10</span>
+      </div>
+      <div class="neo-card p-4 flex items-start gap-4">
+        <span class="tag-yes flex-shrink-0">&#10003;</span>
+        <div class="flex-1">
+          <h4 class="font-bold text-sm">Cacher la section abonnement</h4>
+          <p class="text-xs text-gray-400 font-space">"Cacher/masquer la section abonnement pour la V1"</p>
+        </div>
+        <span class="text-xs font-mono text-gray-400 flex-shrink-0">&rarr; Section 13</span>
+      </div>
+      <div class="neo-card p-4 flex items-start gap-4">
+        <span class="tag-yes flex-shrink-0">&#10003;</span>
+        <div class="flex-1">
+          <h4 class="font-bold text-sm">GDPR conservation / suppression</h4>
+          <p class="text-xs text-gray-400 font-space">"Politique de conservation/suppression des donn&eacute;es"</p>
+        </div>
+        <span class="text-xs font-mono text-gray-400 flex-shrink-0">&rarr; Section 11</span>
+      </div>
+      <div class="neo-card p-4 flex items-start gap-4">
+        <span class="tag-yes flex-shrink-0">&#10003;</span>
+        <div class="flex-1">
+          <h4 class="font-bold text-sm">S&eacute;curit&eacute; emails</h4>
+          <p class="text-xs text-gray-400 font-space">"Point de s&eacute;curit&eacute; sur les emails et donn&eacute;es import&eacute;es"</p>
+        </div>
+        <span class="text-xs font-mono text-gray-400 flex-shrink-0">&rarr; Section 11</span>
+      </div>
+      <div class="neo-card p-4 flex items-start gap-4">
+        <span class="tag-yes flex-shrink-0">&#10003;</span>
+        <div class="flex-1">
+          <h4 class="font-bold text-sm">Couleurs / charte graphique</h4>
+          <p class="text-xs text-gray-400 font-space">"Moins monochrome/gris, suivre la charte envoy&eacute;e"</p>
+        </div>
+        <span class="text-xs font-mono text-gray-400 flex-shrink-0">&rarr; Section 08</span>
+      </div>
+      <div class="neo-card p-4 flex items-start gap-4">
+        <span class="tag-yes flex-shrink-0">&#10003;</span>
+        <div class="flex-1">
+          <h4 class="font-bold text-sm">Logo HB1 &rarr; BrokerONE</h4>
+          <p class="text-xs text-gray-400 font-space">"Mettre &agrave; jour l'ic&ocirc;ne/logo en haut &agrave; gauche"</p>
+        </div>
+        <span class="text-xs font-mono text-gray-400 flex-shrink-0">&rarr; Section 08</span>
+      </div>
+      <div class="neo-card p-4 flex items-start gap-4">
+        <span class="tag-yes flex-shrink-0">&#10003;</span>
+        <div class="flex-1">
+          <h4 class="font-bold text-sm">Footer / mentions l&eacute;gales</h4>
+          <p class="text-xs text-gray-400 font-space">"Augmenter la visibilit&eacute; du footer + rendre &eacute;ditable la mention l&eacute;gale"</p>
+        </div>
+        <span class="text-xs font-mono text-gray-400 flex-shrink-0">&rarr; Section 09</span>
+      </div>
+      <div class="neo-card p-4 flex items-start gap-4">
+        <span class="tag-yes flex-shrink-0">&#10003;</span>
+        <div class="flex-1">
+          <h4 class="font-bold text-sm">Photo de profil</h4>
+          <p class="text-xs text-gray-400 font-space">"D&eacute;cider si affich&eacute;e ou non"</p>
+        </div>
+        <span class="text-xs font-mono text-gray-400 flex-shrink-0">&rarr; Section 14</span>
+      </div>
+      <div class="neo-card p-4 flex items-start gap-4">
+        <span class="tag-yes flex-shrink-0">&#10003;</span>
+        <div class="flex-1">
+          <h4 class="font-bold text-sm">Fine tuning UI</h4>
+          <p class="text-xs text-gray-400 font-space">"Taille/visibilit&eacute; du footer, d&eacute;coupe couleur"</p>
+        </div>
+        <span class="text-xs font-mono text-gray-400 flex-shrink-0">&rarr; Section 14</span>
+      </div>
+    </div>
+
     <div class="anim space-y-3">
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-infra flex-shrink-0">DEVIS 1</span>
-        <div>
-          <h4 class="font-bold text-sm mb-1">Priorit&eacute; : quitter Vercel / infra propre</h4>
-          <p class="text-xs text-gray-500 font-space">Migration serveur, DNS, SSL, site vitrine. Pr&eacute;requis &agrave; tout le reste.</p>
+      <div class="font-mono text-xs font-bold mb-2 pl-2" style="color:#C0392B">HORS P&Eacute;RIM&Egrave;TRE (DEVIS S&Eacute;PAR&Eacute;S)</div>
+      <div class="neo-card p-4 flex items-start gap-4" style="background:#fafafa;opacity:.8">
+        <span class="tag-no flex-shrink-0">&#10007;</span>
+        <div class="flex-1">
+          <h4 class="font-bold text-sm text-gray-500">Migration infra (Hetzner, Nginx, SSL, DNS)</h4>
+          <p class="text-xs text-gray-400 font-space">Devis s&eacute;par&eacute; : 2 500&euro;</p>
         </div>
+        <span class="text-xs font-mono text-gray-400 flex-shrink-0">DEVIS INFRA</span>
       </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">DEVIS 2</span>
-        <div>
-          <h4 class="font-bold text-sm mb-1">Priorit&eacute; : merge v1 + v2 et mise en production</h4>
-          <p class="text-xs text-gray-500 font-space">Int&eacute;gration endpoints Sentinel, prompts IA, SQL, types, config FR/BE dans l'app existante.</p>
+      <div class="neo-card p-4 flex items-start gap-4" style="background:#fafafa;opacity:.8">
+        <span class="tag-no flex-shrink-0">&#10007;</span>
+        <div class="flex-1">
+          <h4 class="font-bold text-sm text-gray-500">DNS / sous-domaines</h4>
+          <p class="text-xs text-gray-400 font-space">Fait partie de la migration infra</p>
         </div>
+        <span class="text-xs font-mono text-gray-400 flex-shrink-0">DEVIS INFRA</span>
       </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">DEVIS 2</span>
-        <div>
-          <h4 class="font-bold text-sm mb-1">S&eacute;curit&eacute; / conformit&eacute; : GDPR process, r&eacute;tention, audit</h4>
-          <p class="text-xs text-gray-500 font-space">Politique de r&eacute;tention, cleanup mensuel, audit trail, s&eacute;curit&eacute; email.</p>
+      <div class="neo-card p-4 flex items-start gap-4" style="background:#fafafa;opacity:.8">
+        <span class="tag-no flex-shrink-0">&#10007;</span>
+        <div class="flex-1">
+          <h4 class="font-bold text-sm text-gray-500">CRM Brio / Openbox</h4>
+          <p class="text-xs text-gray-400 font-space">Devis futur s&eacute;par&eacute; : ~2 500&euro;</p>
         </div>
+        <span class="text-xs font-mono text-gray-400 flex-shrink-0">DEVIS FUTUR</span>
       </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">DEVIS 2</span>
-        <div>
-          <h4 class="font-bold text-sm mb-1">UX / Design : rebrand, multilingue NL, mentions l&eacute;gales</h4>
-          <p class="text-xs text-gray-500 font-space">"Moins monochrome/gris, suivre la charte envoy&eacute;e." Logo BrokerONE, couleurs, footer visible, NL obligatoire pour la Belgique.</p>
+      <div class="neo-card p-4 flex items-start gap-4" style="background:#fafafa;opacity:.8">
+        <span class="tag-no flex-shrink-0">&#10007;</span>
+        <div class="flex-1">
+          <h4 class="font-bold text-sm text-gray-500">Widget Google Maps</h4>
+          <p class="text-xs text-gray-400 font-space">Non prioritaire (tu l'as dit toi-m&ecirc;me)</p>
         </div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">DEVIS 2</span>
-        <div>
-          <h4 class="font-bold text-sm mb-1">Multi-tenant Microsoft 365</h4>
-          <p class="text-xs text-gray-500 font-space">Chaque courtier connecte son propre M365. Isolation tokens. Test en conditions r&eacute;elles.</p>
-        </div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-crm flex-shrink-0">DEVIS 3</span>
-        <div>
-          <h4 class="font-bold text-sm mb-1">Int&eacute;grations : CRM Brio (Portima) + Openbox</h4>
-          <p class="text-xs text-gray-500 font-space">API Brio, sync clients, webhooks. Pas bloquant pour le lancement &mdash; apr&egrave;s mise en prod.</p>
-        </div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4" style="border-left:4px solid #1D6A45">
-        <div class="tag-done flex-shrink-0">COUVERT</div>
-        <div>
-          <h4 class="font-bold text-sm mb-1">Organisation : planning, phases, livrables</h4>
-          <p class="text-xs text-gray-500 font-space">C'est cette pr&eacute;sentation. Les 3 devis structurent tout le travail.</p>
-        </div>
+        <span class="text-xs font-mono text-gray-400 flex-shrink-0">NON PRIORITAIRE</span>
       </div>
     </div>
   </div>
@@ -308,493 +385,801 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 
 
 <!-- ============================================ -->
-<!--      DEVIS 1 — MIGRATION INFRA (2,500€)     -->
+<!--  SECTIONS D&Eacute;TAILL&Eacute;ES — 8 BLOCS DE TRAVAIL  -->
 <!-- ============================================ -->
 
-<section id="devis-1" class="py-20 px-4" style="background:#1E3A5F;border-top:3px solid #0a0a0a">
+<!-- DIVIDER: BLOC 1 -->
+<section id="merge" class="py-20 px-4" style="background:#C0392B;border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto text-white">
     <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">DEVIS 1 / 3</div>
-      <div class="flex items-center gap-3 mb-4"><span class="tag-infra">INFRA</span><span class="devis-pill" style="background:#fff3cd;color:#856404;border-color:#856404">PR&Eacute;REQUIS</span></div>
-      <h2 class="font-grotesk text-4xl sm:text-6xl font-bold mb-6">Migration Infra.</h2>
-      <p class="text-lg font-space" style="color:rgba(255,255,255,.7)">Quitter Vercel, passer sur un serveur propre. <strong class="text-white">2 500&euro; HT &mdash; 3-4 jours.</strong></p>
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">BLOCS 06-07</div>
+      <div class="flex items-center gap-3 mb-4"><span class="tag-prod">BLOC 1</span><span class="devis-pill" style="background:rgba(255,255,255,.2);color:#fff;border-color:rgba(255,255,255,.5)">3-4 JOURS</span></div>
+      <h2 class="font-grotesk text-4xl sm:text-6xl font-bold mb-6">Merge V1 + V2.</h2>
+      <p class="text-lg font-space" style="color:rgba(255,255,255,.8)">Le c&oelig;ur technique du travail. Int&eacute;grer tout le code de Bruno dans l'app existante. <strong>C'est la pi&egrave;ce la plus lourde.</strong></p>
     </div>
   </div>
 </section>
 
-<!-- 06 — WHY MIGRATE -->
+<!-- 06 / MERGE STEP BY STEP -->
 <section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4">06 / POURQUOI MIGRER</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Vercel a ses limites.</h2>
+      <div class="section-number mb-4">06 / MERGE V1 + V2 &mdash; &Eacute;TAPE PAR &Eacute;TAPE</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">6 &eacute;tapes d'int&eacute;gration.</h2>
     </div>
-    <div class="anim grid sm:grid-cols-2 gap-4">
-      <div class="neo-card p-5">
-        <h4 class="font-bold text-sm mb-2" style="color:#C0392B">Cold starts</h4>
-        <p class="text-xs text-gray-500 font-space">Les fonctions serverless d&eacute;marrent &agrave; froid. Latence visible pour les utilisateurs, surtout sur les endpoints IA et cron jobs.</p>
-      </div>
-      <div class="neo-card p-5">
-        <h4 class="font-bold text-sm mb-2" style="color:#C0392B">Pas de process persistant</h4>
-        <p class="text-xs text-gray-500 font-space">Impossible de faire tourner N8N ou des workers en arri&egrave;re-plan. Chaque requ&ecirc;te est isol&eacute;e.</p>
-      </div>
-      <div class="neo-card p-5">
-        <h4 class="font-bold text-sm mb-2" style="color:#C0392B">Co&ucirc;t &agrave; l'&eacute;chelle</h4>
-        <p class="text-xs text-gray-500 font-space">Avec 50 courtiers actifs, les co&ucirc;ts Vercel explosent (invocations, bandwidth, cron). Un serveur Hetzner co&ucirc;te ~20&euro;/mois.</p>
-      </div>
-      <div class="neo-card p-5">
-        <h4 class="font-bold text-sm mb-2" style="color:#1D6A45">GDPR / localisation</h4>
-        <p class="text-xs text-gray-500 font-space">Hetzner Allemagne = donn&eacute;es en EU. Ma&icirc;trise totale du serveur. Conforme RGPD par d&eacute;faut.</p>
+
+    <!-- Step 1: Endpoints -->
+    <div class="anim neo-card p-6 mb-4" style="border-left:6px solid #C0392B">
+      <div class="flex items-start gap-4">
+        <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">1</div>
+        <div class="flex-1">
+          <h4 class="font-bold mb-2">Int&eacute;grer les 3 endpoints Sentinel dans l'app v1</h4>
+          <p class="text-sm text-gray-500 font-space mb-4">Chaque endpoint re&ccedil;oit les donn&eacute;es de Sentinel (le module de Bruno), les valide avec Zod, et les stocke en base.</p>
+          <div class="space-y-2">
+            <div class="code-block">
+              <span class="cm">// Endpoint 1 : R&eacute;clamations</span><br>
+              <span class="kw">POST</span> <span class="str">/api/v1/advice/reclamation</span><br>
+              <span class="cm">// Re&ccedil;oit une r&eacute;clamation d&eacute;tect&eacute;e par Sentinel</span><br>
+              <span class="cm">// Validation Zod : &eacute;metteur, objet, niveau (1-4), d&eacute;lai AR/r&eacute;ponse</span><br><br>
+              <span class="cm">// Endpoint 2 : Demandes RGPD</span><br>
+              <span class="kw">POST</span> <span class="str">/api/v1/advice/rgpd</span><br>
+              <span class="cm">// Re&ccedil;oit les demandes de droits RGPD</span><br>
+              <span class="cm">// Validation Zod : type de droit, identit&eacute;, restrictions LCB-FT</span><br><br>
+              <span class="cm">// Endpoint 3 : Ambassadeurs</span><br>
+              <span class="kw">POST</span> <span class="str">/api/v1/advice/ambassador</span><br>
+              <span class="cm">// Re&ccedil;oit les clients potentiellement ambassadeurs</span><br>
+              <span class="cm">// Validation Zod : segment, score sentiment, conversion Google</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="anim neo-card p-5 mt-6" style="border-left:6px solid #1E3A5F">
-      <p class="text-sm font-space text-gray-600">Tu as d&eacute;j&agrave; mentionn&eacute; vouloir quitter Vercel. Ce devis couvre la migration compl&egrave;te et c'est le <strong>pr&eacute;requis</strong> pour tout le reste.</p>
+
+    <!-- Step 2: AI Prompts -->
+    <div class="anim neo-card p-6 mb-4" style="border-left:6px solid #C0392B">
+      <div class="flex items-start gap-4">
+        <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">2</div>
+        <div class="flex-1">
+          <h4 class="font-bold mb-2">Int&eacute;grer les prompts IA (441 lignes)</h4>
+          <p class="text-sm text-gray-500 font-space mb-4">Trois familles de prompts, chacune avec son r&ocirc;le pr&eacute;cis :</p>
+          <div class="grid sm:grid-cols-3 gap-3">
+            <div class="p-4 bg-neo-gray neo-border-2">
+              <div class="font-mono text-xs font-bold mb-2" style="color:#C0392B">ACCUS&Eacute; DE R&Eacute;CEPTION</div>
+              <p class="text-xs font-space text-gray-500">Conforme ACPR 2024-R-02. Accuse r&eacute;ception de la r&eacute;clamation sous 10 jours ouvr&eacute;s. Mentionne le num&eacute;ro de dossier, le d&eacute;lai max de traitement (2 mois), la possibilit&eacute; de saisine du m&eacute;diateur.</p>
+            </div>
+            <div class="p-4 bg-neo-gray neo-border-2">
+              <div class="font-mono text-xs font-bold mb-2" style="color:#C0392B">R&Eacute;PONSE 3 TONS</div>
+              <p class="text-xs font-space text-gray-500">G&eacute;n&egrave;re 3 variantes de r&eacute;ponse pour chaque r&eacute;clamation : ton professionnel, ton empathique, ton direct. Le courtier choisit et personnalise.</p>
+            </div>
+            <div class="p-4 bg-neo-gray neo-border-2">
+              <div class="font-mono text-xs font-bold mb-2" style="color:#C0392B">6 TEMPLATES RGPD</div>
+              <p class="text-xs font-space text-gray-500">Acc&egrave;s aux donn&eacute;es, portabilit&eacute;, rectification/effacement/limitation, opposition, directives post-mortem, refus motiv&eacute;. Cite les articles RGPD + recours CNIL ou APD.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: SQL Migration -->
+    <div class="anim neo-card p-6 mb-4" style="border-left:6px solid #C0392B">
+      <div class="flex items-start gap-4">
+        <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">3</div>
+        <div class="flex-1">
+          <h4 class="font-bold mb-2">Ex&eacute;cuter la migration SQL (4 nouvelles tables)</h4>
+          <p class="text-sm text-gray-500 font-space mb-4">4 tables &agrave; cr&eacute;er dans Supabase, chacune avec ses RLS policies :</p>
+          <div class="space-y-3">
+            <div class="p-4 bg-neo-gray neo-border-2">
+              <div class="flex items-start gap-3">
+                <div class="font-mono text-xs font-bold px-2 py-1" style="background:#C0392B;color:#fff">TABLE 1</div>
+                <div>
+                  <h5 class="font-bold text-sm">reclamations_advice</h5>
+                  <p class="text-xs text-gray-500 font-space">Niveaux 1-4, d&eacute;lai AR (10j ouvr&eacute;s) et d&eacute;lai r&eacute;ponse (2 mois), &eacute;metteur sensible (oui/non), saisine m&eacute;diateur, statut (ouvert/en cours/cl&ocirc;tur&eacute;), historique des &eacute;changes.</p>
+                </div>
+              </div>
+            </div>
+            <div class="p-4 bg-neo-gray neo-border-2">
+              <div class="flex items-start gap-3">
+                <div class="font-mono text-xs font-bold px-2 py-1" style="background:#C0392B;color:#fff">TABLE 2</div>
+                <div>
+                  <h5 class="font-bold text-sm">demandes_droits_advice</h5>
+                  <p class="text-xs text-gray-500 font-space">8 types de droits RGPD, restrictions LCB-FT (anti-blanchiment), v&eacute;rification d'identit&eacute; (obligatoire), d&eacute;lai de traitement (1 mois extensible &agrave; 3), statut, pi&egrave;ces justificatives.</p>
+                </div>
+              </div>
+            </div>
+            <div class="p-4 bg-neo-gray neo-border-2">
+              <div class="flex items-start gap-3">
+                <div class="font-mono text-xs font-bold px-2 py-1" style="background:#C0392B;color:#fff">TABLE 3</div>
+                <div>
+                  <h5 class="font-bold text-sm">ambassadeurs_advice</h5>
+                  <p class="text-xs text-gray-500 font-space">Segments PREMIUM / POTENTIEL / NEUTRE, score de sentiment (calcul&eacute; par IA), taux de conversion Google Review, historique des sollicitations.</p>
+                </div>
+              </div>
+            </div>
+            <div class="p-4 bg-neo-gray neo-border-2">
+              <div class="flex items-start gap-3">
+                <div class="font-mono text-xs font-bold px-2 py-1" style="background:#C0392B;color:#fff">TABLE 4</div>
+                <div>
+                  <h5 class="font-bold text-sm">sentinel_logs</h5>
+                  <p class="text-xs text-gray-500 font-space">Journal d'audit complet. Chaque appel Sentinel &rarr; Advice est trac&eacute;. Idempotence (pas de doublon si Sentinel renvoie la m&ecirc;me donn&eacute;e).</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 p-4 bg-neo-gray neo-border-2">
+            <div class="font-mono text-xs font-bold mb-2" style="color:#1E3A5F">+ FONCTIONS SQL UTILITAIRES</div>
+            <div class="grid sm:grid-cols-3 gap-2">
+              <div class="text-xs font-space text-gray-500"><strong>get_reclamations_en_retard()</strong><br>Liste les r&eacute;clamations dont le d&eacute;lai AR ou r&eacute;ponse est d&eacute;pass&eacute;</div>
+              <div class="text-xs font-space text-gray-500"><strong>get_demandes_rgpd_en_retard()</strong><br>Liste les demandes RGPD dont le d&eacute;lai de traitement est d&eacute;pass&eacute;</div>
+              <div class="text-xs font-space text-gray-500"><strong>get_ambassadeur_stats()</strong><br>Statistiques agr&eacute;g&eacute;es par courtier (nombre, segments, conversions)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4: Types + Zod -->
+    <div class="anim neo-card p-6 mb-4" style="border-left:6px solid #C0392B">
+      <div class="flex items-start gap-4">
+        <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">4</div>
+        <div class="flex-1">
+          <h4 class="font-bold mb-2">Int&eacute;grer les types TypeScript + validateurs Zod</h4>
+          <p class="text-sm text-gray-500 font-space">Chaque endpoint, chaque table a son type TypeScript et son sch&eacute;ma Zod. Toute donn&eacute;e entrante est valid&eacute;e avant d'atteindre la base. Pas de donn&eacute;e malform&eacute;e en production.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 5: Config FR/BE -->
+    <div class="anim neo-card p-6 mb-4" style="border-left:6px solid #C0392B">
+      <div class="flex items-start gap-4">
+        <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">5</div>
+        <div class="flex-1">
+          <h4 class="font-bold mb-2">Int&eacute;grer la config dynamique FR/BE (reg-config.ts)</h4>
+          <p class="text-sm text-gray-500 font-space">Selon le pays du courtier, le syst&egrave;me adapte automatiquement : r&eacute;gulateur (ACPR vs FSMA), autorit&eacute; protection donn&eacute;es (CNIL vs APD), d&eacute;lais l&eacute;gaux, r&eacute;f&eacute;rences articles de loi, m&eacute;diateur comp&eacute;tent.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 6: Test -->
+    <div class="anim neo-card p-6 mb-4" style="border-left:6px solid #C0392B">
+      <div class="flex items-start gap-4">
+        <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">6</div>
+        <div class="flex-1">
+          <h4 class="font-bold mb-2">Tester que les endpoints r&eacute;pondent correctement</h4>
+          <p class="text-sm text-gray-500 font-space">V&eacute;rifier chaque flux de bout en bout. Endpoint par endpoint, table par table, prompt par prompt.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- 07 — WHAT'S INCLUDED -->
+<!-- 07 / MERGE — WHAT HAPPENS WHEN MERGED -->
 <section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4">07 / CE QUI EST INCLUS</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Infra cl&eacute; en main.</h2>
+      <div class="section-number mb-4">07 / CE QUE &Ccedil;A DONNE CONCR&Egrave;TEMENT</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le flux une fois merg&eacute;.</h2>
+      <p class="text-gray-600 font-space mb-8">Voici ce qui se passe quand un courtier re&ccedil;oit une r&eacute;clamation apr&egrave;s le merge :</p>
     </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5 flex items-start gap-4">
-        <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#1E3A5F">1</div>
-        <div><h4 class="font-bold text-sm mb-1">Setup serveur Hetzner</h4><p class="text-xs text-gray-500 font-space">Allemagne, EU, GDPR compliant. Ubuntu, s&eacute;curis&eacute;, firewall configur&eacute;.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#1E3A5F">2</div>
-        <div><h4 class="font-bold text-sm mb-1">Nginx reverse proxy + SSL auto</h4><p class="text-xs text-gray-500 font-space">Let's Encrypt, renouvellement automatique, HTTPS forc&eacute; partout.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#1E3A5F">3</div>
-        <div><h4 class="font-bold text-sm mb-1">DNS configuration</h4><p class="text-xs text-gray-500 font-space">app.brokerone.insure pointe vers le serveur. Configuration compl&egrave;te.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#1E3A5F">4</div>
-        <div><h4 class="font-bold text-sm mb-1">Migration site vitrine</h4><p class="text-xs text-gray-500 font-space">brokerone.insure migr&eacute; sur le m&ecirc;me serveur. Un seul point de gestion.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#1E3A5F">5</div>
-        <div><h4 class="font-bold text-sm mb-1">PM2 ou Docker</h4><p class="text-xs text-gray-500 font-space">Process management robuste. Auto-restart, logs, monitoring int&eacute;gr&eacute;.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#1E3A5F">6</div>
-        <div><h4 class="font-bold text-sm mb-1">IPs + instructions DNS</h4><p class="text-xs text-gray-500 font-space">Je te fournis les IPs et les instructions pour pointer les domaines chez ton registrar.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#1E3A5F">7</div>
-        <div><h4 class="font-bold text-sm mb-1">Basic monitoring</h4><p class="text-xs text-gray-500 font-space">Uptime check, alertes si le serveur tombe.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 08 — TIMELINE DEVIS 1 -->
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4">08 / PLANNING DEVIS 1</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">4 jours, cl&eacute; en main.</h2>
-    </div>
-    <div class="anim neo-card p-6 sm:p-8 mb-8">
-      <div class="space-y-4">
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
-          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#1E3A5F">J1</div>
-          <div><h4 class="font-bold text-sm mb-1">Hetzner setup + OS + Nginx + SSL</h4><p class="text-sm text-gray-500 font-space">Serveur cr&eacute;&eacute;, s&eacute;curis&eacute;, Nginx install&eacute;, certificats SSL g&eacute;n&eacute;r&eacute;s.</p></div>
+      <div class="neo-card p-6" style="border-left:6px solid #1E3A5F">
+        <div class="space-y-0">
+          <div class="p-4 bg-neo-gray neo-border-2">
+            <div class="flex items-start gap-3">
+              <div class="font-mono text-xs font-bold px-2 py-1 flex-shrink-0" style="background:#1E3A5F;color:#fff">1</div>
+              <div>
+                <h5 class="font-bold text-sm">Sentinel d&eacute;tecte une r&eacute;clamation dans un email</h5>
+                <p class="text-xs text-gray-500 font-space">Le module Sentinel (sur le serveur) analyse les emails entrants et identifie une r&eacute;clamation client.</p>
+              </div>
+            </div>
+          </div>
+          <div class="flow-arrow">&#8595;</div>
+          <div class="p-4 bg-neo-gray neo-border-2">
+            <div class="flex items-start gap-3">
+              <div class="font-mono text-xs font-bold px-2 py-1 flex-shrink-0" style="background:#1E3A5F;color:#fff">2</div>
+              <div>
+                <h5 class="font-bold text-sm">POST /api/v1/advice/reclamation</h5>
+                <p class="text-xs text-gray-500 font-space">Sentinel envoie les d&eacute;tails de la r&eacute;clamation &agrave; Advice. Zod valide. Donn&eacute;e stock&eacute;e dans reclamations_advice.</p>
+              </div>
+            </div>
+          </div>
+          <div class="flow-arrow">&#8595;</div>
+          <div class="p-4 bg-neo-gray neo-border-2">
+            <div class="flex items-start gap-3">
+              <div class="font-mono text-xs font-bold px-2 py-1 flex-shrink-0" style="background:#1E3A5F;color:#fff">3</div>
+              <div>
+                <h5 class="font-bold text-sm">Le dossier appara&icirc;t dans le dashboard du courtier</h5>
+                <p class="text-xs text-gray-500 font-space">Avec les d&eacute;lais calcul&eacute;s (AR sous 10j, r&eacute;ponse sous 2 mois), le niveau de gravit&eacute;, et l'alerte si &eacute;metteur sensible.</p>
+              </div>
+            </div>
+          </div>
+          <div class="flow-arrow">&#8595;</div>
+          <div class="p-4 bg-neo-gray neo-border-2">
+            <div class="flex items-start gap-3">
+              <div class="font-mono text-xs font-bold px-2 py-1 flex-shrink-0" style="background:#1E3A5F;color:#fff">4</div>
+              <div>
+                <h5 class="font-bold text-sm">L'IA g&eacute;n&egrave;re l'accus&eacute; de r&eacute;ception + 3 propositions de r&eacute;ponse</h5>
+                <p class="text-xs text-gray-500 font-space">AR conforme ACPR, puis 3 r&eacute;ponses (pro, empathique, direct). Le courtier choisit, personnalise, envoie.</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
-          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#1E3A5F">J2</div>
-          <div><h4 class="font-bold text-sm mb-1">Deploy Advice app + reverse proxy</h4><p class="text-sm text-gray-500 font-space">Application Next.js d&eacute;ploy&eacute;e, Nginx configur&eacute; en proxy, PM2/Docker actif.</p></div>
-        </div>
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
-          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#1E3A5F">J3</div>
-          <div><h4 class="font-bold text-sm mb-1">Migration site vitrine + DNS</h4><p class="text-sm text-gray-500 font-space">brokerone.insure migr&eacute; sur le serveur. DNS point&eacute;s.</p></div>
-        </div>
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
-          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#1E3A5F">J4</div>
-          <div><h4 class="font-bold text-sm mb-1">Tests + fourniture IPs/instructions</h4><p class="text-sm text-gray-500 font-space">V&eacute;rification compl&egrave;te, monitoring actif, doc remise.</p></div>
-        </div>
-      </div>
-    </div>
-    <div class="anim">
-      <div class="neo-card p-6 text-center" style="border-top:4px solid #1E3A5F">
-        <div class="font-mono text-xs font-bold mb-2" style="color:#1E3A5F">DEVIS 1 &mdash; MIGRATION INFRA</div>
-        <div class="font-grotesk text-4xl font-bold mb-2">2 500&euro; HT</div>
-        <div class="text-sm text-gray-500 font-space">3-4 jours &bull; Pr&eacute;requis pour Devis 2 &amp; 3</div>
-        <div class="mt-3 devis-pill inline-block" style="background:#fff3cd;color:#856404;border-color:#856404">PR&Eacute;REQUIS &mdash; BLOQUE TOUT</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================ -->
-<!--    DEVIS 2 — ADVICE PRODUCTION (6,500€)     -->
-<!-- ============================================ -->
-
-<section id="devis-2" class="py-20 px-4" style="background:#C0392B;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">DEVIS 2 / 3</div>
-      <div class="flex items-center gap-3 mb-4"><span class="tag-prod">PRODUCTION</span><span class="devis-pill" style="background:rgba(255,255,255,.2);color:#fff;border-color:rgba(255,255,255,.5)">PRINCIPAL</span></div>
-      <h2 class="font-grotesk text-4xl sm:text-6xl font-bold mb-6">Advice Production.</h2>
-      <p class="text-lg font-space" style="color:rgba(255,255,255,.8)">Le gros du travail. Couvre la majorit&eacute; des points de ton email. <strong>6 500&euro; HT &mdash; 12-15 jours.</strong></p>
-    </div>
-  </div>
-</section>
-
-<!-- 09 — OVERVIEW -->
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">09 / VUE D'ENSEMBLE</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">6 blocs de travail.</h2>
-    </div>
-    <div class="anim grid sm:grid-cols-3 gap-4">
-      <div class="neo-card p-5 text-center stat-card" style="border-top:4px solid #C0392B">
-        <div class="font-grotesk font-bold text-sm mb-1">Merge v1 + v2</div>
-        <div class="text-xs text-gray-500 font-space">3-4 jours</div>
-      </div>
-      <div class="neo-card p-5 text-center stat-card" style="border-top:4px solid #C0392B">
-        <div class="font-grotesk font-bold text-sm mb-1">Rebrand BrokerONE</div>
-        <div class="text-xs text-gray-500 font-space">2 jours</div>
-      </div>
-      <div class="neo-card p-5 text-center stat-card" style="border-top:4px solid #C0392B">
-        <div class="font-grotesk font-bold text-sm mb-1">Multilingue NL</div>
-        <div class="text-xs text-gray-500 font-space">2-3 jours</div>
-      </div>
-      <div class="neo-card p-5 text-center stat-card" style="border-top:4px solid #C0392B">
-        <div class="font-grotesk font-bold text-sm mb-1">Mentions l&eacute;gales</div>
-        <div class="text-xs text-gray-500 font-space">0.5-1 jour</div>
-      </div>
-      <div class="neo-card p-5 text-center stat-card" style="border-top:4px solid #C0392B">
-        <div class="font-grotesk font-bold text-sm mb-1">GDPR process</div>
-        <div class="text-xs text-gray-500 font-space">1-2 jours</div>
-      </div>
-      <div class="neo-card p-5 text-center stat-card" style="border-top:4px solid #C0392B">
-        <div class="font-grotesk font-bold text-sm mb-1">Multi-tenant M365 + polish</div>
-        <div class="text-xs text-gray-500 font-space">2-3 jours</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 10 — MERGE V1 + V2 -->
-<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">10 / MERGE V1 + V2</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Int&eacute;gration code Bruno.</h2>
-      <p class="text-gray-600 font-space mb-2">3-4 jours</p>
-    </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">Int&eacute;grer les 3 endpoints Sentinel dans l'app v1</h4><p class="text-xs text-gray-500 font-space">R&eacute;clamation, RGPD, Ambassador &mdash; receivers connect&eacute;s &agrave; la base existante.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">Int&eacute;grer 441 lignes de prompts IA</h4><p class="text-xs text-gray-500 font-space">AR conforme ACPR 2024-R-02 + r&eacute;ponse Google 3 tons + 6 templates RGPD.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">Ex&eacute;cuter la migration SQL (4 nouvelles tables)</h4><p class="text-xs text-gray-500 font-space">Tables + RLS + triggers + fonctions utilitaires.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">Int&eacute;grer types TypeScript + validators Zod</h4><p class="text-xs text-gray-500 font-space">S&eacute;curit&eacute; input assur&eacute;e sur chaque endpoint.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">Int&eacute;grer config dynamique FR/BE (reg-config.ts)</h4><p class="text-xs text-gray-500 font-space">Switch ACPR/CNIL vs FSMA/APD selon le pays du courtier.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">Tester l'app merg&eacute;e</h4><p class="text-xs text-gray-500 font-space">V&eacute;rification compl&egrave;te de chaque flux : sollicitation &rarr; analyse &rarr; r&eacute;ponse.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 11 — REBRAND BROKERONE -->
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">11 / REBRAND BROKERONE</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Nouvelle identit&eacute;.</h2>
-      <p class="text-gray-600 font-space mb-2">2 jours</p>
-    </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">Palette de couleurs</h4><p class="text-xs text-gray-500 font-space">Ancien (#1a4d7c, #2d7dd2) &rarr; Nouveau (#1E3A5F bleu nuit, #C0392B corail, #F1F3F6 gris perle). Sidebar, header, boutons, badges &mdash; tout.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">Logo BrokerONE</h4><p class="text-xs text-gray-500 font-space">HB1 &rarr; BrokerONE logo partout. Favicon. OG images.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">"Moins monochrome/gris, suivre la charte"</h4><p class="text-xs text-gray-500 font-space">Ajustements couleurs selon ta note. Plus de contraste, moins de gris uniforme.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">Templates email rebrand&eacute;s</h4><p class="text-xs text-gray-500 font-space">Sollicitation, relances J+2/J+5 &mdash; couleurs BrokerONE + logo courtier.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">Page tampon rebrand&eacute;e</h4><p class="text-xs text-gray-500 font-space">Coh&eacute;rence avec le site vitrine brokerone.insure.</p></div>
-      </div>
-    </div>
-    <!-- Color comparison -->
-    <div class="anim grid sm:grid-cols-2 gap-6 mt-8">
-      <div class="neo-card p-6">
-        <div class="font-mono text-xs font-bold mb-4" style="color:#C0392B">AVANT</div>
-        <div class="space-y-3">
-          <div class="flex items-center gap-3"><div class="w-8 h-8 flex-shrink-0" style="background:#1a4d7c;border:2px solid #0a0a0a"></div><div class="text-xs font-mono">#1a4d7c</div></div>
-          <div class="flex items-center gap-3"><div class="w-8 h-8 flex-shrink-0" style="background:#2d7dd2;border:2px solid #0a0a0a"></div><div class="text-xs font-mono">#2d7dd2</div></div>
-          <div class="flex items-center gap-3"><div class="w-8 h-8 flex-shrink-0" style="background:#f8fafc;border:2px solid #0a0a0a"></div><div class="text-xs font-mono">#f8fafc gris</div></div>
-        </div>
-      </div>
-      <div class="neo-card p-6">
-        <div class="font-mono text-xs font-bold mb-4" style="color:#1D6A45">APR&Egrave;S</div>
-        <div class="space-y-3">
-          <div class="flex items-center gap-3"><div class="w-8 h-8 flex-shrink-0" style="background:#1E3A5F;border:2px solid #0a0a0a"></div><div class="text-xs font-mono">#1E3A5F Bleu nuit</div></div>
-          <div class="flex items-center gap-3"><div class="w-8 h-8 flex-shrink-0" style="background:#C0392B;border:2px solid #0a0a0a"></div><div class="text-xs font-mono">#C0392B Corail</div></div>
-          <div class="flex items-center gap-3"><div class="w-8 h-8 flex-shrink-0" style="background:#F1F3F6;border:2px solid #0a0a0a"></div><div class="text-xs font-mono">#F1F3F6 Gris perle</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 12 — MULTILINGUE NL -->
-<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">12 / MULTILINGUE NL</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">N&eacute;erlandais obligatoire.</h2>
-      <p class="text-gray-600 font-space mb-2">2-3 jours &mdash; Minimum n&eacute;erlandais pour la Belgique</p>
-    </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">Traduction de toutes les cha&icirc;nes UI</h4><p class="text-xs text-gray-500 font-space">Labels, boutons, messages, empty states, notifications &mdash; tout traduit en n&eacute;erlandais.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">M&eacute;canisme de d&eacute;tection / switch langue</h4><p class="text-xs text-gray-500 font-space">D&eacute;tection automatique ou s&eacute;lecteur FR/NL. Persistance du choix.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">Templates email en NL</h4><p class="text-xs text-gray-500 font-space">Sollicitation, relances J+2/J+5 &mdash; version n&eacute;erlandaise compl&egrave;te.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">Page tampon en NL</h4><p class="text-xs text-gray-500 font-space">Le client flamand arrive sur une page tampon dans sa langue.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">Test du flux complet en NL</h4><p class="text-xs text-gray-500 font-space">Parcours int&eacute;gral test&eacute; en n&eacute;erlandais : email &rarr; page tampon &rarr; avis &rarr; analyse.</p></div>
       </div>
     </div>
     <div class="anim neo-card p-5 mt-6" style="border-left:6px solid #C0392B">
-      <p class="text-sm font-space text-gray-600"><strong>Note :</strong> L'allemand (DE) peut &ecirc;tre ajout&eacute; dans un second temps si n&eacute;cessaire. L'architecture multilingue sera pr&ecirc;te pour l'accueillir.</p>
+      <p class="text-sm font-space text-gray-600"><strong>M&ecirc;me logique pour les RGPD et ambassadeurs.</strong> Sentinel d&eacute;tecte &rarr; POST vers Advice &rarr; le courtier voit, r&eacute;pond avec l'aide de l'IA.</p>
     </div>
   </div>
 </section>
 
-<!-- 13 — MENTIONS LÉGALES & FOOTER -->
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+
+<!-- ============================================ -->
+<!-- 08 / BLOC 2 — REBRAND BROKERONE -->
+<!-- ============================================ -->
+<section id="rebrand" class="py-20 px-4" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4">13 / MENTIONS L&Eacute;GALES &amp; FOOTER</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Footer visible, contenu &eacute;ditable.</h2>
-      <p class="text-gray-600 font-space mb-2">0.5-1 jour</p>
+      <div class="section-number mb-4">08 / BLOC 2 &mdash; REBRAND BROKERONE</div>
+      <div class="flex items-center gap-3 mb-4"><span class="tag-prod">BLOC 2</span><span class="devis-pill" style="background:#F1F3F6;color:#0a0a0a;border-color:#0a0a0a">1.5-2 JOURS</span></div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Nouvelle identit&eacute; BrokerONE.</h2>
+      <p class="text-gray-600 font-space mb-2">Bruno a demand&eacute; : "moins monochrome/gris, suivre la charte envoy&eacute;e" et "mettre &agrave; jour l'ic&ocirc;ne/logo". Voici tout ce qui change.</p>
     </div>
+
+    <!-- Color comparison -->
+    <div class="anim grid sm:grid-cols-2 gap-6 mb-8">
+      <div class="neo-card p-6">
+        <div class="font-mono text-xs font-bold mb-4" style="color:#C0392B">AVANT (HiBroker)</div>
+        <div class="space-y-3">
+          <div class="flex items-center gap-3"><div class="w-10 h-10 flex-shrink-0" style="background:#1a4d7c;border:2px solid #0a0a0a"></div><div><div class="text-xs font-mono font-bold">#1a4d7c</div><div class="text-xs text-gray-400">Sidebar</div></div></div>
+          <div class="flex items-center gap-3"><div class="w-10 h-10 flex-shrink-0" style="background:#2d7dd2;border:2px solid #0a0a0a"></div><div><div class="text-xs font-mono font-bold">#2d7dd2</div><div class="text-xs text-gray-400">Accents / liens</div></div></div>
+          <div class="flex items-center gap-3"><div class="w-10 h-10 flex-shrink-0" style="background:#f8fafc;border:2px solid #0a0a0a"></div><div><div class="text-xs font-mono font-bold">#f8fafc</div><div class="text-xs text-gray-400">Background gris froid</div></div></div>
+        </div>
+      </div>
+      <div class="neo-card p-6">
+        <div class="font-mono text-xs font-bold mb-4" style="color:#1D6A45">APR&Egrave;S (BrokerONE)</div>
+        <div class="space-y-3">
+          <div class="flex items-center gap-3"><div class="w-10 h-10 flex-shrink-0" style="background:#1E3A5F;border:2px solid #0a0a0a"></div><div><div class="text-xs font-mono font-bold">#1E3A5F</div><div class="text-xs text-gray-400">Bleu nuit &mdash; sidebar, header</div></div></div>
+          <div class="flex items-center gap-3"><div class="w-10 h-10 flex-shrink-0" style="background:#C0392B;border:2px solid #0a0a0a"></div><div><div class="text-xs font-mono font-bold">#C0392B</div><div class="text-xs text-gray-400">Corail &mdash; accents, CTA, badges</div></div></div>
+          <div class="flex items-center gap-3"><div class="w-10 h-10 flex-shrink-0" style="background:#F1F3F6;border:2px solid #0a0a0a"></div><div><div class="text-xs font-mono font-bold">#F1F3F6</div><div class="text-xs text-gray-400">Gris perle &mdash; plus chaud</div></div></div>
+        </div>
+      </div>
+    </div>
+
     <div class="anim space-y-3">
       <div class="neo-card p-5 flex items-start gap-4">
         <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">"Augmenter la visibilit&eacute;" du footer</h4><p class="text-xs text-gray-500 font-space">Footer plus pr&eacute;sent, facilement accessible. Liens vers mentions l&eacute;gales, politique de confidentialit&eacute;, contact.</p></div>
+        <div><h4 class="font-bold text-sm mb-1">Sidebar : #1a4d7c &rarr; #1E3A5F</h4><p class="text-xs text-gray-500 font-space">Bleu nuit plus profond, plus moderne. Navigation compl&egrave;te rebrand&eacute;e.</p></div>
       </div>
       <div class="neo-card p-5 flex items-start gap-4">
         <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">Mentions l&eacute;gales &eacute;ditables par courtier</h4><p class="text-xs text-gray-500 font-space">Chaque courtier peut personnaliser : lien privacy policy, email contact, adresse cabinet. M&ecirc;me niveau d'&eacute;dition que la signature email.</p></div>
+        <div><h4 class="font-bold text-sm mb-1">Accents : #2d7dd2 &rarr; #C0392B (corail)</h4><p class="text-xs text-gray-500 font-space">Boutons, badges, liens actifs, alertes, hover states. Moins monochrome, plus de caract&egrave;re.</p></div>
       </div>
       <div class="neo-card p-5 flex items-start gap-4">
         <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">Masquer section "Abonnement" pour V1</h4><p class="text-xs text-gray-500 font-space">La section abonnement n'est pas pertinente pour le lancement. Cach&eacute;e proprement, r&eacute;activable.</p></div>
+        <div><h4 class="font-bold text-sm mb-1">Background : #f8fafc &rarr; #F1F3F6 (gris perle)</h4><p class="text-xs text-gray-500 font-space">Fond plus chaud, moins clinique. Meilleur contraste avec les cartes blanches.</p></div>
+      </div>
+      <div class="neo-card p-5 flex items-start gap-4">
+        <span class="tag-prod flex-shrink-0">PROD</span>
+        <div><h4 class="font-bold text-sm mb-1">Logo : HB1 &rarr; BrokerONE</h4><p class="text-xs text-gray-500 font-space">Logo en haut &agrave; gauche de la sidebar. Favicon mis &agrave; jour. OG images (aper&ccedil;u quand on partage un lien) mis &agrave; jour.</p></div>
+      </div>
+      <div class="neo-card p-5 flex items-start gap-4">
+        <span class="tag-prod flex-shrink-0">PROD</span>
+        <div><h4 class="font-bold text-sm mb-1">App title : "HiBroker Advice" &rarr; "BrokerONE Advice"</h4><p class="text-xs text-gray-500 font-space">Partout : &lt;title&gt;, meta tags, page login, confirmation email, onboarding.</p></div>
+      </div>
+      <div class="neo-card p-5 flex items-start gap-4">
+        <span class="tag-prod flex-shrink-0">PROD</span>
+        <div><h4 class="font-bold text-sm mb-1">Templates email rebrand&eacute;s</h4><p class="text-xs text-gray-500 font-space">Sollicitation + relances J+2/J+5 : couleurs BrokerONE + logo courtier. AR r&eacute;clamation + r&eacute;ponses RGPD.</p></div>
+      </div>
+      <div class="neo-card p-5 flex items-start gap-4">
+        <span class="tag-prod flex-shrink-0">PROD</span>
+        <div><h4 class="font-bold text-sm mb-1">Page tampon rebrand&eacute;e</h4><p class="text-xs text-gray-500 font-space">La page client (tampon) affiche la marque BrokerONE, les couleurs du courtier, le logo. Coh&eacute;rent avec le site vitrine.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 14 — GDPR PROCESS -->
+
+<!-- ============================================ -->
+<!-- 09 / BLOC 3 — FOOTER & MENTIONS L&Eacute;GALES -->
+<!-- ============================================ -->
 <section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4">14 / PROCESSUS GDPR</div>
+      <div class="section-number mb-4">09 / BLOC 3 &mdash; FOOTER &amp; MENTIONS L&Eacute;GALES</div>
+      <div class="flex items-center gap-3 mb-4"><span class="tag-prod">BLOC 3</span><span class="devis-pill" style="background:#F1F3F6;color:#0a0a0a;border-color:#0a0a0a">0.5-1 JOUR</span></div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Footer visible,<br>contenu &eacute;ditable.</h2>
+      <p class="text-gray-600 font-space mb-8">Bruno a demand&eacute; trois choses sp&eacute;cifiques :</p>
+    </div>
+    <div class="anim space-y-3">
+      <div class="neo-card p-6" style="border-left:6px solid #C0392B">
+        <div class="font-mono text-xs font-bold mb-3" style="color:#C0392B">"AUGMENTER LA VISIBILIT&Eacute; DU FOOTER"</div>
+        <p class="text-sm text-gray-500 font-space">Footer plus grand, plus visible, impossible &agrave; rater. Liens directs vers : mentions l&eacute;gales, politique de confidentialit&eacute;, contact du cabinet. Pr&eacute;sent sur toutes les pages, y compris la page tampon.</p>
+      </div>
+      <div class="neo-card p-6" style="border-left:6px solid #C0392B">
+        <div class="font-mono text-xs font-bold mb-3" style="color:#C0392B">"RENDRE &Eacute;DITABLE LA MENTION L&Eacute;GALE"</div>
+        <p class="text-sm text-gray-500 font-space mb-4">Chaque courtier peut personnaliser ses mentions directement dans ses param&egrave;tres, au m&ecirc;me endroit que la signature email. Variables &eacute;ditables :</p>
+        <div class="grid sm:grid-cols-2 gap-2">
+          <div class="p-3 bg-neo-gray neo-border-2 text-xs font-space">Lien politique de confidentialit&eacute;</div>
+          <div class="p-3 bg-neo-gray neo-border-2 text-xs font-space">Email de contact du cabinet</div>
+          <div class="p-3 bg-neo-gray neo-border-2 text-xs font-space">Adresse physique du cabinet</div>
+          <div class="p-3 bg-neo-gray neo-border-2 text-xs font-space">Num&eacute;ro d'inscription ORIAS/FSMA</div>
+        </div>
+      </div>
+      <div class="neo-card p-6" style="border-left:6px solid #C0392B">
+        <div class="font-mono text-xs font-bold mb-3" style="color:#C0392B">"M&Ecirc;ME NIVEAU D'&Eacute;DITION QUE LA SIGNATURE"</div>
+        <p class="text-sm text-gray-500 font-space">Plac&eacute; dans la m&ecirc;me section des param&egrave;tres que la signature email. M&ecirc;me ergonomie : champs texte, pr&eacute;visualisation en temps r&eacute;el, sauvegarde auto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- 10 / BLOC 4 — MULTILINGUE NL -->
+<!-- ============================================ -->
+<section id="multilingue" class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">10 / BLOC 4 &mdash; MULTILINGUE NL</div>
+      <div class="flex items-center gap-3 mb-4"><span class="tag-prod">BLOC 4</span><span class="devis-pill" style="background:#F1F3F6;color:#0a0a0a;border-color:#0a0a0a">2-3 JOURS</span></div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">N&eacute;erlandais<br>pour la Belgique.</h2>
+      <p class="text-gray-600 font-space mb-8">Bruno a demand&eacute; : "au moins n&eacute;erlandais pour la Belgique". Le plus gros chantier apr&egrave;s le merge.</p>
+    </div>
+    <div class="anim space-y-3">
+      <div class="neo-card p-5 flex items-start gap-4">
+        <span class="tag-prod flex-shrink-0">NL</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Extraction de toutes les cha&icirc;nes UI dans un fichier i18n</h4>
+          <p class="text-xs text-gray-500 font-space">Chaque label, bouton, placeholder, message d'erreur, empty state, toast notification est extrait dans un fichier de traduction structur&eacute; (fr.json / nl.json).</p>
+        </div>
+      </div>
+      <div class="neo-card p-5 flex items-start gap-4">
+        <span class="tag-prod flex-shrink-0">NL</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Traduction compl&egrave;te NL de l'interface</h4>
+          <p class="text-xs text-gray-500 font-space">Tous les &eacute;crans : dashboard, campagnes, avis, alertes, param&egrave;tres, onboarding, analytiques. Chaque mot traduit en n&eacute;erlandais.</p>
+        </div>
+      </div>
+      <div class="neo-card p-5 flex items-start gap-4">
+        <span class="tag-prod flex-shrink-0">NL</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">D&eacute;tection langue + switch FR/NL</h4>
+          <p class="text-xs text-gray-500 font-space">D&eacute;tection automatique bas&eacute;e sur les param&egrave;tres du courtier. S&eacute;lecteur FR/NL dans le header ou les param&egrave;tres. Le choix est persist&eacute;.</p>
+        </div>
+      </div>
+      <div class="neo-card p-5 flex items-start gap-4">
+        <span class="tag-prod flex-shrink-0">NL</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Templates email en NL</h4>
+          <p class="text-xs text-gray-500 font-space">Sollicitation, relances J+2/J+5, accus&eacute; de r&eacute;ception r&eacute;clamation, r&eacute;ponses RGPD &mdash; tout en version n&eacute;erlandaise compl&egrave;te.</p>
+        </div>
+      </div>
+      <div class="neo-card p-5 flex items-start gap-4">
+        <span class="tag-prod flex-shrink-0">NL</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Page tampon en NL</h4>
+          <p class="text-xs text-gray-500 font-space">Le client flamand arrive sur une page tampon enti&egrave;rement dans sa langue. Routing bas&eacute; sur la langue du courtier.</p>
+        </div>
+      </div>
+    </div>
+    <div class="anim neo-card p-5 mt-6" style="border-left:6px solid #1E3A5F">
+      <p class="text-sm font-space text-gray-600"><strong>Note :</strong> L'allemand (DE) peut &ecirc;tre ajout&eacute; plus tard avec exactement le m&ecirc;me syst&egrave;me &mdash; il suffit de fournir le fichier de.json. L'architecture sera pr&ecirc;te.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- 11 / BLOC 5 — GDPR & S&Eacute;CURIT&Eacute; -->
+<!-- ============================================ -->
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">11 / BLOC 5 &mdash; GDPR &amp; S&Eacute;CURIT&Eacute;</div>
+      <div class="flex items-center gap-3 mb-4"><span class="tag-prod">BLOC 5</span><span class="devis-pill" style="background:#F1F3F6;color:#0a0a0a;border-color:#0a0a0a">1-2 JOURS</span></div>
       <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">R&eacute;tention, suppression, audit.</h2>
-      <p class="text-gray-600 font-space mb-2">1-2 jours</p>
+      <p class="text-gray-600 font-space mb-8">Bruno a demand&eacute; deux choses distinctes :</p>
     </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">Politique de r&eacute;tention des donn&eacute;es</h4><p class="text-xs text-gray-500 font-space">D&eacute;finir ce qui est supprim&eacute;, quand, comment. Distinction entre donn&eacute;es source (emails bruts) et r&eacute;sultats affich&eacute;s.</p></div>
+
+    <!-- Part 1: Retention -->
+    <div class="anim mb-8">
+      <div class="neo-card p-6" style="border-left:6px solid #C0392B">
+        <div class="font-mono text-xs font-bold mb-4" style="color:#C0392B">DEMANDE 1 : "POLITIQUE DE CONSERVATION / SUPPRESSION DES DONN&Eacute;ES"</div>
+        <p class="text-sm text-gray-500 font-space mb-4">D&eacute;finir pr&eacute;cis&eacute;ment ce qui est gard&eacute;, ce qui est supprim&eacute;, et quand :</p>
+
+        <div class="neo-border-2 overflow-hidden mb-4">
+          <div class="retention-header retention-row">
+            <div>TYPE DE DONN&Eacute;E</div>
+            <div>R&Eacute;TENTION</div>
+            <div>ACTION</div>
+          </div>
+          <div class="retention-row bg-white">
+            <div>Donn&eacute;es source (emails bruts import&eacute;s)</div>
+            <div class="font-bold" style="color:#C0392B">Supprim&eacute;es apr&egrave;s traitement</div>
+            <div>Cleanup mensuel automatique</div>
+          </div>
+          <div class="retention-row bg-neo-gray">
+            <div>R&eacute;sultats affich&eacute;s (analyses, scores)</div>
+            <div class="font-bold">3 ans</div>
+            <div>Suppression apr&egrave;s 3 ans</div>
+          </div>
+          <div class="retention-row bg-white">
+            <div>R&eacute;clamations</div>
+            <div class="font-bold" style="color:#1E3A5F">5 ans (obligation ACPR)</div>
+            <div>Archivage puis suppression</div>
+          </div>
+          <div class="retention-row bg-neo-gray">
+            <div>Demandes RGPD</div>
+            <div class="font-bold">3 ans</div>
+            <div>Suppression apr&egrave;s 3 ans</div>
+          </div>
+          <div class="retention-row bg-white">
+            <div>Logs Sentinel</div>
+            <div class="font-bold">1 an</div>
+            <div>Rotation mensuelle</div>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <div class="p-3 flex items-center gap-2 bg-white neo-border-2">
+            <span class="check-done">&#9745;</span>
+            <span class="text-sm font-space">Cron job mensuel automatis&eacute; pour le cleanup</span>
+          </div>
+          <div class="p-3 flex items-center gap-2 bg-white neo-border-2">
+            <span class="check-done">&#9745;</span>
+            <span class="text-sm font-space">Audit trail : chaque suppression est trac&eacute;e (quoi, quand, pourquoi)</span>
+          </div>
+          <div class="p-3 flex items-center gap-2 bg-white neo-border-2">
+            <span class="check-done">&#9745;</span>
+            <span class="text-sm font-space">Suppression compl&egrave;te &agrave; la d&eacute;sactivation d'un compte courtier</span>
+          </div>
+        </div>
       </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">Cleanup mensuel automatis&eacute;</h4><p class="text-xs text-gray-500 font-space">Cron job mensuel qui purge les donn&eacute;es expir&eacute;es selon la politique d&eacute;finie.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">Suppression &agrave; la d&eacute;sactivation courtier</h4><p class="text-xs text-gray-500 font-space">Quand un courtier d&eacute;sactive son compte, toutes ses donn&eacute;es sont purg&eacute;es proprement.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">Audit trail pour les suppressions</h4><p class="text-xs text-gray-500 font-space">Chaque suppression est trac&eacute;e : quoi, quand, par qui, pourquoi. Conforme RGPD.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">Audit s&eacute;curit&eacute; donn&eacute;es email</h4><p class="text-xs text-gray-500 font-space">V&eacute;rification du traitement des donn&eacute;es email : stockage, transmission, acc&egrave;s.</p></div>
+    </div>
+
+    <!-- Part 2: Security -->
+    <div class="anim">
+      <div class="neo-card p-6" style="border-left:6px solid #1E3A5F">
+        <div class="font-mono text-xs font-bold mb-4" style="color:#1E3A5F">DEMANDE 2 : "POINT DE S&Eacute;CURIT&Eacute; SUR LES EMAILS ET DONN&Eacute;ES IMPORT&Eacute;ES"</div>
+        <p class="text-sm text-gray-500 font-space mb-4">Audit complet de la s&eacute;curit&eacute; des donn&eacute;es :</p>
+        <div class="space-y-2">
+          <div class="p-3 flex items-center gap-2 bg-white neo-border-2">
+            <span class="check-done">&#9745;</span>
+            <span class="text-sm font-space">Audit des donn&eacute;es stock&eacute;es depuis les emails : quoi exactement, o&ugrave;, comment</span>
+          </div>
+          <div class="p-3 flex items-center gap-2 bg-white neo-border-2">
+            <span class="check-done">&#9745;</span>
+            <span class="text-sm font-space">V&eacute;rification encryption at rest (Supabase AES-256)</span>
+          </div>
+          <div class="p-3 flex items-center gap-2 bg-white neo-border-2">
+            <span class="check-done">&#9745;</span>
+            <span class="text-sm font-space">V&eacute;rification token refresh (OAuth M365 + Gmail) : expiry, rotation, r&eacute;vocation</span>
+          </div>
+          <div class="p-3 flex items-center gap-2 bg-white neo-border-2">
+            <span class="check-done">&#9745;</span>
+            <span class="text-sm font-space">Rate limiting sur les endpoints publics (page tampon, webhooks)</span>
+          </div>
+          <div class="p-3 flex items-center gap-2 bg-white neo-border-2">
+            <span class="check-done">&#9745;</span>
+            <span class="text-sm font-space">Audit input sanitization sur toutes les entr&eacute;es utilisateur</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 15 — MULTI-TENANT MICROSOFT -->
+
+<!-- ============================================ -->
+<!-- 12 / BLOC 6 — MULTI-TENANT M365 -->
+<!-- ============================================ -->
 <section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4">15 / MULTI-TENANT MICROSOFT 365</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Chaque courtier, son M365.</h2>
-      <p class="text-gray-600 font-space mb-2">1-2 jours</p>
+      <div class="section-number mb-4">12 / BLOC 6 &mdash; MULTI-TENANT MICROSOFT 365</div>
+      <div class="flex items-center gap-3 mb-4"><span class="tag-prod">BLOC 6</span><span class="devis-pill" style="background:#F1F3F6;color:#0a0a0a;border-color:#0a0a0a">1-2 JOURS</span></div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Chaque courtier,<br>son M365.</h2>
+      <p class="text-gray-600 font-space mb-8">Bruno a demand&eacute; : "Impl&eacute;menter et tester la gestion multi-comptes Microsoft / tenant en environnement r&eacute;el".</p>
     </div>
     <div class="anim space-y-3">
       <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">Multiple tenants Microsoft 365</h4><p class="text-xs text-gray-500 font-space">Chaque courtier connecte son propre compte M365. Pas de compte partag&eacute;.</p></div>
+        <span class="tag-prod flex-shrink-0">M365</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Chaque courtier connecte son propre compte M365</h4>
+          <p class="text-xs text-gray-500 font-space">Pas de compte partag&eacute;. Chaque courtier fait son propre OAuth consent sur son tenant Azure AD. Les emails partent de SON adresse.</p>
+        </div>
       </div>
       <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">Isolation des tokens</h4><p class="text-xs text-gray-500 font-space">Chaque token OAuth est isol&eacute; par courtier. Pas de cross-contamination.</p></div>
+        <span class="tag-prod flex-shrink-0">M365</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Multiple Azure AD tenants support&eacute;s</h4>
+          <p class="text-xs text-gray-500 font-space">L'app Azure est enregistr&eacute;e en multi-tenant. Chaque organisation M365 peut s'y connecter ind&eacute;pendamment.</p>
+        </div>
       </div>
       <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">PROD</span>
-        <div><h4 class="font-bold text-sm mb-1">Test en environnement r&eacute;el</h4><p class="text-xs text-gray-500 font-space">Test avec de vrais comptes M365, pas seulement en dev. V&eacute;rification envoi, r&eacute;ception, refresh.</p></div>
+        <span class="tag-prod flex-shrink-0">M365</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Isolation compl&egrave;te des tokens</h4>
+          <p class="text-xs text-gray-500 font-space">Courtier A ne peut pas acc&eacute;der aux emails de Courtier B. Tokens stock&eacute;s s&eacute;par&eacute;ment, chiffr&eacute;s, avec RLS.</p>
+        </div>
+      </div>
+      <div class="neo-card p-5 flex items-start gap-4">
+        <span class="tag-prod flex-shrink-0">M365</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Test en environnement R&Eacute;EL</h4>
+          <p class="text-xs text-gray-500 font-space">Pas juste en dev. Avec de vrais comptes M365, de vrais envois, de vrais refresh tokens. V&eacute;rification : token refresh, tenant switching, permission scoping, error handling.</p>
+        </div>
+      </div>
+      <div class="neo-card p-5 flex items-start gap-4">
+        <span class="tag-prod flex-shrink-0">M365</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Gmail d&eacute;j&agrave; fonctionnel &mdash; aligner M365</h4>
+          <p class="text-xs text-gray-500 font-space">L'OAuth Gmail fonctionne d&eacute;j&agrave; en multi-tenant dans le MVP. Il s'agit de durcir et aligner M365 au m&ecirc;me niveau de robustesse.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 16 — POLISH & SMALL FIXES -->
+
+<!-- ============================================ -->
+<!-- 13 / BLOC 7 — SECTION ABONNEMENT -->
+<!-- ============================================ -->
 <section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4">16 / POLISH &amp; PETITS AJUSTEMENTS</div>
+      <div class="section-number mb-4">13 / BLOC 7 &mdash; SECTION ABONNEMENT</div>
+      <div class="flex items-center gap-3 mb-4"><span class="tag-prod">BLOC 7</span><span class="devis-pill" style="background:#F1F3F6;color:#0a0a0a;border-color:#0a0a0a">0.5 JOUR</span></div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Cacher l'abonnement.</h2>
+      <p class="text-gray-600 font-space mb-8">Bruno a demand&eacute; : "Cacher/masquer la section abonnement pour la V1".</p>
+    </div>
+    <div class="anim neo-card p-6" style="border-left:6px solid #C0392B">
+      <div class="space-y-4">
+        <div>
+          <h4 class="font-bold text-sm mb-2">Pourquoi cacher ?</h4>
+          <p class="text-sm text-gray-500 font-space">L'interface a une section "Abonnement" dans les param&egrave;tres, mais il n'y a pas encore d'int&eacute;gration Stripe. La section n'a pas de sens pour le lancement et pourrait confondre les premiers courtiers.</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm mb-2">Comment ?</h4>
+          <p class="text-sm text-gray-500 font-space">Feature flag simple (variable d'environnement). La section est d&eacute;sactiv&eacute;e proprement, pas supprim&eacute;e. Un toggle suffit pour la r&eacute;activer quand Stripe sera int&eacute;gr&eacute; (V2).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- 14 / BLOC 8 — POLISH & D&Eacute;TAILS -->
+<!-- ============================================ -->
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">14 / BLOC 8 &mdash; POLISH &amp; PETITS D&Eacute;TAILS</div>
+      <div class="flex items-center gap-3 mb-4"><span class="tag-prod">BLOC 8</span><span class="devis-pill" style="background:#F1F3F6;color:#0a0a0a;border-color:#0a0a0a">1 JOUR</span></div>
       <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Les d&eacute;tails qui comptent.</h2>
-      <p class="text-gray-600 font-space mb-2">1-2 jours</p>
     </div>
     <div class="anim grid sm:grid-cols-2 gap-4">
       <div class="neo-card p-5">
         <h4 class="font-bold text-sm mb-2">Photo de profil</h4>
-        <p class="text-xs text-gray-500 font-space">Confirmer affichage ou non selon tes retours.</p>
+        <p class="text-xs text-gray-500 font-space">Bruno a demand&eacute; "d&eacute;cider si affich&eacute;e ou non". Solution : toggle dans les param&egrave;tres du courtier. Chaque courtier d&eacute;cide s'il veut afficher sa photo ou non. Configurable, pas impos&eacute;.</p>
       </div>
       <div class="neo-card p-5">
-        <h4 class="font-bold text-sm mb-2">Fine-tune UI</h4>
-        <p class="text-xs text-gray-500 font-space">Couleurs, sizing, espacement selon tes notes pr&eacute;cises.</p>
+        <h4 class="font-bold text-sm mb-2">Fine tuning UI</h4>
+        <p class="text-xs text-gray-500 font-space">"Taille/visibilit&eacute; du footer, d&eacute;coupe couleur" &mdash; ajustements fins des espacements, contrastes, hierarchie visuelle selon les retours de Bruno.</p>
       </div>
       <div class="neo-card p-5">
-        <h4 class="font-bold text-sm mb-2">Responsive</h4>
-        <p class="text-xs text-gray-500 font-space">V&eacute;rification compl&egrave;te mobile, tablette, desktop.</p>
+        <h4 class="font-bold text-sm mb-2">V&eacute;rification responsive</h4>
+        <p class="text-xs text-gray-500 font-space">Toutes les pages test&eacute;es sur mobile, tablette, desktop. Les nouvelles sections (r&eacute;clamations, RGPD, ambassadeurs) v&eacute;rifi&eacute;es.</p>
       </div>
       <div class="neo-card p-5">
         <h4 class="font-bold text-sm mb-2">Edge cases</h4>
-        <p class="text-xs text-gray-500 font-space">Token expiry, API failures, CSV malform&eacute;s, quota Apify.</p>
+        <p class="text-xs text-gray-500 font-space">Token OAuth expir&eacute;, API qui ne r&eacute;pond pas, CSV malform&eacute;, quota Apify d&eacute;pass&eacute;, Sentinel qui envoie un doublon. Chaque cas trait&eacute;.</p>
       </div>
-      <div class="neo-card p-5 sm:col-span-2">
-        <h4 class="font-bold text-sm mb-2">Tests E2E</h4>
-        <p class="text-xs text-gray-500 font-space">Parcours complet courtier + client + cron jobs + multi-navigateur (Chrome, Firefox, Safari, Edge + mobile).</p>
+      <div class="neo-card p-5">
+        <h4 class="font-bold text-sm mb-2">Loading states</h4>
+        <p class="text-xs text-gray-500 font-space">V&eacute;rification que chaque page affiche un skeleton / spinner pendant le chargement. Pas d'&eacute;cran blanc.</p>
+      </div>
+      <div class="neo-card p-5">
+        <h4 class="font-bold text-sm mb-2">Toast notifications</h4>
+        <p class="text-xs text-gray-500 font-space">Coh&eacute;rence des messages de succ&egrave;s / erreur partout dans l'app. M&ecirc;me style, m&ecirc;me position, m&ecirc;me dur&eacute;e.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 17 — DEVIS 2 CHECKLIST -->
-<section class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
+
+<!-- ============================================ -->
+<!-- 15 / CE QUI N'EST PAS INCLUS -->
+<!-- ============================================ -->
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#C0392B">15 / CE QUI N'EST PAS INCLUS</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Hors p&eacute;rim&egrave;tre.</h2>
+      <p class="text-gray-600 font-space mb-8">Pour &ecirc;tre transparent. Ces items ne font pas partie des 4 500&euro;.</p>
+    </div>
+    <div class="anim space-y-3">
+      <div class="neo-card p-5 flex items-start gap-4" style="opacity:.75">
+        <span class="tag-no flex-shrink-0">&#10007;</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Migration infra (Hetzner, Nginx, SSL, DNS)</h4>
+          <p class="text-xs text-gray-500 font-space">Devis s&eacute;par&eacute; : 2 500&euro;. Pr&eacute;requis pour la mise en production.</p>
+        </div>
+      </div>
+      <div class="neo-card p-5 flex items-start gap-4" style="opacity:.75">
+        <span class="tag-no flex-shrink-0">&#10007;</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">CRM Brio / Openbox</h4>
+          <p class="text-xs text-gray-500 font-space">Devis futur s&eacute;par&eacute; : ~2 500&euro;. Apr&egrave;s les premiers courtiers en test.</p>
+        </div>
+      </div>
+      <div class="neo-card p-5 flex items-start gap-4" style="opacity:.75">
+        <span class="tag-no flex-shrink-0">&#10007;</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Widget Google Maps</h4>
+          <p class="text-xs text-gray-500 font-space">Non prioritaire. Bruno l'a dit lui-m&ecirc;me.</p>
+        </div>
+      </div>
+      <div class="neo-card p-5 flex items-start gap-4" style="opacity:.75">
+        <span class="tag-no flex-shrink-0">&#10007;</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Stripe / abonnements</h4>
+          <p class="text-xs text-gray-500 font-space">V2. La section est masqu&eacute;e pour le lancement (voir section 13).</p>
+        </div>
+      </div>
+      <div class="neo-card p-5 flex items-start gap-4" style="opacity:.75">
+        <span class="tag-no flex-shrink-0">&#10007;</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Allemand (DE)</h4>
+          <p class="text-xs text-gray-500 font-space">Futur. M&ecirc;me syst&egrave;me que le NL, il suffit d'ajouter le fichier de traduction.</p>
+        </div>
+      </div>
+      <div class="neo-card p-5 flex items-start gap-4" style="opacity:.75">
+        <span class="tag-no flex-shrink-0">&#10007;</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">N8N workflows</h4>
+          <p class="text-xs text-gray-500 font-space">Vient avec Sentinel, pas avec Advice. S&eacute;par&eacute; architecturalement.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- 16 / CHECKLIST COMPL&Egrave;TE -->
+<!-- ============================================ -->
+<section id="checklist" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto text-white">
     <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">17 / CHECKLIST DEVIS 2</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">20 items, rien d'oubli&eacute;.</h2>
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">16 / CHECKLIST COMPL&Egrave;TE</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">20 livrables. Rien d'oubli&eacute;.</h2>
     </div>
     <div class="anim">
       <div class="space-y-2">
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">01</span><span class="text-sm font-space">Int&eacute;grer 3 endpoints Sentinel (r&eacute;clamation, RGPD, ambassador)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">02</span><span class="text-sm font-space">Int&eacute;grer 441 lignes prompts IA (AR + 3 tons + 6 RGPD)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">03</span><span class="text-sm font-space">Ex&eacute;cuter migration SQL (4 tables + RLS + triggers)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">04</span><span class="text-sm font-space">Int&eacute;grer types TypeScript + validators Zod</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">05</span><span class="text-sm font-space">Int&eacute;grer config dynamique FR/BE (reg-config.ts)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">06</span><span class="text-sm font-space">Rebrand couleurs (#1E3A5F, #C0392B, #F1F3F6)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">07</span><span class="text-sm font-space">Logo BrokerONE + favicon + OG images</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">08</span><span class="text-sm font-space">Templates email + page tampon rebrand&eacute;s</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">09</span><span class="text-sm font-space">Multilingue NL : UI, labels, boutons, messages</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">10</span><span class="text-sm font-space">Multilingue NL : emails + page tampon</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">11</span><span class="text-sm font-space">D&eacute;tection / switch langue FR/NL</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">12</span><span class="text-sm font-space">Footer visible + mentions l&eacute;gales &eacute;ditables</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">13</span><span class="text-sm font-space">Masquer section Abonnement V1</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">14</span><span class="text-sm font-space">Politique r&eacute;tention + cleanup mensuel cron</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">15</span><span class="text-sm font-space">Suppression donn&eacute;es &agrave; la d&eacute;sactivation + audit trail</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">16</span><span class="text-sm font-space">Audit s&eacute;curit&eacute; donn&eacute;es email</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">17</span><span class="text-sm font-space">Multi-tenant M365 (chaque courtier = son compte)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">18</span><span class="text-sm font-space">Isolation tokens + test env r&eacute;el</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">19</span><span class="text-sm font-space">Polish UI + responsive + edge cases</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">20</span><span class="text-sm font-space">Tests E2E complets (courtier + client + crons)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">01</span><span class="text-sm font-space">Int&eacute;grer endpoint /api/v1/advice/reclamation + validation Zod</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">02</span><span class="text-sm font-space">Int&eacute;grer endpoint /api/v1/advice/rgpd + validation Zod</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">03</span><span class="text-sm font-space">Int&eacute;grer endpoint /api/v1/advice/ambassador + validation Zod</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">04</span><span class="text-sm font-space">Int&eacute;grer prompts IA (AR ACPR + 3 tons + 6 RGPD)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">05</span><span class="text-sm font-space">Ex&eacute;cuter migration SQL (4 tables + RLS + fonctions)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">06</span><span class="text-sm font-space">Int&eacute;grer types TypeScript + config FR/BE (reg-config.ts)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">07</span><span class="text-sm font-space">Rebrand couleurs (#1E3A5F, #C0392B, #F1F3F6)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">08</span><span class="text-sm font-space">Logo BrokerONE + favicon + OG images</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">09</span><span class="text-sm font-space">Templates email rebrand&eacute;s (sollicitation + relances)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">10</span><span class="text-sm font-space">Page tampon rebrand&eacute;e BrokerONE</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">11</span><span class="text-sm font-space">Footer visible + mentions l&eacute;gales &eacute;ditables par courtier</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">12</span><span class="text-sm font-space">Multilingue NL &mdash; interface compl&egrave;te (i18n)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">13</span><span class="text-sm font-space">Multilingue NL &mdash; templates email</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">14</span><span class="text-sm font-space">Multilingue NL &mdash; page tampon</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">15</span><span class="text-sm font-space">Politique GDPR conservation / suppression + cron cleanup</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">16</span><span class="text-sm font-space">Audit s&eacute;curit&eacute; emails + tokens + inputs</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">17</span><span class="text-sm font-space">Multi-tenant M365 (test r&eacute;el multi-courtier)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">18</span><span class="text-sm font-space">Masquer section abonnement (feature flag)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">19</span><span class="text-sm font-space">Photo de profil configurable (toggle courtier)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">20</span><span class="text-sm font-space">Polish UI + responsive + edge cases + tests E2E</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 18 — TIMELINE DEVIS 2 -->
+
+<!-- ============================================ -->
+<!-- 17 / TIMELINE — 3 SPRINTS -->
+<!-- ============================================ -->
 <section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4">18 / PLANNING DEVIS 2</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">4 semaines, 4 sprints.</h2>
+      <div class="section-number mb-4">17 / PLANNING &mdash; 3 SPRINTS</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">12 jours, 3 sprints.</h2>
     </div>
     <div class="anim neo-card p-6 sm:p-8 mb-8">
       <div class="space-y-4">
         <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
-          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">S1</div>
-          <div class="flex-1"><h4 class="font-bold text-sm mb-1">Jours 1-4 : Merge v1 + v2 code</h4><p class="text-sm text-gray-500 font-space">Endpoints Sentinel, prompts IA, SQL migration, types Zod, config FR/BE. Test de l'app merg&eacute;e.</p></div>
+          <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">S1</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-sm mb-1">Sprint 1 &mdash; Jours 1-4 : Merge v1 + v2</h4>
+            <p class="text-sm text-gray-500 font-space">Int&eacute;gration des 3 endpoints Sentinel, 441 lignes de prompts IA, migration SQL (4 tables + RLS + fonctions), types TypeScript + Zod, config FR/BE. Test de l'app merg&eacute;e.</p>
+            <div class="flex flex-wrap gap-2 mt-2">
+              <span class="text-xs font-mono px-2 py-0.5 bg-white neo-border-2">Livrables 01-06</span>
+            </div>
+          </div>
           <div class="text-xs text-gray-400 font-mono flex-shrink-0">4 jours</div>
         </div>
         <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
-          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">S2</div>
-          <div class="flex-1"><h4 class="font-bold text-sm mb-1">Jours 5-7 : Rebrand BrokerONE + mentions l&eacute;gales</h4><p class="text-sm text-gray-500 font-space">Couleurs, logo, templates email, page tampon. Footer visible, mentions &eacute;ditables, masquer abonnement.</p></div>
-          <div class="text-xs text-gray-400 font-mono flex-shrink-0">3 jours</div>
-        </div>
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
-          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">S3</div>
-          <div class="flex-1"><h4 class="font-bold text-sm mb-1">Jours 8-11 : Multilingue NL + GDPR process</h4><p class="text-sm text-gray-500 font-space">Traduction compl&egrave;te NL (UI, emails, tampon), r&eacute;tention, cleanup, audit trail.</p></div>
+          <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">S2</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-sm mb-1">Sprint 2 &mdash; Jours 5-8 : Rebrand + mentions l&eacute;gales + multilingue NL</h4>
+            <p class="text-sm text-gray-500 font-space">Rebrand complet BrokerONE (couleurs, logo, emails, tampon). Footer visible + mentions &eacute;ditables. Extraction i18n + traduction NL compl&egrave;te (UI, emails, tampon).</p>
+            <div class="flex flex-wrap gap-2 mt-2">
+              <span class="text-xs font-mono px-2 py-0.5 bg-white neo-border-2">Livrables 07-14</span>
+            </div>
+          </div>
           <div class="text-xs text-gray-400 font-mono flex-shrink-0">4 jours</div>
         </div>
         <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
-          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">S4</div>
-          <div class="flex-1"><h4 class="font-bold text-sm mb-1">Jours 12-15 : Multi-tenant M365 + polish + tests E2E</h4><p class="text-sm text-gray-500 font-space">Multi-tenant M365, edge cases, responsive, tests complets courtier + client.</p></div>
+          <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">S3</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-sm mb-1">Sprint 3 &mdash; Jours 9-12 : GDPR + M365 + abonnement + polish + tests</h4>
+            <p class="text-sm text-gray-500 font-space">Politique r&eacute;tention GDPR + cron cleanup, audit s&eacute;curit&eacute;, multi-tenant M365 test r&eacute;el, masquer abonnement, photo de profil, polish UI, tests E2E complets.</p>
+            <div class="flex flex-wrap gap-2 mt-2">
+              <span class="text-xs font-mono px-2 py-0.5 bg-white neo-border-2">Livrables 15-20</span>
+            </div>
+          </div>
           <div class="text-xs text-gray-400 font-mono flex-shrink-0">4 jours</div>
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- 18 / BUDGET -->
+<!-- ============================================ -->
+<section id="budget" class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="neo-card p-6 text-center" style="border-top:4px solid #C0392B">
-        <div class="font-mono text-xs font-bold mb-2" style="color:#C0392B">DEVIS 2 &mdash; ADVICE PRODUCTION</div>
-        <div class="font-grotesk text-4xl font-bold mb-2">6 500&euro; HT</div>
-        <div class="text-sm text-gray-500 font-space">12-15 jours &bull; Travail principal</div>
-        <div class="mt-3 devis-pill inline-block" style="background:#C0392B;color:#fff;border-color:#C0392B">PRINCIPAL</div>
+      <div class="section-number mb-4" style="color:#C0392B">18 / BUDGET</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-8">4 500&euro; HT.</h2>
+    </div>
+    <div class="anim">
+      <div class="neo-card p-8 sm:p-12 text-center" style="border-top:6px solid #C0392B">
+        <div class="font-mono text-xs font-bold mb-4" style="color:#C0392B;letter-spacing:.2em">ADVICE PRODUCTION</div>
+        <div class="font-grotesk text-6xl sm:text-7xl font-bold mb-4">4 500&euro; <span class="text-3xl" style="color:#999">HT</span></div>
+        <div class="grid sm:grid-cols-3 gap-6 mt-8 mb-8">
+          <div>
+            <div class="font-grotesk text-3xl font-bold mb-1">~12</div>
+            <div class="text-sm text-gray-500 font-space">jours de travail</div>
+          </div>
+          <div>
+            <div class="font-grotesk text-3xl font-bold mb-1">3</div>
+            <div class="text-sm text-gray-500 font-space">sprints</div>
+          </div>
+          <div>
+            <div class="font-grotesk text-3xl font-bold mb-1">20</div>
+            <div class="text-sm text-gray-500 font-space">livrables</div>
+          </div>
+        </div>
+        <div class="pt-4" style="border-top:2px dashed #e2e8f0">
+          <div class="devis-pill inline-block" style="background:#fff3cd;color:#856404;border-color:#856404">PR&Eacute;REQUIS : MIGRATION INFRA (DEVIS S&Eacute;PAR&Eacute;)</div>
+        </div>
+      </div>
+    </div>
+    <div class="anim grid sm:grid-cols-3 gap-4 mt-8">
+      <div class="neo-card p-5 text-center stat-card" style="border-top:4px solid #1D6A45">
+        <div class="font-mono text-xs font-bold mb-2" style="color:#1D6A45">MVP v1</div>
+        <div class="font-grotesk text-2xl font-bold mb-1">7 500&euro;</div>
+        <div class="tag-mvp inline-block">PAY&Eacute; &#10003;</div>
+      </div>
+      <div class="neo-card p-5 text-center stat-card" style="border-top:4px solid #C0392B">
+        <div class="font-mono text-xs font-bold mb-2" style="color:#C0392B">PRODUCTION</div>
+        <div class="font-grotesk text-2xl font-bold mb-1">4 500&euro;</div>
+        <div class="tag-prod inline-block">CE DEVIS</div>
+      </div>
+      <div class="neo-card p-5 text-center stat-card" style="border-top:4px solid #0a0a0a">
+        <div class="font-mono text-xs font-bold mb-2">CODE V2</div>
+        <div class="font-grotesk text-2xl font-bold mb-1">0&euro;</div>
+        <div class="tag-done inline-block">FOURNI</div>
       </div>
     </div>
   </div>
@@ -802,331 +1187,112 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 
 
 <!-- ============================================ -->
-<!--       DEVIS 3 — CRM BRIO (2,500€)           -->
+<!-- 19 / CE QUE BRUNO DOIT FOURNIR -->
 <!-- ============================================ -->
-
-<section id="devis-3" class="py-20 px-4" style="background:#8E44AD;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">DEVIS 3 / 3</div>
-      <div class="flex items-center gap-3 mb-4"><span class="tag-crm">CRM BRIO</span><span class="devis-pill" style="background:rgba(255,255,255,.2);color:#fff;border-color:rgba(255,255,255,.5)">APR&Egrave;S PROD</span></div>
-      <h2 class="font-grotesk text-4xl sm:text-6xl font-bold mb-6">CRM Brio.</h2>
-      <p class="text-lg font-space" style="color:rgba(255,255,255,.8)">Int&eacute;gration CRM apr&egrave;s mise en production. <strong>2 500&euro; HT &mdash; 3-5 jours.</strong></p>
-    </div>
-  </div>
-</section>
-
-<!-- 19 — WHY SEPARATE -->
 <section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4">19 / POURQUOI S&Eacute;PAR&Eacute;</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Pas bloquant pour le lancement.</h2>
-    </div>
-    <div class="anim neo-card p-6 sm:p-8" style="border-left:6px solid #8E44AD">
-      <p class="text-gray-600 font-space mb-4">L'int&eacute;gration CRM Brio peut se faire <strong>apr&egrave;s</strong> que l'app est en production avec les premiers courtiers test. Raisons :</p>
-      <div class="space-y-3 mt-4">
-        <div class="p-3 flex items-center gap-2 bg-neo-gray neo-border-2">
-          <span class="check-done">&#9745;</span>
-          <span class="text-sm font-space">Advice fonctionne d&eacute;j&agrave; sans CRM (saisie manuelle + CSV)</span>
-        </div>
-        <div class="p-3 flex items-center gap-2 bg-neo-gray neo-border-2">
-          <span class="check-done">&#9745;</span>
-          <span class="text-sm font-space">L'API Brio n&eacute;cessite un acc&egrave;s / documentation que tu fournis</span>
-        </div>
-        <div class="p-3 flex items-center gap-2 bg-neo-gray neo-border-2">
-          <span class="check-done">&#9745;</span>
-          <span class="text-sm font-space">Les premiers courtiers peuvent tester sans Brio</span>
-        </div>
-        <div class="p-3 flex items-center gap-2 bg-neo-gray neo-border-2">
-          <span class="check-done">&#9745;</span>
-          <span class="text-sm font-space">D&eacute;coupler = moins de risque sur le lancement principal</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 20 — WHAT'S INCLUDED CRM -->
-<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">20 / CE QUI EST INCLUS</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Int&eacute;gration compl&egrave;te Brio.</h2>
-    </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5 flex items-start gap-4">
-        <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#8E44AD">1</div>
-        <div><h4 class="font-bold text-sm mb-1">API Brio (Portima) int&eacute;gration</h4><p class="text-xs text-gray-500 font-space">Connexion &agrave; l'API Brio, authentification, gestion des tokens.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#8E44AD">2</div>
-        <div><h4 class="font-bold text-sm mb-1">Exploration connecteur Openbox</h4><p class="text-xs text-gray-500 font-space">Analyse des possibilit&eacute;s Openbox pour enrichir la sync.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#8E44AD">3</div>
-        <div><h4 class="font-bold text-sm mb-1">Sync donn&eacute;es clients</h4><p class="text-xs text-gray-500 font-space">Profils, contrats, sinistres &mdash; sync bidirectionnelle entre Brio et Advice.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#8E44AD">4</div>
-        <div><h4 class="font-bold text-sm mb-1">Configuration webhooks</h4><p class="text-xs text-gray-500 font-space">Webhooks pour mises &agrave; jour en temps r&eacute;el quand un &eacute;v&eacute;nement arrive dans Brio.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#8E44AD">5</div>
-        <div><h4 class="font-bold text-sm mb-1">Mapping Brio &rarr; Advice</h4><p class="text-xs text-gray-500 font-space">Transformation des donn&eacute;es Brio vers le mod&egrave;le de donn&eacute;es Advice.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#8E44AD">6</div>
-        <div><h4 class="font-bold text-sm mb-1">Test avec un vrai compte Brio</h4><p class="text-xs text-gray-500 font-space">Validation end-to-end avec de vraies donn&eacute;es en conditions r&eacute;elles.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 21 — TIMELINE DEVIS 3 -->
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">21 / PLANNING DEVIS 3</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">5 jours, apr&egrave;s la prod.</h2>
-    </div>
-    <div class="anim neo-card p-6 sm:p-8 mb-8">
-      <div class="space-y-4">
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
-          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#8E44AD">J1-2</div>
-          <div class="flex-1"><h4 class="font-bold text-sm mb-1">Exploration API Brio + auth</h4><p class="text-sm text-gray-500 font-space">Comprendre l'API, obtenir les acc&egrave;s, configurer l'authentification.</p></div>
-          <div class="text-xs text-gray-400 font-mono flex-shrink-0">2 jours</div>
-        </div>
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
-          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#8E44AD">J3-4</div>
-          <div class="flex-1"><h4 class="font-bold text-sm mb-1">Data mapping + sync implementation</h4><p class="text-sm text-gray-500 font-space">Mapping des donn&eacute;es, sync bidirectionnelle, webhooks configur&eacute;s.</p></div>
-          <div class="text-xs text-gray-400 font-mono flex-shrink-0">2 jours</div>
-        </div>
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
-          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#8E44AD">J5</div>
-          <div class="flex-1"><h4 class="font-bold text-sm mb-1">Tests avec donn&eacute;es r&eacute;elles</h4><p class="text-sm text-gray-500 font-space">Validation compl&egrave;te avec un vrai compte Brio.</p></div>
-          <div class="text-xs text-gray-400 font-mono flex-shrink-0">1 jour</div>
-        </div>
-      </div>
-    </div>
-    <div class="anim">
-      <div class="neo-card p-6 text-center" style="border-top:4px solid #8E44AD">
-        <div class="font-mono text-xs font-bold mb-2" style="color:#8E44AD">DEVIS 3 &mdash; CRM BRIO</div>
-        <div class="font-grotesk text-4xl font-bold mb-2">2 500&euro; HT</div>
-        <div class="text-sm text-gray-500 font-space">3-5 jours &bull; Apr&egrave;s mise en production</div>
-        <div class="mt-3 devis-pill inline-block" style="background:#f0f0f0;color:#666;border-color:#999">APR&Egrave;S PROD</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================ -->
-<!--          COMBINED — BUDGET TOTAL             -->
-<!-- ============================================ -->
-
-<section id="budget-total" class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:#C0392B">22 / BUDGET TOTAL</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">19 000&euro; dont 7 500&euro; pay&eacute;s.</h2>
-    </div>
-    <div class="anim grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-      <div class="neo-card p-6 text-center" style="border-top:4px solid #1D6A45">
-        <div class="font-mono text-xs font-bold mb-2" style="color:#1D6A45">MVP</div>
-        <div class="font-grotesk text-3xl font-bold mb-2">7 500&euro;</div>
-        <div class="text-xs text-gray-500 font-space">v1 Baptiste &mdash; livr&eacute;</div>
-        <div class="mt-3 tag-mvp inline-block">PAY&Eacute; &#10003;</div>
-      </div>
-      <div class="neo-card p-6 text-center" style="border-top:4px solid #1E3A5F">
-        <div class="font-mono text-xs font-bold mb-2" style="color:#1E3A5F">DEVIS 1 &mdash; INFRA</div>
-        <div class="font-grotesk text-3xl font-bold mb-2">2 500&euro;</div>
-        <div class="text-xs text-gray-500 font-space">Hetzner, Nginx, DNS, SSL</div>
-        <div class="mt-3 devis-pill inline-block" style="background:#fff3cd;color:#856404;border-color:#856404;font-size:10px">PR&Eacute;REQUIS</div>
-      </div>
-      <div class="neo-card p-6 text-center" style="border-top:4px solid #C0392B">
-        <div class="font-mono text-xs font-bold mb-2" style="color:#C0392B">DEVIS 2 &mdash; PROD</div>
-        <div class="font-grotesk text-3xl font-bold mb-2">6 500&euro;</div>
-        <div class="text-xs text-gray-500 font-space">Merge, rebrand, NL, GDPR</div>
-        <div class="mt-3 tag-prod inline-block">PRINCIPAL</div>
-      </div>
-      <div class="neo-card p-6 text-center" style="border-top:4px solid #8E44AD">
-        <div class="font-mono text-xs font-bold mb-2" style="color:#8E44AD">DEVIS 3 &mdash; CRM</div>
-        <div class="font-grotesk text-3xl font-bold mb-2">2 500&euro;</div>
-        <div class="text-xs text-gray-500 font-space">Brio, Openbox, sync</div>
-        <div class="mt-3 tag-crm inline-block">APR&Egrave;S PROD</div>
-      </div>
-    </div>
-    <div class="anim neo-card p-6 mt-8 text-center" style="background:#0a0a0a;color:#fff;border-color:#0a0a0a">
-      <div class="font-mono text-xs mb-2" style="color:rgba(255,255,255,.5)">TOTAL GLOBAL</div>
-      <div class="font-grotesk text-5xl font-bold mb-2">19 000&euro; <span class="text-2xl" style="color:rgba(255,255,255,.5)">HT</span></div>
-      <div class="font-space text-sm" style="color:rgba(255,255,255,.6)">dont 7 500&euro; d&eacute;j&agrave; pay&eacute;s &mdash; <strong class="text-white">reste 11 500&euro;</strong></div>
-    </div>
-  </div>
-</section>
-
-<!-- 23 — ORDER OF OPERATIONS -->
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">23 / ORDRE DES OP&Eacute;RATIONS</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">S&eacute;quentiel et logique.</h2>
-    </div>
-    <div class="anim">
-      <div class="space-y-6">
-        <!-- Phase 1 -->
-        <div class="neo-card p-6" style="border-left:6px solid #1E3A5F">
-          <div class="flex items-start gap-4">
-            <div class="flex-shrink-0">
-              <div class="w-14 h-14 flex items-center justify-center font-grotesk font-bold text-xl text-white" style="background:#1E3A5F;border:3px solid #0a0a0a">1</div>
-            </div>
-            <div class="flex-1">
-              <div class="flex items-center gap-2 mb-2 flex-wrap">
-                <span class="tag-infra">INFRA</span>
-                <span class="devis-pill" style="background:#fff3cd;color:#856404;border-color:#856404">PR&Eacute;REQUIS</span>
-              </div>
-              <h4 class="font-bold text-lg mb-1">Migration Infra</h4>
-              <p class="text-sm text-gray-500 font-space">Hetzner + Nginx + SSL + DNS + migration site vitrine. <strong>Bloque tout le reste.</strong></p>
-              <div class="flex items-center gap-4 mt-3">
-                <span class="font-mono text-xs text-gray-400">3-4 jours</span>
-                <span class="font-mono text-xs font-bold" style="color:#1E3A5F">2 500&euro;</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Arrow -->
-        <div class="text-center"><div class="inline-block font-grotesk text-3xl" style="color:#C0392B">&#8595;</div></div>
-        <!-- Phase 2 -->
-        <div class="neo-card p-6" style="border-left:6px solid #C0392B">
-          <div class="flex items-start gap-4">
-            <div class="flex-shrink-0">
-              <div class="w-14 h-14 flex items-center justify-center font-grotesk font-bold text-xl text-white" style="background:#C0392B;border:3px solid #0a0a0a">2</div>
-            </div>
-            <div class="flex-1">
-              <div class="flex items-center gap-2 mb-2 flex-wrap">
-                <span class="tag-prod">PRODUCTION</span>
-                <span class="devis-pill" style="background:#C0392B;color:#fff;border-color:#C0392B">TRAVAIL PRINCIPAL</span>
-              </div>
-              <h4 class="font-bold text-lg mb-1">Advice Production</h4>
-              <p class="text-sm text-gray-500 font-space">Merge v1+v2, rebrand, multilingue NL, mentions l&eacute;gales, GDPR, multi-tenant M365, polish, tests E2E.</p>
-              <div class="flex items-center gap-4 mt-3">
-                <span class="font-mono text-xs text-gray-400">12-15 jours</span>
-                <span class="font-mono text-xs font-bold" style="color:#C0392B">6 500&euro;</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Arrow -->
-        <div class="text-center"><div class="inline-block font-grotesk text-3xl" style="color:#8E44AD">&#8595;</div></div>
-        <!-- Phase 3 -->
-        <div class="neo-card p-6" style="border-left:6px solid #8E44AD">
-          <div class="flex items-start gap-4">
-            <div class="flex-shrink-0">
-              <div class="w-14 h-14 flex items-center justify-center font-grotesk font-bold text-xl text-white" style="background:#8E44AD;border:3px solid #0a0a0a">3</div>
-            </div>
-            <div class="flex-1">
-              <div class="flex items-center gap-2 mb-2 flex-wrap">
-                <span class="tag-crm">CRM BRIO</span>
-                <span class="devis-pill" style="background:#f0f0f0;color:#666;border-color:#999">APR&Egrave;S PREMIERS TESTS</span>
-              </div>
-              <h4 class="font-bold text-lg mb-1">CRM Brio</h4>
-              <p class="text-sm text-gray-500 font-space">API Brio (Portima), Openbox, sync clients, webhooks. Quand les premiers courtiers sont d&eacute;j&agrave; en test.</p>
-              <div class="flex items-center gap-4 mt-3">
-                <span class="font-mono text-xs text-gray-400">3-5 jours</span>
-                <span class="font-mono text-xs font-bold" style="color:#8E44AD">2 500&euro;</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 24 — WHAT BRUNO NEEDS TO PROVIDE -->
-<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">24 / CE QU'IL ME FAUT DE TON C&Ocirc;T&Eacute;</div>
+      <div class="section-number mb-4">19 / CE QU'IL ME FAUT DE TON C&Ocirc;T&Eacute;</div>
       <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Pour d&eacute;marrer.</h2>
+      <p class="text-gray-600 font-space mb-8">6 choses dont j'ai besoin avant ou pendant le travail :</p>
     </div>
     <div class="anim space-y-3">
       <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-infra flex-shrink-0">DEVIS 1</span>
-        <div><h4 class="font-bold text-sm mb-1">Acc&egrave;s registrar DNS</h4><p class="text-xs text-gray-500 font-space">Pour pointer les sous-domaines (app.brokerone.insure, etc.) vers le nouveau serveur.</p></div>
+        <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#C0392B">1</div>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Fichiers logo BrokerONE (SVG + PNG)</h4>
+          <p class="text-xs text-gray-500 font-space">Le logo que je mets en haut &agrave; gauche de la sidebar, dans le favicon, dans les OG images, dans les emails.</p>
+        </div>
       </div>
       <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-infra flex-shrink-0">DEVIS 1</span>
-        <div><h4 class="font-bold text-sm mb-1">Pr&eacute;f&eacute;rences Hetzner</h4><p class="text-xs text-gray-500 font-space">Localisation (Falkenstein, Nuremberg, Helsinki), budget mensuel souhait&eacute;.</p></div>
+        <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#C0392B">2</div>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Charte graphique (celle que tu as d&eacute;j&agrave; envoy&eacute;e)</h4>
+          <p class="text-xs text-gray-500 font-space">Confirmation des couleurs exactes, des usages. Si tu as des exemples visuels, c'est id&eacute;al.</p>
+        </div>
       </div>
       <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">DEVIS 2</span>
-        <div><h4 class="font-bold text-sm mb-1">Charte BrokerONE / fichiers logo</h4><p class="text-xs text-gray-500 font-space">Logo en SVG/PNG, couleurs confirm&eacute;es, guidelines de la charte envoy&eacute;e.</p></div>
+        <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#C0392B">3</div>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Traductions NL (ou validation des traductions auto)</h4>
+          <p class="text-xs text-gray-500 font-space">Soit tu me fournis les traductions officielles, soit je fais une premi&egrave;re passe automatique et tu valides.</p>
+        </div>
       </div>
       <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">DEVIS 2</span>
-        <div><h4 class="font-bold text-sm mb-1">Traductions NL</h4><p class="text-xs text-gray-500 font-space">Soit tu fournis les traductions officielles, soit tu valides les auto-traductions que je propose.</p></div>
+        <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#C0392B">4</div>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Texte des mentions l&eacute;gales / politique de confidentialit&eacute;</h4>
+          <p class="text-xs text-gray-500 font-space">Le contenu textuel que chaque courtier peut ensuite personnaliser. Le template de base.</p>
+        </div>
       </div>
       <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-prod flex-shrink-0">DEVIS 2</span>
-        <div><h4 class="font-bold text-sm mb-1">Contenu mentions l&eacute;gales</h4><p class="text-xs text-gray-500 font-space">Texte mentions l&eacute;gales, politique de confidentialit&eacute;, conditions d'utilisation.</p></div>
+        <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#C0392B">5</div>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Acc&egrave;s &agrave; un vrai compte M365 pour test multi-tenant</h4>
+          <p class="text-xs text-gray-500 font-space">Pour tester l'isolation des tokens en conditions r&eacute;elles. Id&eacute;alement 2 comptes sur 2 tenants diff&eacute;rents.</p>
+        </div>
       </div>
       <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-crm flex-shrink-0">DEVIS 3</span>
-        <div><h4 class="font-bold text-sm mb-1">Acc&egrave;s API Brio + documentation</h4><p class="text-xs text-gray-500 font-space">Credentials API, documentation technique, compte de test Brio.</p></div>
+        <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#C0392B">6</div>
+        <div>
+          <h4 class="font-bold text-sm mb-1">D&eacute;cision : photo de profil oui / non</h4>
+          <p class="text-xs text-gray-500 font-space">Tu me dis si tu veux l'activer par d&eacute;faut ou la d&eacute;sactiver par d&eacute;faut. Le courtier pourra toujours changer.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================ -->
-<!-- 25 — NEXT STEPS + CONCLUSION -->
-<!-- ============================================ -->
 
+<!-- ============================================ -->
+<!-- 20 / NEXT STEPS + CONCLUSION -->
+<!-- ============================================ -->
 <section id="next-steps" class="py-24 px-4" style="background:#C0392B;border-top:3px solid #0a0a0a">
   <div class="max-w-3xl mx-auto text-center text-white">
     <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">25 / CONCLUSION</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">On y est.</h2>
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">20 / CONCLUSION</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">20 livrables. 12 jours.</h2>
       <p class="text-lg font-space mb-8 leading-relaxed" style="color:rgba(255,255,255,.85)">
-        Ton email du 30 mars couvre exactement ce plan.<br>
-        On commence par l'infra, puis la prod, puis le CRM.<br><br>
-        <strong class="text-white">Premiers courtiers test dans 3-4 semaines.</strong>
+        Chaque point de ton email du 30 mars est couvert.<br>
+        Multi-comptes M365, multilingue NL, GDPR, rebrand,<br>
+        mentions l&eacute;gales, abonnement, photo, polish.<br><br>
+        <strong class="text-white">Tout est dans les 4 500&euro;.</strong>
       </p>
       <div class="neo-card p-6 sm:p-8 text-left" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3)">
         <div class="space-y-4">
           <div class="flex items-start gap-4">
             <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold" style="background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.3)">1</div>
-            <div><h4 class="font-bold text-sm mb-1">Tu valides les 3 devis</h4><p class="text-sm font-space" style="color:rgba(255,255,255,.7)">Devis 1 (infra 2 500&euro;), Devis 2 (prod 6 500&euro;), Devis 3 (CRM 2 500&euro;). Si tu veux ajuster, on ajuste.</p></div>
+            <div><h4 class="font-bold text-sm mb-1">Tu valides ce devis</h4><p class="text-sm font-space" style="color:rgba(255,255,255,.7)">4 500&euro; HT pour la production Advice. Si tu veux ajuster, on ajuste.</p></div>
           </div>
           <div class="flex items-start gap-4">
             <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold" style="background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.3)">2</div>
-            <div><h4 class="font-bold text-sm mb-1">Je d&eacute;marre le Devis 1 (infra)</h4><p class="text-sm font-space" style="color:rgba(255,255,255,.7)">Setup Hetzner, Nginx, SSL, DNS. En 3-4 jours c'est fait.</p></div>
+            <div><h4 class="font-bold text-sm mb-1">Tu me fournis les assets</h4><p class="text-sm font-space" style="color:rgba(255,255,255,.7)">Logo BrokerONE, charte, texte mentions l&eacute;gales, traductions NL (ou validation), acc&egrave;s M365.</p></div>
           </div>
           <div class="flex items-start gap-4">
             <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold" style="background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.3)">3</div>
-            <div><h4 class="font-bold text-sm mb-1">Encha&icirc;nement Devis 2 (production)</h4><p class="text-sm font-space" style="color:rgba(255,255,255,.7)">Merge, rebrand, NL, GDPR, M365, polish. 12-15 jours.</p></div>
+            <div><h4 class="font-bold text-sm mb-1">L'infra doit &ecirc;tre migr&eacute;e</h4><p class="text-sm font-space" style="color:rgba(255,255,255,.7)">C'est le pr&eacute;requis. Devis infra s&eacute;par&eacute;. L'un ne bloque pas le d&eacute;marrage de l'autre, mais la mise en ligne finale, si.</p></div>
           </div>
           <div class="flex items-start gap-4">
             <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold" style="background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.3)">4</div>
-            <div><h4 class="font-bold text-sm mb-1">Premiers courtiers en test, puis Devis 3</h4><p class="text-sm font-space" style="color:rgba(255,255,255,.7)">CRM Brio une fois les premiers retours des courtiers pilotes.</p></div>
+            <div><h4 class="font-bold text-sm mb-1">Je livre en 3 sprints (12 jours)</h4><p class="text-sm font-space" style="color:rgba(255,255,255,.7)">Sprint 1 : merge. Sprint 2 : rebrand + NL. Sprint 3 : GDPR + M365 + polish. D&eacute;mo &agrave; chaque fin de sprint.</p></div>
           </div>
         </div>
       </div>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8 mb-8">
-        <a href="https://calendly.com/baptiste-visionia/30min" target="_blank" class="neo-btn bg-white px-6 py-3 font-space text-sm inline-flex items-center gap-2" style="color:#C0392B">&#128222; Planifier un call</a>
-        <a href="mailto:baptiste.fort.pro@gmail.com" class="neo-btn px-6 py-3 font-space text-sm inline-flex items-center gap-2" style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.3)">&#9993; R&eacute;pondre par email</a>
+        <a href="https://calendly.com/baptiste-visionia/30min" target="_blank" class="neo-btn bg-white px-6 py-3 font-space text-sm inline-flex items-center gap-2" style="color:#C0392B">Planifier un call</a>
+        <a href="mailto:baptiste.fort.pro@gmail.com" class="neo-btn px-6 py-3 font-space text-sm inline-flex items-center gap-2" style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.3)">R&eacute;pondre par email</a>
       </div>
       <div class="font-mono text-sm" style="color:rgba(255,255,255,.4)">Baptiste Fort &rarr; Bruno &mdash; Avril 2026</div>
     </div>
   </div>
 </section>
 
+
 <!-- FOOTER -->
 <footer class="py-10 px-4 bg-neo-black text-white" style="border-top:3px solid #0a0a0a">
   <div class="max-w-5xl mx-auto text-center">
-    <div class="neo-card-sm px-6 py-3 inline-block font-mono text-sm mb-3" style="background:#C0392B;border-color:#C0392B">Advice Production &mdash; 3 devis &mdash; Avril 2026 &mdash; Baptiste Fort &rarr; Bruno</div>
-    <p class="text-gray-500 text-sm font-space">19 000&euro; total (7 500 pay&eacute;s + 11 500 restants) &bull; Infra 2 500&euro; + Prod 6 500&euro; + CRM 2 500&euro;</p>
+    <div class="neo-card-sm px-6 py-3 inline-block font-mono text-sm mb-3" style="background:#C0392B;border-color:#C0392B">Advice Production &mdash; 4 500&euro; &mdash; BrokerONE &mdash; Avril 2026</div>
+    <p class="text-gray-500 text-sm font-space">20 livrables &bull; 12 jours &bull; 3 sprints &bull; MVP pay&eacute; &bull; Code v2 fourni &bull; Baptiste Fort &rarr; Bruno</p>
   </div>
 </footer>
 
@@ -1147,7 +1313,7 @@ const obs=new IntersectionObserver(e=>{
 document.querySelectorAll('.anim').forEach(el=>obs.observe(el));
 document.addEventListener('click',e=>{
   if(Math.random()>.7)return;
-  const colors=['#C0392B','#E74C3C','#1E3A5F','#8E44AD','#0a0a0a'];
+  const colors=['#C0392B','#E74C3C','#1E3A5F','#0a0a0a'];
   for(let i=0;i<5;i++){
     const d=document.createElement('div');
     d.className='click-burst';

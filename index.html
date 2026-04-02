@@ -7,73 +7,103 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px}
+body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;min-height:100vh;padding:40px 20px}
 ::selection{background:#1E3A5F;color:#fff}
-.container{max-width:800px;width:100%}
+.container{max-width:900px;margin:0 auto}
 h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;margin-bottom:8px;line-height:1.1}
 h1 span{color:#C0392B}
-.subtitle{font-family:'Space Mono',monospace;font-size:14px;color:#888;margin-bottom:48px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:40px}
+h2{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:16px;margin-top:40px;color:#888}
+.subtitle{font-family:'Space Mono',monospace;font-size:14px;color:#888;margin-bottom:32px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-bottom:24px}
 .card{border:3px solid #0a0a0a;box-shadow:6px 6px 0 #0a0a0a;padding:24px;background:#fff;transition:all .2s;text-decoration:none;color:#0a0a0a;display:block}
 .card:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 #0a0a0a}
 .card-badge{display:inline-block;padding:2px 10px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:#fff;margin-bottom:12px}
-.card h2{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:4px}
+.card-tag{display:inline-block;padding:2px 8px;font-family:'Space Mono',monospace;font-size:9px;font-weight:700;margin-left:8px}
+.card h3{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:4px}
 .card .price{font-family:'Space Mono',monospace;font-size:1.1rem;font-weight:700;margin-bottom:8px}
 .card p{font-size:13px;color:#666;line-height:1.5}
-.footer{text-align:center;font-family:'Space Mono',monospace;font-size:12px;color:#aaa}
-.total{border:3px solid #0a0a0a;box-shadow:6px 6px 0 #0a0a0a;padding:20px;background:#0a0a0a;color:#fff;text-align:center;margin-bottom:40px}
-.total .amount{font-family:'Space Grotesk',sans-serif;font-size:2.5rem;font-weight:700}
-.total .label{font-family:'Space Mono',monospace;font-size:12px;color:rgba(255,255,255,.5)}
+.footer{text-align:center;font-family:'Space Mono',monospace;font-size:12px;color:#aaa;margin-top:40px}
+.summary{border:3px solid #0a0a0a;box-shadow:6px 6px 0 #0a0a0a;padding:20px 30px;background:#0a0a0a;color:#fff;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.summary .label{font-family:'Space Mono',monospace;font-size:11px;color:rgba(255,255,255,.5)}
+.summary .amount{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700}
+.note{font-family:'Space Mono',monospace;font-size:11px;color:#888;margin-top:8px;margin-bottom:24px}
 </style>
 </head>
 <body>
 <div class="container">
   <h1>Broker<span>ONE</span></h1>
-  <div class="subtitle">Présentations modules — MVP + Production</div>
+  <div class="subtitle">Présentations par module — Baptiste Fort → Bruno</div>
+
+  <!-- PRIORITAIRE -->
+  <h2>&#9654; Prioritaire — prochaines étapes</h2>
   
+  <div class="grid" style="grid-template-columns:1fr">
+    <a href="infra-complete.html" class="card" style="border-left:6px solid #1E3A5F">
+      <div class="card-badge" style="background:#1E3A5F">INFRA</div>
+      <span class="card-tag" style="background:#C0392B;color:#fff">PRÉREQUIS</span>
+      <h3>Migration Serveur</h3>
+      <div class="price" style="color:#1E3A5F">2 500€</div>
+      <p>Vercel → Hetzner (Allemagne). Nginx, SSL, DNS, sous-domaines. Sert à TOUS les modules. 3-4 jours.</p>
+    </a>
+  </div>
+
   <div class="grid">
-    <a href="advice-complete.html" class="card">
+    <a href="advice-complete.html" class="card" style="border-left:6px solid #C0392B">
       <div class="card-badge" style="background:#C0392B">ADVICE</div>
-      <h2>Advice</h2>
-      <div class="price" style="color:#C0392B">4 000€ restants</div>
-      <p>MVP payé (7 500€). Reste : intégration v1+v2 + rebrand + production.</p>
+      <span class="card-tag" style="background:#1D6A45;color:#fff">MVP PAYÉ ✓</span>
+      <h3>Advice Production</h3>
+      <div class="price" style="color:#C0392B">4 500€</div>
+      <p>Merge v1+v2, rebrand BrokerONE, multilingue NL, GDPR, M365 multi-tenant, footer. 12 jours.</p>
     </a>
-    <a href="sentinel-complete.html" class="card">
+    <a href="sentinel-complete.html" class="card" style="border-left:6px solid #2980B9">
       <div class="card-badge" style="background:#2980B9">SENTINEL</div>
-      <h2>Sentinel</h2>
+      <span class="card-tag" style="background:#2980B9;color:#fff">SPEC BCC FOURNIE</span>
+      <h3>Sentinel MVP + Prod</h3>
       <div class="price" style="color:#2980B9">10 000€</div>
-      <p>Dispatcher email intelligent. Spec BCC fournie + endpoints Advice prêts.</p>
+      <p>Dispatcher email intelligent. 4 catégories, classification IA, N8N, dashboard 6 pages. 22 jours.</p>
     </a>
+  </div>
+
+  <div class="summary">
+    <div><div class="label">PROCHAINE FACTURE</div><div class="amount">17 000€ <span style="font-size:.8rem;color:rgba(255,255,255,.5)">HT</span></div></div>
+    <div style="text-align:right"><div class="label">INFRA 2 500 + ADVICE 4 500 + SENTINEL 10 000</div><div style="font-family:'Space Mono';font-size:12px;color:rgba(255,255,255,.4);margin-top:4px">Advice MVP (7 500€) déjà payé</div></div>
+  </div>
+
+  <!-- MODULES SUIVANTS -->
+  <h2>&#9655; Modules suivants (après Sentinel)</h2>
+
+  <div class="grid">
     <a href="augmented-complete.html" class="card">
       <div class="card-badge" style="background:#1D6A45">AUGMENTED</div>
-      <h2>Augmented</h2>
+      <h3>Augmented</h3>
       <div class="price" style="color:#1D6A45">20 000€</div>
       <p>Devoir de conseil automatisé. 22 branches, 3 blocs IA, rapports FSMA/ACPR.</p>
     </a>
     <a href="checkup-complete.html" class="card">
       <div class="card-badge" style="background:#8E44AD">CHECKUP</div>
-      <h2>Checkup</h2>
+      <h3>Checkup</h3>
       <div class="price" style="color:#8E44AD">15 500€</div>
       <p>Audit portefeuille 360°. 17 axes, 218 garanties IPID, score 0-100, cross-sell auto.</p>
     </a>
     <a href="transcript-complete.html" class="card">
       <div class="card-badge" style="background:#C65D07">TRANSCRIPT</div>
-      <h2>Transcript</h2>
+      <h3>Transcript</h3>
       <div class="price" style="color:#C65D07">10 500€</div>
       <p>Conformité des appels. Leexi, scoring MiFID, documents FSMA/ACPR pré-remplis.</p>
     </a>
     <a href="connect-complete.html" class="card">
       <div class="card-badge" style="background:#E74C3C">CONNECT</div>
-      <h2>Connect</h2>
+      <h3>Connect</h3>
       <div class="price" style="color:#E74C3C">13 000€</div>
       <p>Réseaux sociaux & acquisition. 4 réseaux, visuels auto, engagement, ambassadeurs.</p>
     </a>
   </div>
 
-  <div class="total">
-    <div class="label">TOTAL 6 MODULES — MVP + PRODUCTION</div>
-    <div class="amount">73 000€ <span style="font-size:1rem;color:rgba(255,255,255,.5)">HT</span></div>
-    <div class="label" style="margin-top:8px">Advice MVP payé (7 500€) — reste 65 500€ à facturer</div>
+  <div class="note">Les prix des modules suivants peuvent évoluer si Bruno fournit du code/specs supplémentaires (comme pour Sentinel).</div>
+
+  <div class="summary">
+    <div><div class="label">TOTAL TOUS MODULES</div><div class="amount">76 000€ <span style="font-size:.8rem;color:rgba(255,255,255,.5)">HT</span></div></div>
+    <div style="text-align:right"><div class="label">MVP Advice payé (7 500€) — Reste 68 500€</div><div style="font-family:'Space Mono';font-size:12px;color:rgba(255,255,255,.4);margin-top:4px">Infra 2 500 + Advice Prod 4 500 + Sentinel 10 000 + 4 modules 59 000</div></div>
   </div>
 
   <div class="footer">Baptiste Fort → Bruno — Avril 2026</div>

@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infrastructure BrokerONE — Migration Serveur — 2 500&euro; HT</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={theme:{extend:{fontFamily:{'inter':['Inter','sans-serif'],'grotesk':['Space Grotesk','sans-serif'],'mono':['JetBrains Mono','monospace'],'space':['Space Mono','monospace']},colors:{'neo':{'black':'#0a0a0a','white':'#fefefe','gray':'#f5f5f5','dark':'#0a0a0a'}}}}}
+</script>
+<style>
+*{scroll-behavior:smooth;margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:hidden}
+::selection{background:#1E3A5F;color:#fff}
+::-webkit-scrollbar{width:10px}::-webkit-scrollbar-track{background:#fefefe;border-left:3px solid #1E3A5F}::-webkit-scrollbar-thumb{background:#1E3A5F;border-radius:0}
+.neo-border{border:3px solid #0a0a0a}.neo-border-2{border:2px solid #0a0a0a}
+.neo-shadow{box-shadow:6px 6px 0 #0a0a0a}.neo-shadow-sm{box-shadow:4px 4px 0 #0a0a0a}
+.neo-card{border:3px solid #0a0a0a;box-shadow:6px 6px 0 #0a0a0a;transition:all .2s cubic-bezier(.16,1,.3,1);background:#fff}
+.neo-card:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 #0a0a0a}
+.neo-card-sm{border:2px solid #0a0a0a;box-shadow:3px 3px 0 #0a0a0a;transition:all .2s cubic-bezier(.16,1,.3,1)}
+.neo-card-sm:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 #0a0a0a}
+.neo-btn{border:3px solid #0a0a0a;box-shadow:4px 4px 0 #0a0a0a;transition:all .15s ease;cursor:pointer;font-weight:700}
+.neo-btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 #0a0a0a}
+.neo-btn:active{transform:translate(4px,4px);box-shadow:0 0 0 #0a0a0a}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.anim{opacity:0;transform:translateY(18px);transition:opacity .45s ease,transform .45s ease}
+.anim.v{opacity:1;transform:translateY(0)}
+.marquee{animation:marquee 40s linear infinite}
+.stripe-bg{background-image:repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(30,58,95,.03) 10px,rgba(30,58,95,.03) 20px)}
+.ticker-wrap{overflow:hidden}.ticker{display:inline-flex;white-space:nowrap}
+.progress-bar{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#1E3A5F,#2d5a8c);z-index:200;transition:width .1s}
+.section-number{font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:#888}
+.back-top{position:fixed;bottom:24px;right:24px;z-index:100;opacity:0;transform:translateY(20px);transition:all .3s;pointer-events:none}
+.back-top.show{opacity:1;transform:translateY(0);pointer-events:auto}
+.click-burst{pointer-events:none;position:fixed;z-index:9999}
+.check-done{color:#1D6A45;font-weight:700}.check-todo{color:#999}
+.tag-infra{background:#1E3A5F;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
+.tag-done{background:#0a0a0a;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
+.tag-future{background:#94a3b8;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
+@keyframes count-up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.stat-card:hover .stat-number{animation:count-up .3s ease}
+.devis-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;border:2px solid #0a0a0a}
+.diagram-box{font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.8;background:#0a0a0a;color:#e2e8f0;padding:24px 28px;border:3px solid #0a0a0a;white-space:pre;overflow-x:auto}
+.diagram-box .hl{color:#5eead4}
+.diagram-box .accent{color:#7dd3fc}
+.diagram-box .dim{color:#64748b}
+.diagram-box .warn{color:#fbbf24}
+.diagram-box .port{color:#a78bfa}
+.compare-table{width:100%;border-collapse:collapse;font-family:'Space Mono',monospace;font-size:13px}
+.compare-table th{background:#1E3A5F;color:#fff;padding:12px 16px;text-align:left;font-size:11px;letter-spacing:.1em;text-transform:uppercase;border:2px solid #0a0a0a}
+.compare-table td{padding:12px 16px;border:2px solid #0a0a0a;vertical-align:top}
+.compare-table tr:nth-child(even) td{background:#f8fafc}
+.compare-table .bad{color:#dc2626;font-weight:600}.compare-table .good{color:#16a34a;font-weight:600}
+</style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div id="progress-bar" class="progress-bar" style="width:0%"></div>
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-neo-white/95 backdrop-blur-md transition-all duration-300" style="border-bottom:3px solid #0a0a0a">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="flex items-center justify-between h-14">
+    <div class="flex items-center gap-3">
+      <div class="neo-card-sm px-3 py-1 font-mono text-sm font-bold" style="background:#1E3A5F;color:#fff;border-color:#1E3A5F">INFRA</div>
+      <span class="font-grotesk font-bold text-sm hidden sm:block">Infrastructure &mdash; Migration Serveur</span>
+    </div>
+    <div class="hidden lg:flex items-center gap-1 text-xs font-space">
+      <a href="#exec-summary" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Quoi</a>
+      <a href="#pourquoi" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Pourquoi</a>
+      <a href="#architecture" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Archi</a>
+      <a href="#hetzner" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Hetzner</a>
+      <a href="#inclus" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Inclus</a>
+      <a href="#timeline" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Planning</a>
+      <a href="#budget" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Budget</a>
+      <a href="#next-steps" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Next</a>
+    </div>
+    <div class="font-mono text-xs text-gray-400">2 500&euro; HT</div>
+  </div>
+</div>
+</nav>
+
+<!-- TICKER -->
+<div class="fixed top-[56px] left-0 right-0 z-40 text-white py-1.5 ticker-wrap" style="background:#1E3A5F;border-bottom:3px solid #0a0a0a">
+<div class="ticker marquee">
+  <span class="mx-8 text-xs font-space">INFRA &mdash; MIGRATION SERVEUR &mdash; 2 500&euro;</span>
+  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
+  <span class="mx-8 text-xs font-space">HETZNER ALLEMAGNE &mdash; RGPD COMPLIANT</span>
+  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
+  <span class="mx-8 text-xs font-space">3-4 JOURS &mdash; PR&Eacute;REQUIS POUR TOUT</span>
+  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
+  <span class="mx-8 text-xs font-space">TOUS LES MODULES SUR 1 SERVEUR</span>
+  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
+  <span class="mx-8 text-xs font-space">~30&euro;/MOIS AU LIEU DE 200-400&euro;</span>
+  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
+  <span class="mx-8 text-xs font-space">INFRA &mdash; MIGRATION SERVEUR &mdash; 2 500&euro;</span>
+  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
+  <span class="mx-8 text-xs font-space">HETZNER ALLEMAGNE &mdash; RGPD COMPLIANT</span>
+  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
+  <span class="mx-8 text-xs font-space">3-4 JOURS &mdash; PR&Eacute;REQUIS POUR TOUT</span>
+  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
+  <span class="mx-8 text-xs font-space">TOUS LES MODULES SUR 1 SERVEUR</span>
+  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
+  <span class="mx-8 text-xs font-space">~30&euro;/MOIS AU LIEU DE 200-400&euro;</span>
+</div>
+</div>
+
+
+<!-- ============================================ -->
+<!-- 01 — HELLO -->
+<!-- ============================================ -->
+<section class="min-h-screen flex items-center justify-center pt-32 pb-20 px-4 relative overflow-hidden">
+  <div class="absolute inset-0 stripe-bg opacity-30"></div>
+  <div class="max-w-3xl mx-auto relative z-10">
+    <div class="anim">
+      <div class="section-number mb-6">01 / HELLO</div>
+      <div class="flex items-center gap-3 mb-6 flex-wrap">
+        <span class="tag-infra">INFRA</span>
+        <span class="devis-pill" style="background:#fff3cd;color:#856404;border-color:#856404">PR&Eacute;REQUIS</span>
+      </div>
+      <h1 class="font-grotesk text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] mb-8">
+        Avant de mettre quoi<br>que ce soit en production,<br>il faut un serveur.
+      </h1>
+      <div class="text-lg sm:text-xl text-gray-500 font-space leading-relaxed mb-8 space-y-4">
+        <p>Aujourd'hui, l'application tourne sur <strong class="text-neo-black">Vercel</strong> &mdash; un service cloud pratique pour d&eacute;velopper.</p>
+        <p>Mais pour accueillir de vrais courtiers qui paient, il faut <strong class="text-neo-black">ton propre serveur</strong>. C'est ce devis.</p>
+      </div>
+    </div>
+    <div class="anim">
+      <a href="#exec-summary" class="neo-btn text-white px-8 py-3 font-space text-sm inline-flex items-center gap-2" style="background:#1E3A5F">Comprendre le projet &#8595;</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- 02 — EXEC SUMMARY -->
+<!-- ============================================ -->
+<section id="exec-summary" class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#1E3A5F">02 / R&Eacute;SUM&Eacute;</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le projet en 30 secondes.</h2>
+    </div>
+    <div class="anim neo-card p-6 sm:p-8" style="border-left:6px solid #1E3A5F">
+      <div class="space-y-6">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-20 font-mono text-xs font-bold text-right pt-1" style="color:#1E3A5F">QUOI</div>
+          <div><p class="text-sm font-space text-gray-700">Migrer de <strong>Vercel</strong> (service cloud pour d&eacute;veloppeurs) vers un <strong>serveur d&eacute;di&eacute; Hetzner</strong> en Allemagne, dans l'Union Europ&eacute;enne.</p></div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-20 font-mono text-xs font-bold text-right pt-1" style="color:#1E3A5F">POURQUOI</div>
+          <div><p class="text-sm font-space text-gray-700">Vercel = ok pour d&eacute;velopper, <strong>pas pour la production</strong> avec de vrais courtiers. Trop lent, trop cher, serveurs aux USA.</p></div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-20 font-mono text-xs font-bold text-right pt-1" style="color:#1E3A5F">COMBIEN</div>
+          <div><p class="text-sm font-space text-gray-700"><strong>2 500&euro; HT</strong>, investissement unique. Puis ~30&euro;/mois pour le serveur.</p></div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-20 font-mono text-xs font-bold text-right pt-1" style="color:#1E3A5F">QUAND</div>
+          <div><p class="text-sm font-space text-gray-700"><strong>3-4 jours</strong>. En premier. C'est le pr&eacute;requis pour tout le reste.</p></div>
+        </div>
+        <div class="flex items-start gap-4 pt-4" style="border-top:2px dashed #e2e8f0">
+          <div class="flex-shrink-0 w-20 font-mono text-xs font-bold text-right pt-1" style="color:#dc2626">IMPORTANT</div>
+          <div><p class="text-sm font-space text-gray-700">Ce serveur servira pour <strong>TOUS les modules BrokerONE</strong> &mdash; pas juste Advice. Sentinel, Augmented, Connect... tout tourne sur le m&ecirc;me serveur. <strong>On ne repaye pas l'infra pour chaque module.</strong></p></div>
+        </div>
+      </div>
+    </div>
+    <div class="anim grid sm:grid-cols-3 gap-4 mt-8">
+      <div class="neo-card p-4 text-center stat-card"><div class="text-xs text-gray-400 font-space mb-1">Investissement</div><div class="font-space font-bold text-3xl stat-number" style="color:#1E3A5F">2 500&euro;</div></div>
+      <div class="neo-card p-4 text-center stat-card"><div class="text-xs text-gray-400 font-space mb-1">Dur&eacute;e</div><div class="font-space font-bold text-3xl stat-number">3-4j</div></div>
+      <div class="neo-card p-4 text-center stat-card"><div class="text-xs text-gray-400 font-space mb-1">Co&ucirc;t mensuel apr&egrave;s</div><div class="font-space font-bold text-3xl stat-number" style="color:#16a34a">~30&euro;</div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- 03 — POURQUOI MIGRER — L'ANALOGIE -->
+<!-- ============================================ -->
+<section id="pourquoi" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto text-white">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">03 / POURQUOI MIGRER</div>
+      <h2 class="font-grotesk text-4xl sm:text-6xl font-bold mb-6">L'analogie simple.</h2>
+    </div>
+    <div class="anim neo-card p-6 sm:p-8" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.15)">
+      <div class="text-center mb-8">
+        <p class="text-xl sm:text-2xl font-grotesk font-bold leading-relaxed" style="color:#7dd3fc">&laquo; Vercel, c'est comme un Airbnb. Pratique pour quelques nuits, mais pour vivre avec des clients qui paient, tu veux ton propre appartement. &raquo;</p>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div class="p-5 text-center" style="background:rgba(220,38,38,.1);border:2px solid rgba(220,38,38,.3);border-radius:0">
+          <div class="font-mono text-xs font-bold mb-3" style="color:#fca5a5">AIRBNB (VERCEL)</div>
+          <div class="space-y-2 text-sm font-space" style="color:rgba(255,255,255,.7)">
+            <p>Tu n'as pas les cl&eacute;s</p>
+            <p>Le propri&eacute;taire peut changer les r&egrave;gles</p>
+            <p>Tu paies &agrave; la nuit&eacute;e (cher &agrave; long terme)</p>
+            <p>Pas le droit de tout installer</p>
+            <p>C'est chez quelqu'un d'autre</p>
+          </div>
+        </div>
+        <div class="p-5 text-center" style="background:rgba(22,163,74,.1);border:2px solid rgba(22,163,74,.3);border-radius:0">
+          <div class="font-mono text-xs font-bold mb-3" style="color:#86efac">TON APPART (HETZNER)</div>
+          <div class="space-y-2 text-sm font-space" style="color:rgba(255,255,255,.7)">
+            <p>Tu as les cl&eacute;s</p>
+            <p>Tu d&eacute;cides des r&egrave;gles</p>
+            <p>Loyer fixe et pr&eacute;visible (~30&euro;/mois)</p>
+            <p>Tu installes ce que tu veux</p>
+            <p>C'est <strong class="text-white">TON</strong> serveur</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- 04 — COMPARAISON TABLEAU -->
+<!-- ============================================ -->
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">04 / COMPARAISON D&Eacute;TAILL&Eacute;E</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Vercel vs. Serveur d&eacute;di&eacute;.</h2>
+    </div>
+    <div class="anim neo-card overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th style="width:35%"></th>
+              <th style="width:32%">Vercel (aujourd'hui)</th>
+              <th style="width:33%">Serveur d&eacute;di&eacute; (apr&egrave;s)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="font-bold text-xs">Disponibilit&eacute;</td>
+              <td class="bad">L'app "dort" quand personne l'utilise</td>
+              <td class="good">Tourne 24h/24, 7j/7</td>
+            </tr>
+            <tr>
+              <td class="font-bold text-xs">Temps de r&eacute;ponse</td>
+              <td class="bad">Cold starts : 2-5 sec d'attente</td>
+              <td class="good">R&eacute;ponse instantan&eacute;e</td>
+            </tr>
+            <tr>
+              <td class="font-bold text-xs">Automatisations (N8N)</td>
+              <td class="bad">Impossible d'installer N8N</td>
+              <td class="good">N8N tourne sur le m&ecirc;me serveur</td>
+            </tr>
+            <tr>
+              <td class="font-bold text-xs">Co&ucirc;t avec du trafic</td>
+              <td class="bad">200-400&euro;/mois avec 50 courtiers</td>
+              <td class="good">Prix fixe ~25-30&euro;/mois</td>
+            </tr>
+            <tr>
+              <td class="font-bold text-xs">Localisation des donn&eacute;es</td>
+              <td class="bad">Serveurs aux USA</td>
+              <td class="good">Serveur en Allemagne (RGPD)</td>
+            </tr>
+            <tr>
+              <td class="font-bold text-xs">Contr&ocirc;le</td>
+              <td class="bad">Tu d&eacute;pends d'une entreprise tierce</td>
+              <td class="good">C'est TON serveur</td>
+            </tr>
+            <tr>
+              <td class="font-bold text-xs">Nombre d'apps</td>
+              <td class="bad">1 seule app par d&eacute;ploiement</td>
+              <td class="good">Tous les modules sur le m&ecirc;me serveur</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- 05 — ARCHITECTURE VISUELLE -->
+<!-- ============================================ -->
+<section id="architecture" class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#1E3A5F">05 / CE QUE &Ccedil;A DONNE</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Avant / Apr&egrave;s.</h2>
+      <p class="text-gray-600 font-space mb-8">Voici ce qui change pour tes utilisateurs, de mani&egrave;re concr&egrave;te.</p>
+    </div>
+    <div class="anim space-y-6">
+      <!-- AVANT -->
+      <div>
+        <div class="font-mono text-xs font-bold mb-3" style="color:#dc2626">AVANT</div>
+        <div class="diagram-box"><span class="dim">Courtier</span>  <span class="warn">&#8594;</span>  <span class="bad" style="color:#fca5a5">vercel.app</span>  <span class="warn">&#8594;</span>  <span class="bad" style="color:#fca5a5">USA</span>  <span class="warn">&#8594;</span>  Supabase
+
+<span class="dim">1 seule app, cold starts, serveurs am&eacute;ricains</span></div>
+      </div>
+      <!-- APRES -->
+      <div>
+        <div class="font-mono text-xs font-bold mb-3" style="color:#16a34a">APR&Egrave;S</div>
+        <div class="diagram-box"><span class="dim">Courtier</span>  <span class="hl">&#8594;</span>  <span class="hl">app.brokerone.insure</span>  <span class="hl">&#8594;</span>  <span class="accent">Hetzner (Allemagne)</span>
+                                              <span class="accent">|</span>
+                                              <span class="accent">|&mdash;&mdash;</span> <span class="hl">Advice</span>        <span class="port">(port 3001)</span>
+                                              <span class="accent">|&mdash;&mdash;</span> <span class="dim">Sentinel</span>      <span class="port">(port 3004)</span>  <span class="warn">&larr; futur</span>
+                                              <span class="accent">|&mdash;&mdash;</span> <span class="dim">Augmented</span>     <span class="port">(port 3005)</span>  <span class="warn">&larr; futur</span>
+                                              <span class="accent">|&mdash;&mdash;</span> <span class="dim">Connect</span>       <span class="port">(port 3006)</span>  <span class="warn">&larr; futur</span>
+                                              <span class="accent">|&mdash;&mdash;</span> <span class="hl">N8N</span>           <span class="port">(workflows auto)</span>
+                                              <span class="accent">|&mdash;&mdash;</span> <span class="hl">Site vitrine</span>  <span class="port">brokerone.insure</span></div>
+      </div>
+    </div>
+    <div class="anim neo-card p-5 mt-6" style="border-left:6px solid #1E3A5F">
+      <p class="text-sm font-space text-gray-600"><strong>En clair :</strong> un seul serveur qui h&eacute;berge tout. Quand Sentinel, Augmented ou Connect seront d&eacute;velopp&eacute;s, ils se branchent sur le m&ecirc;me serveur &mdash; pas besoin de racheter une infrastructure.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- 06 — HETZNER C'EST QUOI -->
+<!-- ============================================ -->
+<section id="hetzner" class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">06 / HETZNER &mdash; C'EST QUOI</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">L'h&eacute;bergeur.</h2>
+    </div>
+    <div class="anim grid sm:grid-cols-2 gap-4">
+      <div class="neo-card p-5">
+        <div class="text-2xl mb-3">&#127465;&#127466;</div>
+        <h4 class="font-bold text-sm mb-2">H&eacute;bergeur allemand</h4>
+        <p class="text-xs text-gray-500 font-space">Datacenter en Allemagne. Entreprise europ&eacute;enne fond&eacute;e en 1997. S&eacute;rieux et fiable.</p>
+      </div>
+      <div class="neo-card p-5">
+        <div class="text-2xl mb-3">&#128274;</div>
+        <h4 class="font-bold text-sm mb-2">RGPD compliant</h4>
+        <p class="text-xs text-gray-500 font-space">Donn&eacute;es stock&eacute;es dans l'UE. Pas de transfert vers les USA. Conforme RGPD par d&eacute;faut.</p>
+      </div>
+      <div class="neo-card p-5">
+        <div class="text-2xl mb-3">&#9989;</div>
+        <h4 class="font-bold text-sm mb-2">Tr&egrave;s fiable</h4>
+        <p class="text-xs text-gray-500 font-space">99,9% de disponibilit&eacute; garantie. Utilis&eacute; par des milliers de startups europ&eacute;ennes.</p>
+      </div>
+      <div class="neo-card p-5">
+        <div class="text-2xl mb-3">&#128184;</div>
+        <h4 class="font-bold text-sm mb-2">Prix imbattable</h4>
+        <p class="text-xs text-gray-500 font-space">~25-30&euro;/mois pour un VPS largement suffisant. 5 &agrave; 10x moins cher qu'AWS ou Vercel.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 07 — HETZNER — LE SERVEUR -->
+<!-- ============================================ -->
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#1E3A5F">07 / LE SERVEUR</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Ce qu'on commande.</h2>
+    </div>
+    <div class="anim neo-card p-6 sm:p-8" style="border-left:6px solid #1E3A5F">
+      <div class="font-mono text-xs font-bold mb-4" style="color:#1E3A5F">HETZNER CPX31 &mdash; VPS CLOUD</div>
+      <div class="grid sm:grid-cols-2 gap-x-8 gap-y-4">
+        <div class="flex items-center gap-3 p-3 bg-neo-gray neo-border-2">
+          <span class="font-mono text-xs font-bold" style="color:#1E3A5F">CPU</span>
+          <span class="text-sm font-space">4 vCPU (AMD)</span>
+        </div>
+        <div class="flex items-center gap-3 p-3 bg-neo-gray neo-border-2">
+          <span class="font-mono text-xs font-bold" style="color:#1E3A5F">RAM</span>
+          <span class="text-sm font-space">8 GB</span>
+        </div>
+        <div class="flex items-center gap-3 p-3 bg-neo-gray neo-border-2">
+          <span class="font-mono text-xs font-bold" style="color:#1E3A5F">SSD</span>
+          <span class="text-sm font-space">160 GB NVMe</span>
+        </div>
+        <div class="flex items-center gap-3 p-3 bg-neo-gray neo-border-2">
+          <span class="font-mono text-xs font-bold" style="color:#1E3A5F">TRAFIC</span>
+          <span class="text-sm font-space">20 TB/mois inclus</span>
+        </div>
+        <div class="flex items-center gap-3 p-3 bg-neo-gray neo-border-2">
+          <span class="font-mono text-xs font-bold" style="color:#1E3A5F">OS</span>
+          <span class="text-sm font-space">Ubuntu 24 LTS</span>
+        </div>
+        <div class="flex items-center gap-3 p-3 bg-neo-gray neo-border-2">
+          <span class="font-mono text-xs font-bold" style="color:#1E3A5F">LIEU</span>
+          <span class="text-sm font-space">Allemagne (EU)</span>
+        </div>
+      </div>
+      <div class="mt-6 p-4 text-center" style="background:rgba(30,58,95,.05);border:2px dashed #1E3A5F">
+        <p class="text-sm font-space text-gray-600">C'est aussi ce qui est recommand&eacute; dans la spec technique de BCC.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- 08 — CE QUI EST INCLUS (1/3) -->
+<!-- ============================================ -->
+<section id="inclus" class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">08 / CE QUI EST INCLUS (1/3)</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Setup &amp; s&eacute;curit&eacute;.</h2>
+    </div>
+    <div class="anim space-y-4">
+      <!-- Item 1 -->
+      <div class="neo-card p-6">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center font-mono font-bold text-white text-sm" style="background:#1E3A5F">1</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-base mb-2">Setup serveur Hetzner</h4>
+            <p class="text-sm text-gray-500 font-space mb-3">Je commande le VPS, j'installe Ubuntu 24, et je s&eacute;curise tout.</p>
+            <div class="grid sm:grid-cols-3 gap-2">
+              <div class="p-2 bg-neo-gray neo-border-2 text-xs font-space text-center">Installation Ubuntu 24</div>
+              <div class="p-2 bg-neo-gray neo-border-2 text-xs font-space text-center">Cl&eacute; SSH (pas de mot de passe)</div>
+              <div class="p-2 bg-neo-gray neo-border-2 text-xs font-space text-center">Firewall (ufw) configur&eacute;</div>
+            </div>
+            <div class="mt-3 neo-card-sm p-3" style="background:#f0fdf4;border-color:#16a34a">
+              <p class="text-xs font-space" style="color:#15803d"><strong>En clair :</strong> le serveur est install&eacute;, verrouill&eacute;, et seules les bonnes portes sont ouvertes (web + SSH).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Item 2 -->
+      <div class="neo-card p-6">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center font-mono font-bold text-white text-sm" style="background:#1E3A5F">2</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-base mb-2">Nginx &mdash; l'aiguilleur du serveur</h4>
+            <p class="text-sm text-gray-500 font-space mb-3">Nginx fait l'aiguillage. C'est lui qui d&eacute;cide o&ugrave; envoyer chaque visiteur.</p>
+            <div class="diagram-box" style="font-size:12px">
+<span class="dim">Quelqu'un va sur...</span>
+<span class="hl">app.brokerone.insure</span>  <span class="warn">&#8594;</span>  Nginx envoie vers <span class="port">Advice (port 3001)</span>
+<span class="hl">brokerone.insure</span>      <span class="warn">&#8594;</span>  Nginx envoie vers <span class="port">Site vitrine (port 80)</span>
+<span class="dim">n8n.brokerone.insure</span>   <span class="warn">&#8594;</span>  Nginx envoie vers <span class="port">N8N (port 5678)</span>  <span class="dim">&larr; futur</span></div>
+            <div class="mt-3 neo-card-sm p-3" style="background:#f0fdf4;border-color:#16a34a">
+              <p class="text-xs font-space" style="color:#15803d"><strong>En clair :</strong> un seul serveur, plusieurs adresses. Nginx fait le tri automatiquement.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- 09 — CE QUI EST INCLUS (2/3) -->
+<!-- ============================================ -->
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#1E3A5F">09 / CE QUI EST INCLUS (2/3)</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">SSL, DNS, site vitrine.</h2>
+    </div>
+    <div class="anim space-y-4">
+      <!-- Item 3 -->
+      <div class="neo-card p-6">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center font-mono font-bold text-white text-sm" style="background:#1E3A5F">3</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-base mb-2">SSL / HTTPS &mdash; le cadenas vert</h4>
+            <p class="text-sm text-gray-500 font-space mb-3">Certificats Let's Encrypt gratuits, renouvel&eacute;s automatiquement. Toutes les connexions sont chiffr&eacute;es.</p>
+            <div class="p-3 bg-neo-gray neo-border-2 flex items-center gap-3">
+              <span class="text-lg" style="color:#16a34a">&#128274;</span>
+              <span class="text-sm font-space">https://app.brokerone.insure &mdash; connexion s&eacute;curis&eacute;e</span>
+            </div>
+            <div class="mt-3 neo-card-sm p-3" style="background:#f0fdf4;border-color:#16a34a">
+              <p class="text-xs font-space" style="color:#15803d"><strong>En clair :</strong> le petit cadenas vert dans le navigateur. Gratuit et automatique.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Item 4 -->
+      <div class="neo-card p-6">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center font-mono font-bold text-white text-sm" style="background:#1E3A5F">4</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-base mb-2">DNS / Sous-domaines</h4>
+            <p class="text-sm text-gray-500 font-space mb-3">Je configure les adresses pour que tout pointe vers le bon endroit.</p>
+            <div class="space-y-2">
+              <div class="p-3 bg-neo-gray neo-border-2 flex items-center gap-3">
+                <span class="font-mono text-xs font-bold" style="color:#1E3A5F">A</span>
+                <span class="text-sm font-space"><strong>brokerone.insure</strong> &#8594; site vitrine</span>
+              </div>
+              <div class="p-3 bg-neo-gray neo-border-2 flex items-center gap-3">
+                <span class="font-mono text-xs font-bold" style="color:#1E3A5F">A</span>
+                <span class="text-sm font-space"><strong>app.brokerone.insure</strong> &#8594; application Advice</span>
+              </div>
+            </div>
+            <div class="mt-3 neo-card-sm p-3" style="background:#fffbeb;border-color:#d97706">
+              <p class="text-xs font-space" style="color:#92400e"><strong>Note :</strong> je te fournis les IPs et les instructions. Tu devras les entrer dans ton registrar (OVH, Gandi, etc.).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Item 5 -->
+      <div class="neo-card p-6">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center font-mono font-bold text-white text-sm" style="background:#1E3A5F">5</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-base mb-2">Migration site vitrine</h4>
+            <p class="text-sm text-gray-500 font-space">Le site brokerone.insure (actuellement h&eacute;berg&eacute; ailleurs) migr&eacute; sur le m&ecirc;me serveur. Un seul endroit pour tout g&eacute;rer.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- 10 — CE QUI EST INCLUS (3/3) -->
+<!-- ============================================ -->
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">10 / CE QUI EST INCLUS (3/3)</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Fiabilit&eacute; &amp; livraison.</h2>
+    </div>
+    <div class="anim space-y-4">
+      <!-- Item 6 -->
+      <div class="neo-card p-6">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center font-mono font-bold text-white text-sm" style="background:#1E3A5F">6</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-base mb-2">PM2 &mdash; le gardien de l'application</h4>
+            <p class="text-sm text-gray-500 font-space mb-3">PM2 garde l'application vivante 24h/24. Si l'app plante (bug, erreur m&eacute;moire...), PM2 la red&eacute;marre automatiquement en 2 secondes.</p>
+            <div class="diagram-box" style="font-size:12px">
+<span class="hl">PM2</span> surveille en permanence :
+  <span class="accent">Advice</span> &#8594; <span class="good" style="color:#86efac">online</span>  <span class="dim">(si crash &#8594; red&eacute;marre auto)</span>
+  <span class="dim">Sentinel</span> &#8594; <span class="warn">futur</span>
+  <span class="dim">Connect</span>  &#8594; <span class="warn">futur</span></div>
+            <div class="mt-3 neo-card-sm p-3" style="background:#f0fdf4;border-color:#16a34a">
+              <p class="text-xs font-space" style="color:#15803d"><strong>En clair :</strong> m&ecirc;me &agrave; 3h du matin, si l'app plante, elle revient toute seule.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Item 7 -->
+      <div class="neo-card p-6">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center font-mono font-bold text-white text-sm" style="background:#1E3A5F">7</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-base mb-2">Monitoring basique</h4>
+            <p class="text-sm text-gray-500 font-space">V&eacute;rification automatique que le serveur est en ligne. Alerte email si quelque chose tombe.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Item 8 -->
+      <div class="neo-card p-6">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center font-mono font-bold text-white text-sm" style="background:#1E3A5F">8</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-base mb-2">Livraison &agrave; Bruno</h4>
+            <p class="text-sm text-gray-500 font-space mb-3">Ce que tu re&ccedil;ois &agrave; la fin :</p>
+            <div class="grid sm:grid-cols-2 gap-2">
+              <div class="p-2 bg-neo-gray neo-border-2 text-xs font-space">IPs du serveur</div>
+              <div class="p-2 bg-neo-gray neo-border-2 text-xs font-space">Instructions DNS (copier-coller)</div>
+              <div class="p-2 bg-neo-gray neo-border-2 text-xs font-space">Acc&egrave;s SSH si besoin</div>
+              <div class="p-2 bg-neo-gray neo-border-2 text-xs font-space">Documentation de l'architecture</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- 11 — CE QUI N'EST PAS INCLUS -->
+<!-- ============================================ -->
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">11 / CE QUI N'EST PAS INCLUS</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Pour &ecirc;tre transparent.</h2>
+    </div>
+    <div class="anim space-y-3">
+      <div class="neo-card p-5 flex items-start gap-4" style="border-left:4px solid #94a3b8">
+        <span class="tag-future flex-shrink-0">INFO</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Supabase reste sur supabase.co</h4>
+          <p class="text-xs text-gray-500 font-space">La base de donn&eacute;es n'est pas migr&eacute;e. Elle reste chez Supabase (cloud). C'est volontaire &mdash; &ccedil;a marche bien et c'est fiable.</p>
+        </div>
+      </div>
+      <div class="neo-card p-5 flex items-start gap-4" style="border-left:4px solid #94a3b8">
+        <span class="tag-future flex-shrink-0">FUTUR</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">N8N sera install&eacute; plus tard</h4>
+          <p class="text-xs text-gray-500 font-space">N8N (outil d'automatisation / workflows) sera install&eacute; quand Sentinel sera d&eacute;velopp&eacute;. Le serveur le supportera sans probl&egrave;me.</p>
+        </div>
+      </div>
+      <div class="neo-card p-5 flex items-start gap-4" style="border-left:4px solid #94a3b8">
+        <span class="tag-future flex-shrink-0">FUTUR</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Les modules futurs</h4>
+          <p class="text-xs text-gray-500 font-space">Sentinel, Augmented, Connect... seront d&eacute;ploy&eacute;s sur ce m&ecirc;me serveur quand ils seront pr&ecirc;ts. Pas besoin de refaire l'infra.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- 12 — COÛT MENSUEL -->
+<!-- ============================================ -->
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#16a34a">12 / CO&Ucirc;T MENSUEL APR&Egrave;S MIGRATION</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">~30&euro;/mois. C'est tout.</h2>
+    </div>
+    <div class="anim grid sm:grid-cols-3 gap-4">
+      <div class="neo-card p-5 text-center">
+        <div class="text-xs text-gray-400 font-space mb-2">Hetzner VPS</div>
+        <div class="font-space font-bold text-2xl mb-1">~25-30&euro;</div>
+        <div class="text-xs text-gray-400 font-space">/mois</div>
+      </div>
+      <div class="neo-card p-5 text-center">
+        <div class="text-xs text-gray-400 font-space mb-2">Domaine</div>
+        <div class="font-space font-bold text-2xl mb-1" style="color:#16a34a">0&euro;</div>
+        <div class="text-xs text-gray-400 font-space">d&eacute;j&agrave; pay&eacute; par Bruno</div>
+      </div>
+      <div class="neo-card p-5 text-center">
+        <div class="text-xs text-gray-400 font-space mb-2">SSL (HTTPS)</div>
+        <div class="font-space font-bold text-2xl mb-1" style="color:#16a34a">0&euro;</div>
+        <div class="text-xs text-gray-400 font-space">Let's Encrypt = gratuit</div>
+      </div>
+    </div>
+    <div class="anim mt-6">
+      <div class="neo-card p-6 flex flex-col sm:flex-row items-center justify-between gap-4" style="border-top:4px solid #16a34a">
+        <div>
+          <div class="font-mono text-xs font-bold mb-1" style="color:#16a34a">TOTAL MENSUEL</div>
+          <div class="font-grotesk text-3xl font-bold">~30&euro;/mois</div>
+        </div>
+        <div class="text-center sm:text-right">
+          <div class="font-mono text-xs font-bold mb-1" style="color:#dc2626">VS. VERCEL AVEC DU TRAFIC</div>
+          <div class="font-grotesk text-3xl font-bold" style="color:#dc2626;text-decoration:line-through">200-400&euro;/mois</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- 13 — TIMELINE -->
+<!-- ============================================ -->
+<section id="timeline" class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#1E3A5F">13 / PLANNING</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">4 jours, pas un de plus.</h2>
+    </div>
+    <div class="anim neo-card p-6 sm:p-8">
+      <div class="space-y-4">
+        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
+          <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#1E3A5F">J1</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-sm mb-1">Commande Hetzner + setup OS + s&eacute;curit&eacute;</h4>
+            <p class="text-sm text-gray-500 font-space">Commande du VPS, installation Ubuntu, s&eacute;curisation SSH (cl&eacute; publique, pas de mot de passe), configuration du firewall.</p>
+          </div>
+          <div class="text-xs text-gray-400 font-mono flex-shrink-0">1 jour</div>
+        </div>
+        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
+          <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#1E3A5F">J2</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-sm mb-1">Nginx + SSL + d&eacute;ploiement Advice</h4>
+            <p class="text-sm text-gray-500 font-space">Installation de Nginx, certificats SSL Let's Encrypt, d&eacute;ploiement d'Advice sur le serveur avec PM2.</p>
+          </div>
+          <div class="text-xs text-gray-400 font-mono flex-shrink-0">1 jour</div>
+        </div>
+        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
+          <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#1E3A5F">J3</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-sm mb-1">Migration site vitrine + DNS</h4>
+            <p class="text-sm text-gray-500 font-space">Migration du site vitrine brokerone.insure, configuration DNS, sous-domaines.</p>
+          </div>
+          <div class="text-xs text-gray-400 font-mono flex-shrink-0">1 jour</div>
+        </div>
+        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
+          <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#1E3A5F">J4</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-sm mb-1">Tests + documentation + livraison</h4>
+            <p class="text-sm text-gray-500 font-space">Tests complets, monitoring, r&eacute;daction documentation, livraison des IPs et instructions DNS.</p>
+          </div>
+          <div class="text-xs text-gray-400 font-mono flex-shrink-0">1 jour</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- 14 — CE QUE BRUNO DOIT FOURNIR -->
+<!-- ============================================ -->
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">14 / CE QU'IL ME FAUT DE TON C&Ocirc;T&Eacute;</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">3 choses, c'est tout.</h2>
+    </div>
+    <div class="anim space-y-4">
+      <div class="neo-card p-6">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center font-grotesk font-bold text-white" style="background:#1E3A5F;border:2px solid #0a0a0a">1</div>
+          <div>
+            <h4 class="font-bold text-base mb-2">Acc&egrave;s au registrar DNS</h4>
+            <p class="text-sm text-gray-500 font-space">OVH, Gandi, ou l&agrave; o&ugrave; tu g&egrave;res le domaine brokerone.insure. Pour que je puisse te dire quoi configurer (ou le faire moi-m&ecirc;me si tu me donnes l'acc&egrave;s).</p>
+          </div>
+        </div>
+      </div>
+      <div class="neo-card p-6">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center font-grotesk font-bold text-white" style="background:#1E3A5F;border:2px solid #0a0a0a">2</div>
+          <div>
+            <h4 class="font-bold text-base mb-2">Confirmer la localisation serveur</h4>
+            <p class="text-sm text-gray-500 font-space">Allemagne recommand&eacute; (RGPD, bon prix). Sinon un autre pays EU (Finlande possible aussi chez Hetzner).</p>
+          </div>
+        </div>
+      </div>
+      <div class="neo-card p-6">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center font-grotesk font-bold text-white" style="background:#1E3A5F;border:2px solid #0a0a0a">3</div>
+          <div>
+            <h4 class="font-bold text-base mb-2">Budget mensuel OK (~30&euro;/mois)</h4>
+            <p class="text-sm text-gray-500 font-space">Le serveur co&ucirc;te ~25-30&euro;/mois. C'est un abonnement mensuel directement chez Hetzner. Ton nom, ta carte.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- 15 — POURQUOI C'EST LE PRÉREQUIS -->
+<!-- ============================================ -->
+<section class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto text-white">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">15 / POURQUOI C'EST LE PR&Eacute;REQUIS</div>
+      <h2 class="font-grotesk text-4xl sm:text-6xl font-bold mb-6">Sans &ccedil;a, rien ne peut<br>aller en production.</h2>
+    </div>
+    <div class="anim">
+      <div class="diagram-box" style="font-size:14px;text-align:center;padding:32px">
+<span class="hl" style="font-size:18px;font-weight:bold">INFRA</span>  <span class="warn">&#8594;</span>  <span class="accent">Advice Prod</span>  <span class="warn">&#8594;</span>  <span class="dim">Sentinel</span>  <span class="warn">&#8594;</span>  <span class="dim">Augmented</span>  <span class="warn">&#8594;</span>  <span class="dim">...</span>
+  <span class="hl">&#9650;</span>
+  <span class="hl">|</span>
+  <span class="hl" style="font-size:12px">Tu es ici.</span></div>
+      <div class="mt-8 grid sm:grid-cols-3 gap-4">
+        <div class="p-4 text-center" style="background:rgba(30,58,95,.3);border:2px solid rgba(30,58,95,.5)">
+          <div class="font-mono text-xs mb-2" style="color:#7dd3fc">SANS INFRA</div>
+          <p class="text-sm font-space" style="color:rgba(255,255,255,.6)">Pas de mise en production possible</p>
+        </div>
+        <div class="p-4 text-center" style="background:rgba(30,58,95,.3);border:2px solid rgba(30,58,95,.5)">
+          <div class="font-mono text-xs mb-2" style="color:#7dd3fc">SANS INFRA</div>
+          <p class="text-sm font-space" style="color:rgba(255,255,255,.6)">Pas de N8N pour les automatisations</p>
+        </div>
+        <div class="p-4 text-center" style="background:rgba(30,58,95,.3);border:2px solid rgba(30,58,95,.5)">
+          <div class="font-mono text-xs mb-2" style="color:#7dd3fc">SANS INFRA</div>
+          <p class="text-sm font-space" style="color:rgba(255,255,255,.6)">Pas de serveur pour les futurs modules</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- 16 — BUDGET -->
+<!-- ============================================ -->
+<section id="budget" class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#1E3A5F">16 / BUDGET</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Investissement unique.</h2>
+    </div>
+    <div class="anim">
+      <div class="neo-card p-8 text-center" style="border-top:6px solid #1E3A5F">
+        <div class="font-mono text-xs font-bold mb-3" style="color:#1E3A5F">INFRASTRUCTURE BROKERONE</div>
+        <div class="font-grotesk text-6xl font-bold mb-2">2 500&euro; <span class="text-2xl text-gray-400">HT</span></div>
+        <div class="font-space text-lg text-gray-500 mb-6">3-4 jours de travail</div>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <span class="devis-pill" style="background:#fff3cd;color:#856404;border-color:#856404">INVESTISSEMENT UNIQUE</span>
+          <span class="devis-pill" style="background:#1E3A5F;color:#fff;border-color:#1E3A5F">PR&Eacute;REQUIS POUR TOUT</span>
+        </div>
+      </div>
+    </div>
+    <div class="anim grid sm:grid-cols-2 gap-4 mt-6">
+      <div class="neo-card p-5" style="border-left:4px solid #16a34a">
+        <div class="font-mono text-xs font-bold mb-2" style="color:#16a34a">BON &Agrave; SAVOIR</div>
+        <p class="text-sm font-space text-gray-600">Le serveur (~30&euro;/mois) est inclus dans la <strong>maintenance mensuelle future</strong>. Ce n'est pas un co&ucirc;t suppl&eacute;mentaire.</p>
+      </div>
+      <div class="neo-card p-5" style="border-left:4px solid #1E3A5F">
+        <div class="font-mono text-xs font-bold mb-2" style="color:#1E3A5F">MULTI-MODULE</div>
+        <p class="text-sm font-space text-gray-600">Ce serveur accueillera <strong>TOUS les modules</strong>. Pas besoin de repayer l'infra pour Sentinel, Augmented, Connect, etc.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- 17 — RÉCAPITULATIF VISUEL -->
+<!-- ============================================ -->
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">17 / R&Eacute;CAPITULATIF</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Tout ce qui est inclus.</h2>
+    </div>
+    <div class="anim grid sm:grid-cols-2 gap-3">
+      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="check-done">&#9745;</span><span class="text-sm font-space">Commande &amp; setup VPS Hetzner (Allemagne)</span></div>
+      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="check-done">&#9745;</span><span class="text-sm font-space">Ubuntu 24 + s&eacute;curisation SSH + firewall</span></div>
+      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="check-done">&#9745;</span><span class="text-sm font-space">Nginx reverse proxy (aiguillage)</span></div>
+      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="check-done">&#9745;</span><span class="text-sm font-space">SSL / HTTPS (Let's Encrypt gratuit)</span></div>
+      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="check-done">&#9745;</span><span class="text-sm font-space">DNS + sous-domaines configur&eacute;s</span></div>
+      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="check-done">&#9745;</span><span class="text-sm font-space">Migration site vitrine brokerone.insure</span></div>
+      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="check-done">&#9745;</span><span class="text-sm font-space">PM2 (auto-restart, logs, monitoring)</span></div>
+      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="check-done">&#9745;</span><span class="text-sm font-space">Monitoring basique + alertes</span></div>
+      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="check-done">&#9745;</span><span class="text-sm font-space">IPs + instructions DNS pour Bruno</span></div>
+      <div class="p-3 flex items-center gap-2 bg-white neo-border-2"><span class="check-done">&#9745;</span><span class="text-sm font-space">Documentation compl&egrave;te de l'architecture</span></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- 18 — NEXT STEPS + CONCLUSION -->
+<!-- ============================================ -->
+<section id="next-steps" class="py-24 px-4" style="background:#1E3A5F;border-top:3px solid #0a0a0a">
+  <div class="max-w-3xl mx-auto text-center text-white">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">18 / CONCLUSION</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">C'est la fondation.</h2>
+      <p class="text-lg font-space mb-8 leading-relaxed" style="color:rgba(255,255,255,.85)">
+        4 jours et le serveur est pr&ecirc;t.<br>
+        Tout le reste se branche dessus.<br><br>
+        <strong class="text-white">Advice, Sentinel, Augmented, Connect &mdash; tout passe par ce serveur.</strong>
+      </p>
+      <div class="neo-card p-6 sm:p-8 text-left" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3)">
+        <div class="space-y-4">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold" style="background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.3)">1</div>
+            <div><h4 class="font-bold text-sm mb-1">Tu valides ce devis</h4><p class="text-sm font-space" style="color:rgba(255,255,255,.7)">2 500&euro; HT pour l'infrastructure compl&egrave;te. Investissement unique.</p></div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold" style="background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.3)">2</div>
+            <div><h4 class="font-bold text-sm mb-1">Tu me fournis l'acc&egrave;s DNS + confirmation localisation</h4><p class="text-sm font-space" style="color:rgba(255,255,255,.7)">Registrar (OVH, Gandi...) + Allemagne OK pour le serveur.</p></div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold" style="background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.3)">3</div>
+            <div><h4 class="font-bold text-sm mb-1">Je setup tout en 4 jours</h4><p class="text-sm font-space" style="color:rgba(255,255,255,.7)">Serveur, Nginx, SSL, DNS, site vitrine, PM2, monitoring, documentation.</p></div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold" style="background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.3)">4</div>
+            <div><h4 class="font-bold text-sm mb-1">Le serveur est pr&ecirc;t pour la production</h4><p class="text-sm font-space" style="color:rgba(255,255,255,.7)">On encha&icirc;ne avec la mise en production d'Advice, puis les autres modules.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8 mb-8">
+        <a href="https://calendly.com/baptiste-visionia/30min" target="_blank" class="neo-btn bg-white px-6 py-3 font-space text-sm inline-flex items-center gap-2" style="color:#1E3A5F">Planifier un call</a>
+        <a href="mailto:baptiste.fort.pro@gmail.com" class="neo-btn px-6 py-3 font-space text-sm inline-flex items-center gap-2" style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.3)">R&eacute;pondre par email</a>
+      </div>
+      <div class="font-mono text-sm" style="color:rgba(255,255,255,.4)">Baptiste Fort &rarr; Bruno &mdash; Avril 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-10 px-4 bg-neo-black text-white" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-5xl mx-auto text-center">
+    <div class="neo-card-sm px-6 py-3 inline-block font-mono text-sm mb-3" style="background:#1E3A5F;border-color:#1E3A5F">Infrastructure BrokerONE &mdash; Avril 2026</div>
+    <p class="text-gray-500 text-sm font-space">2 500&euro; HT &bull; 3-4 jours &bull; Serveur pour tous les modules &bull; ~30&euro;/mois apr&egrave;s</p>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<button id="back-top" class="back-top neo-btn text-white w-12 h-12 flex items-center justify-center text-lg" style="background:#1E3A5F" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+<!-- JAVASCRIPT -->
+<script>
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+  document.getElementById('progress-bar').style.width=pct+'%';
+  document.getElementById('back-top').classList.toggle('show',h.scrollTop>600);
+});
+const obs=new IntersectionObserver(e=>{
+  e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('v');obs.unobserve(en.target)}});
+},{threshold:.05,rootMargin:'0px 0px 40px 0px'});
+document.querySelectorAll('.anim').forEach(el=>obs.observe(el));
+document.addEventListener('click',e=>{
+  if(Math.random()>.7)return;
+  const colors=['#1E3A5F','#2d5a8c','#0a0a0a','#16a34a','#64748b'];
+  for(let i=0;i<5;i++){
+    const d=document.createElement('div');
+    d.className='click-burst';
+    d.style.cssText=`left:${e.clientX}px;top:${e.clientY}px;width:5px;height:5px;border-radius:50%;background:${colors[Math.floor(Math.random()*colors.length)]};`;
+    document.body.appendChild(d);
+    const a=Math.random()*Math.PI*2,dist=25+Math.random()*40;
+    d.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:`translate(${Math.cos(a)*dist}px,${Math.sin(a)*dist}px) scale(0)`,opacity:0}],{duration:400+Math.random()*200,easing:'cubic-bezier(.16,1,.3,1)'});
+    setTimeout(()=>d.remove(),700);
+  }
+});
+const sections=document.querySelectorAll('section[id]');
+const navLinks=document.querySelectorAll('nav a[href^="#"]');
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-200)current=s.id});
+  navLinks.forEach(l=>{l.style.background=l.getAttribute('href')==='#'+current?'#f5f5f5':''});
+});
+</script>
+
+</body>
+</html>
