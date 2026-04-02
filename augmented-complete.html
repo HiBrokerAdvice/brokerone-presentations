@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BrokerONE Augmented — MVP + Production pour Bruno</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={theme:{extend:{fontFamily:{'inter':['Inter','sans-serif'],'grotesk':['Space Grotesk','sans-serif'],'mono':['JetBrains Mono','monospace'],'space':['Space Mono','monospace']},colors:{'neo':{'black':'#0a0a0a','white':'#fefefe','gray':'#f5f5f5','dark':'#0a0a0a'},'aug':{'green':'#1D6A45','dark':'#1E3A5F','light':'#E8F5EE','mid':'#27AE60'}}}}}
+</script>
+<style>
+*{scroll-behavior:smooth;margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:hidden}
+::selection{background:#1D6A45;color:#fff}
+::-webkit-scrollbar{width:10px}::-webkit-scrollbar-track{background:#fefefe;border-left:3px solid #1D6A45}::-webkit-scrollbar-thumb{background:#1D6A45;border-radius:0}
+.neo-border{border:3px solid #0a0a0a}.neo-border-2{border:2px solid #0a0a0a}
+.neo-shadow{box-shadow:6px 6px 0 #0a0a0a}.neo-shadow-sm{box-shadow:4px 4px 0 #0a0a0a}
+.neo-card{border:3px solid #0a0a0a;box-shadow:6px 6px 0 #0a0a0a;transition:all .2s cubic-bezier(.16,1,.3,1);background:#fff}
+.neo-card:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 #0a0a0a}
+.neo-card-sm{border:2px solid #0a0a0a;box-shadow:3px 3px 0 #0a0a0a;transition:all .2s cubic-bezier(.16,1,.3,1)}
+.neo-card-sm:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 #0a0a0a}
+.neo-btn{border:3px solid #0a0a0a;box-shadow:4px 4px 0 #0a0a0a;transition:all .15s ease;cursor:pointer;font-weight:700}
+.neo-btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 #0a0a0a}
+.neo-btn:active{transform:translate(4px,4px);box-shadow:0 0 0 #0a0a0a}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.anim{opacity:0;transform:translateY(18px);transition:opacity .45s ease,transform .45s ease}
+.anim.v{opacity:1;transform:translateY(0)}
+.marquee{animation:marquee 35s linear infinite}
+.stripe-bg{background-image:repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(29,106,69,.03) 10px,rgba(29,106,69,.03) 20px)}
+.ticker-wrap{overflow:hidden}.ticker{display:inline-flex;white-space:nowrap}
+.progress-bar{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#1E3A5F,#1D6A45,#27AE60);z-index:200;transition:width .1s}
+.section-number{font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:#888}
+.back-top{position:fixed;bottom:24px;right:24px;z-index:100;opacity:0;transform:translateY(20px);transition:all .3s;pointer-events:none}
+.back-top.show{opacity:1;transform:translateY(0);pointer-events:auto}
+.click-burst{pointer-events:none;position:fixed;z-index:9999}
+.check-done{color:#1D6A45;font-weight:700}.check-todo{color:#999}
+.tag-mvp{background:#1D6A45;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
+.tag-prod{background:#C0392B;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
+.tag-done{background:#0a0a0a;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+.pulse-dot{animation:pulse-dot 2s ease-in-out infinite}
+@keyframes count-up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.stat-card:hover .stat-number{animation:count-up .3s ease}
+.code-block{font-family:'JetBrains Mono',monospace;font-size:.75rem;line-height:1.7;border-radius:0}
+.branch-be{border-left:5px solid #1D6A45;background:rgba(29,106,69,.04)}
+.branch-fr{border-left:5px solid #2980B9;background:rgba(41,128,185,.04)}
+.block-1{border-top:4px solid #2980B9}
+.block-2{border-top:4px solid #1D6A45}
+.block-3{border-top:4px solid #F39C12}
+.flow-arrow{font-size:1.5rem;color:#1D6A45;font-weight:bold;text-align:center}
+.wf-header{background:#1E3A5F;height:28px;display:flex;align-items:center;padding:0 10px;gap:6px}
+.wf-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4)}
+.wf-sidebar{background:#0f2236;width:44px;min-height:100%}
+.wf-bar{background:#e2e8f0;border-radius:3px}
+.wf-card{border:1px solid #e2e8f0;border-radius:4px;background:#fff}
+</style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div id="progress-bar" class="progress-bar" style="width:0%"></div>
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-neo-white/95 backdrop-blur-md transition-all duration-300" style="border-bottom:3px solid #0a0a0a">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="flex items-center justify-between h-14">
+    <div class="flex items-center gap-3">
+      <div class="neo-card-sm px-3 py-1 font-mono text-sm font-bold" style="background:#1D6A45;color:#fff;border-color:#1D6A45">A+</div>
+      <span class="font-grotesk font-bold text-sm hidden sm:block">Augmented &mdash; MVP + Production</span>
+    </div>
+    <div class="hidden lg:flex items-center gap-1 text-xs font-space">
+      <a href="#probleme" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Probleme</a>
+      <a href="#solution" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Solution</a>
+      <a href="#branches" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Branches</a>
+      <a href="#ai-blocks" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">3 Blocs IA</a>
+      <a href="#human-loop" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Human-in-the-loop</a>
+      <a href="#connexions" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Connexions</a>
+      <a href="#technique" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Technique</a>
+      <a href="#scope" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">MVP Scope</a>
+      <a href="#transition" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Production</a>
+      <a href="#budget-final" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Budget</a>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="tag-mvp">MVP</span>
+      <span class="tag-prod">PROD</span>
+    </div>
+  </div>
+</div>
+</nav>
+
+<!-- TICKER -->
+<div class="fixed top-[56px] left-0 right-0 z-40 text-white py-1.5 ticker-wrap" style="background:#1D6A45;border-bottom:3px solid #0a0a0a">
+<div class="ticker marquee">
+  <span class="mx-8 text-xs font-space">AUGMENTED &mdash; MVP + PRODUCTION &mdash; 20 000&euro;</span>
+  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
+  <span class="mx-8 text-xs font-space">22 BRANCHES D'ASSURANCE</span>
+  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
+  <span class="mx-8 text-xs font-space">3 BLOCS IA</span>
+  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
+  <span class="mx-8 text-xs font-space">RAPPORTS FSMA &amp; ACPR V2</span>
+  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
+  <span class="mx-8 text-xs font-space">HUMAN-IN-THE-LOOP</span>
+  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
+  <span class="mx-8 text-xs font-space">BELGIQUE + FRANCE</span>
+  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
+  <span class="mx-8 text-xs font-space">MODULE LE PLUS COMPLEXE</span>
+  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
+  <span class="mx-8 text-xs font-space">AUGMENTED &mdash; MVP + PRODUCTION &mdash; 20 000&euro;</span>
+  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
+  <span class="mx-8 text-xs font-space">22 BRANCHES D'ASSURANCE</span>
+  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
+  <span class="mx-8 text-xs font-space">3 BLOCS IA</span>
+  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
+  <span class="mx-8 text-xs font-space">RAPPORTS FSMA &amp; ACPR V2</span>
+  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
+  <span class="mx-8 text-xs font-space">HUMAN-IN-THE-LOOP</span>
+  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
+  <span class="mx-8 text-xs font-space">BELGIQUE + FRANCE</span>
+  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
+  <span class="mx-8 text-xs font-space">MODULE LE PLUS COMPLEXE</span>
+</div>
+</div>
+
+<!-- ============================================ -->
+<!-- 01 / HELLO -->
+<!-- ============================================ -->
+<section class="min-h-screen flex items-center justify-center pt-32 pb-20 px-4 relative overflow-hidden">
+  <div class="absolute inset-0 stripe-bg opacity-30"></div>
+  <div class="max-w-3xl mx-auto relative z-10">
+    <div class="anim">
+      <div class="section-number mb-6">01 / HELLO</div>
+      <div class="flex items-center gap-4 mb-6">
+        <div class="neo-card-sm px-4 py-2 font-mono text-lg font-bold" style="background:#1D6A45;color:#fff;border-color:#1D6A45">Augmented</div>
+        <div class="text-gray-400 font-space text-sm">Module 2 / 6 de BrokerONE</div>
+      </div>
+      <h1 class="font-grotesk text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] mb-8">
+        L'assistant IA<br>devoir de conseil.
+      </h1>
+      <div class="text-lg sm:text-xl text-gray-500 font-space leading-relaxed mb-8 space-y-4">
+        <p><strong class="text-neo-black">22 branches d'assurance. 3 blocs IA. Rapports FSMA &amp; ACPR V2 pre-remplis.</strong> Augmented formalise automatiquement le devoir de conseil du courtier, comme l'exige la reglementation IDD/DDA.</p>
+        <p>Le courtier reste <strong class="text-neo-black" style="color:#1D6A45">toujours aux commandes</strong> &mdash; human-in-the-loop. L'IA genere, le courtier valide. Rien ne sort sans approbation explicite.</p>
+      </div>
+    </div>
+    <div class="anim flex flex-wrap gap-4">
+      <a href="#probleme" class="neo-btn text-white px-8 py-3 font-space text-sm inline-flex items-center gap-2" style="background:#1D6A45">C'est parti &#8595;</a>
+      <div class="flex items-center gap-3">
+        <span class="tag-mvp">MVP 13 000&euro;</span>
+        <span class="tag-prod">PROD 7 000&euro;</span>
+        <span class="text-xs font-space text-gray-400">= <strong>20 000&euro; HT</strong> &bull; Module le plus complexe</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 02 / EXEC SUMMARY -->
+<!-- ============================================ -->
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#1D6A45">02 / EN 2 MINUTES</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">L'essentiel.</h2>
+    </div>
+    <div class="anim neo-card p-6 sm:p-8" style="border-left:6px solid #1D6A45">
+      <div class="space-y-4">
+        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#1D6A45;min-width:32px">1</div><div><h4 class="font-bold text-sm mb-1">Quoi</h4><p class="text-sm text-gray-500 font-space">Agent IA qui formalise le devoir de conseil du courtier. Il recoit un besoin client, extrait le profil CRM, identifie la branche d'assurance, execute 3 blocs IA (collecte, diagnostic, rapport), et genere un rapport de conseil pre-rempli conforme FSMA (Belgique) ou ACPR V2 (France).</p></div></div>
+        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#1D6A45;min-width:32px">2</div><div><h4 class="font-bold text-sm mb-1">Pourquoi</h4><p class="text-sm text-gray-500 font-space">Un courtier passe ~2h par rapport de conseil, 15+ rapports/semaine = 30h de paperasse. La qualite est inegale, les references reglementaires manquent, les controles FSMA/ACPR trouvent des rapports incomplets &rarr; sanctions.</p></div></div>
+        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#1D6A45;min-width:32px">3</div><div><h4 class="font-bold text-sm mb-1">Combien &amp; Quand</h4><p class="text-sm text-gray-500 font-space"><span class="tag-mvp">MVP</span> <strong>13 000&euro; HT</strong> (~30 jours) + <span class="tag-prod">PROD</span> <strong>7 000&euro; HT</strong> (~15 jours) = <strong>20 000&euro; HT total</strong>. Module le plus complexe de BrokerONE.</p></div></div>
+        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#1D6A45;min-width:32px">4</div><div><h4 class="font-bold text-sm mb-1">Role dans BrokerONE</h4><p class="text-sm text-gray-500 font-space">Augmented est le <strong>coeur de la boucle vertueuse</strong>. Il est alimente par Sentinel (besoin assurance detecte) et Checkup (lacune critique). Quand le courtier valide un dossier, Advice declenche automatiquement une sollicitation de satisfaction &mdash; timing optimal.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- PARTIE 1 — LE PROBLEME (03-05) -->
+<!-- ============================================ -->
+
+<section id="probleme" class="py-20 px-4" style="background:#1E3A5F;border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto text-white">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 1 / LE PROBLEME</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le devoir de conseil aujourd'hui.</h2>
+      <p class="text-lg font-space leading-relaxed" style="color:rgba(255,255,255,.7)">La reglementation IDD (Belgique) et DDA (France) impose au courtier de documenter formellement <strong class="text-white">chaque</strong> conseil en assurance. Situation du client, besoins identifies, produits recommandes, alternatives presentees, references reglementaires. Tout doit etre ecrit, signe, archive.</p>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">03 / CE QUI SE PASSE AUJOURD'HUI</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le quotidien du courtier.</h2>
+    </div>
+    <div class="anim">
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div class="neo-card p-6" style="border-left:5px solid #C0392B;background:rgba(192,57,43,.05)">
+          <div class="text-2xl mb-3">&#128196;</div>
+          <h3 class="font-grotesk font-bold mb-2">Templates Word manuels</h3>
+          <p class="text-sm text-gray-500 font-space">Le courtier ouvre un template Word vierge, copie-colle les infos du client depuis le CRM, remplit manuellement chaque section. 1h30 a 2h par dossier. Erreurs de copie, oublis, incoherences.</p>
+          <div class="mt-3 p-2 bg-white text-xs font-space"><strong style="color:#C0392B">Cout :</strong> 30h/semaine de paperasse pour un courtier actif.</div>
+        </div>
+        <div class="neo-card p-6" style="border-left:5px solid #C0392B;background:rgba(192,57,43,.05)">
+          <div class="text-2xl mb-3">&#9888;</div>
+          <h3 class="font-grotesk font-bold mb-2">Qualite inegale</h3>
+          <p class="text-sm text-gray-500 font-space">Chaque courtier redige a sa facon. Certains sont exhaustifs, d'autres expedient. Les references reglementaires sont souvent absentes ou erronees. Pas de standard.</p>
+          <div class="mt-3 p-2 bg-white text-xs font-space"><strong style="color:#C0392B">Risque :</strong> Inspection FSMA/ACPR &rarr; rapport juge non conforme.</div>
+        </div>
+        <div class="neo-card p-6" style="border-left:5px solid #C0392B;background:rgba(192,57,43,.05)">
+          <div class="text-2xl mb-3">&#128269;</div>
+          <h3 class="font-grotesk font-bold mb-2">References manquantes</h3>
+          <p class="text-sm text-gray-500 font-space">Le rapport de conseil doit citer les articles de loi, circulaires FSMA, recommandations ACPR qui justifient le conseil donne. Qui connait par coeur l'article 279 de la Loi Assurances ?</p>
+          <div class="mt-3 p-2 bg-white text-xs font-space"><strong style="color:#C0392B">Risque :</strong> Rapport sans base juridique = conseil non fonde.</div>
+        </div>
+        <div class="neo-card p-6" style="border-left:5px solid #C0392B;background:rgba(192,57,43,.05)">
+          <div class="text-2xl mb-3">&#128683;</div>
+          <h3 class="font-grotesk font-bold mb-2">Dossiers oublies</h3>
+          <p class="text-sm text-gray-500 font-space">Un client appelle pour un devis, le courtier repond oralement. Le rapport de conseil ? Jamais redige. Si le client se plaint 3 ans plus tard, aucune trace ecrite.</p>
+          <div class="mt-3 p-2 bg-white text-xs font-space"><strong style="color:#C0392B">Risque :</strong> Responsabilite civile professionnelle du courtier engagee.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">04 / EN CHIFFRES</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le cout du devoir de conseil manuel.</h2>
+    </div>
+    <div class="anim grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div class="neo-card p-5 text-center stat-card"><div class="font-space font-bold text-3xl stat-number" style="color:#C0392B">~2h</div><div class="text-xs text-gray-500 font-space mt-1">par rapport de conseil</div></div>
+      <div class="neo-card p-5 text-center stat-card"><div class="font-space font-bold text-3xl stat-number" style="color:#C0392B">15+</div><div class="text-xs text-gray-500 font-space mt-1">rapports / semaine</div></div>
+      <div class="neo-card p-5 text-center stat-card"><div class="font-space font-bold text-3xl stat-number" style="color:#C0392B">30h</div><div class="text-xs text-gray-500 font-space mt-1">de paperasse / semaine</div></div>
+      <div class="neo-card p-5 text-center stat-card"><div class="font-space font-bold text-3xl stat-number" style="color:#C0392B">40%</div><div class="text-xs text-gray-500 font-space mt-1">de rapports incomplets</div></div>
+    </div>
+    <div class="anim">
+      <div class="grid sm:grid-cols-2 gap-0" style="border:3px solid #0a0a0a;box-shadow:6px 6px 0 #0a0a0a">
+        <div class="p-6" style="background:rgba(192,57,43,.05);border-right:2px solid #0a0a0a">
+          <div class="font-mono text-xs mb-4 font-bold" style="color:#C0392B">AVANT &mdash; MANUEL</div>
+          <div class="space-y-3 text-sm font-space text-gray-400">
+            <div>&#10007; Template Word vierge a remplir</div>
+            <div>&#10007; Copy-paste depuis le CRM</div>
+            <div>&#10007; 2h par rapport de conseil</div>
+            <div>&#10007; References reglementaires oubliees</div>
+            <div>&#10007; Qualite variable selon le courtier</div>
+            <div>&#10007; Dossiers parfois jamais rediges</div>
+            <div>&#10007; Pas de tracabilite</div>
+          </div>
+        </div>
+        <div class="p-6" style="background:rgba(29,106,69,.05)">
+          <div class="font-mono text-xs mb-4 font-bold" style="color:#1D6A45">APRES &mdash; AUGMENTED</div>
+          <div class="space-y-3 text-sm font-space text-neo-black">
+            <div><strong>&#10003; Profil client extrait du CRM</strong> automatiquement</div>
+            <div><strong>&#10003; Diagnostic IA</strong> en 30 secondes</div>
+            <div><strong>&#10003; Rapport pre-rempli</strong> conforme FSMA/ACPR</div>
+            <div><strong>&#10003; References reglementaires</strong> injectees</div>
+            <div><strong>&#10003; Qualite constante</strong> sur chaque dossier</div>
+            <div><strong>&#10003; Aucun dossier oublie</strong> (cree par Sentinel)</div>
+            <div><strong>&#10003; Audit trail</strong> complet</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- PARTIE 2 — LA SOLUTION (05-07) -->
+<!-- ============================================ -->
+
+<section id="solution" class="py-20 px-4" style="background:#1D6A45;border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto text-white">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 2 / LA SOLUTION</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Augmented en un schema.</h2>
+      <p class="text-lg font-space" style="color:rgba(255,255,255,.8)">Un besoin arrive. L'IA fait le travail. Le courtier valide. Le rapport sort.</p>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">05 / LE FLUX COMPLET</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">6 etapes, 1 rapport.</h2>
+    </div>
+    <div class="anim space-y-3">
+      <div class="neo-card p-5 flex items-start gap-4">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#1D6A45">1</div>
+        <div><h4 class="font-bold text-sm mb-1">Besoin client arrive</h4><p class="text-xs text-gray-500 font-space">Via Sentinel (email classifie BESOIN_ASSURANCE avec 6 couches conseil_routing) ou saisie manuelle par le courtier. Un dossier Augmented est cree.</p></div>
+      </div>
+      <div class="text-center"><div class="flow-arrow">&#8595;</div></div>
+      <div class="neo-card p-5 flex items-start gap-4 block-1">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#2980B9">2</div>
+        <div><h4 class="font-bold text-sm mb-1">BLOC 1 &mdash; Collecte &amp; Profil</h4><p class="text-xs text-gray-500 font-space">L'IA extrait le profil client du CRM (Brio/BrokerCloud) : situation familiale, patrimoine, contrats existants, situation professionnelle, profil de risque.</p></div>
+      </div>
+      <div class="text-center"><div class="flow-arrow">&#8595;</div></div>
+      <div class="neo-card p-5 flex items-start gap-4 block-2">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#1D6A45">3</div>
+        <div><h4 class="font-bold text-sm mb-1">BLOC 2 &mdash; Analyse &amp; Diagnostic</h4><p class="text-xs text-gray-500 font-space">Croisement profil client x branche d'assurance x reglementation. Detection des lacunes, scoring des besoins, injection des references reglementaires (article FSMA, recommandation ACPR).</p></div>
+      </div>
+      <div class="text-center"><div class="flow-arrow">&#8595;</div></div>
+      <div class="neo-card p-5 flex items-start gap-4 block-3">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#F39C12">4</div>
+        <div><h4 class="font-bold text-sm mb-1">BLOC 3 &mdash; Generation &amp; Rapport</h4><p class="text-xs text-gray-500 font-space">Rapport de conseil pre-rempli au format FSMA (Belgique) ou ACPR V2 (France). Sections : resume situation, besoins identifies, produits recommandes, alternatives, references reglementaires, recommandation courtier.</p></div>
+      </div>
+      <div class="text-center"><div class="flow-arrow">&#8595;</div></div>
+      <div class="neo-card p-5 flex items-start gap-4" style="border:3px solid #1D6A45;box-shadow:6px 6px 0 #1D6A45">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#0a0a0a">5</div>
+        <div><h4 class="font-bold text-sm mb-1">HUMAN-IN-THE-LOOP &mdash; Le courtier valide</h4><p class="text-xs text-gray-500 font-space">Le courtier relit, modifie si necessaire, et <strong>valide explicitement</strong> le rapport. Rien ne sort sans son approbation. Validation logguee avec timestamp + broker ID.</p></div>
+      </div>
+      <div class="text-center"><div class="flow-arrow">&#8595;</div></div>
+      <div class="neo-card p-5 flex items-start gap-4">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#1E3A5F">6</div>
+        <div><h4 class="font-bold text-sm mb-1">Export &amp; archivage</h4><p class="text-xs text-gray-500 font-space">Rapport disponible en HTML (apercu in-app) + DOCX (telechargement pour impression/signature). Archive automatique. Declenchement Advice (sollicitation satisfaction).</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">06 / CE QUE CA CHANGE</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">L'impact concret.</h2>
+    </div>
+    <div class="anim grid sm:grid-cols-3 gap-4">
+      <div class="neo-card p-5 text-center stat-card"><div class="font-space font-bold text-3xl stat-number" style="color:#1D6A45">2h &rarr; 5min</div><div class="text-xs text-gray-500 font-space mt-2">Temps par rapport de conseil</div></div>
+      <div class="neo-card p-5 text-center stat-card"><div class="font-space font-bold text-3xl stat-number" style="color:#1D6A45">100%</div><div class="text-xs text-gray-500 font-space mt-2">Rapports avec references reglementaires</div></div>
+      <div class="neo-card p-5 text-center stat-card"><div class="font-space font-bold text-3xl stat-number" style="color:#1D6A45">0</div><div class="text-xs text-gray-500 font-space mt-2">Dossiers oublies (auto-cree par Sentinel)</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- PARTIE 3 — 22 BRANCHES (07-10) -->
+<!-- ============================================ -->
+
+<section id="branches" class="py-20 px-4" style="background:#1E3A5F;border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto text-white">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 3 / 22 BRANCHES D'ASSURANCE</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Chaque branche, ses regles.</h2>
+      <p class="text-lg font-space" style="color:rgba(255,255,255,.8)">Augmented ne fait pas du generique. Chaque branche d'assurance a son propre prompt IA, ses propres references reglementaires, ses propres sections de rapport. 15 branches Belgique, 13 branches France &mdash; certaines en commun.</p>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#1D6A45">07 / BELGIQUE &mdash; 15 BRANCHES</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">&#127463;&#127466; Branches belges.</h2>
+    </div>
+    <div class="anim grid sm:grid-cols-3 gap-3">
+      <div class="neo-card-sm p-4 branch-be"><div class="font-bold text-sm mb-1">&#128663; Auto</div><p class="text-[10px] text-gray-500 font-space">RC obligatoire, omnium, mini-omnium, protection juridique auto</p></div>
+      <div class="neo-card-sm p-4 branch-be"><div class="font-bold text-sm mb-1">&#127968; Habitation</div><p class="text-[10px] text-gray-500 font-space">Incendie, vol, bris de glace, responsabilite locative</p></div>
+      <div class="neo-card-sm p-4 branch-be"><div class="font-bold text-sm mb-1">&#128106; RC Familiale</div><p class="text-[10px] text-gray-500 font-space">Responsabilite civile vie privee, famille, enfants</p></div>
+      <div class="neo-card-sm p-4 branch-be"><div class="font-bold text-sm mb-1">&#127973; Hospitalisation</div><p class="text-[10px] text-gray-500 font-space">Frais hospitaliers, chambre individuelle, soins ambulatoires</p></div>
+      <div class="neo-card-sm p-4 branch-be"><div class="font-bold text-sm mb-1">&#128154; Vie</div><p class="text-[10px] text-gray-500 font-space">Assurance deces, branche 21, branche 23</p></div>
+      <div class="neo-card-sm p-4 branch-be"><div class="font-bold text-sm mb-1">&#128176; Pension</div><p class="text-[10px] text-gray-500 font-space">Pension libre complementaire (PLCI), EIP, CPTI</p></div>
+      <div class="neo-card-sm p-4 branch-be"><div class="font-bold text-sm mb-1">&#128188; RC Pro</div><p class="text-[10px] text-gray-500 font-space">Responsabilite civile professionnelle, exploitation</p></div>
+      <div class="neo-card-sm p-4 branch-be"><div class="font-bold text-sm mb-1">&#128293; Incendie</div><p class="text-[10px] text-gray-500 font-space">Immeubles, contenu, pertes indirectes</p></div>
+      <div class="neo-card-sm p-4 branch-be"><div class="font-bold text-sm mb-1">&#9878; Protection juridique</div><p class="text-[10px] text-gray-500 font-space">Amiable, judiciaire, droit fiscal, droit familial</p></div>
+      <div class="neo-card-sm p-4 branch-be"><div class="font-bold text-sm mb-1">&#128679; Accidents du travail</div><p class="text-[10px] text-gray-500 font-space">Loi du 10/04/1971, employeur obligatoire</p></div>
+      <div class="neo-card-sm p-4 branch-be"><div class="font-bold text-sm mb-1">&#9992; Voyage</div><p class="text-[10px] text-gray-500 font-space">Annulation, assistance, bagages, rapatriement</p></div>
+      <div class="neo-card-sm p-4 branch-be"><div class="font-bold text-sm mb-1">&#128161; Assistance</div><p class="text-[10px] text-gray-500 font-space">Depannage, assistance personne, domicile</p></div>
+      <div class="neo-card-sm p-4 branch-be"><div class="font-bold text-sm mb-1">&#128187; Cyber</div><p class="text-[10px] text-gray-500 font-space">Cyberattaque, vol de donnees, rancon, pertes d'exploitation</p></div>
+      <div class="neo-card-sm p-4 branch-be"><div class="font-bold text-sm mb-1">&#128666; Transport</div><p class="text-[10px] text-gray-500 font-space">Marchandises, responsabilite transporteur, CMR</p></div>
+      <div class="neo-card-sm p-4 branch-be"><div class="font-bold text-sm mb-1">&#128179; Credit</div><p class="text-[10px] text-gray-500 font-space">Credit caution, credit commercial, assurance-credit</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#2980B9">08 / FRANCE &mdash; 13 BRANCHES</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">&#127467;&#127479; Branches francaises.</h2>
+    </div>
+    <div class="anim grid sm:grid-cols-3 gap-3">
+      <div class="neo-card-sm p-4 branch-fr"><div class="font-bold text-sm mb-1">&#128663; Auto</div><p class="text-[10px] text-gray-500 font-space">RC obligatoire, tous risques, bris de glace, vol</p></div>
+      <div class="neo-card-sm p-4 branch-fr"><div class="font-bold text-sm mb-1">&#127968; MRH</div><p class="text-[10px] text-gray-500 font-space">Multirisque habitation, PNO, locataire, proprietaire</p></div>
+      <div class="neo-card-sm p-4 branch-fr"><div class="font-bold text-sm mb-1">&#128138; Sante</div><p class="text-[10px] text-gray-500 font-space">Complementaire sante, 100% sante, surcomplementaire</p></div>
+      <div class="neo-card-sm p-4 branch-fr"><div class="font-bold text-sm mb-1">&#128170; Prevoyance</div><p class="text-[10px] text-gray-500 font-space">Arret de travail, invalidite, deces, Madelin</p></div>
+      <div class="neo-card-sm p-4 branch-fr"><div class="font-bold text-sm mb-1">&#128188; RC Pro</div><p class="text-[10px] text-gray-500 font-space">RC professionnelle, decennale, exploitation</p></div>
+      <div class="neo-card-sm p-4 branch-fr"><div class="font-bold text-sm mb-1">&#128176; PER</div><p class="text-[10px] text-gray-500 font-space">Plan epargne retraite, ancien Madelin, Loi Industrie Verte</p></div>
+      <div class="neo-card-sm p-4 branch-fr"><div class="font-bold text-sm mb-1">&#128154; Vie</div><p class="text-[10px] text-gray-500 font-space">Assurance vie, fonds euros, unites de compte</p></div>
+      <div class="neo-card-sm p-4 branch-fr"><div class="font-bold text-sm mb-1">&#9878; Protection juridique</div><p class="text-[10px] text-gray-500 font-space">Defense amiable et judiciaire, litiges quotidiens</p></div>
+      <div class="neo-card-sm p-4 branch-fr"><div class="font-bold text-sm mb-1">&#128187; Cyber</div><p class="text-[10px] text-gray-500 font-space">Cyberattaque, RGPD, notification CNIL, pertes exploitation</p></div>
+      <div class="neo-card-sm p-4 branch-fr"><div class="font-bold text-sm mb-1">&#128170; GAV</div><p class="text-[10px] text-gray-500 font-space">Garantie accidents de la vie, corporel, incapacite</p></div>
+      <div class="neo-card-sm p-4 branch-fr"><div class="font-bold text-sm mb-1">&#128151; Obseques</div><p class="text-[10px] text-gray-500 font-space">Capital ou prestations, organisation obseques</p></div>
+      <div class="neo-card-sm p-4 branch-fr"><div class="font-bold text-sm mb-1">&#127970; Emprunteur</div><p class="text-[10px] text-gray-500 font-space">Assurance pret immobilier, loi Lemoine, delegation</p></div>
+      <div class="neo-card-sm p-4 branch-fr"><div class="font-bold text-sm mb-1">&#127891; Scolaire</div><p class="text-[10px] text-gray-500 font-space">RC + individuelle accident, activites extrascolaires</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">09 / PROMPT PAR BRANCHE</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Chaque branche = 1 prompt IA dedie.</h2>
+    </div>
+    <div class="anim neo-card p-6 sm:p-8">
+      <p class="text-sm text-gray-500 font-space mb-4">Augmented ne fait pas un seul prompt generique. Chaque branche a son propre prompt structure qui inclut :</p>
+      <div class="space-y-3 text-sm font-space">
+        <div class="flex items-start gap-2"><span class="check-done">&#9745;</span> <strong>Contexte reglementaire specifique</strong> &mdash; articles, circulaires, recommandations</div>
+        <div class="flex items-start gap-2"><span class="check-done">&#9745;</span> <strong>Points d'analyse obligatoires</strong> &mdash; ce que le rapport DOIT couvrir pour cette branche</div>
+        <div class="flex items-start gap-2"><span class="check-done">&#9745;</span> <strong>Structure du rapport</strong> &mdash; sections specifiques a la branche</div>
+        <div class="flex items-start gap-2"><span class="check-done">&#9745;</span> <strong>Alternatives a presenter</strong> &mdash; ce que la reglementation exige comme comparaison</div>
+        <div class="flex items-start gap-2"><span class="check-done">&#9745;</span> <strong>Vocabulaire technique</strong> &mdash; termes et concepts propres a la branche</div>
+      </div>
+      <div class="mt-6 p-4 bg-neo-gray text-xs font-mono" style="line-height:1.8">
+        <span style="color:#888">// Exemple : prompt Auto (Belgique)</span><br>
+        branche: "auto_be"<br>
+        reglementation: ["Art. 2 Loi 21/11/1989", "AR 14/12/1992", "FSMA_2022_06"]<br>
+        sections_obligatoires: ["rc_obligatoire", "garanties_optionnelles", "franchise", "bonus_malus"]<br>
+        alternatives_min: 2<br>
+        langue: ["fr", "nl"]
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- PARTIE 4 — 3 BLOCS IA (10-13) -->
+<!-- ============================================ -->
+
+<section id="ai-blocks" class="py-20 px-4" style="background:#1D6A45;border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto text-white">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 4 / 3 BLOCS IA</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le moteur d'Augmented.</h2>
+      <p class="text-lg font-space" style="color:rgba(255,255,255,.8)">3 blocs distincts, executes en sequence. Chacun a un role precis. Tous alimentes par Claude Sonnet.</p>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#2980B9">10 / BLOC 1 &mdash; COLLECTE &amp; PROFIL</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Tout savoir du client.</h2>
+    </div>
+    <div class="anim neo-card p-6 sm:p-8 block-1">
+      <p class="text-sm text-gray-500 font-space mb-6">Le premier bloc extrait automatiquement le profil complet du client depuis le CRM (Brio ou BrokerCloud). Plus de copier-coller. Plus d'oublis.</p>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="p-4 bg-neo-gray neo-border-2">
+          <h4 class="font-bold text-sm mb-2">&#128101; Situation familiale</h4>
+          <div class="text-xs text-gray-500 font-space space-y-1">
+            <div>Statut marital (marie, cohabitant legal, isole)</div>
+            <div>Enfants (nombre, ages, a charge)</div>
+            <div>Personnes dependantes</div>
+            <div>Regime matrimonial</div>
+          </div>
+        </div>
+        <div class="p-4 bg-neo-gray neo-border-2">
+          <h4 class="font-bold text-sm mb-2">&#127968; Patrimoine</h4>
+          <div class="text-xs text-gray-500 font-space space-y-1">
+            <div>Immobilier (residence, locatif, neuf/ancien)</div>
+            <div>Vehicules (nombre, type, valeur)</div>
+            <div>Entreprise (type, CA, nb employes)</div>
+            <div>Epargne et placements</div>
+          </div>
+        </div>
+        <div class="p-4 bg-neo-gray neo-border-2">
+          <h4 class="font-bold text-sm mb-2">&#128196; Contrats existants</h4>
+          <div class="text-xs text-gray-500 font-space space-y-1">
+            <div>Polices en cours (compagnie, branche, echeance)</div>
+            <div>Couvertures actives</div>
+            <div>Sinistralite (nombre, montants)</div>
+            <div>Historique des modifications</div>
+          </div>
+        </div>
+        <div class="p-4 bg-neo-gray neo-border-2">
+          <h4 class="font-bold text-sm mb-2">&#128188; Situation professionnelle</h4>
+          <div class="text-xs text-gray-500 font-space space-y-1">
+            <div>Statut (salarie, TNS, gerant, retraite)</div>
+            <div>Secteur d'activite, code NACE</div>
+            <div>Revenus (tranches)</div>
+            <div>Avantages sociaux (mutuelle collective, PER entreprise)</div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4 p-3 text-xs font-space" style="background:rgba(41,128,185,.05);border-left:4px solid #2980B9">
+        <strong>Integration CRM :</strong> Brio API (SOAP/REST) et BrokerCloud API (REST). Extraction en temps reel, pas de synchronisation batch. Si le CRM est indisponible, le courtier peut saisir manuellement.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#1D6A45">11 / BLOC 2 &mdash; ANALYSE &amp; DIAGNOSTIC</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le diagnostic IA.</h2>
+    </div>
+    <div class="anim neo-card p-6 sm:p-8 block-2">
+      <p class="text-sm text-gray-500 font-space mb-6">Le coeur d'Augmented. Claude Sonnet croise le profil client avec la branche d'assurance et la reglementation applicable. Il produit un diagnostic structure.</p>
+      <div class="space-y-4">
+        <div class="flex items-start gap-4 p-4 bg-white neo-border-2">
+          <div class="w-8 h-8 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#1D6A45">A</div>
+          <div><h4 class="font-bold text-sm mb-1">Croisement 3 dimensions</h4><p class="text-xs text-gray-500 font-space">Profil client x branche d'assurance x reglementation applicable. L'IA ne genere pas du texte generique &mdash; elle analyse une situation precise dans un cadre reglementaire precis.</p></div>
+        </div>
+        <div class="flex items-start gap-4 p-4 bg-white neo-border-2">
+          <div class="w-8 h-8 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#1D6A45">B</div>
+          <div><h4 class="font-bold text-sm mb-1">Detection des lacunes</h4><p class="text-xs text-gray-500 font-space">Ce qui manque vs ce qui devrait etre couvert. Exemple : famille avec 2 enfants mais aucune RC familiale &rarr; lacune critique detectee. Proprietaire sans assurance vol &rarr; lacune identifiee.</p></div>
+        </div>
+        <div class="flex items-start gap-4 p-4 bg-white neo-border-2">
+          <div class="w-8 h-8 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#1D6A45">C</div>
+          <div><h4 class="font-bold text-sm mb-1">Scoring des besoins</h4><p class="text-xs text-gray-500 font-space">Chaque besoin identifie est score sur 3 axes : urgence (le client est-il expose maintenant ?), impact (quelle est la gravite potentielle ?), obligation reglementaire (est-ce legalement requis ?).</p></div>
+        </div>
+        <div class="flex items-start gap-4 p-4 bg-white neo-border-2">
+          <div class="w-8 h-8 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#1D6A45">D</div>
+          <div><h4 class="font-bold text-sm mb-1">References reglementaires</h4><p class="text-xs text-gray-500 font-space">Pour chaque besoin identifie, l'IA injecte les references : quel article FSMA, quelle circulaire, quelle recommandation ACPR. Le courtier n'a plus a chercher.</p></div>
+        </div>
+      </div>
+      <div class="mt-6 p-4 bg-neo-gray text-xs font-mono" style="line-height:1.8">
+        <span style="color:#888">// Sortie structuree du Bloc 2</span><br>
+        diagnostic: &#123;<br>
+        &nbsp;&nbsp;besoins: [&#123; branche, description, urgence, impact, reglementaire, references[] &#125;],<br>
+        &nbsp;&nbsp;lacunes: [&#123; type, description, gravite, couverture_actuelle, couverture_recommandee &#125;],<br>
+        &nbsp;&nbsp;profil_risque: "modere" | "eleve" | "critique",<br>
+        &nbsp;&nbsp;reglementation_applicable: [&#123; code, libelle, article, source &#125;]<br>
+        &#125;
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#F39C12">12 / BLOC 3 &mdash; GENERATION &amp; RAPPORT</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le rapport pre-rempli.</h2>
+    </div>
+    <div class="anim neo-card p-6 sm:p-8 block-3">
+      <p class="text-sm text-gray-500 font-space mb-6">Le Bloc 3 transforme le diagnostic en un rapport de conseil formel, pret a etre valide et signe. Deux formats selon le pays : FSMA (Belgique) ou ACPR V2 (France).</p>
+      <div class="grid sm:grid-cols-2 gap-4 mb-6">
+        <div>
+          <h4 class="font-grotesk font-bold mb-3">Sections du rapport</h4>
+          <div class="space-y-2 text-sm font-space text-gray-600">
+            <div>1. Identification courtier + client</div>
+            <div>2. Resume de la situation du client</div>
+            <div>3. Besoins identifies et hierarchises</div>
+            <div>4. Produits recommandes (avec justification)</div>
+            <div>5. Alternatives presentees (obligatoire)</div>
+            <div>6. References reglementaires</div>
+            <div>7. Recommandation formelle du courtier</div>
+            <div>8. Date, signature, mentions legales</div>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-grotesk font-bold mb-3">Formats de sortie</h4>
+          <div class="space-y-3">
+            <div class="p-3 bg-neo-gray neo-border-2">
+              <div class="font-bold text-xs mb-1">&#128196; HTML (in-app preview)</div>
+              <p class="text-[10px] text-gray-500 font-space">Apercu interactif dans le dashboard. Le courtier peut relire, annoter, modifier avant validation.</p>
+            </div>
+            <div class="p-3 bg-neo-gray neo-border-2">
+              <div class="font-bold text-xs mb-1">&#128462; DOCX (telechargement)</div>
+              <p class="text-[10px] text-gray-500 font-space">Fichier Word genere via la librairie docx. Pret a imprimer, signer, archiver. En-tete personnalise avec le logo du courtier.</p>
+            </div>
+          </div>
+          <div class="mt-3 p-3 text-xs font-space" style="background:rgba(243,156,18,.05);border-left:4px solid #F39C12">
+            <strong>Personnalisation :</strong> en-tete, logo courtier, pied de page, couleurs &mdash; configurable dans les parametres du courtier.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- PARTIE 5 — HUMAN-IN-THE-LOOP (13-15) -->
+<!-- ============================================ -->
+
+<section id="human-loop" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto text-white">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 5 / HUMAN-IN-THE-LOOP</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">LA garantie architecturale.</h2>
+      <p class="text-lg font-space" style="color:rgba(255,255,255,.7)">C'est le principe fondateur d'Augmented. <strong class="text-white">L'IA genere, le courtier decide.</strong> Aucune transmission automatique. Jamais. Le courtier est personnellement responsable de son conseil &mdash; c'est la loi.</p>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">13 / LE WORKFLOW DE VALIDATION</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">5 etapes, 0 automatisme.</h2>
+    </div>
+    <div class="anim space-y-3">
+      <div class="neo-card p-5 flex items-start gap-4" style="background:rgba(29,106,69,.03)">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#1D6A45">1</div>
+        <div><h4 class="font-bold text-sm mb-1">L'IA genere le brouillon</h4><p class="text-xs text-gray-500 font-space">Les 3 blocs s'executent. Le rapport est genere en mode <strong>brouillon</strong>. Statut : "draft". Visible uniquement par le courtier.</p></div>
+      </div>
+      <div class="neo-card p-5 flex items-start gap-4" style="background:rgba(29,106,69,.03)">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#1D6A45">2</div>
+        <div><h4 class="font-bold text-sm mb-1">Le courtier relit</h4><p class="text-xs text-gray-500 font-space">Le rapport s'affiche en apercu HTML. Le courtier lit chaque section, verifie les recommandations, s'assure que le diagnostic correspond a sa connaissance du client.</p></div>
+      </div>
+      <div class="neo-card p-5 flex items-start gap-4" style="background:rgba(29,106,69,.03)">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#1D6A45">3</div>
+        <div><h4 class="font-bold text-sm mb-1">Le courtier modifie si necessaire</h4><p class="text-xs text-gray-500 font-space">Chaque section du rapport est editable. Le courtier peut reformuler, ajouter un contexte, modifier une recommandation. L'IA n'est qu'un point de depart.</p></div>
+      </div>
+      <div class="neo-card p-5 flex items-start gap-4" style="border:3px solid #1D6A45;box-shadow:6px 6px 0 #1D6A45">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#0a0a0a">4</div>
+        <div><h4 class="font-bold text-sm mb-1">Le courtier valide explicitement</h4><p class="text-xs text-gray-500 font-space">Checkbox obligatoire : <em>"Je confirme avoir relu et approuve ce rapport de conseil"</em>. Bouton de validation. <strong>Rien ne peut etre transmis au client avant cette etape.</strong></p></div>
+      </div>
+      <div class="neo-card p-5 flex items-start gap-4">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#1E3A5F">5</div>
+        <div><h4 class="font-bold text-sm mb-1">Le rapport est valide</h4><p class="text-xs text-gray-500 font-space">Statut passe a "validated". L'export DOCX devient disponible. La validation est logguee : timestamp, broker_id, IP. Declenchement automatique d'Advice pour la sollicitation satisfaction.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">14 / POURQUOI C'EST NON-NEGOCIABLE</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Exigence reglementaire.</h2>
+    </div>
+    <div class="anim neo-card p-6 sm:p-8">
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div>
+          <h4 class="font-grotesk font-bold mb-3">&#127463;&#127466; Belgique</h4>
+          <div class="text-sm font-space text-gray-600 space-y-2">
+            <div>Art. 284 Loi Assurances : le <strong>courtier est personnellement responsable</strong> du conseil donne.</div>
+            <div>Circulaire FSMA_2022_06 : le conseil doit etre <strong>adapte aux besoins du client</strong> et documente.</div>
+            <div>Code deontologique Feprabel : le courtier ne peut pas deleguer sa responsabilite a un outil.</div>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-grotesk font-bold mb-3">&#127467;&#127479; France</h4>
+          <div class="text-sm font-space text-gray-600 space-y-2">
+            <div>Art. L521-4 Code des assurances : obligation de conseil <strong>personnalise et documente</strong>.</div>
+            <div>Recommandation ACPR 2024-R-03 : le rapport de conseil V2 est <strong>obligatoire</strong>.</div>
+            <div>L'intermediaire est responsable du conseil, pas l'outil.</div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-6 p-4 border-l-4 text-sm font-space" style="border-color:#1D6A45;background:rgba(29,106,69,.05)">
+        <strong>En resume :</strong> L'IA est un assistant. Le courtier est le decideur. Le human-in-the-loop n'est pas un "nice to have" &mdash; c'est une obligation legale. Augmented respecte ca de bout en bout.
+      </div>
+    </div>
+    <div class="anim mt-6 neo-card p-6 sm:p-8">
+      <h4 class="font-grotesk font-bold mb-4">Audit trail complet</h4>
+      <div class="space-y-2 text-sm font-space">
+        <div class="flex items-start gap-2"><span class="check-done">&#9745;</span> Chaque validation logguee avec <strong>timestamp exact</strong></div>
+        <div class="flex items-start gap-2"><span class="check-done">&#9745;</span> <strong>Broker ID</strong> du courtier qui a valide</div>
+        <div class="flex items-start gap-2"><span class="check-done">&#9745;</span> <strong>Hash du rapport</strong> au moment de la validation (integrite)</div>
+        <div class="flex items-start gap-2"><span class="check-done">&#9745;</span> <strong>Modifications trackees</strong> (diff entre draft IA et version validee)</div>
+        <div class="flex items-start gap-2"><span class="check-done">&#9745;</span> Retention <strong>5 ans minimum</strong> (exigence FSMA/ACPR)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- PARTIE 6 — CONFORMITE REGLEMENTAIRE (15-17) -->
+<!-- ============================================ -->
+
+<section class="py-20 px-4" style="background:#1E3A5F;border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto text-white">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 6 / CONFORMITE REGLEMENTAIRE</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">2 pays, 2 cadres, 1 outil.</h2>
+      <p class="text-lg font-space" style="color:rgba(255,255,255,.8)">Augmented est concu pour la Belgique et la France. Chaque pays a son propre cadre reglementaire. Augmented s'adapte automatiquement.</p>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">15 / BELGIQUE &mdash; FSMA / IDD</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">&#127463;&#127466; Cadre belge.</h2>
+    </div>
+    <div class="anim neo-card p-6 sm:p-8" style="border-left:6px solid #1D6A45">
+      <div class="space-y-4">
+        <div class="p-3 bg-neo-gray">
+          <h4 class="font-bold text-sm mb-2">Loi du 4 avril 2014 relative aux assurances</h4>
+          <div class="text-xs text-gray-500 font-space space-y-1">
+            <div><strong>Art. 279</strong> &mdash; Obligation de conseil : analyse des besoins et recommandation personnalisee</div>
+            <div><strong>Art. 284</strong> &mdash; Responsabilite de l'intermediaire : le courtier assume personnellement</div>
+            <div><strong>Art. 296</strong> &mdash; Information precontractuelle : document IPID et fiche produit</div>
+          </div>
+        </div>
+        <div class="p-3 bg-neo-gray">
+          <h4 class="font-bold text-sm mb-2">Circulaires FSMA</h4>
+          <div class="text-xs text-gray-500 font-space space-y-1">
+            <div><strong>FSMA_2022_06</strong> &mdash; Devoir de conseil : exigences de documentation</div>
+            <div><strong>FSMA_2021_04</strong> &mdash; Gouvernance produit : adequation client/produit</div>
+          </div>
+        </div>
+        <div class="p-3 bg-neo-gray">
+          <h4 class="font-bold text-sm mb-2">Autres references</h4>
+          <div class="text-xs text-gray-500 font-space space-y-1">
+            <div><strong>Code deontologique Feprabel</strong> &mdash; Regles professionnelles des courtiers</div>
+            <div><strong>ASSURMIFID</strong> &mdash; Exigences de transparence et adequation</div>
+          </div>
+        </div>
+        <div class="p-3 border-l-4 text-xs font-space" style="border-color:#1D6A45;background:rgba(29,106,69,.05)">
+          <strong>Ce que le rapport FSMA doit inclure :</strong> analyse des besoins du client, recommandation personnalisee avec justification, alternatives considerees, references reglementaires, avertissements de risque.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#2980B9">16 / FRANCE &mdash; ACPR / DDA</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">&#127467;&#127479; Cadre francais.</h2>
+    </div>
+    <div class="anim neo-card p-6 sm:p-8" style="border-left:6px solid #2980B9">
+      <div class="space-y-4">
+        <div class="p-3 bg-white">
+          <h4 class="font-bold text-sm mb-2">Recommandation ACPR 2024-R-03</h4>
+          <div class="text-xs text-gray-500 font-space space-y-1">
+            <div>Devoir de conseil renforce : rapport de conseil <strong>V2 obligatoire</strong></div>
+            <div>Sections imposees : situation client, analyse besoins, produit(s) recommande(s), alternatives, base reglementaire</div>
+            <div>Document remis au client <strong>avant la souscription</strong></div>
+          </div>
+        </div>
+        <div class="p-3 bg-white">
+          <h4 class="font-bold text-sm mb-2">Code des assurances</h4>
+          <div class="text-xs text-gray-500 font-space space-y-1">
+            <div><strong>Art. L521-4</strong> &mdash; Obligation de conseil personnalise</div>
+            <div><strong>Art. R521-2 a R521-5</strong> &mdash; Contenu du rapport de conseil</div>
+          </div>
+        </div>
+        <div class="p-3 bg-white">
+          <h4 class="font-bold text-sm mb-2">Lois specifiques integrees</h4>
+          <div class="text-xs text-gray-500 font-space space-y-1">
+            <div><strong>Loi Industrie Verte</strong> &mdash; Preferences ESG/durabilite dans le conseil (PER, assurance vie)</div>
+            <div><strong>Loi Cazenave (VAD)</strong> &mdash; Module Vente a Distance integre pour les conseils donnes par telephone/visio</div>
+            <div><strong>ANACOFI Livret Adherent</strong> &mdash; Regles specifiques pour les CIF/COA</div>
+          </div>
+        </div>
+        <div class="p-3 border-l-4 text-xs font-space" style="border-color:#2980B9;background:rgba(41,128,185,.05)">
+          <strong>Module VAD (Loi Cazenave) :</strong> Quand le conseil est donne a distance (telephone, visio), le rapport inclut automatiquement les mentions specifiques obligatoires : droit de renonciation 30 jours, enregistrement de l'appel, confirmation ecrite.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- PARTIE 7 — CONNEXIONS INTER-AGENTS (17-19) -->
+<!-- ============================================ -->
+
+<section id="connexions" class="py-20 px-4" style="background:#1D6A45;border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto text-white">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 7 / CONNEXIONS INTER-AGENTS</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Augmented dans la boucle.</h2>
+      <p class="text-lg font-space" style="color:rgba(255,255,255,.8)">Augmented recoit des dossiers de Sentinel et Checkup, et declenche Advice quand un dossier est valide. C'est le coeur de la boucle vertueuse BrokerONE.</p>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">17 / QUI ALIMENTE QUI</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">3 connexions actives.</h2>
+    </div>
+    <div class="anim space-y-4">
+      <div class="neo-card p-5 flex items-center gap-4" style="border-left:5px solid #2980B9;background:rgba(41,128,185,.04)">
+        <div class="neo-card-sm px-3 py-1 text-xs font-bold text-white flex-shrink-0" style="background:#2980B9;border-color:#2980B9">Sentinel</div>
+        <div class="text-2xl">&rarr;</div>
+        <div class="neo-card-sm px-3 py-1 text-xs font-bold text-white flex-shrink-0" style="background:#1D6A45;border-color:#1D6A45">Augmented</div>
+        <div class="flex-1 text-xs text-gray-500 font-space">Quand Sentinel classifie un email <strong>BESOIN_ASSURANCE</strong>, il cree automatiquement un dossier Augmented avec les 6 couches de conseil_routing (operation, branche, evenement, profil_client, alertes, doublons).</div>
+      </div>
+      <div class="neo-card p-5 flex items-center gap-4" style="border-left:5px solid #8E44AD;background:rgba(142,68,173,.04)">
+        <div class="neo-card-sm px-3 py-1 text-xs font-bold text-white flex-shrink-0" style="background:#8E44AD;border-color:#8E44AD">Checkup</div>
+        <div class="text-2xl">&rarr;</div>
+        <div class="neo-card-sm px-3 py-1 text-xs font-bold text-white flex-shrink-0" style="background:#1D6A45;border-color:#1D6A45">Augmented</div>
+        <div class="flex-1 text-xs text-gray-500 font-space">Quand Checkup detecte une <strong>lacune critique</strong> dans la couverture d'un client (ex: pas de RC familiale avec enfants), il cree automatiquement un dossier Augmented pour cette branche specifique.</div>
+      </div>
+      <div class="neo-card p-5 flex items-center gap-4" style="border-left:5px solid #1D6A45;background:rgba(29,106,69,.04)">
+        <div class="neo-card-sm px-3 py-1 text-xs font-bold text-white flex-shrink-0" style="background:#1D6A45;border-color:#1D6A45">Augmented</div>
+        <div class="text-2xl">&rarr;</div>
+        <div class="neo-card-sm px-3 py-1 text-xs font-bold text-white flex-shrink-0" style="background:#C0392B;border-color:#C0392B">Advice</div>
+        <div class="flex-1 text-xs text-gray-500 font-space">Quand le courtier <strong>valide un dossier</strong>, Advice declenche automatiquement une sollicitation de satisfaction client. Timing optimal : le client vient de recevoir un conseil structure &rarr; satisfaction a son pic.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">18 / LA BOUCLE VERTUEUSE</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le schema complet.</h2>
+    </div>
+    <div class="anim">
+      <div class="neo-card p-6 sm:p-8">
+        <div class="flex flex-col items-center gap-3">
+          <div class="flex items-center gap-4 flex-wrap justify-center">
+            <div class="neo-card-sm px-4 py-2 text-sm font-bold text-white" style="background:#2980B9;border-color:#2980B9">&#128233; Sentinel</div>
+            <div class="font-bold text-lg" style="color:#1D6A45">&rarr;</div>
+            <div class="neo-card-sm px-4 py-2 text-sm font-bold text-white" style="background:#1D6A45;border-color:#1D6A45">&#129302; Augmented</div>
+            <div class="font-bold text-lg" style="color:#C0392B">&rarr;</div>
+            <div class="neo-card-sm px-4 py-2 text-sm font-bold text-white" style="background:#C0392B;border-color:#C0392B">&#11088; Advice</div>
+          </div>
+          <div class="text-xs text-gray-400 font-space mt-2">Email &rarr; Besoin detecte &rarr; Conseil formalise &rarr; Client satisfait &rarr; Avis Google</div>
+          <div class="w-full border-t-2 border-dashed border-gray-200 my-4"></div>
+          <div class="flex items-center gap-4 flex-wrap justify-center">
+            <div class="neo-card-sm px-4 py-2 text-sm font-bold text-white" style="background:#8E44AD;border-color:#8E44AD">&#128269; Checkup</div>
+            <div class="font-bold text-lg" style="color:#1D6A45">&rarr;</div>
+            <div class="neo-card-sm px-4 py-2 text-sm font-bold text-white" style="background:#1D6A45;border-color:#1D6A45">&#129302; Augmented</div>
+            <div class="font-bold text-lg" style="color:#C0392B">&rarr;</div>
+            <div class="neo-card-sm px-4 py-2 text-sm font-bold text-white" style="background:#C0392B;border-color:#C0392B">&#11088; Advice</div>
+          </div>
+          <div class="text-xs text-gray-400 font-space mt-2">Lacune detectee &rarr; Conseil formalise &rarr; Client satisfait &rarr; Avis Google</div>
+        </div>
+        <div class="mt-6 p-4 border-l-4 text-sm font-space" style="border-color:#1D6A45;background:rgba(29,106,69,.05)">
+          <strong>Augmented est le coeur.</strong> Sans Augmented, il n'y a pas de conseil formalise. Sans conseil formalise, pas de satisfaction mesurable. Sans satisfaction, pas d'avis Google. La boucle ne tourne que si Augmented fonctionne.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- PARTIE 8 — ARCHITECTURE TECHNIQUE (19-21) -->
+<!-- ============================================ -->
+
+<section id="technique" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto text-white">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 8 / ARCHITECTURE TECHNIQUE</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Sous le capot.</h2>
+      <p class="text-lg font-space" style="color:rgba(255,255,255,.7)">Claude Sonnet pour les 3 blocs IA. Prompts structures par branche avec contexte reglementaire. Integration CRM en temps reel. Generation DOCX cote serveur.</p>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">19 / BASE DE DONNEES</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">3 tables principales.</h2>
+    </div>
+    <div class="anim grid sm:grid-cols-3 gap-4">
+      <div class="neo-card p-5" style="border-top:4px solid #1D6A45">
+        <h4 class="font-bold text-sm mb-2 font-grotesk">augmented_dossiers</h4>
+        <p class="text-xs text-gray-500 font-space">Table maitre. Chaque dossier : client_id, branche, pays, source (sentinel/checkup/manual), statut (draft/in_progress/validated/archived), created_at, updated_at.</p>
+      </div>
+      <div class="neo-card p-5" style="border-top:4px solid #2980B9">
+        <h4 class="font-bold text-sm mb-2 font-grotesk">augmented_reports</h4>
+        <p class="text-xs text-gray-500 font-space">Rapports generes. Dossier_id, version, content_html, content_json (structure), diagnostic_json, references_json, format (fsma/acpr_v2), langue.</p>
+      </div>
+      <div class="neo-card p-5" style="border-top:4px solid #F39C12">
+        <h4 class="font-bold text-sm mb-2 font-grotesk">augmented_validations</h4>
+        <p class="text-xs text-gray-500 font-space">Audit trail. Dossier_id, broker_id, validated_at, report_hash, modifications_diff, ip_address, user_agent.</p>
+      </div>
+    </div>
+    <div class="anim mt-4 space-y-2">
+      <div class="p-3 text-xs font-space bg-neo-gray"><strong>RLS actif sur les 3 tables.</strong> Chaque courtier ne voit que ses propres dossiers. Fonction <code class="bg-white px-1">get_my_courtier_id()</code> pour lier auth.uid() &rarr; courtiers.id.</div>
+      <div class="p-3 text-xs font-space bg-neo-gray"><strong>Indexes :</strong> client_id, branche, statut, created_at, broker_id. Recherche rapide meme avec 100k+ dossiers.</div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">20 / API &amp; INTEGRATION</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Endpoints et integrations.</h2>
+    </div>
+    <div class="anim neo-card p-6 sm:p-8">
+      <h4 class="font-grotesk font-bold mb-4">API REST Augmented</h4>
+      <div class="p-4 bg-neo-gray text-xs font-mono" style="line-height:2">
+        POST /api/augmented/dossier &mdash; Creer un dossier (manual ou auto)<br>
+        GET &nbsp;/api/augmented/dossier/{id} &mdash; Detail d'un dossier<br>
+        GET &nbsp;/api/augmented/dossiers &mdash; Liste des dossiers (filtrable)<br>
+        POST /api/augmented/dossier/{id}/analyze &mdash; Lancer les 3 blocs IA<br>
+        GET &nbsp;/api/augmented/dossier/{id}/report &mdash; Rapport genere (HTML)<br>
+        PUT &nbsp;/api/augmented/dossier/{id}/report &mdash; Modifier le rapport<br>
+        POST /api/augmented/dossier/{id}/validate &mdash; Valider le rapport<br>
+        GET &nbsp;/api/augmented/dossier/{id}/export &mdash; Export DOCX<br>
+        GET &nbsp;/api/augmented/branches &mdash; Liste des branches par pays
+      </div>
+      <div class="mt-6 grid sm:grid-cols-2 gap-4">
+        <div class="p-4 neo-border-2">
+          <h4 class="font-bold text-xs mb-2">Integration CRM Brio</h4>
+          <div class="text-xs text-gray-500 font-space space-y-1">
+            <div>API SOAP/REST (selon version)</div>
+            <div>Extraction : client, polices, sinistres</div>
+            <div>Auth : token courtier + credentials Brio</div>
+          </div>
+        </div>
+        <div class="p-4 neo-border-2">
+          <h4 class="font-bold text-xs mb-2">Integration CRM BrokerCloud</h4>
+          <div class="text-xs text-gray-500 font-space space-y-1">
+            <div>API REST moderne (JSON)</div>
+            <div>Extraction : client, portefeuille, contrats</div>
+            <div>Auth : API key + OAuth2</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- PARTIE 9 — UI WIREFRAMES (21-23) -->
+<!-- ============================================ -->
+
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#1D6A45">PART 9 / INTERFACE &mdash; LISTE DES DOSSIERS</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Ce que le courtier voit.</h2>
+    </div>
+    <div class="anim">
+      <!-- Wireframe: Dossier list -->
+      <div style="border:3px solid #0a0a0a;box-shadow:6px 6px 0 #0a0a0a;background:#fff;overflow:hidden">
+        <div class="wf-header"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="text-xs text-white/60 font-mono ml-2">Augmented &mdash; Mes dossiers</span></div>
+        <div class="flex">
+          <div class="wf-sidebar p-2 space-y-3">
+            <div class="w-8 h-8 rounded bg-white/10 mx-auto"></div>
+            <div class="w-6 h-1 bg-white/20 mx-auto"></div>
+            <div class="w-6 h-1 bg-white/30 mx-auto" style="background:#1D6A45"></div>
+            <div class="w-6 h-1 bg-white/10 mx-auto"></div>
+            <div class="w-6 h-1 bg-white/10 mx-auto"></div>
+          </div>
+          <div class="flex-1 p-4 space-y-3">
+            <div class="flex gap-3">
+              <div class="wf-card p-3 flex-1 text-center"><div class="text-lg font-bold" style="color:#1D6A45">34</div><div class="text-[9px] text-gray-400">Total dossiers</div></div>
+              <div class="wf-card p-3 flex-1 text-center"><div class="text-lg font-bold" style="color:#F39C12">8</div><div class="text-[9px] text-gray-400">En cours</div></div>
+              <div class="wf-card p-3 flex-1 text-center"><div class="text-lg font-bold" style="color:#1D6A45">22</div><div class="text-[9px] text-gray-400">Valides</div></div>
+              <div class="wf-card p-3 flex-1 text-center"><div class="text-lg font-bold" style="color:#C0392B">4</div><div class="text-[9px] text-gray-400">Brouillons</div></div>
+            </div>
+            <div class="flex gap-2 text-[10px] font-mono">
+              <div class="px-2 py-1" style="background:#1D6A45;color:#fff">Tous (34)</div>
+              <div class="px-2 py-1 bg-gray-100">Auto (6)</div>
+              <div class="px-2 py-1 bg-gray-100">Habitation (5)</div>
+              <div class="px-2 py-1 bg-gray-100">Sante (4)</div>
+              <div class="px-2 py-1 bg-gray-100">RC Pro (3)</div>
+              <div class="px-2 py-1 bg-gray-100">+17</div>
+            </div>
+            <div class="space-y-2">
+              <div class="wf-card p-3 flex items-center gap-3" style="border-left:4px solid #1D6A45"><div class="flex-1"><div class="text-[10px] font-bold">Martin Dupont &mdash; Auto BE</div><div class="wf-bar h-1.5 w-2/3 mt-1"></div></div><div class="text-[9px] font-mono px-2 py-0.5 text-white" style="background:#1D6A45">VALIDE</div><div class="text-[9px] text-gray-400">il y a 2h</div></div>
+              <div class="wf-card p-3 flex items-center gap-3" style="border-left:4px solid #F39C12"><div class="flex-1"><div class="text-[10px] font-bold">Sophie Laurent &mdash; MRH FR</div><div class="wf-bar h-1.5 w-1/2 mt-1"></div></div><div class="text-[9px] font-mono px-2 py-0.5 text-white" style="background:#F39C12">EN COURS</div><div class="text-[9px] text-gray-400">il y a 1j</div></div>
+              <div class="wf-card p-3 flex items-center gap-3" style="border-left:4px solid #999"><div class="flex-1"><div class="text-[10px] font-bold">Pierre Janssen &mdash; RC Familiale BE</div><div class="wf-bar h-1.5 w-3/4 mt-1"></div></div><div class="text-[9px] font-mono px-2 py-0.5 bg-gray-300">BROUILLON</div><div class="text-[9px] text-gray-400">il y a 3j</div></div>
+              <div class="wf-card p-3 flex items-center gap-3" style="border-left:4px solid #2980B9"><div class="flex-1"><div class="text-[10px] font-bold">Isabelle Moreau &mdash; PER FR</div><div class="wf-bar h-1.5 w-1/3 mt-1"></div></div><div class="text-[9px] font-mono px-2 py-0.5 text-white" style="background:#2980B9">SENTINEL</div><div class="text-[9px] text-gray-400">il y a 5h</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-3 text-xs font-mono text-gray-400 text-center">Wireframe &mdash; Liste des dossiers Augmented (filtrable par branche, statut, date)</div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#1D6A45">21 / INTERFACE &mdash; DETAIL DOSSIER</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le dossier en detail.</h2>
+    </div>
+    <div class="anim">
+      <!-- Wireframe: Dossier detail -->
+      <div style="border:3px solid #0a0a0a;box-shadow:6px 6px 0 #0a0a0a;background:#fff;overflow:hidden">
+        <div class="wf-header"><div class="wf-dot"></div><div class="wf-dot"></div><div class="wf-dot"></div><span class="text-xs text-white/60 font-mono ml-2">Augmented &mdash; Sophie Laurent &mdash; MRH FR</span></div>
+        <div class="flex">
+          <div class="wf-sidebar p-2 space-y-3">
+            <div class="w-8 h-8 rounded bg-white/10 mx-auto"></div>
+            <div class="w-6 h-1 bg-white/20 mx-auto"></div>
+            <div class="w-6 h-1 bg-white/30 mx-auto" style="background:#1D6A45"></div>
+            <div class="w-6 h-1 bg-white/10 mx-auto"></div>
+          </div>
+          <div class="flex-1 p-4">
+            <div class="grid grid-cols-2 gap-3">
+              <div class="space-y-3">
+                <div class="text-[10px] font-mono font-bold" style="color:#1D6A45">PROFIL CLIENT</div>
+                <div class="wf-card p-3 space-y-2">
+                  <div class="text-[10px] font-bold">Sophie Laurent, 38 ans</div>
+                  <div class="wf-bar h-1.5 w-4/5"></div>
+                  <div class="wf-bar h-1.5 w-3/5"></div>
+                  <div class="text-[9px] text-gray-400">Mariee, 2 enfants, proprietaire</div>
+                  <div class="wf-bar h-1.5 w-2/3"></div>
+                </div>
+                <div class="wf-card p-3 space-y-2">
+                  <div class="text-[10px] font-bold">Contrats existants</div>
+                  <div class="flex gap-1"><div class="px-1 py-0.5 text-[8px] bg-gray-100">Auto &#10003;</div><div class="px-1 py-0.5 text-[8px] bg-gray-100">Sante &#10003;</div><div class="px-1 py-0.5 text-[8px]" style="background:rgba(192,57,43,.1);color:#C0392B">MRH &#10007;</div></div>
+                </div>
+              </div>
+              <div class="space-y-3">
+                <div class="text-[10px] font-mono font-bold" style="color:#1D6A45">DIAGNOSTIC IA</div>
+                <div class="wf-card p-3 space-y-2" style="border-left:3px solid #C0392B">
+                  <div class="text-[9px] font-bold" style="color:#C0392B">Lacune critique</div>
+                  <div class="text-[9px] text-gray-500">Proprietaire sans MRH</div>
+                  <div class="wf-bar h-1.5 w-full" style="background:#C0392B;opacity:.3"></div>
+                </div>
+                <div class="wf-card p-3 space-y-2" style="border-left:3px solid #1D6A45">
+                  <div class="text-[9px] font-bold" style="color:#1D6A45">Recommandation</div>
+                  <div class="wf-bar h-1.5 w-4/5"></div>
+                  <div class="wf-bar h-1.5 w-3/5"></div>
+                </div>
+                <div class="wf-card p-3 space-y-1">
+                  <div class="text-[9px] font-bold">References</div>
+                  <div class="text-[8px] text-gray-400">Art. L521-4 Code des assurances</div>
+                  <div class="text-[8px] text-gray-400">ACPR 2024-R-03</div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-3 wf-card p-3">
+              <div class="flex items-center justify-between mb-2">
+                <div class="text-[10px] font-mono font-bold" style="color:#1D6A45">RAPPORT DE CONSEIL (APERCU)</div>
+                <div class="flex gap-1">
+                  <div class="px-2 py-0.5 text-[8px] font-mono" style="background:#1D6A45;color:#fff">HTML</div>
+                  <div class="px-2 py-0.5 text-[8px] font-mono bg-gray-200">DOCX</div>
+                </div>
+              </div>
+              <div class="space-y-1">
+                <div class="wf-bar h-2 w-1/3"></div>
+                <div class="wf-bar h-1.5 w-full"></div>
+                <div class="wf-bar h-1.5 w-4/5"></div>
+                <div class="wf-bar h-1.5 w-full"></div>
+                <div class="wf-bar h-1.5 w-2/3"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-3 text-xs font-mono text-gray-400 text-center">Wireframe &mdash; Detail dossier (profil gauche, diagnostic droite, rapport dessous)</div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#1D6A45">22 / INTERFACE &mdash; VALIDATION</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">La modale de validation.</h2>
+    </div>
+    <div class="anim">
+      <!-- Wireframe: Validation modal -->
+      <div class="max-w-md mx-auto" style="border:3px solid #0a0a0a;box-shadow:6px 6px 0 #0a0a0a;background:#fff;overflow:hidden">
+        <div class="p-6 space-y-4">
+          <div class="text-center">
+            <div class="text-2xl mb-2">&#9989;</div>
+            <div class="font-grotesk font-bold text-lg">Valider ce rapport</div>
+            <div class="text-xs text-gray-400 font-space mt-1">Sophie Laurent &mdash; MRH FR</div>
+          </div>
+          <div class="p-3 border-l-4 text-xs font-space" style="border-color:#F39C12;background:rgba(243,156,18,.05)">
+            En validant ce rapport, vous confirmez avoir relu l'integralite du contenu et que les recommandations correspondent a votre analyse professionnelle.
+          </div>
+          <div class="space-y-2">
+            <label class="flex items-start gap-2 text-xs font-space cursor-pointer">
+              <input type="checkbox" class="mt-0.5">
+              <span>J'ai relu l'integralite du rapport de conseil</span>
+            </label>
+            <label class="flex items-start gap-2 text-xs font-space cursor-pointer">
+              <input type="checkbox" class="mt-0.5">
+              <span>Les recommandations correspondent a mon analyse professionnelle</span>
+            </label>
+            <label class="flex items-start gap-2 text-xs font-space cursor-pointer">
+              <input type="checkbox" class="mt-0.5">
+              <span>J'assume la responsabilite de ce conseil</span>
+            </label>
+          </div>
+          <div class="flex gap-2">
+            <div class="flex-1 py-2 text-center text-xs font-bold bg-gray-100 cursor-pointer">Annuler</div>
+            <div class="flex-1 py-2 text-center text-xs font-bold text-white cursor-pointer" style="background:#1D6A45">Valider le rapport</div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-3 text-xs font-mono text-gray-400 text-center">Wireframe &mdash; Modale de validation (checkbox obligatoires + confirmation)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- PARTIE 10 — MVP CHECKLIST (23-25) -->
+<!-- ============================================ -->
+
+<section id="scope" class="py-20 px-4" style="background:#1E3A5F;border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto text-white">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 10 / SCOPE MVP</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Ce qui sera livre.</h2>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">23 / CHECKLIST MVP <span class="tag-mvp ml-2">MVP</span></div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">25 livrables concrets.</h2>
+    </div>
+    <div class="anim neo-card p-6 sm:p-8">
+      <div class="space-y-3 text-sm font-space">
+        <div class="text-xs font-mono font-bold mb-2" style="color:#1D6A45">BRANCHES &amp; PROMPTS</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> 15 branches Belgique avec prompts dedies</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> 13 branches France avec prompts dedies</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> Contexte reglementaire par branche (articles, circulaires)</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> Structure de rapport specifique par branche</div>
+        <div class="border-t border-gray-100 mt-3 pt-3"></div>
+        <div class="text-xs font-mono font-bold mb-2" style="color:#2980B9">3 BLOCS IA</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> Bloc 1 &mdash; Collecte &amp; Profil (extraction CRM)</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> Bloc 2 &mdash; Analyse &amp; Diagnostic (croisement 3D + scoring)</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> Bloc 3 &mdash; Generation &amp; Rapport (FSMA + ACPR V2)</div>
+        <div class="border-t border-gray-100 mt-3 pt-3"></div>
+        <div class="text-xs font-mono font-bold mb-2" style="color:#F39C12">INTEGRATION CRM</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> Connecteur Brio API (extraction client + polices)</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> Connecteur BrokerCloud API (extraction client + portefeuille)</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> Fallback saisie manuelle (CRM indisponible)</div>
+        <div class="border-t border-gray-100 mt-3 pt-3"></div>
+        <div class="text-xs font-mono font-bold mb-2">RAPPORTS &amp; EXPORTS</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> Format rapport FSMA (Belgique)</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> Format rapport ACPR V2 (France)</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> Export HTML (apercu in-app)</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> Export DOCX (telechargement, impression, signature)</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> Module VAD Loi Cazenave (France, vente a distance)</div>
+        <div class="border-t border-gray-100 mt-3 pt-3"></div>
+        <div class="text-xs font-mono font-bold mb-2" style="color:#0a0a0a">HUMAN-IN-THE-LOOP &amp; AUDIT</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> Workflow de validation (5 etapes)</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> Edition inline du rapport (sections editables)</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> Audit trail (validations logguees avec hash)</div>
+        <div class="border-t border-gray-100 mt-3 pt-3"></div>
+        <div class="text-xs font-mono font-bold mb-2" style="color:#8E44AD">CONNEXIONS</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> Sentinel &rarr; Augmented (auto-creation dossier)</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> Checkup &rarr; Augmented (lacune critique)</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> Augmented &rarr; Advice (sollicitation post-validation)</div>
+        <div class="border-t border-gray-100 mt-3 pt-3"></div>
+        <div class="text-xs font-mono font-bold mb-2" style="color:#1D6A45">INTERFACE</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> Page liste dossiers (filtrable branche/statut/date)</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> Page detail dossier (profil + diagnostic + rapport)</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> Page apercu rapport + telechargement DOCX</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> Modale de validation (checkbox + signature)</div>
+        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> Multi-langue FR/NL (Belgique)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">24 / BUDGET MVP <span class="tag-mvp ml-2">MVP</span></div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Ventilation du budget.</h2>
+    </div>
+    <div class="anim">
+      <div class="neo-card p-6 sm:p-8">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between p-3 bg-neo-gray neo-border-2">
+            <span class="text-sm font-space">Database + Integration CRM</span>
+            <span class="font-mono font-bold" style="color:#1D6A45">2 500&euro;</span>
+          </div>
+          <div class="flex items-center justify-between p-3 bg-neo-gray neo-border-2">
+            <span class="text-sm font-space">3 Blocs IA + 22 prompts branches</span>
+            <span class="font-mono font-bold" style="color:#1D6A45">4 000&euro;</span>
+          </div>
+          <div class="flex items-center justify-between p-3 bg-neo-gray neo-border-2">
+            <span class="text-sm font-space">Rapports FSMA + ACPR V2 + HTML/DOCX</span>
+            <span class="font-mono font-bold" style="color:#1D6A45">3 000&euro;</span>
+          </div>
+          <div class="flex items-center justify-between p-3 bg-neo-gray neo-border-2">
+            <span class="text-sm font-space">Dashboard UI + human-in-the-loop + connexions</span>
+            <span class="font-mono font-bold" style="color:#1D6A45">2 500&euro;</span>
+          </div>
+          <div class="flex items-center justify-between p-3 bg-neo-gray neo-border-2">
+            <span class="text-sm font-space">Tests + VAD Cazenave + multi-langue</span>
+            <span class="font-mono font-bold" style="color:#1D6A45">1 000&euro;</span>
+          </div>
+        </div>
+        <div class="mt-4 p-4 text-center" style="border:3px solid #1D6A45;background:rgba(29,106,69,.05)">
+          <div class="font-grotesk text-3xl font-bold" style="color:#1D6A45">13 000&euro; HT</div>
+          <div class="text-sm text-gray-500 font-space">~30 jours de developpement &bull; 4 sprints</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#C0392B">25 / HORS SCOPE MVP</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Ce qui n'est pas inclus.</h2>
+    </div>
+    <div class="anim neo-card p-6 sm:p-8">
+      <div class="space-y-3 text-sm font-space text-gray-500">
+        <div class="flex items-start gap-2"><span style="color:#C0392B">&#10007;</span> <strong>Communication automatique au client</strong> &mdash; le courtier decide toujours quand et comment transmettre le rapport</div>
+        <div class="flex items-start gap-2"><span style="color:#C0392B">&#10007;</span> <strong>Integration catalogue produits compagnies</strong> &mdash; pas de connexion aux tarificateurs des compagnies d'assurance (phase 2)</div>
+        <div class="flex items-start gap-2"><span style="color:#C0392B">&#10007;</span> <strong>Signature electronique</strong> &mdash; pas d'integration DocuSign/Yousign dans le MVP (le courtier imprime et fait signer)</div>
+        <div class="flex items-start gap-2"><span style="color:#C0392B">&#10007;</span> <strong>IA apprenant des corrections</strong> &mdash; l'IA ne s'ameliore pas automatiquement a partir des modifications du courtier (phase ulterieure)</div>
+        <div class="flex items-start gap-2"><span style="color:#C0392B">&#10007;</span> <strong>Comparaison de prix</strong> &mdash; Augmented formalise le conseil, il ne compare pas les tarifs entre compagnies</div>
+        <div class="flex items-start gap-2"><span style="color:#C0392B">&#10007;</span> <strong>Branches exotiques</strong> &mdash; branches tres specifiques (maritime, aviation, agriculture) seront ajoutees en phase 2 si demandees</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- TRANSITION — MVP FAIT. PLACE A LA PRODUCTION. -->
+<!-- ============================================ -->
+
+<section id="transition" class="py-24 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
+  <div class="max-w-3xl mx-auto text-center text-white">
+    <div class="anim">
+      <div class="flex items-center justify-center gap-3 mb-8">
+        <span class="tag-mvp" style="font-size:14px;padding:6px 16px">MVP 13 000&euro; &#10003;</span>
+        <span class="font-grotesk text-3xl font-bold">&rarr;</span>
+        <span class="tag-prod" style="font-size:14px;padding:6px 16px">PRODUCTION 7 000&euro;</span>
+      </div>
+      <h2 class="font-grotesk text-4xl sm:text-6xl font-bold mb-6">MVP fait.<br>Place a la production.</h2>
+      <p class="text-lg font-space leading-relaxed" style="color:rgba(255,255,255,.7)">Le MVP prouve que l'IA genere des rapports de conseil corrects. La production fait en sorte que chaque rapport soit <strong class="text-white">irreprochable, pour chaque branche, pour chaque courtier</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- PARTIE 11 — PRODUCTION: REBRAND + TEMPLATES (26-27) -->
+<!-- ============================================ -->
+
+<section class="py-20 px-4" style="background:#1E3A5F;border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto text-white">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 11 / REBRAND + TEMPLATES <span class="tag-prod ml-2">PROD</span></div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Nouvelle identite, rapports pros.</h2>
+      <p class="text-lg font-space" style="color:rgba(255,255,255,.7)">Tous les rapports, templates et l'interface passent aux couleurs et a l'identite BrokerONE. Un rapport de devoir de conseil est un document reglementaire &mdash; il doit etre irreprochable a l'impression comme a l'ecran.</p>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">26 / REBRAND COMPLET</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Ce qui change.</h2>
+    </div>
+    <div class="anim space-y-3">
+      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-prod">PROD</span><div><h4 class="font-bold text-sm mb-1">Palette de couleurs</h4><p class="text-xs text-gray-500 font-space">Ancien HiBroker &rarr; Nouveau BrokerONE (#1E3A5F bleu nuit, #C0392B corail, #F1F3F6 gris perle). Interface complete + templates de rapports.</p></div></div>
+      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-prod">PROD</span><div><h4 class="font-bold text-sm mb-1">Logo & noms dans les rapports</h4><p class="text-xs text-gray-500 font-space">"HiBroker Augmented" &rarr; "BrokerONE Augmented" partout. En-tetes de rapports FSMA/ACPR, pied de page, favicon, OG images.</p></div></div>
+      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-prod">PROD</span><div><h4 class="font-bold text-sm mb-1">Terminologie reglementaire</h4><p class="text-xs text-gray-500 font-space">Verification de toute la terminologie dans les rapports generes : termes FSMA pour BE, termes ACPR/Loi Cazenave pour FR.</p></div></div>
+      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-prod">PROD</span><div><h4 class="font-bold text-sm mb-1">Templates DOCX</h4><p class="text-xs text-gray-500 font-space">Tous les templates DOCX exportes rebrandes avec les couleurs BrokerONE + logo du courtier personnalisable.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">27 / POLISH RAPPORTS</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Formatage pro.</h2>
+    </div>
+    <div class="anim grid sm:grid-cols-2 gap-4">
+      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Headers / Footers</h4></div><p class="text-xs text-gray-500 font-space">En-tetes avec logo courtier + numero de registre. Pieds de page avec date, n&deg; de page, mention legale FSMA/ACPR.</p></div>
+      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Logo courtier</h4></div><p class="text-xs text-gray-500 font-space">Chaque courtier upload son logo. Il apparait automatiquement dans tous ses rapports generes (HTML + DOCX).</p></div>
+      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Numerotation des pages</h4></div><p class="text-xs text-gray-500 font-space">Numerotation automatique dans le DOCX. "Page X sur Y" en pied de page. Compatible impression recto-verso.</p></div>
+      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Table des matieres</h4></div><p class="text-xs text-gray-500 font-space">Generation automatique pour les rapports complexes (multi-branche). Liens cliquables dans le DOCX.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- PARTIE 12 — PRODUCTION: PROMPT TUNING (28-29) -->
+<!-- ============================================ -->
+
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#1D6A45">PART 12 / PROMPT TUNING <span class="tag-prod ml-2">PROD</span></div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Affiner l'IA par branche.</h2>
+      <p class="text-lg text-gray-500 font-space leading-relaxed mb-8">Le MVP utilise des prompts generiques. La production affine Claude pour chacune des 22 branches avec des dossiers de test reels.</p>
+    </div>
+    <div class="anim space-y-3">
+      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Fine-tuning 22 branches</h4></div><p class="text-xs text-gray-500 font-space">Chaque branche a ses specificites : une RC Pro n'a rien a voir avec une hospitalisation. Les prompts Claude sont calibres branche par branche avec des dossiers reels.</p></div>
+      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">References reglementaires verifiees</h4></div><p class="text-xs text-gray-500 font-space">Articles de loi, directives FSMA/ACPR citees dans chaque rapport verifies par branche et par pays. Pas d'hallucination reglementaire.</p></div>
+      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Tests sur dossiers reels</h4></div><p class="text-xs text-gray-500 font-space">Au moins 3 dossiers de test par branche. On compare le rapport genere avec ce qu'un courtier experimente ecrirait. On itere jusqu'a satisfaction.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">28 / COLLECT &rarr; DIAGNOSE &rarr; GENERATE</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Les 3 blocs IA affines.</h2>
+    </div>
+    <div class="anim grid sm:grid-cols-3 gap-5">
+      <div class="neo-card p-5"><div class="text-2xl mb-2" style="color:#1D6A45">1</div><h4 class="font-bold text-sm mb-2">Collect</h4><p class="text-xs text-gray-500 font-space">Recuperation des donnees client via CRM (Brio/BrokerCloud) ou saisie manuelle. Questions adaptees par branche.</p></div>
+      <div class="neo-card p-5"><div class="text-2xl mb-2" style="color:#1D6A45">2</div><h4 class="font-bold text-sm mb-2">Diagnose</h4><p class="text-xs text-gray-500 font-space">Claude analyse les besoins, identifie les risques, compare avec les contrats existants. Diagnostic structure.</p></div>
+      <div class="neo-card p-5"><div class="text-2xl mb-2" style="color:#1D6A45">3</div><h4 class="font-bold text-sm mb-2">Generate</h4><p class="text-xs text-gray-500 font-space">Generation du rapport FSMA/ACPR complet. References legales, recommandations, justifications. Export HTML + DOCX.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- PARTIE 13 — PRODUCTION: UI POLISH (29-30) -->
+<!-- ============================================ -->
+
+<section class="py-20 px-4" style="background:#1D6A45;border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto text-white">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 13 / UI POLISH <span class="tag-prod ml-2">PROD</span></div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">L'interface au niveau pro.</h2>
+      <p class="text-lg font-space" style="color:rgba(255,255,255,.8)">Le workflow dossier doit etre fluide : du nouveau client au rapport valide et transmis, chaque etape est visible et intuitive.</p>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">29 / WORKFLOW DOSSIER</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Pipeline de statut.</h2>
+    </div>
+    <div class="anim neo-card p-6 sm:p-8">
+      <p class="text-gray-600 font-space mb-6">Chaque dossier suit un pipeline visuel clair :</p>
+      <div class="flex flex-wrap items-center gap-2 mb-6">
+        <span class="neo-card-sm px-4 py-2 font-mono text-xs font-bold" style="background:#f5f5f5">NOUVEAU</span>
+        <span class="font-mono text-gray-300">&rarr;</span>
+        <span class="neo-card-sm px-4 py-2 font-mono text-xs font-bold" style="background:#E8F4FD;color:#1E3A5F">DIAGNOSTIC</span>
+        <span class="font-mono text-gray-300">&rarr;</span>
+        <span class="neo-card-sm px-4 py-2 font-mono text-xs font-bold" style="background:#FFF3E8;color:#D4790E">RAPPORT</span>
+        <span class="font-mono text-gray-300">&rarr;</span>
+        <span class="neo-card-sm px-4 py-2 font-mono text-xs font-bold" style="background:#E8F5E9;color:#1D6A45">VALIDE</span>
+        <span class="font-mono text-gray-300">&rarr;</span>
+        <span class="neo-card-sm px-4 py-2 font-mono text-xs font-bold" style="background:#1D6A45;color:#fff">TRANSMIS</span>
+      </div>
+      <div class="space-y-3 text-sm font-space">
+        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> Responsive mobile/tablette sur toutes les pages</div>
+        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> Loading states (skeletons) pendant la generation IA</div>
+        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> Empty states : "Creez votre premier dossier de conseil"</div>
+        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> Error handling : messages clairs, bouton "Reessayer"</div>
+        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> Visualisation pipeline (kanban ou barre de progression par dossier)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- PARTIE 14 — PRODUCTION: SECURITE (30-31) -->
+<!-- ============================================ -->
+
+<section class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto text-white">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 14 / SECURITE <span class="tag-prod ml-2">PROD</span></div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Securite renforcee.</h2>
+      <p class="text-lg font-space" style="color:rgba(255,255,255,.7)">Les rapports de devoir de conseil sont des documents reglementaires. Pas de modification apres validation. Tracabilite complete.</p>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">30 / CHECKLIST SECURITE</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Conformite et controle.</h2>
+    </div>
+    <div class="anim">
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Rate limiting IA</h4></div><p class="text-xs text-gray-500 font-space">Controle des couts : limiter les appels Claude par courtier par jour. Eviter qu'un courtier fasse exploser la facture API.</p></div>
+        <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Audit trail tamper-proof</h4></div><p class="text-xs text-gray-500 font-space">Chaque action loguee : creation dossier, generation rapport, validation, transmission. Hash de verification. Non modifiable.</p></div>
+        <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Report versioning</h4></div><p class="text-xs text-gray-500 font-space">Pas de modification apres validation. Chaque generation cree une version. L'historique est conserve. Conformement FSMA/ACPR.</p></div>
+        <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">DOCX signing prep</h4></div><p class="text-xs text-gray-500 font-space">Preparation pour signature electronique des rapports DOCX. Structure compatible avec les outils de signature (DocuSign, Yousign).</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- PARTIE 15 — PRODUCTION: EDGE CASES (31-32) -->
+<!-- ============================================ -->
+
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#1D6A45">PART 15 / EDGE CASES <span class="tag-prod ml-2">PROD</span></div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Quand tout ne se passe pas bien.</h2>
+      <p class="text-lg text-gray-500 font-space leading-relaxed mb-8">Le MVP gere le happy path. La production gere les cas limites qui arrivent dans la vraie vie.</p>
+    </div>
+    <div class="anim space-y-3">
+      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">CRM indisponible</h4></div><p class="text-xs text-gray-500 font-space">Brio ou BrokerCloud est en panne. <strong>Fix :</strong> Fallback saisie manuelle. Le courtier entre les donnees client a la main. Le rapport est genere quand meme.</p></div>
+      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Claude timeout</h4></div><p class="text-xs text-gray-500 font-space">La generation de rapport prend trop de temps. <strong>Fix :</strong> Retry 3x avec backoff. Si echec total, rapport partiel sauvegarde + notification pour relancer.</p></div>
+      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Branche non reconnue</h4></div><p class="text-xs text-gray-500 font-space">Le CRM renvoie une branche inconnue. <strong>Fix :</strong> Selection manuelle de la branche par le courtier. Mapping CRM &rarr; branches Augmented configurable.</p></div>
+      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Client avec 0 contrats existants</h4></div><p class="text-xs text-gray-500 font-space">Nouveau client sans historique. <strong>Fix :</strong> Le bloc Diagnose adapte son analyse. Pas de comparaison avec l'existant, focus sur l'analyse des besoins purs.</p></div>
+      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Dossier multi-branche</h4></div><p class="text-xs text-gray-500 font-space">Un client a besoin de 3 assurances en meme temps (auto + habitation + RC familiale). <strong>Fix :</strong> Dossier unique avec 3 sections de diagnostic. Rapport consolide avec table des matieres.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- PARTIE 16 — PRODUCTION: MULTI-TENANT + PERF (33-34) -->
+<!-- ============================================ -->
+
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">PART 16 / MULTI-TENANT + PERFORMANCE <span class="tag-prod ml-2">PROD</span></div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Pret pour N courtiers.</h2>
+      <p class="text-lg text-gray-500 font-space leading-relaxed mb-8">Plusieurs courtiers generent des rapports en meme temps. Chacun a son style, sa specialite, sa numerotation.</p>
+    </div>
+    <div class="anim space-y-3">
+      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Generation simultanee</h4></div><p class="text-xs text-gray-500 font-space">Plusieurs courtiers lancent des rapports en meme temps sans conflit. Queue de generation si necessaire.</p></div>
+      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Prompt isolation par courtier</h4></div><p class="text-xs text-gray-500 font-space">Chaque courtier peut avoir son propre style de rapport, ses specialites, ses formulations preferees. Isolation complete.</p></div>
+      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Numerotation par courtier</h4></div><p class="text-xs text-gray-500 font-space">Chaque courtier a sa propre sequence de numerotation de rapports : DC-2026-001, DC-2026-002... Pas de collision entre courtiers.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">31 / PERFORMANCE</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Objectifs de vitesse.</h2>
+    </div>
+    <div class="anim grid sm:grid-cols-3 gap-5">
+      <div class="neo-card p-6 text-center stat-card">
+        <div class="font-space font-bold text-3xl mb-2 stat-number" style="color:#1D6A45">&lt;30s</div>
+        <div class="text-xs font-space text-gray-500">Generation rapport IA</div>
+        <div class="text-[10px] font-mono text-gray-300 mt-2">Collect + Diagnose + Generate</div>
+      </div>
+      <div class="neo-card p-6 text-center stat-card">
+        <div class="font-space font-bold text-3xl mb-2 stat-number" style="color:#1D6A45">&lt;5s</div>
+        <div class="text-xs font-space text-gray-500">Export DOCX</div>
+        <div class="text-[10px] font-mono text-gray-300 mt-2">Generation + telechargement</div>
+      </div>
+      <div class="neo-card p-6 text-center stat-card">
+        <div class="font-space font-bold text-3xl mb-2 stat-number" style="color:#1D6A45">&lt;10s</div>
+        <div class="text-xs font-space text-gray-500">Fetch CRM</div>
+        <div class="text-[10px] font-mono text-gray-300 mt-2">Brio ou BrokerCloud</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- PARTIE 17 — PRODUCTION: TESTS & DOC (32-33) -->
+<!-- ============================================ -->
+
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">PART 17 / TESTS &amp; DOCUMENTATION <span class="tag-prod ml-2">PROD</span></div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Tests exhaustifs.</h2>
+    </div>
+    <div class="anim neo-card p-6 sm:p-8">
+      <div class="space-y-3 text-sm font-space">
+        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> <strong>E2E par branche :</strong> au moins 3 dossiers de test par branche (22 branches x 3 = 66 dossiers minimum)</div>
+        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> <strong>Cross-country :</strong> meme scenario client teste en version BE (FSMA) et FR (ACPR). Verification des differences reglementaires.</div>
+        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> <strong>Validation flow :</strong> nouveau &rarr; diagnostic &rarr; rapport &rarr; valide &rarr; transmis. Chaque transition testee.</div>
+        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> <strong>Report accuracy :</strong> revue humaine des rapports generes. References legales verifiees. Recommandations coherentes.</div>
+        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> <strong>Edge cases :</strong> CRM down, timeout IA, branche inconnue, 0 contrats, multi-branche</div>
+      </div>
+    </div>
+    <div class="anim mt-6 neo-card p-6 sm:p-8">
+      <h4 class="font-grotesk font-bold mb-4">Documentation</h4>
+      <div class="space-y-3 text-sm font-space">
+        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> <strong>Guide courtier</strong> &mdash; Comment utiliser Augmented : creer un dossier, lancer le diagnostic, valider et transmettre le rapport</div>
+        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> <strong>Guide admin</strong> &mdash; Comment ajouter ou modifier des branches d'assurance, gerer les prompts, configurer les CRM</div>
+        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> <strong>Guide templates</strong> &mdash; Comment personnaliser les templates de rapport (logo, couleurs, formulations specifiques)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- PARTIE 18 — PRODUCTION CHECKLIST (34) -->
+<!-- ============================================ -->
+
+<section class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto text-white">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 18 / CHECKLIST PRODUCTION <span class="tag-prod ml-2">PROD</span></div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Tout ce qui sera livre.</h2>
+    </div>
+    <div class="anim">
+      <div class="space-y-2">
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">01</span><span class="text-sm font-space">Rebrand couleurs BrokerONE (#1E3A5F, #C0392B, #F1F3F6) &mdash; interface + rapports</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">02</span><span class="text-sm font-space">Logo + nom BrokerONE Augmented partout (app, rapports, templates DOCX)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">03</span><span class="text-sm font-space">Terminologie reglementaire verifiee par pays (FSMA vs ACPR)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">04</span><span class="text-sm font-space">Headers / footers professionnels avec logo courtier</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">05</span><span class="text-sm font-space">Numerotation des pages + table des matieres (rapports complexes)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">06</span><span class="text-sm font-space">Prompt tuning Claude pour chacune des 22 branches</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">07</span><span class="text-sm font-space">References reglementaires verifiees branche par branche</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">08</span><span class="text-sm font-space">Responsive mobile/tablette sur toutes les pages</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">09</span><span class="text-sm font-space">Pipeline dossier visuel (nouveau &rarr; diagnostic &rarr; rapport &rarr; valide &rarr; transmis)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">10</span><span class="text-sm font-space">Loading states + empty states + error handling</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">11</span><span class="text-sm font-space">Rate limiting IA (controle couts par courtier)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">12</span><span class="text-sm font-space">Audit trail tamper-proof (tracabilite complete)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">13</span><span class="text-sm font-space">Report versioning (pas de modification apres validation)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">14</span><span class="text-sm font-space">DOCX signing preparation (compatible DocuSign/Yousign)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">15</span><span class="text-sm font-space">Fallback CRM indisponible (saisie manuelle)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">16</span><span class="text-sm font-space">Claude timeout retry + rapport partiel sauvegarde</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">17</span><span class="text-sm font-space">Branche non reconnue &rarr; selection manuelle + mapping configurable</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">18</span><span class="text-sm font-space">Client 0 contrats + dossier multi-branche</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">19</span><span class="text-sm font-space">Multi-tenant (generation simultanee, prompt isolation, numerotation par courtier)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">20</span><span class="text-sm font-space">Performance : rapport &lt;30s, DOCX &lt;5s, CRM &lt;10s</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">21</span><span class="text-sm font-space">Tests E2E : 66+ dossiers (3 par branche), cross-country BE/FR, validation flow</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">22</span><span class="text-sm font-space">Documentation : guide courtier + guide admin + guide templates</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- COMBINED TIMELINE -->
+<!-- ============================================ -->
+
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#1D6A45">COMBINED TIMELINE</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">MVP ~30 jours + Prod ~15 jours.</h2>
+    </div>
+    <div class="anim neo-card p-6 sm:p-8">
+      <div class="space-y-4">
+        <div class="font-mono text-xs font-bold mb-2 p-2 inline-block" style="background:#1D6A45;color:#fff">PHASE MVP &mdash; 30 JOURS</div>
+        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
+          <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#1D6A45">S1</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-sm mb-1">Jours 1-8 : Fondations</h4>
+            <p class="text-sm text-gray-500 font-space">Database (3 tables + RLS + indexes). Integration CRM Brio + BrokerCloud. Saisie manuelle fallback.</p>
+          </div>
+          <div class="text-xs text-gray-400 font-mono flex-shrink-0">8 jours</div>
+        </div>
+        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
+          <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#1D6A45">S2</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-sm mb-1">Jours 9-16 : 3 Blocs IA</h4>
+            <p class="text-sm text-gray-500 font-space">Bloc 1 (profil). Bloc 2 (diagnostic + scoring + references). Bloc 3 (generation rapport). 22 prompts par branche.</p>
+          </div>
+          <div class="text-xs text-gray-400 font-mono flex-shrink-0">8 jours</div>
+        </div>
+        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
+          <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#1D6A45">S3</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-sm mb-1">Jours 17-24 : Rapports &amp; Export</h4>
+            <p class="text-sm text-gray-500 font-space">Template rapport FSMA + ACPR V2. Generation HTML + DOCX. Module VAD Cazenave. Multi-langue FR/NL.</p>
+          </div>
+          <div class="text-xs text-gray-400 font-mono flex-shrink-0">8 jours</div>
+        </div>
+        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
+          <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#1D6A45">S4</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-sm mb-1">Jours 25-30 : UI &amp; Connexions</h4>
+            <p class="text-sm text-gray-500 font-space">Dashboard. Human-in-the-loop. Connexions Sentinel/Checkup &rarr; Augmented &rarr; Advice. Tests E2E. Recette.</p>
+          </div>
+          <div class="text-xs text-gray-400 font-mono flex-shrink-0">6 jours</div>
+        </div>
+        <div class="border-t-4 border-dashed my-6" style="border-color:#C0392B"></div>
+        <div class="font-mono text-xs font-bold mb-2 p-2 inline-block" style="background:#C0392B;color:#fff">PHASE PRODUCTION &mdash; 15 JOURS</div>
+        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
+          <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">S5</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-sm mb-1">Jours 31-35 : Rebrand + Templates + Prompt tuning</h4>
+            <p class="text-sm text-gray-500 font-space">Couleurs BrokerONE, logo, terminologie. Polish rapports (headers, footers, pagination, TdM). Fine-tuning Claude pour les 22 branches.</p>
+          </div>
+          <div class="text-xs text-gray-400 font-mono flex-shrink-0">5 jours</div>
+        </div>
+        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
+          <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">S6</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-sm mb-1">Jours 36-40 : UI Polish + Edge cases + Securite</h4>
+            <p class="text-sm text-gray-500 font-space">Responsive, pipeline dossier, loading/empty/error states. CRM fallback, Claude retry, multi-branche. Rate limiting, audit trail, versioning.</p>
+          </div>
+          <div class="text-xs text-gray-400 font-mono flex-shrink-0">5 jours</div>
+        </div>
+        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
+          <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">S7</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-sm mb-1">Jours 41-45 : Multi-tenant + Performance + Tests + Doc</h4>
+            <p class="text-sm text-gray-500 font-space">Generation simultanee, prompt isolation. Optimisation vitesse. 66+ dossiers de test. Guides courtier + admin + templates.</p>
+          </div>
+          <div class="text-xs text-gray-400 font-mono flex-shrink-0">5 jours</div>
+        </div>
+      </div>
+      <div class="mt-6 grid sm:grid-cols-3 gap-3">
+        <div class="p-4 text-center" style="border:2px solid #1D6A45">
+          <div class="font-space font-bold text-2xl mb-1" style="color:#1D6A45">Jour 16</div>
+          <div class="text-xs text-gray-500 font-space">Premier rapport IA genere</div>
+        </div>
+        <div class="p-4 text-center" style="border:2px solid #1D6A45">
+          <div class="font-space font-bold text-2xl mb-1" style="color:#1D6A45">Jour 30</div>
+          <div class="text-xs text-gray-500 font-space">MVP complet</div>
+        </div>
+        <div class="p-4 text-center" style="border:2px solid #C0392B">
+          <div class="font-space font-bold text-2xl mb-1" style="color:#C0392B">Jour 45</div>
+          <div class="text-xs text-gray-500 font-space">Production ready</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- COMBINED BUDGET -->
+<!-- ============================================ -->
+
+<section id="budget-final" class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">BUDGET TOTAL</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Recap complet Augmented.</h2>
+    </div>
+    <div class="anim">
+      <div class="grid sm:grid-cols-3 gap-5">
+        <div class="neo-card p-6 text-center" style="border-top:4px solid #1D6A45"><div class="font-mono text-xs font-bold mb-2" style="color:#1D6A45">MVP</div><div class="font-grotesk text-3xl font-bold mb-2">13 000&euro;</div><div class="text-xs text-gray-500 font-space">22 branches, 3 blocs IA, CRM, FSMA/ACPR, HTML+DOCX, human-in-the-loop, connexions</div><div class="mt-2"><span class="tag-mvp inline-block">~30 JOURS</span></div></div>
+        <div class="neo-card p-6 text-center" style="border-top:4px solid #C0392B"><div class="font-mono text-xs font-bold mb-2" style="color:#C0392B">PRODUCTION</div><div class="font-grotesk text-3xl font-bold mb-2">7 000&euro;</div><div class="text-xs text-gray-500 font-space">Rebrand, prompt tuning, templates, securite, multi-tenant, tests, documentation</div><div class="mt-2"><span class="tag-prod inline-block">~15 JOURS</span></div></div>
+        <div class="neo-card p-6 text-center" style="border-top:4px solid #0a0a0a"><div class="font-mono text-xs font-bold mb-2">TOTAL</div><div class="font-grotesk text-3xl font-bold mb-2">20 000&euro;</div><div class="text-xs text-gray-500 font-space">Module Augmented complet, pret pour les courtiers</div><div class="mt-2"><span class="tag-done inline-block">~45 JOURS</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- NEXT STEPS -->
+<!-- ============================================ -->
+
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">PROCHAINE ETAPE</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Ce qu'on fait maintenant.</h2>
+    </div>
+    <div class="anim neo-card p-6 sm:p-8">
+      <div class="space-y-4">
+        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
+          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#0a0a0a">1</div>
+          <div><h4 class="font-bold text-sm mb-1">Tu valides le scope complet (MVP + Prod)</h4><p class="text-sm text-gray-500 font-space">25 livrables MVP + 22 livrables Production. Si tu veux ajouter ou retirer quelque chose, on ajuste.</p></div>
+        </div>
+        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
+          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#0a0a0a">2</div>
+          <div><h4 class="font-bold text-sm mb-1">Tu fournis les acces CRM + dossiers test</h4><p class="text-sm text-gray-500 font-space">Acces API Brio + BrokerCloud (sandbox). Exemples de rapports de conseil (anonymises). Dossiers de test reels pour le prompt tuning.</p></div>
+        </div>
+        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
+          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#1D6A45">3</div>
+          <div><h4 class="font-bold text-sm mb-1">Je demarre le Sprint 1</h4><p class="text-sm text-gray-500 font-space">Premier livrable en 8 jours : database + connecteurs CRM. Premier rapport IA en 16 jours.</p></div>
+        </div>
+        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
+          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">4</div>
+          <div><h4 class="font-bold text-sm mb-1">Livraison complete en ~45 jours</h4><p class="text-sm text-gray-500 font-space">Augmented operationnel et production-ready. Les premiers courtiers peuvent generer leurs devoirs de conseil avec l'IA.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- CONCLUSION -->
+<!-- ============================================ -->
+
+<section class="py-24 px-4" style="background:#1D6A45;border-top:3px solid #0a0a0a">
+  <div class="max-w-3xl mx-auto text-center text-white">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">C'EST A TOI</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le devoir de conseil automatise.</h2>
+      <p class="text-lg font-space mb-4 leading-relaxed" style="color:rgba(255,255,255,.8)">22 branches. 2 pays. 0 paperasse.</p>
+      <p class="text-lg font-space mb-8 leading-relaxed" style="color:rgba(255,255,255,.7)">Chaque conseil formalise en 5 minutes au lieu de 2 heures.<br>Chaque rapport conforme FSMA/ACPR.<br>Chaque validation tracee, logguee, archivee.<br><strong class="text-white">Le courtier conseille. Augmented documente.</strong></p>
+      <div class="flex items-center justify-center gap-4 mb-6">
+        <span class="tag-mvp" style="font-size:12px;padding:4px 12px">MVP 13 000&euro;</span>
+        <span class="font-bold text-xl">+</span>
+        <span class="tag-prod" style="font-size:12px;padding:4px 12px">PROD 7 000&euro;</span>
+        <span class="font-bold text-xl">=</span>
+        <span class="tag-done" style="font-size:14px;padding:6px 16px">20 000&euro; HT</span>
+      </div>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+        <a href="https://calendly.com/baptiste-visionia/30min" target="_blank" class="neo-btn bg-white px-6 py-3 font-space text-sm inline-flex items-center gap-2" style="color:#1D6A45">&#128222; Planifier un call</a>
+        <a href="mailto:baptiste.fort.pro@gmail.com" class="neo-btn px-6 py-3 font-space text-sm inline-flex items-center gap-2" style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.3)">&#9993; Repondre par email</a>
+      </div>
+      <div class="font-mono text-sm" style="color:rgba(255,255,255,.4)">Baptiste Fort &mdash; Avril 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-10 px-4 bg-neo-black text-white" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-5xl mx-auto text-center">
+    <div class="neo-card-sm px-6 py-3 inline-block font-mono text-sm mb-3" style="background:#1D6A45;border-color:#1D6A45">Augmented MVP + Production &mdash; Broker<span style="color:#C0392B">ONE</span></div>
+    <p class="text-gray-500 text-sm font-space">Module complet &bull; Avril 2026 &bull; Baptiste Fort &rarr; Bruno</p>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<button id="back-top" class="back-top neo-btn text-white w-12 h-12 flex items-center justify-center text-lg" style="background:#1D6A45" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+<!-- JAVASCRIPT -->
+<script>
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+  document.getElementById('progress-bar').style.width=pct+'%';
+  document.getElementById('back-top').classList.toggle('show',h.scrollTop>600);
+});
+const obs=new IntersectionObserver(e=>{
+  e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('v');obs.unobserve(en.target)}});
+},{threshold:.05,rootMargin:'0px 0px 40px 0px'});
+document.querySelectorAll('.anim').forEach(el=>obs.observe(el));
+document.addEventListener('click',e=>{
+  if(Math.random()>.7)return;
+  const colors=['#1D6A45','#27AE60','#1E3A5F','#C0392B','#0a0a0a'];
+  for(let i=0;i<5;i++){
+    const d=document.createElement('div');
+    d.className='click-burst';
+    d.style.cssText=`left:${e.clientX}px;top:${e.clientY}px;width:5px;height:5px;border-radius:50%;background:${colors[Math.floor(Math.random()*colors.length)]};`;
+    document.body.appendChild(d);
+    const a=Math.random()*Math.PI*2,dist=25+Math.random()*40;
+    d.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:`translate(${Math.cos(a)*dist}px,${Math.sin(a)*dist}px) scale(0)`,opacity:0}],{duration:400+Math.random()*200,easing:'cubic-bezier(.16,1,.3,1)'});
+    setTimeout(()=>d.remove(),700);
+  }
+});
+const sections=document.querySelectorAll('section[id]');
+const navLinks=document.querySelectorAll('nav a[href^="#"]');
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-200)current=s.id});
+  navLinks.forEach(l=>{l.style.background=l.getAttribute('href')==='#'+current?'#f5f5f5':''});
+});
+</script>
+
+</body>
+</html>

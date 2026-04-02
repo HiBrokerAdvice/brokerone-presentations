@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BrokerONE — Présentations Modules</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px}
+::selection{background:#1E3A5F;color:#fff}
+.container{max-width:800px;width:100%}
+h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;margin-bottom:8px;line-height:1.1}
+h1 span{color:#C0392B}
+.subtitle{font-family:'Space Mono',monospace;font-size:14px;color:#888;margin-bottom:48px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:40px}
+.card{border:3px solid #0a0a0a;box-shadow:6px 6px 0 #0a0a0a;padding:24px;background:#fff;transition:all .2s;text-decoration:none;color:#0a0a0a;display:block}
+.card:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 #0a0a0a}
+.card-badge{display:inline-block;padding:2px 10px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:#fff;margin-bottom:12px}
+.card h2{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:4px}
+.card .price{font-family:'Space Mono',monospace;font-size:1.1rem;font-weight:700;margin-bottom:8px}
+.card p{font-size:13px;color:#666;line-height:1.5}
+.footer{text-align:center;font-family:'Space Mono',monospace;font-size:12px;color:#aaa}
+.total{border:3px solid #0a0a0a;box-shadow:6px 6px 0 #0a0a0a;padding:20px;background:#0a0a0a;color:#fff;text-align:center;margin-bottom:40px}
+.total .amount{font-family:'Space Grotesk',sans-serif;font-size:2.5rem;font-weight:700}
+.total .label{font-family:'Space Mono',monospace;font-size:12px;color:rgba(255,255,255,.5)}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Broker<span>ONE</span></h1>
+  <div class="subtitle">Présentations modules — MVP + Production</div>
+  
+  <div class="grid">
+    <a href="advice-complete.html" class="card">
+      <div class="card-badge" style="background:#C0392B">ADVICE</div>
+      <h2>Advice</h2>
+      <div class="price" style="color:#C0392B">11 500€</div>
+      <p>Réclamations, RGPD, ambassadeurs, avis Google, scraping, veille concurrentielle.</p>
+    </a>
+    <a href="sentinel-complete.html" class="card">
+      <div class="card-badge" style="background:#2980B9">SENTINEL</div>
+      <h2>Sentinel</h2>
+      <div class="price" style="color:#2980B9">12 500€</div>
+      <p>Dispatcher email intelligent. 4 catégories, 6 niveaux de détection, classification IA.</p>
+    </a>
+    <a href="augmented-complete.html" class="card">
+      <div class="card-badge" style="background:#1D6A45">AUGMENTED</div>
+      <h2>Augmented</h2>
+      <div class="price" style="color:#1D6A45">20 000€</div>
+      <p>Devoir de conseil automatisé. 22 branches, 3 blocs IA, rapports FSMA/ACPR.</p>
+    </a>
+    <a href="checkup-complete.html" class="card">
+      <div class="card-badge" style="background:#8E44AD">CHECKUP</div>
+      <h2>Checkup</h2>
+      <div class="price" style="color:#8E44AD">15 500€</div>
+      <p>Audit portefeuille 360°. 17 axes, 218 garanties IPID, score 0-100, cross-sell auto.</p>
+    </a>
+    <a href="transcript-complete.html" class="card">
+      <div class="card-badge" style="background:#C65D07">TRANSCRIPT</div>
+      <h2>Transcript</h2>
+      <div class="price" style="color:#C65D07">10 500€</div>
+      <p>Conformité des appels. Leexi, scoring MiFID, documents FSMA/ACPR pré-remplis.</p>
+    </a>
+    <a href="connect-complete.html" class="card">
+      <div class="card-badge" style="background:#E74C3C">CONNECT</div>
+      <h2>Connect</h2>
+      <div class="price" style="color:#E74C3C">13 000€</div>
+      <p>Réseaux sociaux & acquisition. 4 réseaux, visuels auto, engagement, ambassadeurs.</p>
+    </a>
+  </div>
+
+  <div class="total">
+    <div class="label">TOTAL 6 MODULES — MVP + PRODUCTION</div>
+    <div class="amount">83 000€ <span style="font-size:1rem;color:rgba(255,255,255,.5)">HT</span></div>
+    <div class="label" style="margin-top:8px">54 000€ MVP + 29 000€ Production</div>
+  </div>
+
+  <div class="footer">Baptiste Fort → Bruno — Avril 2026</div>
+</div>
+</body>
+</html>
