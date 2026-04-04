@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BrokerONE Checkup — MVP + Production pour Bruno</title>
+<title>BrokerONE Checkup — Ce que Bruno a fourni + Ce que je construis</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -25,7 +25,7 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .anim{opacity:0;transform:translateY(18px);transition:opacity .45s ease,transform .45s ease}
 .anim.v{opacity:1;transform:translateY(0)}
-.marquee{animation:marquee 35s linear infinite}
+.marquee{animation:marquee 40s linear infinite}
 .stripe-bg{background-image:repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(142,68,173,.03) 10px,rgba(142,68,173,.03) 20px)}
 .ticker-wrap{overflow:hidden}.ticker{display:inline-flex;white-space:nowrap}
 .progress-bar{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#8E44AD,#AF7AC5);z-index:200;transition:width .1s}
@@ -33,14 +33,15 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 .back-top{position:fixed;bottom:24px;right:24px;z-index:100;opacity:0;transform:translateY(20px);transition:all .3s;pointer-events:none}
 .back-top.show{opacity:1;transform:translateY(0);pointer-events:auto}
 .click-burst{pointer-events:none;position:fixed;z-index:9999}
-.check-done{color:#1D6A45;font-weight:700}.check-todo{color:#999}
-.tag-mvp{background:#8E44AD;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
-.tag-prod{background:#C0392B;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
+.tag-fourni{background:#1D6A45;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
+.tag-manque{background:#C0392B;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
+.tag-bloc{background:#8E44AD;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
+.tag-done{background:#0a0a0a;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
+.tag-conn{background:#1E3A5F;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
+.tag-demo{background:#E67E22;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
 .tag-critical{background:#C0392B;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
 .tag-important{background:#E67E22;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
 .tag-recommended{background:#F1C40F;color:#0a0a0a;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
-.tag-done{background:#0a0a0a;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
-.tag-conn{background:#1E3A5F;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
 @keyframes count-up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .stat-card:hover .stat-number{animation:count-up .3s ease}
 @keyframes score-fill{from{stroke-dashoffset:283}to{stroke-dashoffset:var(--target)}}
@@ -50,6 +51,8 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 .pulse-purple{animation:pulse-glow 2s ease infinite}
 .part-divider{position:relative;overflow:hidden}
 .part-divider::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(255,255,255,.03) 20px,rgba(255,255,255,.03) 40px)}
+.fourni-glow{border-left:6px solid #1D6A45}
+.manque-glow{border-left:6px solid #C0392B}
 </style>
 </head>
 <body>
@@ -63,20 +66,21 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
   <div class="flex items-center justify-between h-14">
     <div class="flex items-center gap-3">
       <div class="neo-card-sm px-3 py-1 font-mono text-sm font-bold" style="background:#8E44AD;color:#fff;border-color:#8E44AD">C</div>
-      <span class="font-grotesk font-bold text-sm hidden sm:block">Checkup &mdash; MVP + Production</span>
+      <span class="font-grotesk font-bold text-sm hidden sm:block">Checkup &mdash; 11 000&euro;</span>
     </div>
     <div class="hidden lg:flex items-center gap-1 text-xs font-space">
-      <a href="#problem" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Probleme</a>
-      <a href="#solution" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Solution</a>
-      <a href="#axes" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">17 Axes</a>
-      <a href="#ipid" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">IPID</a>
-      <a href="#scoring" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Scoring</a>
-      <a href="#crosssell" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Cross-sell</a>
-      <a href="#campaign" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Campagnes</a>
-      <a href="#transition" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Production</a>
+      <a href="#exec-summary" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Exec</a>
+      <a href="#fourni" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Fourni</a>
+      <a href="#manque" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Manque</a>
+      <a href="#problem" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Probl&egrave;me</a>
+      <a href="#blocs" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">6 Blocs</a>
+      <a href="#wireframes" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Wireframes</a>
+      <a href="#campaign-pricing" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Pricing</a>
+      <a href="#checklist" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Checklist</a>
       <a href="#timeline" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Timeline</a>
+      <a href="#budget" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Budget</a>
     </div>
-    <div class="font-mono text-xs text-gray-400">MVP + PROD</div>
+    <div class="font-mono text-xs text-gray-400">11 000&euro; HT</div>
   </div>
 </div>
 </nav>
@@ -84,36 +88,34 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 <!-- TICKER -->
 <div class="fixed top-[56px] left-0 right-0 z-40 text-white py-1.5 ticker-wrap" style="background:#8E44AD;border-bottom:3px solid #0a0a0a">
 <div class="ticker marquee">
-  <span class="mx-8 text-xs font-space">CHECKUP &mdash; MVP + PRODUCTION &mdash; 15 500&euro;</span>
-  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">17 AXES D'ANALYSE</span>
+  <span class="mx-8 text-xs font-space">CHECKUP &mdash; 11 000&euro; &mdash; PIPELINE IA + BRIO + REPORTS FOURNIS</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
   <span class="mx-8 text-xs font-space">218 GARANTIES IPID</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">SCORE 0-100</span>
+  <span class="mx-8 text-xs font-space">PIPELINE IA FOURNI</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">CROSS-SELL AUTOMATIQUE</span>
+  <span class="mx-8 text-xs font-space">BRIO CONNECTOR FOURNI</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">RAPPORTS HTML + DOCX</span>
+  <span class="mx-8 text-xs font-space">REPORTS HTML+DOCX FOURNIS</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">CAMPAIGN MODE</span>
+  <span class="mx-8 text-xs font-space">18-24 JOURS</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">CHECKUP &mdash; MVP + PRODUCTION &mdash; 15 500&euro;</span>
+  <span class="mx-8 text-xs font-space">R&Eacute;DUIT DE 15 500&euro; &Agrave; 11 000&euro;</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">17 AXES D'ANALYSE</span>
+  <span class="mx-8 text-xs font-space">CHECKUP &mdash; 11 000&euro; &mdash; PIPELINE IA + BRIO + REPORTS FOURNIS</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
   <span class="mx-8 text-xs font-space">218 GARANTIES IPID</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">SCORE 0-100</span>
+  <span class="mx-8 text-xs font-space">PIPELINE IA FOURNI</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">CROSS-SELL AUTOMATIQUE</span>
+  <span class="mx-8 text-xs font-space">BRIO CONNECTOR FOURNI</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">RAPPORTS HTML + DOCX</span>
+  <span class="mx-8 text-xs font-space">REPORTS HTML+DOCX FOURNIS</span>
 </div>
 </div>
 
 <!-- ============================================ -->
-<!-- 01 — HELLO -->
+<!-- 01 / HELLO -->
 <!-- ============================================ -->
 <section class="min-h-screen flex items-center justify-center pt-32 pb-20 px-4 relative overflow-hidden">
   <div class="absolute inset-0 stripe-bg opacity-30"></div>
@@ -121,15 +123,15 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
     <div class="anim">
       <div class="section-number mb-6">01 / HELLO</div>
       <div class="flex items-center gap-3 mb-6">
-        <span class="tag-mvp">MODULE 4/6</span>
+        <span class="tag-bloc">MODULE 4/6</span>
         <span class="tag-done">CHECKUP 360&deg;</span>
       </div>
       <h1 class="font-grotesk text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] mb-8">
-        Checkup:<br>analyse portefeuille<br>360&deg;.
+        Checkup:<br>Bruno a d&eacute;j&agrave; construit<br>le moteur.
       </h1>
       <div class="text-lg sm:text-xl text-gray-500 font-space leading-relaxed mb-8 space-y-4">
-        <p>L'agent IA qui audite l'int&eacute;gralit&eacute; du portefeuille assurance de chaque client. <strong class="text-neo-black">D&eacute;tecte les lacunes, les doublons, les opportunit&eacute;s de cross-sell.</strong></p>
-        <p>Analyse sur <strong class="text-neo-black">17 axes</strong> (Priv&eacute; + Pro), comparaison contre le r&eacute;f&eacute;rentiel <strong class="text-neo-black">IPID (218 garanties)</strong>, score de couverture <strong class="text-neo-black">0-100</strong>, recommandations prioris&eacute;es, rapports HTML + DOCX.</p>
+        <p>Pipeline IA, connecteur Brio, IPID 218 garanties, validateur JSON, rapports HTML+DOCX, batch processing &mdash; <strong class="text-neo-black">tout le backend est l&agrave;.</strong></p>
+        <p>Ce qu'il manque : un <strong class="text-neo-black">frontend</strong>, une <strong class="text-neo-black">base de donn&eacute;es</strong>, de l'<strong class="text-neo-black">auth</strong>, des <strong class="text-neo-black">campagnes</strong>, et le <strong class="text-neo-black">liant</strong> qui transforme le CLI en produit.</p>
       </div>
     </div>
     <div class="anim">
@@ -139,72 +141,85 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 </section>
 
 <!-- ============================================ -->
-<!-- 02 — EXEC SUMMARY -->
+<!-- 02 / EXEC SUMMARY -->
 <!-- ============================================ -->
 <section id="exec-summary" class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4" style="color:#8E44AD">02 / EN 2 MINUTES</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">L'essentiel.</h2>
+      <div class="section-number mb-4" style="color:#8E44AD">02 / EXEC SUMMARY</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">L'essentiel en 60 secondes.</h2>
     </div>
     <div class="anim neo-card p-6 sm:p-8" style="border-left:6px solid #8E44AD">
       <div class="space-y-4">
-        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#8E44AD;min-width:32px">1</div><div><h4 class="font-bold text-sm mb-1">Quoi</h4><p class="text-sm text-gray-500 font-space">Un agent IA qui audite le portefeuille complet d'un client. D&eacute;tecte ce qui manque, ce qui est en double, ce qu'on pourrait vendre. Produit un score de couverture et des recommandations prioris&eacute;es.</p></div></div>
-        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#8E44AD;min-width:32px">2</div><div><h4 class="font-bold text-sm mb-1">Pourquoi</h4><p class="text-sm text-gray-500 font-space">Chaque lacune d&eacute;tect&eacute;e = une opportunit&eacute; de conseil. Chaque opportunit&eacute; = du revenu. Et chaque lacune non d&eacute;tect&eacute;e = un risque de responsabilit&eacute; pour le courtier.</p></div></div>
-        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#8E44AD;min-width:32px">3</div><div><h4 class="font-bold text-sm mb-1">Combien</h4><p class="text-sm text-gray-500 font-space"><span class="tag-mvp">MVP</span> <strong>10 000&euro; HT</strong> (~22 jours) + <span class="tag-prod">PROD</span> <strong>5 500&euro; HT</strong> (~12 jours) = <strong style="color:#8E44AD">15 500&euro; HT total</strong></p></div></div>
-        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#8E44AD;min-width:32px">4</div><div><h4 class="font-bold text-sm mb-1">Connexions</h4><p class="text-sm text-gray-500 font-space">Sentinel d&eacute;tecte un besoin &rarr; Checkup lance un audit parall&egrave;le. Checkup trouve une lacune critique &rarr; cr&eacute;e automatiquement un dossier Augmented.</p></div></div>
+        <div class="flex items-start gap-4">
+          <div class="font-grotesk font-bold text-2xl" style="color:#1D6A45;min-width:32px">&#10003;</div>
+          <div><h4 class="font-bold text-sm mb-1">Pipeline IA <span class="tag-fourni">FOURNI</span></h4><p class="text-sm text-gray-500 font-space">pipeline_ICU.js + server.js : CLI + Express API, int&eacute;gration Claude Sonnet. Le moteur d'analyse existe.</p></div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="font-grotesk font-bold text-2xl" style="color:#1D6A45;min-width:32px">&#10003;</div>
+          <div><h4 class="font-bold text-sm mb-1">IPID 218 garanties <span class="tag-fourni">FOURNI</span></h4><p class="text-sm text-gray-500 font-space">Loader Excel structur&eacute;. 218 garanties belges r&eacute;f&eacute;renc&eacute;es, class&eacute;es par branche. Particuli&egrave;rement pr&eacute;cieux.</p></div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="font-grotesk font-bold text-2xl" style="color:#1D6A45;min-width:32px">&#10003;</div>
+          <div><h4 class="font-bold text-sm mb-1">Reports HTML + DOCX <span class="tag-fourni">FOURNI</span></h4><p class="text-sm text-gray-500 font-space">G&eacute;n&eacute;rateur HTML (5 pages A4, design system, badges, scores, mentions l&eacute;gales) + DOCX via docx-js.</p></div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="font-grotesk font-bold text-2xl" style="color:#1D6A45;min-width:32px">&#10003;</div>
+          <div><h4 class="font-bold text-sm mb-1">Brio CRM connector <span class="tag-fourni">FOURNI</span></h4><p class="text-sm text-gray-500 font-space">5 fichiers : auth, HTTP client (9 endpoints), assembler, sync, metrics. Quota management 500tx/licence/mois. Production-grade.</p></div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="font-grotesk font-bold text-2xl" style="color:#1D6A45;min-width:32px">&#10003;</div>
+          <div><h4 class="font-bold text-sm mb-1">Batch + Validation + Tests <span class="tag-fourni">FOURNI</span></h4><p class="text-sm text-gray-500 font-space">Validateur JSON 450 lignes, batch parser Python, batch report generator, cross-sell auto, 4 niveaux de tests.</p></div>
+        </div>
       </div>
     </div>
+    <div class="anim mt-6 neo-card p-6" style="border-left:6px solid #C0392B">
+      <div class="font-mono text-xs font-bold mb-3" style="color:#C0392B">CE QUI MANQUE</div>
+      <p class="text-sm text-gray-500 font-space">Pas de frontend/UI (CLI uniquement), pas d'auth, pas de Supabase, pas de campagnes/scheduling, pas d'email, pas d'onboarding, pas de settings, pas de multi-tenant, pas d'int&eacute;gration BrokerCloud.</p>
+    </div>
     <div class="anim grid sm:grid-cols-4 gap-4 mt-6">
-      <div class="neo-card p-4 text-center stat-card"><div class="font-space font-bold text-3xl mb-1 stat-number" style="color:#8E44AD">17</div><div class="text-xs font-space text-gray-500">Axes d'analyse</div></div>
-      <div class="neo-card p-4 text-center stat-card"><div class="font-space font-bold text-3xl mb-1 stat-number" style="color:#8E44AD">218</div><div class="text-xs font-space text-gray-500">Garanties IPID</div></div>
-      <div class="neo-card p-4 text-center stat-card"><div class="font-space font-bold text-3xl mb-1 stat-number" style="color:#8E44AD">0-100</div><div class="text-xs font-space text-gray-500">Score couverture</div></div>
-      <div class="neo-card p-4 text-center stat-card"><div class="font-space font-bold text-3xl mb-1 stat-number" style="color:#8E44AD">34j</div><div class="text-xs font-space text-gray-500">D&eacute;lai total</div></div>
+      <div class="neo-card p-4 text-center stat-card"><div class="font-space font-bold text-3xl mb-1 stat-number" style="color:#8E44AD">11k&euro;</div><div class="text-xs font-space text-gray-500">Prix total HT</div></div>
+      <div class="neo-card p-4 text-center stat-card"><div class="font-space font-bold text-3xl mb-1 stat-number" style="color:#1D6A45">-4.5k</div><div class="text-xs font-space text-gray-500">&Eacute;conomis&eacute; gr&acirc;ce au fourni</div></div>
+      <div class="neo-card p-4 text-center stat-card"><div class="font-space font-bold text-3xl mb-1 stat-number" style="color:#8E44AD">18-24</div><div class="text-xs font-space text-gray-500">Jours de d&eacute;v</div></div>
+      <div class="neo-card p-4 text-center stat-card"><div class="font-space font-bold text-3xl mb-1 stat-number" style="color:#8E44AD">6</div><div class="text-xs font-space text-gray-500">Blocs de travail</div></div>
     </div>
   </div>
 </section>
 
 <!-- ============================================ -->
-<!-- PART 1 — THE PROBLEM (03-05) -->
+<!-- 03-05 / CE QUE BRUNO A FOURNI (detail) -->
 <!-- ============================================ -->
-
-<section id="problem" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
+<section id="fourni" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto text-white">
     <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 1 / LE PROBL&Egrave;ME</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Les courtiers ne font pas d'audit syst&eacute;matique.</h2>
-      <p class="text-lg font-space leading-relaxed mb-8" style="color:rgba(255,255,255,.7)">Un client peut &ecirc;tre chez le courtier depuis 10 ans. Entre-temps : des enfants, une maison, un changement de m&eacute;tier, une cr&eacute;ation de soci&eacute;t&eacute;. Mais personne ne rev&eacute;rifie son portefeuille.</p>
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">03 / CE QUE BRUNO A FOURNI</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le pipeline IA + l'infra CRM.</h2>
+      <p class="text-lg font-space leading-relaxed mb-8" style="color:rgba(255,255,255,.7)">Bruno a fourni un volume de code cons&eacute;quent. Pas du prototype : du code structur&eacute;, document&eacute;, avec des tests. C'est ce qui permet de passer de 15 500&euro; &agrave; 11 000&euro;.</p>
     </div>
-    <div class="anim grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <div class="p-5" style="border:2px solid rgba(255,255,255,.15)">
-        <div class="text-2xl mb-3">&#9888;</div>
-        <h4 class="font-bold text-sm mb-2">Lacunes de couverture</h4>
-        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Le client n'a pas d'assurance incapacit&eacute; de travail. Il est ind&eacute;pendant. Un accident = plus de revenus. Le courtier est responsable de ne pas avoir d&eacute;tect&eacute; cette lacune.</p>
+    <div class="anim grid sm:grid-cols-2 gap-4">
+      <div class="p-5" style="border:2px solid rgba(255,255,255,.15);border-left:4px solid #1D6A45">
+        <div class="flex items-center gap-2 mb-2"><span class="tag-fourni">FOURNI</span><h4 class="font-bold text-sm">pipeline_ICU.js + server.js</h4></div>
+        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">CLI complet + API Express. Int&eacute;gration Claude Sonnet pour l'analyse. Le moteur d'audit fonctionne en ligne de commande.</p>
       </div>
-      <div class="p-5" style="border:2px solid rgba(255,255,255,.15)">
-        <div class="text-2xl mb-3">&#128176;</div>
-        <h4 class="font-bold text-sm mb-2">Doublons de couverture</h4>
-        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Le client paie 2x l'assistance voyage : une dans son auto, une dans sa carte de cr&eacute;dit. Il surpaie. Il le d&eacute;couvre. Il est m&eacute;content. Il change de courtier.</p>
+      <div class="p-5" style="border:2px solid rgba(255,255,255,.15);border-left:4px solid #1D6A45">
+        <div class="flex items-center gap-2 mb-2"><span class="tag-fourni">FOURNI</span><h4 class="font-bold text-sm">IPID Loader (218 garanties)</h4></div>
+        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Chargement depuis Excel. 218 garanties belges structur&eacute;es par branche. C'est le r&eacute;f&eacute;rentiel de comparaison &mdash; pi&egrave;ce ma&icirc;tresse du syst&egrave;me.</p>
       </div>
-      <div class="p-5" style="border:2px solid rgba(255,255,255,.15)">
-        <div class="text-2xl mb-3">&#128200;</div>
-        <h4 class="font-bold text-sm mb-2">Cross-sell manqu&eacute;</h4>
-        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Le client a un patrimoine immobilier mais aucune assurance propri&eacute;taire non-occupant. C'est du chiffre d'affaires que le courtier laisse sur la table.</p>
+      <div class="p-5" style="border:2px solid rgba(255,255,255,.15);border-left:4px solid #1D6A45">
+        <div class="flex items-center gap-2 mb-2"><span class="tag-fourni">FOURNI</span><h4 class="font-bold text-sm">JSON Validator (450 lignes)</h4></div>
+        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Validation robuste, auto-correction des erreurs, recalcul de scores, g&eacute;n&eacute;ration automatique du top 3. Gestion des edge cases.</p>
       </div>
-      <div class="p-5" style="border:2px solid rgba(255,255,255,.15)">
-        <div class="text-2xl mb-3">&#9203;</div>
-        <h4 class="font-bold text-sm mb-2">Pas le temps</h4>
-        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Un audit complet prend 45min-1h par client. Avec 500 clients, c'est 500 heures. Aucun courtier ne le fait manuellement.</p>
+      <div class="p-5" style="border:2px solid rgba(255,255,255,.15);border-left:4px solid #1D6A45">
+        <div class="flex items-center gap-2 mb-2"><span class="tag-fourni">FOURNI</span><h4 class="font-bold text-sm">HTML Report Generator</h4></div>
+        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">5 pages A4 avec design system, badges, scores par axe, mentions l&eacute;gales. Pr&ecirc;t &agrave; l'impression.</p>
       </div>
-      <div class="p-5" style="border:2px solid rgba(255,255,255,.15)">
-        <div class="text-2xl mb-3">&#9878;</div>
-        <h4 class="font-bold text-sm mb-2">Responsabilit&eacute; juridique</h4>
-        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Le courtier a un devoir de conseil. S'il ne d&eacute;tecte pas une lacune et que le client subit un sinistre non couvert, le courtier peut &ecirc;tre tenu responsable.</p>
+      <div class="p-5" style="border:2px solid rgba(255,255,255,.15);border-left:4px solid #1D6A45">
+        <div class="flex items-center gap-2 mb-2"><span class="tag-fourni">FOURNI</span><h4 class="font-bold text-sm">DOCX Report Generator</h4></div>
+        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">M&ecirc;me structure que le HTML, g&eacute;n&eacute;r&eacute; via docx-js. T&eacute;l&eacute;chargeable, imprimable, brand&eacute;.</p>
       </div>
-      <div class="p-5" style="border:2px solid rgba(255,255,255,.15)">
-        <div class="text-2xl mb-3">&#128556;</div>
-        <h4 class="font-bold text-sm mb-2">Clients insatisfaits</h4>
-        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Un client qui d&eacute;couvre qu'il paie trop ou qu'il est mal couvert perd confiance. Le courtier perd le client et le bouche-&agrave;-oreille n&eacute;gatif commence.</p>
+      <div class="p-5" style="border:2px solid rgba(255,255,255,.15);border-left:4px solid #1D6A45">
+        <div class="flex items-center gap-2 mb-2"><span class="tag-fourni">FOURNI</span><h4 class="font-bold text-sm">Cross-sell auto</h4></div>
+        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Forwarding automatique des lacunes critiques vers Augmented. Le flux de d&eacute;tection &rarr; action est d&eacute;j&agrave; cod&eacute;.</p>
       </div>
     </div>
   </div>
@@ -213,17 +228,25 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 <section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4">CAS CONCRET</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Un client type.</h2>
+      <div class="section-number mb-4" style="color:#1D6A45">04 / BRIO CONNECTOR</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le connecteur CRM est production-grade.</h2>
     </div>
-    <div class="anim neo-card p-6 sm:p-8" style="border-left:6px solid #8E44AD">
-      <div class="font-mono text-xs mb-4 font-bold" style="color:#8E44AD">EXEMPLE &mdash; MARC, 42 ANS, IND&Eacute;PENDANT</div>
-      <div class="space-y-3 text-sm font-space text-gray-600">
-        <p><strong class="text-neo-black">2016 :</strong> Marc devient client. Auto + habitation. C&eacute;libataire, locataire, salari&eacute;.</p>
-        <p><strong class="text-neo-black">2019 :</strong> Il se met en couple, ach&egrave;te une maison. Le courtier ajuste l'habitation. C'est tout.</p>
-        <p><strong class="text-neo-black">2021 :</strong> Marc devient ind&eacute;pendant. Il lance une SPRL. Personne ne rev&eacute;rifie son portefeuille.</p>
-        <p><strong class="text-neo-black">2024 :</strong> Un enfant. Toujours aucune pr&eacute;voyance, aucune RC Pro, aucune assurance homme-cl&eacute;.</p>
-        <p class="pt-3" style="color:#C0392B"><strong>R&eacute;sultat :</strong> Marc a 2 contrats (auto + habitation) alors qu'il devrait en avoir 7-8. Le courtier passe &agrave; c&ocirc;t&eacute; de 5 opportunit&eacute;s de vente et s'expose juridiquement.</p>
+    <div class="anim neo-card p-6 sm:p-8 fourni-glow">
+      <div class="font-mono text-xs mb-4 font-bold" style="color:#1D6A45">BRIO CRM CONNECTOR &mdash; 5 FICHIERS</div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="space-y-3 text-sm font-space text-gray-600">
+          <div class="flex items-center gap-2"><span class="w-6 h-6 flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style="background:#1D6A45">1</span> <strong class="text-neo-black">Auth module</strong> &mdash; authentification API Brio</div>
+          <div class="flex items-center gap-2"><span class="w-6 h-6 flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style="background:#1D6A45">2</span> <strong class="text-neo-black">HTTP client</strong> &mdash; 9 endpoints couverts</div>
+          <div class="flex items-center gap-2"><span class="w-6 h-6 flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style="background:#1D6A45">3</span> <strong class="text-neo-black">Assembler</strong> &mdash; agr&eacute;gation des donn&eacute;es</div>
+          <div class="flex items-center gap-2"><span class="w-6 h-6 flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style="background:#1D6A45">4</span> <strong class="text-neo-black">Sync</strong> &mdash; initial + incr&eacute;mental</div>
+          <div class="flex items-center gap-2"><span class="w-6 h-6 flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style="background:#1D6A45">5</span> <strong class="text-neo-black">Metrics + Quotas</strong> &mdash; 500tx/licence/mois</div>
+        </div>
+        <div class="space-y-3 text-sm font-space text-gray-600">
+          <div>&#9679; Tables SQL : <code class="bg-neo-gray px-1 text-xs">brio_sync</code>, <code class="bg-neo-gray px-1 text-xs">brio_credentials</code>, <code class="bg-neo-gray px-1 text-xs">brio_usage</code></div>
+          <div>&#9679; RLS pr&eacute;configur&eacute;</div>
+          <div>&#9679; Gestion erreurs + retry</div>
+          <div>&#9679; Documentation compl&egrave;te</div>
+        </div>
       </div>
     </div>
   </div>
@@ -232,7 +255,113 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 <section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4">AVANT vs APR&Egrave;S</div>
+      <div class="section-number mb-4" style="color:#1D6A45">05 / BATCH + TESTS + DOCS</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le reste du kit.</h2>
+    </div>
+    <div class="anim grid sm:grid-cols-2 gap-4">
+      <div class="neo-card p-5 fourni-glow">
+        <div class="flex items-center gap-2 mb-2"><span class="tag-fourni">FOURNI</span><h4 class="font-bold text-sm">Batch processing</h4></div>
+        <p class="text-xs text-gray-500 font-space mb-2">Python batch parser + JS batch report generator + JSON importer. Traitement en s&eacute;rie de plusieurs clients.</p>
+      </div>
+      <div class="neo-card p-5 fourni-glow">
+        <div class="flex items-center gap-2 mb-2"><span class="tag-fourni">FOURNI</span><h4 class="font-bold text-sm">Dashboard HTML (basic)</h4></div>
+        <p class="text-xs text-gray-500 font-space mb-2">Page analytique portefeuille. Statique, mais la structure visuelle est l&agrave;.</p>
+      </div>
+      <div class="neo-card p-5 fourni-glow">
+        <div class="flex items-center gap-2 mb-2"><span class="tag-fourni">FOURNI</span><h4 class="font-bold text-sm">4 niveaux de tests</h4></div>
+        <p class="text-xs text-gray-500 font-space mb-2">Tests unitaires, int&eacute;gration, validation, end-to-end. La base de qualit&eacute; est pos&eacute;e.</p>
+      </div>
+      <div class="neo-card p-5 fourni-glow">
+        <div class="flex items-center gap-2 mb-2"><span class="tag-fourni">FOURNI</span><h4 class="font-bold text-sm">Documentation extensive</h4></div>
+        <p class="text-xs text-gray-500 font-space mb-2">SYSTEM_PROMPT, DATA_SCHEMA_BRIO, OUTPUT_SPEC. Version FR adapt&eacute;e DDA/ACPR, 9+9 axes, knowledge loader Augmented packs.</p>
+      </div>
+    </div>
+    <div class="anim mt-6 neo-card p-5 text-center" style="border-top:4px solid #1D6A45">
+      <div class="font-grotesk text-xl font-bold mb-2" style="color:#1D6A45">Estimation de la valeur fournie : ~4 500&euro;</div>
+      <div class="text-sm text-gray-500 font-space">C'est ce qui permet de passer de 15 500&euro; &agrave; 11 000&euro;.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 06 / CE QUI MANQUE -->
+<!-- ============================================ -->
+<section id="manque" class="py-20 px-4" style="background:#C0392B;border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto text-white">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">06 / CE QUI MANQUE</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Pas de produit sans ces pi&egrave;ces.</h2>
+      <p class="text-lg font-space leading-relaxed mb-8" style="color:rgba(255,255,255,.8)">Le moteur IA tourne en CLI. Mais un courtier ne lancera jamais un terminal. Il lui faut un produit : des &eacute;crans, de l'auth, de la persistance, des campagnes, des connexions.</p>
+    </div>
+    <div class="anim grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="p-4" style="border:2px solid rgba(255,255,255,.2)">
+        <div class="text-2xl mb-2">&#128187;</div>
+        <h4 class="font-bold text-sm mb-1">Pas de frontend/UI</h4>
+        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Tout est CLI. Aucun &eacute;cran, aucune page, aucune navigation.</p>
+      </div>
+      <div class="p-4" style="border:2px solid rgba(255,255,255,.2)">
+        <div class="text-2xl mb-2">&#128274;</div>
+        <h4 class="font-bold text-sm mb-1">Pas d'auth</h4>
+        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Aucune authentification, aucun login, aucune gestion de session.</p>
+      </div>
+      <div class="p-4" style="border:2px solid rgba(255,255,255,.2)">
+        <div class="text-2xl mb-2">&#128451;</div>
+        <h4 class="font-bold text-sm mb-1">Pas de Supabase</h4>
+        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Aucune persistance des r&eacute;sultats. Tout est en m&eacute;moire ou en fichier local.</p>
+      </div>
+      <div class="p-4" style="border:2px solid rgba(255,255,255,.2)">
+        <div class="text-2xl mb-2">&#128197;</div>
+        <h4 class="font-bold text-sm mb-1">Pas de campagnes/scheduling</h4>
+        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Pas de mode campagne avec planification, progression, notifications.</p>
+      </div>
+      <div class="p-4" style="border:2px solid rgba(255,255,255,.2)">
+        <div class="text-2xl mb-2">&#9993;</div>
+        <h4 class="font-bold text-sm mb-1">Pas d'email</h4>
+        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Aucune notification par email. Le courtier ne sait pas quand c'est fini.</p>
+      </div>
+      <div class="p-4" style="border:2px solid rgba(255,255,255,.2)">
+        <div class="text-2xl mb-2">&#128101;</div>
+        <h4 class="font-bold text-sm mb-1">Pas de multi-tenant</h4>
+        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Pas d'onboarding, pas de settings, pas d'isolation des donn&eacute;es entre courtiers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 07-08 / THE PROBLEM -->
+<!-- ============================================ -->
+<section id="problem" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto text-white">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">07 / LE PROBL&Egrave;ME</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Aucun courtier ne fait d'audit syst&eacute;matique.</h2>
+      <p class="text-lg font-space leading-relaxed mb-8" style="color:rgba(255,255,255,.7)">Un client peut &ecirc;tre chez le courtier depuis 10 ans. Entre-temps : des enfants, une maison, un changement de m&eacute;tier, une cr&eacute;ation de soci&eacute;t&eacute;. Personne ne rev&eacute;rifie.</p>
+    </div>
+    <div class="anim grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="p-5" style="border:2px solid rgba(255,255,255,.15)">
+        <div class="text-2xl mb-3">&#9888;</div>
+        <h4 class="font-bold text-sm mb-2">Lacunes de couverture</h4>
+        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Le client est ind&eacute;pendant sans pr&eacute;voyance. Un accident = plus de revenus. Le courtier est responsable.</p>
+      </div>
+      <div class="p-5" style="border:2px solid rgba(255,255,255,.15)">
+        <div class="text-2xl mb-3">&#128176;</div>
+        <h4 class="font-bold text-sm mb-2">Cross-sell manqu&eacute;</h4>
+        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Patrimoine immobilier mais aucune PNO. C'est du chiffre d'affaires laiss&eacute; sur la table.</p>
+      </div>
+      <div class="p-5" style="border:2px solid rgba(255,255,255,.15)">
+        <div class="text-2xl mb-3">&#9203;</div>
+        <h4 class="font-bold text-sm mb-2">Pas le temps</h4>
+        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">1h par audit x 500 clients = 500h. Aucun courtier ne le fait manuellement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">08 / AVANT vs APR&Egrave;S</div>
       <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le changement.</h2>
     </div>
     <div class="anim">
@@ -245,18 +374,16 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
             <div>&#10007; Lacunes d&eacute;couvertes au sinistre</div>
             <div>&#10007; Cross-sell au hasard</div>
             <div>&#10007; Aucune preuve du devoir de conseil</div>
-            <div>&#10007; Pas de priorisation</div>
           </div>
         </div>
         <div class="p-6" style="background:rgba(142,68,173,.05)">
           <div class="font-mono text-xs mb-4 font-bold" style="color:#8E44AD">AVEC CHECKUP</div>
           <div class="space-y-3 text-sm font-space text-neo-black">
-            <div><strong>&#10003; Audit IA en 30 secondes par client</strong></div>
+            <div><strong>&#10003; Audit IA en 30 secondes / client</strong></div>
             <div><strong>&#10003; 100% des clients audit&eacute;s en 1 journ&eacute;e</strong></div>
             <div><strong>&#10003; Lacunes d&eacute;tect&eacute;es avant le sinistre</strong></div>
             <div><strong>&#10003; Cross-sell cibl&eacute; et prioris&eacute;</strong></div>
             <div><strong>&#10003; Rapport = preuve de conseil</strong></div>
-            <div><strong>&#10003; Top 3 priorit&eacute;s par client</strong></div>
           </div>
         </div>
       </div>
@@ -270,15 +397,14 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 </section>
 
 <!-- ============================================ -->
-<!-- PART 2 — THE SOLUTION (06-08) -->
+<!-- 09-12 / CE QUE JE CONSTRUIS (6 BLOCS) -->
 <!-- ============================================ -->
-
-<section id="solution" class="py-20 px-4" style="background:#8E44AD;border-top:3px solid #0a0a0a">
+<section id="blocs" class="py-20 px-4" style="background:#8E44AD;border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto text-white">
     <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 2 / LA SOLUTION</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Comment Checkup fonctionne.</h2>
-      <p class="text-lg font-space leading-relaxed" style="color:rgba(255,255,255,.8)">Checkup extrait les contrats du CRM, les analyse sur 17 axes, compare contre le r&eacute;f&eacute;rentiel IPID, et produit un score + des recommandations prioris&eacute;es.</p>
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">09 / CE QUE JE CONSTRUIS</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">6 blocs. 18-24 jours.</h2>
+      <p class="text-lg font-space leading-relaxed" style="color:rgba(255,255,255,.8)">Tout ce qui manque pour transformer le CLI de Bruno en produit fini. Chaque bloc est ind&eacute;pendant et livre des &eacute;crans fonctionnels.</p>
     </div>
   </div>
 </section>
@@ -286,29 +412,29 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 <section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4">LE FLUX</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">5 &eacute;tapes, 30 secondes.</h2>
+      <div class="section-number mb-4" style="color:#8E44AD">10 / BLOC 1</div>
+      <h2 class="font-grotesk text-3xl sm:text-4xl font-bold mb-6">Frontend Next.js <span class="tag-bloc">6-8 JOURS</span></h2>
     </div>
     <div class="anim space-y-3">
       <div class="neo-card p-5 flex items-start gap-4">
-        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#8E44AD">1</div>
-        <div><h4 class="font-bold text-sm mb-1">Extraction CRM</h4><p class="text-xs text-gray-500 font-space">Checkup se connecte au CRM du courtier (Brio, BrokerCloud) et r&eacute;cup&egrave;re tous les contrats du client : branche, garanties, montants, dates.</p></div>
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#8E44AD">1.1</div>
+        <div><h4 class="font-bold text-sm mb-1">Page liste des audits</h4><p class="text-xs text-gray-500 font-space">Liste paginable avec score, statut, date, nombre de lacunes. Filtres par score, par statut, par date. Search par nom client.</p></div>
       </div>
       <div class="neo-card p-5 flex items-start gap-4">
-        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#8E44AD">2</div>
-        <div><h4 class="font-bold text-sm mb-1">Analyse 17 axes</h4><p class="text-xs text-gray-500 font-space">Claude Sonnet analyse le portefeuille sur 8-9 axes Priv&eacute; (mobilit&eacute;, habitation, famille, sant&eacute;, revenus, &eacute;pargne, voyage, cyber, succession) + 9 axes Pro (RC Pro, locaux, personnel, flotte, BI, cyber, transport, homme-cl&eacute;, cr&eacute;dit).</p></div>
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#8E44AD">1.2</div>
+        <div><h4 class="font-bold text-sm mb-1">Page d&eacute;tail audit</h4><p class="text-xs text-gray-500 font-space">Score cercle anim&eacute; (0-100) + barres par axe + liste de priorit&eacute;s (Critique / Important / Recommand&eacute;). Top 3 avec argumentaire.</p></div>
       </div>
       <div class="neo-card p-5 flex items-start gap-4">
-        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#8E44AD">3</div>
-        <div><h4 class="font-bold text-sm mb-1">Comparaison IPID</h4><p class="text-xs text-gray-500 font-space">Chaque contrat est mapp&eacute; contre le r&eacute;f&eacute;rentiel IPID (218 garanties). R&eacute;sultat : pr&eacute;sent / absent / sous-couvert / doublon pour chaque garantie.</p></div>
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#8E44AD">1.3</div>
+        <div><h4 class="font-bold text-sm mb-1">Report preview</h4><p class="text-xs text-gray-500 font-space">Aper&ccedil;u du rapport HTML directement dans l'app. Boutons export DOCX et PDF. Branding dynamique (logo + couleurs courtier).</p></div>
       </div>
       <div class="neo-card p-5 flex items-start gap-4">
-        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#8E44AD">4</div>
-        <div><h4 class="font-bold text-sm mb-1">Score + Priorit&eacute;s</h4><p class="text-xs text-gray-500 font-space">Score global 0-100. Score par axe. Classification des lacunes : Critique (action imm&eacute;diate), Important (rapidement), Recommand&eacute; (quand possible). Top 3 priorit&eacute;s identifi&eacute;es.</p></div>
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#8E44AD">1.4</div>
+        <div><h4 class="font-bold text-sm mb-1">Campaign management page</h4><p class="text-xs text-gray-500 font-space">Lancer une campagne, voir la progression en temps r&eacute;el, consulter les r&eacute;sultats par score, filtrer les urgences.</p></div>
       </div>
       <div class="neo-card p-5 flex items-start gap-4">
-        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#8E44AD">5</div>
-        <div><h4 class="font-bold text-sm mb-1">Rapport + Action</h4><p class="text-xs text-gray-500 font-space">G&eacute;n&eacute;ration d'un rapport HTML (in-app) + DOCX (t&eacute;l&eacute;chargeable). Pour les lacunes critiques : cr&eacute;ation automatique d'un dossier Augmented.</p></div>
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#8E44AD">1.5</div>
+        <div><h4 class="font-bold text-sm mb-1">Settings page</h4><p class="text-xs text-gray-500 font-space">Configuration du courtier : logo, couleurs, CRM credentials, pr&eacute;f&eacute;rences d'audit, seuils de notification.</p></div>
       </div>
     </div>
   </div>
@@ -317,663 +443,41 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 <section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4">EXEMPLE CONCRET</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Audit de Marc en action.</h2>
+      <div class="section-number mb-4" style="color:#8E44AD">11 / BLOCS 2-4</div>
+      <h2 class="font-grotesk text-3xl sm:text-4xl font-bold mb-6">TypeScript + Supabase + Campagnes.</h2>
     </div>
-    <div class="anim neo-card p-6 sm:p-8">
-      <div class="font-mono text-xs mb-4 font-bold" style="color:#8E44AD">CHECKUP &mdash; AUDIT MARC DUPONT</div>
-      <div class="grid sm:grid-cols-2 gap-4 mb-4">
-        <div class="p-3 bg-neo-gray neo-border-2">
-          <div class="font-mono text-xs font-bold mb-2">CONTRATS D&Eacute;TECT&Eacute;S</div>
-          <div class="text-sm font-space text-gray-600">
-            <div>&#10003; Auto &mdash; Omnium</div>
-            <div>&#10003; Habitation &mdash; Propri&eacute;taire</div>
-          </div>
+    <div class="anim grid sm:grid-cols-1 gap-4">
+      <div class="neo-card p-6" style="border-left:6px solid #8E44AD">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="tag-bloc">BLOC 2</span>
+          <h4 class="font-bold text-sm">Port TypeScript + int&eacute;gration</h4>
+          <span class="tag-done">2-3 JOURS</span>
         </div>
-        <div class="p-3 bg-neo-gray neo-border-2">
-          <div class="font-mono text-xs font-bold mb-2" style="color:#C0392B">LACUNES D&Eacute;TECT&Eacute;ES</div>
-          <div class="text-sm font-space text-gray-600">
-            <div style="color:#C0392B">&#10007; RC Professionnelle</div>
-            <div style="color:#C0392B">&#10007; Pr&eacute;voyance / Incapacit&eacute;</div>
-            <div style="color:#E67E22">&#10007; Homme-cl&eacute;</div>
-            <div style="color:#E67E22">&#10007; Protection juridique</div>
-            <div style="color:#F1C40F">&#10007; Cyber (priv&eacute; + pro)</div>
-          </div>
+        <p class="text-sm text-gray-500 font-space">Porter le pipeline JS de Bruno en TypeScript strict. Int&eacute;grer dans l'architecture Next.js. Adapter les imports, typer les interfaces, connecter au frontend.</p>
+      </div>
+      <div class="neo-card p-6" style="border-left:6px solid #8E44AD">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="tag-bloc">BLOC 3</span>
+          <h4 class="font-bold text-sm">Supabase persistence</h4>
+          <span class="tag-done">2-3 JOURS</span>
         </div>
-      </div>
-      <div class="p-3 text-center" style="border:3px solid #8E44AD;background:rgba(142,68,173,.05)">
-        <div class="font-grotesk text-2xl font-bold" style="color:#8E44AD">Score : 28/100</div>
-        <div class="text-xs text-gray-500 font-space">Alarmant &mdash; Action imm&eacute;diate requise sur 2 axes critiques</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 3 — 17 AXES (09-11) -->
-<!-- ============================================ -->
-
-<section id="axes" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 3 / 17 AXES D'ANALYSE</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Couverture compl&egrave;te.</h2>
-      <p class="text-lg font-space mb-8" style="color:rgba(255,255,255,.7)">Checkup analyse sur 17 axes : 8-9 axes Priv&eacute; + 9 axes Professionnel. Chaque axe produit un score et une liste de lacunes.</p>
-    </div>
-    <div class="anim">
-      <div class="font-mono text-xs font-bold mb-4" style="color:#AF7AC5">AXES PRIV&Eacute;S (8-9 AXES)</div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
-        <div class="p-4" style="border:2px solid rgba(255,255,255,.15)">
-          <div class="font-bold text-sm mb-1">&#128663; Mobilit&eacute;</div>
-          <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Auto, moto, v&eacute;lo &eacute;lectrique, assistance. Lacune type : pas d'omnium sur v&eacute;hicule &lt;3 ans.</p>
-        </div>
-        <div class="p-4" style="border:2px solid rgba(255,255,255,.15)">
-          <div class="font-bold text-sm mb-1">&#127968; Habitation</div>
-          <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Locataire, propri&eacute;taire, PNO, contenu. Lacune type : pas de "d&eacute;g&acirc;ts des eaux" s&eacute;par&eacute;.</p>
-        </div>
-        <div class="p-4" style="border:2px solid rgba(255,255,255,.15)">
-          <div class="font-bold text-sm mb-1">&#128106; Famille</div>
-          <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">RC familiale, protection juridique, accidents. Lacune type : enfants non couverts en RC.</p>
-        </div>
-        <div class="p-4" style="border:2px solid rgba(255,255,255,.15)">
-          <div class="font-bold text-sm mb-1">&#127973; Sant&eacute;</div>
-          <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Hospitalisation, soins ambulatoires, dentaire. Lacune type : pas d'hospitalisation individuelle.</p>
-        </div>
-        <div class="p-4" style="border:2px solid rgba(255,255,255,.15)">
-          <div class="font-bold text-sm mb-1">&#128176; Revenus</div>
-          <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Incapacit&eacute;, invalidit&eacute;, ch&ocirc;mage. Lacune type : ind&eacute;pendant sans pr&eacute;voyance = score 0.</p>
-        </div>
-        <div class="p-4" style="border:2px solid rgba(255,255,255,.15)">
-          <div class="font-bold text-sm mb-1">&#128179; &Eacute;pargne</div>
-          <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Pension, branche 21/23, EIP/PLCI. Lacune type : aucun 3&egrave;me pilier &agrave; 45 ans.</p>
-        </div>
-        <div class="p-4" style="border:2px solid rgba(255,255,255,.15)">
-          <div class="font-bold text-sm mb-1">&#9992; Voyage</div>
-          <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Assistance, annulation, bagages. Lacune type : pas d'assistance rapatriement pour voyageurs fr&eacute;quents.</p>
-        </div>
-        <div class="p-4" style="border:2px solid rgba(255,255,255,.15)">
-          <div class="font-bold text-sm mb-1">&#128187; Cyber</div>
-          <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Protection identit&eacute;, fraude en ligne. Lacune type : aucune cyber-protection pour famille connect&eacute;e.</p>
-        </div>
-        <div class="p-4" style="border:2px solid rgba(255,255,255,.15)">
-          <div class="font-bold text-sm mb-1">&#128220; Succession</div>
-          <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Assurance d&eacute;c&egrave;s, droits de succession. Lacune type : patrimoine &gt;500K sans planification successorale.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:#8E44AD">AXES PROFESSIONNELS</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">9 axes Business.</h2>
-    </div>
-    <div class="anim grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <div class="neo-card p-5">
-        <div class="font-bold text-sm mb-2">&#9878; RC Professionnelle</div>
-        <p class="text-xs text-gray-500 font-space mb-2">Responsabilit&eacute; civile li&eacute;e &agrave; l'activit&eacute;. Couvre les dommages caus&eacute;s aux tiers dans le cadre professionnel.</p>
-        <div class="text-xs font-mono" style="color:#C0392B">Lacune : ind&eacute;pendant sans RC Pro = score 0</div>
-      </div>
-      <div class="neo-card p-5">
-        <div class="font-bold text-sm mb-2">&#127970; Locaux</div>
-        <p class="text-xs text-gray-500 font-space mb-2">Incendie, d&eacute;g&acirc;ts des eaux, vol, bris de machine. Couvre le b&acirc;timent et le contenu professionnel.</p>
-        <div class="text-xs font-mono" style="color:#E67E22">Lacune : pas de couverture contenu pro</div>
-      </div>
-      <div class="neo-card p-5">
-        <div class="font-bold text-sm mb-2">&#128101; Personnel</div>
-        <p class="text-xs text-gray-500 font-space mb-2">Accident du travail, loi, assurance groupe, hospitalisation collective.</p>
-        <div class="text-xs font-mono" style="color:#E67E22">Lacune : 5+ employ&eacute;s sans assurance groupe</div>
-      </div>
-      <div class="neo-card p-5">
-        <div class="font-bold text-sm mb-2">&#128663; Flotte</div>
-        <p class="text-xs text-gray-500 font-space mb-2">V&eacute;hicules de soci&eacute;t&eacute;, utilitaires, mission. Gestion centralis&eacute;e de la flotte.</p>
-        <div class="text-xs font-mono" style="color:#F1C40F">Lacune : v&eacute;hicules mission non couverts</div>
-      </div>
-      <div class="neo-card p-5">
-        <div class="font-bold text-sm mb-2">&#128293; Perte d'exploitation</div>
-        <p class="text-xs text-gray-500 font-space mb-2">Business interruption. Couvre la perte de CA suite &agrave; sinistre, panne, catastrophe.</p>
-        <div class="text-xs font-mono" style="color:#C0392B">Lacune : aucune BI = risque faillite</div>
-      </div>
-      <div class="neo-card p-5">
-        <div class="font-bold text-sm mb-2">&#128274; Cyber entreprise</div>
-        <p class="text-xs text-gray-500 font-space mb-2">Ransomware, fuite de donn&eacute;es, RGPD, responsabilit&eacute; donn&eacute;es. Couvre les co&ucirc;ts de r&eacute;ponse &agrave; incident.</p>
-        <div class="text-xs font-mono" style="color:#E67E22">Lacune : donn&eacute;es clients sans cyber</div>
-      </div>
-      <div class="neo-card p-5">
-        <div class="font-bold text-sm mb-2">&#128666; Transport</div>
-        <p class="text-xs text-gray-500 font-space mb-2">Marchandises transport&eacute;es, responsabilit&eacute; transporteur, stock en transit.</p>
-        <div class="text-xs font-mono" style="color:#F1C40F">Lacune : marchandises non assur&eacute;es en transit</div>
-      </div>
-      <div class="neo-card p-5">
-        <div class="font-bold text-sm mb-2">&#128100; Homme-cl&eacute;</div>
-        <p class="text-xs text-gray-500 font-space mb-2">Assurance sur le d&eacute;c&egrave;s/incapacit&eacute; du dirigeant ou d'un collaborateur essentiel.</p>
-        <div class="text-xs font-mono" style="color:#C0392B">Lacune : dirigeant unique sans couverture</div>
-      </div>
-      <div class="neo-card p-5">
-        <div class="font-bold text-sm mb-2">&#128179; Cr&eacute;dit</div>
-        <p class="text-xs text-gray-500 font-space mb-2">Assurance-cr&eacute;dit, caution, garantie de paiement. Prot&egrave;ge contre l'insolvabilit&eacute; des d&eacute;biteurs.</p>
-        <div class="text-xs font-mono" style="color:#F1C40F">Lacune : B2B sans assurance-cr&eacute;dit</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">SCORING PAR AXE</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Chaque axe a son score.</h2>
-    </div>
-    <div class="anim neo-card p-6 sm:p-8">
-      <div class="font-mono text-xs mb-4 font-bold" style="color:#8E44AD">EXEMPLE &mdash; MARC DUPONT &mdash; AXES PRIV&Eacute;S</div>
-      <div class="space-y-3">
-        <div class="flex items-center gap-3"><span class="text-sm font-space w-28 flex-shrink-0">Mobilit&eacute;</span><div class="flex-1 bg-neo-gray neo-border-2 h-6 relative"><div class="axis-bar h-full" style="width:85%;background:#8E44AD"></div></div><span class="text-sm font-mono w-10 text-right font-bold">85</span></div>
-        <div class="flex items-center gap-3"><span class="text-sm font-space w-28 flex-shrink-0">Habitation</span><div class="flex-1 bg-neo-gray neo-border-2 h-6 relative"><div class="axis-bar h-full" style="width:70%;background:#8E44AD"></div></div><span class="text-sm font-mono w-10 text-right font-bold">70</span></div>
-        <div class="flex items-center gap-3"><span class="text-sm font-space w-28 flex-shrink-0">Famille</span><div class="flex-1 bg-neo-gray neo-border-2 h-6 relative"><div class="axis-bar h-full" style="width:30%;background:#E67E22"></div></div><span class="text-sm font-mono w-10 text-right font-bold">30</span></div>
-        <div class="flex items-center gap-3"><span class="text-sm font-space w-28 flex-shrink-0">Sant&eacute;</span><div class="flex-1 bg-neo-gray neo-border-2 h-6 relative"><div class="axis-bar h-full" style="width:0%;background:#C0392B"></div></div><span class="text-sm font-mono w-10 text-right font-bold" style="color:#C0392B">0</span></div>
-        <div class="flex items-center gap-3"><span class="text-sm font-space w-28 flex-shrink-0">Revenus</span><div class="flex-1 bg-neo-gray neo-border-2 h-6 relative"><div class="axis-bar h-full" style="width:0%;background:#C0392B"></div></div><span class="text-sm font-mono w-10 text-right font-bold" style="color:#C0392B">0</span></div>
-        <div class="flex items-center gap-3"><span class="text-sm font-space w-28 flex-shrink-0">&Eacute;pargne</span><div class="flex-1 bg-neo-gray neo-border-2 h-6 relative"><div class="axis-bar h-full" style="width:15%;background:#C0392B"></div></div><span class="text-sm font-mono w-10 text-right font-bold" style="color:#C0392B">15</span></div>
-        <div class="flex items-center gap-3"><span class="text-sm font-space w-28 flex-shrink-0">Voyage</span><div class="flex-1 bg-neo-gray neo-border-2 h-6 relative"><div class="axis-bar h-full" style="width:50%;background:#F1C40F"></div></div><span class="text-sm font-mono w-10 text-right font-bold">50</span></div>
-        <div class="flex items-center gap-3"><span class="text-sm font-space w-28 flex-shrink-0">Cyber</span><div class="flex-1 bg-neo-gray neo-border-2 h-6 relative"><div class="axis-bar h-full" style="width:0%;background:#C0392B"></div></div><span class="text-sm font-mono w-10 text-right font-bold" style="color:#C0392B">0</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 4 — IPID COMPARISON (12-14) -->
-<!-- ============================================ -->
-
-<section id="ipid" class="py-20 px-4" style="background:#8E44AD;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 4 / R&Eacute;F&Eacute;RENTIEL IPID</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">218 garanties r&eacute;f&eacute;renc&eacute;es.</h2>
-      <p class="text-lg font-space leading-relaxed" style="color:rgba(255,255,255,.8)">L'IPID (Insurance Product Information Document) est le document europ&eacute;en standardis&eacute; qui d&eacute;crit les garanties de chaque produit d'assurance. Checkup utilise ce r&eacute;f&eacute;rentiel pour &eacute;valuer chaque contrat.</p>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">LE MAPPING IPID</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Comment &ccedil;a marche.</h2>
-    </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-mvp">IPID</span>
-        <div>
-          <h4 class="font-bold text-sm mb-1">Base de donn&eacute;es structur&eacute;e</h4>
-          <p class="text-xs text-gray-500 font-space">218 garanties class&eacute;es par branche, sous-branche, et type. Chaque garantie a un code unique, une description, et un niveau d'importance (obligatoire / recommand&eacute; / optionnel).</p>
-        </div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-mvp">IPID</span>
-        <div>
-          <h4 class="font-bold text-sm mb-1">Mapping automatique</h4>
-          <p class="text-xs text-gray-500 font-space">Claude Sonnet analyse chaque contrat et mappe les garanties mentionn&eacute;es aux codes IPID. "Assistance v&eacute;hicule" dans le contrat &rarr; IPID-AUTO-007 (assistance d&eacute;pannage).</p>
-        </div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-mvp">IPID</span>
-        <div>
-          <h4 class="font-bold text-sm mb-1">4 statuts par garantie</h4>
-          <p class="text-xs text-gray-500 font-space">Chaque garantie IPID est class&eacute;e : <strong style="color:#1D6A45">Pr&eacute;sent</strong> (couvert), <strong style="color:#C0392B">Absent</strong> (non couvert), <strong style="color:#E67E22">Sous-couvert</strong> (montant insuffisant), <strong style="color:#8E44AD">Doublon</strong> (couvert 2+ fois).</p>
-        </div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <span class="tag-mvp">IPID</span>
-        <div>
-          <h4 class="font-bold text-sm mb-1">Pond&eacute;ration par profil</h4>
-          <p class="text-xs text-gray-500 font-space">L'importance d'une garantie d&eacute;pend du profil client. "Perte d'exploitation" est critique pour un ind&eacute;pendant avec 10 employ&eacute;s, optionnel pour un freelance solo.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">EXEMPLE IPID</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">D&eacute;tection concr&egrave;te.</h2>
-    </div>
-    <div class="anim neo-card p-6 sm:p-8">
-      <div class="font-mono text-xs mb-4 font-bold" style="color:#8E44AD">CONTRAT : HABITATION PROPRI&Eacute;TAIRE &mdash; MARC</div>
-      <div class="space-y-2 text-sm font-space">
-        <div class="flex items-center gap-2 p-2 bg-green-50 neo-border-2" style="border-color:#1D6A45"><span class="w-6 h-6 flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style="background:#1D6A45">&#10003;</span><span class="font-mono text-xs w-28 flex-shrink-0">IPID-HAB-001</span> Incendie &mdash; Pr&eacute;sent</div>
-        <div class="flex items-center gap-2 p-2 bg-green-50 neo-border-2" style="border-color:#1D6A45"><span class="w-6 h-6 flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style="background:#1D6A45">&#10003;</span><span class="font-mono text-xs w-28 flex-shrink-0">IPID-HAB-002</span> Vol &mdash; Pr&eacute;sent</div>
-        <div class="flex items-center gap-2 p-2 bg-red-50 neo-border-2" style="border-color:#C0392B"><span class="w-6 h-6 flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style="background:#C0392B">&#10007;</span><span class="font-mono text-xs w-28 flex-shrink-0">IPID-HAB-003</span> D&eacute;g&acirc;ts des eaux &mdash; <strong style="color:#C0392B">Absent</strong></div>
-        <div class="flex items-center gap-2 p-2 bg-orange-50 neo-border-2" style="border-color:#E67E22"><span class="w-6 h-6 flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style="background:#E67E22">!</span><span class="font-mono text-xs w-28 flex-shrink-0">IPID-HAB-004</span> Bris de glace &mdash; <strong style="color:#E67E22">Sous-couvert</strong> (plafond 500&euro; vs recommand&eacute; 2500&euro;)</div>
-        <div class="flex items-center gap-2 p-2 bg-green-50 neo-border-2" style="border-color:#1D6A45"><span class="w-6 h-6 flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style="background:#1D6A45">&#10003;</span><span class="font-mono text-xs w-28 flex-shrink-0">IPID-HAB-005</span> Catastrophes naturelles &mdash; Pr&eacute;sent</div>
-        <div class="flex items-center gap-2 p-2 bg-green-50 neo-border-2" style="border-color:#1D6A45"><span class="w-6 h-6 flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style="background:#1D6A45">&#10003;</span><span class="font-mono text-xs w-28 flex-shrink-0">IPID-HAB-006</span> RC vie priv&eacute;e &mdash; Pr&eacute;sent</div>
-        <div class="flex items-center gap-2 p-2 bg-red-50 neo-border-2" style="border-color:#C0392B"><span class="w-6 h-6 flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style="background:#C0392B">&#10007;</span><span class="font-mono text-xs w-28 flex-shrink-0">IPID-HAB-007</span> Protection juridique habitation &mdash; <strong style="color:#C0392B">Absent</strong></div>
-      </div>
-      <div class="mt-4 p-3 text-center" style="border:2px solid #8E44AD;background:rgba(142,68,173,.05)">
-        <span class="font-mono text-sm font-bold" style="color:#8E44AD">Score habitation : 70/100</span>
-        <span class="text-xs text-gray-500 font-space ml-2">&mdash; 2 lacunes d&eacute;tect&eacute;es, 1 sous-couverture</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 5 — SCORING (15-17) -->
-<!-- ============================================ -->
-
-<section id="scoring" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 5 / SCORING SYSTEM</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Score de couverture 0-100.</h2>
-    </div>
-    <div class="anim flex flex-col items-center mb-8">
-      <div class="relative w-48 h-48 mb-4">
-        <svg viewBox="0 0 100 100" class="w-full h-full transform -rotate-90">
-          <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="8"/>
-          <circle cx="50" cy="50" r="45" fill="none" stroke="#8E44AD" stroke-width="8" stroke-linecap="round" stroke-dasharray="283" class="score-circle" style="--target:198"/>
-        </svg>
-        <div class="absolute inset-0 flex flex-col items-center justify-center">
-          <div class="font-grotesk text-4xl font-bold">28</div>
-          <div class="text-xs font-space" style="color:rgba(255,255,255,.5)">sur 100</div>
-        </div>
-      </div>
-      <div class="text-center">
-        <span class="tag-critical">ALARMANT</span>
-        <p class="text-sm font-space mt-2" style="color:rgba(255,255,255,.5)">Marc Dupont &mdash; Score global</p>
-      </div>
-    </div>
-    <div class="anim grid sm:grid-cols-4 gap-3">
-      <div class="p-4 text-center" style="border:2px solid #C0392B">
-        <div class="font-grotesk font-bold text-2xl mb-1" style="color:#C0392B">&lt;40</div>
-        <div class="font-mono text-xs" style="color:rgba(255,255,255,.5)">ALARMANT</div>
-        <div class="text-xs font-space mt-1" style="color:rgba(255,255,255,.4)">Action imm&eacute;diate</div>
-      </div>
-      <div class="p-4 text-center" style="border:2px solid #E67E22">
-        <div class="font-grotesk font-bold text-2xl mb-1" style="color:#E67E22">40-60</div>
-        <div class="font-mono text-xs" style="color:rgba(255,255,255,.5)">ATTENTION</div>
-        <div class="text-xs font-space mt-1" style="color:rgba(255,255,255,.4)">Revoir rapidement</div>
-      </div>
-      <div class="p-4 text-center" style="border:2px solid #F1C40F">
-        <div class="font-grotesk font-bold text-2xl mb-1" style="color:#F1C40F">60-80</div>
-        <div class="font-mono text-xs" style="color:rgba(255,255,255,.5)">BON</div>
-        <div class="text-xs font-space mt-1" style="color:rgba(255,255,255,.4)">Quelques ajustements</div>
-      </div>
-      <div class="p-4 text-center" style="border:2px solid #1D6A45">
-        <div class="font-grotesk font-bold text-2xl mb-1" style="color:#1D6A45">&gt;80</div>
-        <div class="font-mono text-xs" style="color:rgba(255,255,255,.5)">EXCELLENT</div>
-        <div class="text-xs font-space mt-1" style="color:rgba(255,255,255,.4)">Portefeuille optimal</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:#8E44AD">PRIORIT&Eacute;S</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Classification des lacunes.</h2>
-    </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5" style="border-left:6px solid #C0392B">
-        <div class="flex items-center gap-2 mb-2"><span class="tag-critical">CRITIQUE</span><h4 class="font-bold text-sm">Action imm&eacute;diate requise</h4></div>
-        <p class="text-xs text-gray-500 font-space mb-2">Risque majeur pour le client ou responsabilit&eacute; juridique pour le courtier. Le courtier doit contacter le client dans les 48h.</p>
-        <div class="text-xs font-mono" style="color:#C0392B">Ex : Ind&eacute;pendant sans RC Pro, famille sans hospitalisation, entreprise sans BI</div>
-      </div>
-      <div class="neo-card p-5" style="border-left:6px solid #E67E22">
-        <div class="flex items-center gap-2 mb-2"><span class="tag-important">IMPORTANT</span><h4 class="font-bold text-sm">A traiter rapidement</h4></div>
-        <p class="text-xs text-gray-500 font-space mb-2">Lacune significative mais pas de risque imm&eacute;diat. A int&eacute;grer dans le prochain RDV client.</p>
-        <div class="text-xs font-mono" style="color:#E67E22">Ex : Pas de protection juridique, homme-cl&eacute; non couvert, sous-couverture d&eacute;g&acirc;ts des eaux</div>
-      </div>
-      <div class="neo-card p-5" style="border-left:6px solid #F1C40F">
-        <div class="flex items-center gap-2 mb-2"><span class="tag-recommended">RECOMMAND&Eacute;</span><h4 class="font-bold text-sm">Quand c'est possible</h4></div>
-        <p class="text-xs text-gray-500 font-space mb-2">Am&eacute;lioration possible mais pas urgente. Mentionner lors d'un prochain contact.</p>
-        <div class="text-xs font-mono" style="color:#a08300">Ex : Cyber priv&eacute;, doublons assistance voyage, optimisation &eacute;pargne pension</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">TOP 3 PRIORIT&Eacute;S</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Les 3 actions cl&eacute;s.</h2>
-    </div>
-    <div class="anim neo-card p-6 sm:p-8">
-      <div class="font-mono text-xs mb-4 font-bold" style="color:#8E44AD">TOP 3 &mdash; MARC DUPONT</div>
-      <div class="space-y-4">
-        <div class="flex items-start gap-4 p-4 bg-red-50 neo-border-2" style="border-color:#C0392B">
-          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">1</div>
-          <div>
-            <div class="flex items-center gap-2 mb-1"><span class="tag-critical">CRITIQUE</span><h4 class="font-bold text-sm">Souscrire une RC Professionnelle</h4></div>
-            <p class="text-xs text-gray-500 font-space">Marc est ind&eacute;pendant depuis 2021 sans RC Pro. En cas de dommage caus&eacute; &agrave; un client, il est personnellement responsable. Prime estim&eacute;e : 300-600&euro;/an.</p>
-          </div>
-        </div>
-        <div class="flex items-start gap-4 p-4 bg-red-50 neo-border-2" style="border-color:#C0392B">
-          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">2</div>
-          <div>
-            <div class="flex items-center gap-2 mb-1"><span class="tag-critical">CRITIQUE</span><h4 class="font-bold text-sm">Assurance incapacit&eacute; de travail</h4></div>
-            <p class="text-xs text-gray-500 font-space">En tant qu'ind&eacute;pendant, un arr&ecirc;t de travail = 0 revenu. Avec un enfant, c'est un risque existentiel. Prime estim&eacute;e : 800-1500&euro;/an.</p>
-          </div>
-        </div>
-        <div class="flex items-start gap-4 p-4 bg-orange-50 neo-border-2" style="border-color:#E67E22">
-          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#E67E22">3</div>
-          <div>
-            <div class="flex items-center gap-2 mb-1"><span class="tag-important">IMPORTANT</span><h4 class="font-bold text-sm">Hospitalisation individuelle</h4></div>
-            <p class="text-xs text-gray-500 font-space">Marc n'a aucune couverture sant&eacute; au-del&agrave; de la mutuelle de base. Avec un enfant, une hospitalisation longue serait d&eacute;vastatrice financiquement. Prime estim&eacute;e : 100-200&euro;/mois.</p>
-          </div>
-        </div>
-      </div>
-      <div class="mt-4 p-3 text-center" style="border:2px solid #8E44AD;background:rgba(142,68,173,.05)">
-        <span class="font-mono text-sm" style="color:#8E44AD"><strong>Potentiel cross-sell :</strong> +1 700&euro; &agrave; 4 700&euro;/an de primes additionnelles</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 6 — CROSS-SELL AUTOMATION (18-20) -->
-<!-- ============================================ -->
-
-<section id="crosssell" class="py-20 px-4" style="background:#8E44AD;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 6 / CROSS-SELL AUTOMATIQUE</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Chaque lacune = du revenu.</h2>
-      <p class="text-lg font-space leading-relaxed" style="color:rgba(255,255,255,.8)">Quand Checkup d&eacute;tecte une lacune critique, il cr&eacute;e automatiquement un dossier Augmented pour la branche concern&eacute;e. Le courtier d&eacute;cide ensuite s'il contacte le client ou non.</p>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">LE FLUX CROSS-SELL</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">De la d&eacute;tection &agrave; la vente.</h2>
-    </div>
-    <div class="anim">
-      <div class="neo-card p-6 sm:p-8">
-        <div class="space-y-4">
-          <div class="flex items-center gap-3">
-            <div class="neo-card-sm px-3 py-2 font-mono text-xs font-bold text-center" style="background:#8E44AD;color:#fff;border-color:#8E44AD;min-width:100px">CHECKUP</div>
-            <div class="flex-1 h-0 border-t-2 border-dashed" style="border-color:#8E44AD"></div>
-            <div class="text-xs font-space text-gray-500">D&eacute;tecte lacune critique : pas de pr&eacute;voyance</div>
-          </div>
-          <div class="flex items-center justify-center"><div class="text-lg" style="color:#8E44AD">&#8595;</div></div>
-          <div class="flex items-center gap-3">
-            <div class="neo-card-sm px-3 py-2 font-mono text-xs font-bold text-center" style="background:#8E44AD;color:#fff;border-color:#8E44AD;min-width:100px">AUTO</div>
-            <div class="flex-1 h-0 border-t-2 border-dashed" style="border-color:#8E44AD"></div>
-            <div class="text-xs font-space text-gray-500">Cr&eacute;e dossier Augmented &rarr; branche "Pr&eacute;voyance"</div>
-          </div>
-          <div class="flex items-center justify-center"><div class="text-lg" style="color:#8E44AD">&#8595;</div></div>
-          <div class="flex items-center gap-3">
-            <div class="neo-card-sm px-3 py-2 font-mono text-xs font-bold text-center" style="background:#1E3A5F;color:#fff;border-color:#1E3A5F;min-width:100px">COURTIER</div>
-            <div class="flex-1 h-0 border-t-2 border-dashed" style="border-color:#1E3A5F"></div>
-            <div class="text-xs font-space text-gray-500">Re&ccedil;oit notification + dossier pr&eacute;-rempli</div>
-          </div>
-          <div class="flex items-center justify-center"><div class="text-lg" style="color:#1E3A5F">&#8595;</div></div>
-          <div class="flex items-center gap-3">
-            <div class="neo-card-sm px-3 py-2 font-mono text-xs font-bold text-center" style="background:#1D6A45;color:#fff;border-color:#1D6A45;min-width:100px">ACTION</div>
-            <div class="flex-1 h-0 border-t-2 border-dashed" style="border-color:#1D6A45"></div>
-            <div class="text-xs font-space text-gray-500">Courtier contacte Marc &rarr; souscription pr&eacute;voyance &rarr; +1 200&euro;/an</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">ROI CROSS-SELL</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le calcul est simple.</h2>
-    </div>
-    <div class="anim neo-card p-6 sm:p-8">
-      <div class="grid sm:grid-cols-2 gap-6">
-        <div>
-          <div class="font-mono text-xs mb-3 font-bold" style="color:#8E44AD">HYPOTH&Egrave;SE CONSERVATRICE</div>
-          <div class="space-y-2 text-sm font-space text-gray-600">
-            <div>500 clients audit&eacute;s</div>
-            <div>60% ont au moins 1 lacune critique</div>
-            <div>= 300 opportunit&eacute;s identifi&eacute;es</div>
-            <div>20% taux de conversion</div>
-            <div>= 60 nouvelles souscriptions</div>
-            <div>Prime moyenne : 800&euro;/an</div>
-          </div>
-        </div>
-        <div>
-          <div class="font-mono text-xs mb-3 font-bold" style="color:#1D6A45">R&Eacute;SULTAT</div>
-          <div class="space-y-3">
-            <div class="p-3 text-center" style="border:3px solid #1D6A45;background:rgba(29,106,69,.05)">
-              <div class="font-grotesk text-2xl font-bold" style="color:#1D6A45">+48 000&euro;</div>
-              <div class="text-xs text-gray-500 font-space">Primes additionnelles / an</div>
-            </div>
-            <div class="p-3 text-center" style="border:3px solid #8E44AD;background:rgba(142,68,173,.05)">
-              <div class="font-grotesk text-2xl font-bold" style="color:#8E44AD">+12 000&euro;</div>
-              <div class="text-xs text-gray-500 font-space">Commissions estim&eacute;es / an (25%)</div>
-            </div>
-            <div class="text-xs text-center font-space text-gray-400">Co&ucirc;t Checkup : ~500&euro;/mois = 6 000&euro;/an<br>ROI : <strong class="text-neo-black">x2 la premi&egrave;re ann&eacute;e</strong></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 7 — REPORTS (21-23) -->
-<!-- ============================================ -->
-
-<section id="reports" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 7 / RAPPORTS</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">2 formats, 1 objectif.</h2>
-      <p class="text-lg font-space leading-relaxed" style="color:rgba(255,255,255,.7)">Chaque audit g&eacute;n&egrave;re un rapport complet en 2 formats : HTML interactif dans l'app, et DOCX t&eacute;l&eacute;chargeable pour les RDV clients.</p>
-    </div>
-    <div class="anim grid sm:grid-cols-2 gap-4 mt-8">
-      <div class="p-5" style="border:2px solid rgba(255,255,255,.15)">
-        <div class="text-2xl mb-3">&#127760;</div>
-        <h4 class="font-bold text-sm mb-2">Rapport HTML (in-app)</h4>
-        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Interactif, scores visuels par axe, filtrage par priorit&eacute;, drill-down sur chaque garantie. Accessible depuis le dashboard.</p>
-      </div>
-      <div class="p-5" style="border:2px solid rgba(255,255,255,.15)">
-        <div class="text-2xl mb-3">&#128196;</div>
-        <h4 class="font-bold text-sm mb-2">Rapport DOCX (export)</h4>
-        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">T&eacute;l&eacute;chargeable, imprimable, brand&eacute; avec le logo du courtier. Parfait pour les RDV clients et la tra&ccedil;abilit&eacute; du devoir de conseil.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">CONTENU DU RAPPORT</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Ce qu'il contient.</h2>
-    </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5 flex items-start gap-4"><div class="w-8 h-8 flex-shrink-0 flex items-center justify-center font-mono text-sm font-bold text-white" style="background:#8E44AD">1</div><div><h4 class="font-bold text-sm mb-1">R&eacute;sum&eacute; ex&eacute;cutif</h4><p class="text-xs text-gray-500 font-space">Score global, nombre de lacunes par priorit&eacute;, phrase cl&eacute; ("Ce portefeuille pr&eacute;sente 5 lacunes critiques n&eacute;cessitant une action imm&eacute;diate").</p></div></div>
-      <div class="neo-card p-5 flex items-start gap-4"><div class="w-8 h-8 flex-shrink-0 flex items-center justify-center font-mono text-sm font-bold text-white" style="background:#8E44AD">2</div><div><h4 class="font-bold text-sm mb-1">Score par axe</h4><p class="text-xs text-gray-500 font-space">Barre de progression pour chaque axe analys&eacute;. Code couleur : rouge (&lt;40), orange (40-60), jaune (60-80), vert (&gt;80).</p></div></div>
-      <div class="neo-card p-5 flex items-start gap-4"><div class="w-8 h-8 flex-shrink-0 flex items-center justify-center font-mono text-sm font-bold text-white" style="background:#8E44AD">3</div><div><h4 class="font-bold text-sm mb-1">D&eacute;tail des lacunes</h4><p class="text-xs text-gray-500 font-space">Pour chaque lacune : description, impact, urgence, action recommand&eacute;e, prime estim&eacute;e.</p></div></div>
-      <div class="neo-card p-5 flex items-start gap-4"><div class="w-8 h-8 flex-shrink-0 flex items-center justify-center font-mono text-sm font-bold text-white" style="background:#8E44AD">4</div><div><h4 class="font-bold text-sm mb-1">Recommandations prioris&eacute;es</h4><p class="text-xs text-gray-500 font-space">Top 3 priorit&eacute;s avec argumentaire. Le courtier peut directement utiliser ce texte en RDV client.</p></div></div>
-      <div class="neo-card p-5 flex items-start gap-4"><div class="w-8 h-8 flex-shrink-0 flex items-center justify-center font-mono text-sm font-bold text-white" style="background:#8E44AD">5</div><div><h4 class="font-bold text-sm mb-1">Carte de couverture existante</h4><p class="text-xs text-gray-500 font-space">Vue compl&egrave;te de ce que le client a d&eacute;j&agrave; : contrats, garanties, montants, &eacute;ch&eacute;ances. Sert aussi de base pour le renouvellement.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 8 — CAMPAIGN MODE (24-26) -->
-<!-- ============================================ -->
-
-<section id="campaign" class="py-20 px-4" style="background:#8E44AD;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 8 / MODE CAMPAGNE</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Audit de masse.</h2>
-      <p class="text-lg font-space leading-relaxed" style="color:rgba(255,255,255,.8)">Checkup 360&deg; permet d'auditer l'int&eacute;gralit&eacute; du portefeuille en une seule op&eacute;ration. Le courtier importe 500 clients depuis le CRM, Checkup les audite tous, et produit une liste prioris&eacute;e de qui appeler en premier.</p>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:#8E44AD">TARIFICATION CAMPAGNE</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Packs Checkup 360&deg;.</h2>
-    </div>
-    <div class="anim grid sm:grid-cols-3 gap-4">
-      <div class="neo-card p-6 text-center">
-        <div class="font-mono text-xs font-bold mb-3">PACK 100</div>
-        <div class="font-grotesk text-3xl font-bold mb-1" style="color:#8E44AD">149&euro;</div>
-        <div class="text-xs text-gray-500 font-space mb-3">/mois</div>
-        <div class="space-y-1 text-xs font-space text-gray-600">
-          <div>100 audits / mois</div>
-          <div class="font-bold" style="color:#8E44AD">1,49&euro; / audit</div>
-          <div>Rapports HTML + DOCX</div>
-          <div>Dossiers Augmented auto</div>
-        </div>
-      </div>
-      <div class="neo-card p-6 text-center pulse-purple" style="border-color:#8E44AD;border-width:3px">
-        <div class="flex items-center justify-center gap-2 mb-3"><span class="font-mono text-xs font-bold">PACK 250</span><span class="tag-mvp">POPULAIRE</span></div>
-        <div class="font-grotesk text-3xl font-bold mb-1" style="color:#8E44AD">299&euro;</div>
-        <div class="text-xs text-gray-500 font-space mb-3">/mois</div>
-        <div class="space-y-1 text-xs font-space text-gray-600">
-          <div>250 audits / mois</div>
-          <div class="font-bold" style="color:#8E44AD">1,20&euro; / audit</div>
-          <div>Rapports HTML + DOCX</div>
-          <div>Dossiers Augmented auto</div>
-          <div class="font-bold">Dashboard priorit&eacute;s</div>
-        </div>
-      </div>
-      <div class="neo-card p-6 text-center">
-        <div class="font-mono text-xs font-bold mb-3">PACK 500</div>
-        <div class="font-grotesk text-3xl font-bold mb-1" style="color:#8E44AD">499&euro;</div>
-        <div class="text-xs text-gray-500 font-space mb-3">/mois</div>
-        <div class="space-y-1 text-xs font-space text-gray-600">
-          <div>500 audits / mois</div>
-          <div class="font-bold" style="color:#8E44AD">1,00&euro; / audit</div>
-          <div>Rapports HTML + DOCX</div>
-          <div>Dossiers Augmented auto</div>
-          <div class="font-bold">Dashboard + API acc&egrave;s</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 9 — CONNECTIONS (27-28) -->
-<!-- ============================================ -->
-
-<section class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 9 / CONNEXIONS MODULES</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Checkup dans l'&eacute;cosyst&egrave;me.</h2>
-      <p class="text-lg font-space mb-8" style="color:rgba(255,255,255,.7)">Checkup ne fonctionne pas en silo. Il est connect&eacute; aux autres modules BrokerONE.</p>
-    </div>
-    <div class="anim space-y-4">
-      <div class="p-5" style="border:2px solid rgba(255,255,255,.15)">
-        <div class="flex items-center gap-2 mb-2"><span class="tag-conn">SENTINEL &rarr; CHECKUP</span></div>
-        <p class="text-sm font-space" style="color:rgba(255,255,255,.7)">Quand Sentinel d&eacute;tecte un &eacute;v&eacute;nement de type BESOIN_ASSURANCE (ex : naissance, d&eacute;m&eacute;nagement, cr&eacute;ation d'entreprise via email), Checkup lance automatiquement un audit parall&egrave;le du client concern&eacute;.</p>
-        <div class="text-xs font-mono mt-2" style="color:#AF7AC5">Trigger : event_type = "BESOIN_ASSURANCE" &rarr; POST /api/checkup/audit</div>
-      </div>
-      <div class="p-5" style="border:2px solid rgba(255,255,255,.15)">
-        <div class="flex items-center gap-2 mb-2"><span class="tag-conn">CHECKUP &rarr; AUGMENTED</span></div>
-        <p class="text-sm font-space" style="color:rgba(255,255,255,.7)">Quand Checkup identifie une lacune class&eacute;e "Critique", il cr&eacute;e automatiquement un dossier Augmented pr&eacute;-rempli pour la branche concern&eacute;e. Le courtier re&ccedil;oit une notification et d&eacute;cide de la suite.</p>
-        <div class="text-xs font-mono mt-2" style="color:#AF7AC5">Trigger : priority = "CRITICAL" &rarr; POST /api/augmented/dossier</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">DIAGRAMME CONNEXIONS</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Flux inter-modules.</h2>
-    </div>
-    <div class="anim neo-card p-6 sm:p-8">
-      <div class="flex flex-col items-center space-y-3">
-        <div class="neo-card-sm px-6 py-3 font-mono text-sm font-bold text-center text-white" style="background:#1E3A5F;border-color:#1E3A5F;min-width:240px">
-          SENTINEL<br><span class="font-space text-xs font-normal" style="color:rgba(255,255,255,.6)">D&eacute;tecte &eacute;v&eacute;nement vie</span>
-        </div>
-        <div class="flex items-center gap-2"><div class="w-0 h-8 border-l-2 border-dashed" style="border-color:#8E44AD"></div></div>
-        <div class="text-xs font-mono px-3 py-1" style="background:rgba(142,68,173,.1);border:1px solid #8E44AD;color:#8E44AD">BESOIN_ASSURANCE</div>
-        <div class="flex items-center gap-2"><div class="w-0 h-8 border-l-2 border-dashed" style="border-color:#8E44AD"></div></div>
-        <div class="neo-card-sm px-6 py-3 font-mono text-sm font-bold text-center text-white" style="background:#8E44AD;border-color:#8E44AD;min-width:240px">
-          CHECKUP<br><span class="font-space text-xs font-normal" style="color:rgba(255,255,255,.6)">Audit 360&deg; du client</span>
-        </div>
-        <div class="flex items-center gap-2"><div class="w-0 h-8 border-l-2 border-dashed" style="border-color:#C0392B"></div></div>
-        <div class="text-xs font-mono px-3 py-1" style="background:rgba(192,57,43,.1);border:1px solid #C0392B;color:#C0392B">LACUNE CRITIQUE</div>
-        <div class="flex items-center gap-2"><div class="w-0 h-8 border-l-2 border-dashed" style="border-color:#C0392B"></div></div>
-        <div class="neo-card-sm px-6 py-3 font-mono text-sm font-bold text-center text-white" style="background:#C0392B;border-color:#C0392B;min-width:240px">
-          AUGMENTED<br><span class="font-space text-xs font-normal" style="color:rgba(255,255,255,.6)">Dossier pr&eacute;-rempli</span>
-        </div>
-        <div class="flex items-center gap-2"><div class="w-0 h-8 border-l-2 border-dashed" style="border-color:#1D6A45"></div></div>
-        <div class="text-xs font-mono px-3 py-1" style="background:rgba(29,106,69,.1);border:1px solid #1D6A45;color:#1D6A45">SOUSCRIPTION</div>
-        <div class="flex items-center gap-2"><div class="w-0 h-8 border-l-2 border-dashed" style="border-color:#1D6A45"></div></div>
-        <div class="neo-card-sm px-6 py-3 font-mono text-sm font-bold text-center text-white" style="background:#1D6A45;border-color:#1D6A45;min-width:240px">
-          REVENU<br><span class="font-space text-xs font-normal" style="color:rgba(255,255,255,.6)">+primes pour le courtier</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 10 — TECHNICAL + UI WIREFRAMES (29-31) -->
-<!-- ============================================ -->
-
-<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:#8E44AD">PART 10 / TECHNIQUE</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Stack technique.</h2>
-    </div>
-    <div class="anim grid sm:grid-cols-2 gap-4">
-      <div class="neo-card p-5">
-        <div class="font-mono text-xs font-bold mb-3" style="color:#8E44AD">IA & ANALYSE</div>
-        <div class="space-y-2 text-xs font-space text-gray-600">
-          <div>&#9679; Claude Sonnet pour l'analyse multi-axes</div>
-          <div>&#9679; Prompt structur&eacute; par axe + profil client</div>
-          <div>&#9679; Output JSON strict (scores + lacunes)</div>
-          <div>&#9679; Fallback + retry (3x backoff)</div>
-        </div>
-      </div>
-      <div class="neo-card p-5">
-        <div class="font-mono text-xs font-bold mb-3" style="color:#8E44AD">CRM & DATA</div>
-        <div class="space-y-2 text-xs font-space text-gray-600">
-          <div>&#9679; API Brio / BrokerCloud pour extraction</div>
-          <div>&#9679; Normalisation des donn&eacute;es contrats</div>
-          <div>&#9679; Cache local pour r&eacute;audits rapides</div>
-          <div>&#9679; Connecteur g&eacute;n&eacute;rique (adaptable)</div>
-        </div>
-      </div>
-      <div class="neo-card p-5">
-        <div class="font-mono text-xs font-bold mb-3" style="color:#8E44AD">BASE DE DONN&Eacute;ES</div>
-        <div class="space-y-2 text-xs font-space text-gray-600">
+        <p class="text-sm text-gray-500 font-space mb-3">Sauvegarder les audits, scores, rapports en base. Tables avec RLS. Historique d'audits par client, versioning des rapports.</p>
+        <div class="grid sm:grid-cols-2 gap-2 text-xs font-space text-gray-400">
           <div>&#9679; <code class="bg-neo-gray px-1">checkup_audits</code> &mdash; audit principal</div>
           <div>&#9679; <code class="bg-neo-gray px-1">checkup_scores</code> &mdash; scores par axe</div>
           <div>&#9679; <code class="bg-neo-gray px-1">checkup_gaps</code> &mdash; lacunes d&eacute;tect&eacute;es</div>
           <div>&#9679; <code class="bg-neo-gray px-1">checkup_reports</code> &mdash; rapports g&eacute;n&eacute;r&eacute;s</div>
-          <div>&#9679; <code class="bg-neo-gray px-1">ipid_guarantees</code> &mdash; r&eacute;f&eacute;rentiel 218 garanties</div>
+          <div>&#9679; <code class="bg-neo-gray px-1">checkup_campaigns</code> &mdash; campagnes bulk</div>
+          <div>&#9679; <code class="bg-neo-gray px-1">ipid_guarantees</code> &mdash; r&eacute;f&eacute;rentiel 218</div>
         </div>
       </div>
-      <div class="neo-card p-5">
-        <div class="font-mono text-xs font-bold mb-3" style="color:#8E44AD">G&Eacute;N&Eacute;RATION RAPPORTS</div>
-        <div class="space-y-2 text-xs font-space text-gray-600">
-          <div>&#9679; Template HTML (React server component)</div>
-          <div>&#9679; DOCX via docx.js (t&eacute;l&eacute;chargement)</div>
-          <div>&#9679; Branding dynamique (logo + couleurs courtier)</div>
-          <div>&#9679; PDF optionnel (via Puppeteer)</div>
+      <div class="neo-card p-6" style="border-left:6px solid #8E44AD">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="tag-bloc">BLOC 4</span>
+          <h4 class="font-bold text-sm">Campaign mode</h4>
+          <span class="tag-done">2-3 JOURS</span>
         </div>
+        <p class="text-sm text-gray-500 font-space">Audit en masse : importer des clients depuis le CRM, lancer le batch, suivre la progression, recevoir un email quand c'est termin&eacute;. Dashboard des r&eacute;sultats tri&eacute;s par urgence.</p>
       </div>
     </div>
   </div>
@@ -982,7 +486,47 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 <section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4">UI WIREFRAMES</div>
+      <div class="section-number mb-4" style="color:#8E44AD">12 / BLOCS 5-6</div>
+      <h2 class="font-grotesk text-3xl sm:text-4xl font-bold mb-6">Multi-tenant + Production.</h2>
+    </div>
+    <div class="anim grid sm:grid-cols-1 gap-4">
+      <div class="neo-card p-6" style="border-left:6px solid #8E44AD">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="tag-bloc">BLOC 5</span>
+          <h4 class="font-bold text-sm">Multi-tenant + Auth + Connexions</h4>
+          <span class="tag-done">2-3 JOURS</span>
+        </div>
+        <p class="text-sm text-gray-500 font-space mb-3">Auth Supabase, isolation des donn&eacute;es par courtier, onboarding, settings. Connexions inter-modules :</p>
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div class="p-3 bg-neo-gray neo-border-2">
+            <div class="flex items-center gap-2 mb-1"><span class="tag-conn">SENTINEL &rarr; CHECKUP</span></div>
+            <p class="text-xs text-gray-500 font-space">D&eacute;tection besoin assurance &rarr; audit auto du client concern&eacute;</p>
+          </div>
+          <div class="p-3 bg-neo-gray neo-border-2">
+            <div class="flex items-center gap-2 mb-1"><span class="tag-conn">CHECKUP &rarr; AUGMENTED</span></div>
+            <p class="text-xs text-gray-500 font-space">Lacune critique &rarr; dossier Augmented pr&eacute;-rempli automatiquement</p>
+          </div>
+        </div>
+      </div>
+      <div class="neo-card p-6" style="border-left:6px solid #8E44AD">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="tag-bloc">BLOC 6</span>
+          <h4 class="font-bold text-sm">Production : rebrand + calibration + tests</h4>
+          <span class="tag-done">2-3 JOURS</span>
+        </div>
+        <p class="text-sm text-gray-500 font-space">Couleurs BrokerONE dans tout le produit. Calibration du scoring sur vrais portefeuilles (avec Bruno). Tests complets. Edge cases. Performance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 13 / WIREFRAMES -->
+<!-- ============================================ -->
+<section id="wireframes" class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#8E44AD">13 / WIREFRAMES</div>
       <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Aper&ccedil;u des &eacute;crans.</h2>
     </div>
     <div class="anim space-y-6">
@@ -1022,7 +566,7 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 
       <!-- Wireframe 2: Audit Detail -->
       <div class="neo-card p-5">
-        <div class="font-mono text-xs font-bold mb-3" style="color:#8E44AD">PAGE &mdash; D&Eacute;TAIL AUDIT</div>
+        <div class="font-mono text-xs font-bold mb-3" style="color:#8E44AD">PAGE &mdash; D&Eacute;TAIL AUDIT (SCORE CIRCLE + BARRES AXES + PRIORIT&Eacute;S)</div>
         <div class="p-4 bg-neo-gray neo-border-2">
           <div class="flex items-center gap-4 mb-4">
             <div class="relative w-16 h-16 flex-shrink-0">
@@ -1040,232 +584,139 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
           <div class="space-y-1 text-xs">
             <div class="flex items-center gap-2"><span class="w-20 font-space">Mobilit&eacute;</span><div class="flex-1 h-3 bg-white neo-border-2"><div style="width:85%;height:100%;background:#8E44AD"></div></div><span class="font-mono w-8 text-right">85</span></div>
             <div class="flex items-center gap-2"><span class="w-20 font-space">Habitation</span><div class="flex-1 h-3 bg-white neo-border-2"><div style="width:70%;height:100%;background:#8E44AD"></div></div><span class="font-mono w-8 text-right">70</span></div>
+            <div class="flex items-center gap-2"><span class="w-20 font-space">Famille</span><div class="flex-1 h-3 bg-white neo-border-2"><div style="width:30%;height:100%;background:#E67E22"></div></div><span class="font-mono w-8 text-right" style="color:#E67E22">30</span></div>
             <div class="flex items-center gap-2"><span class="w-20 font-space">Revenus</span><div class="flex-1 h-3 bg-white neo-border-2"><div style="width:0%;height:100%;background:#C0392B"></div></div><span class="font-mono w-8 text-right" style="color:#C0392B">0</span></div>
             <div class="flex items-center gap-2"><span class="w-20 font-space">Sant&eacute;</span><div class="flex-1 h-3 bg-white neo-border-2"><div style="width:0%;height:100%;background:#C0392B"></div></div><span class="font-mono w-8 text-right" style="color:#C0392B">0</span></div>
           </div>
-          <div class="mt-3 flex gap-2">
+          <div class="mt-3 p-2 bg-red-50 neo-border-2 text-xs font-space" style="border-color:#C0392B">
+            <strong style="color:#C0392B">Top 1 :</strong> RC Professionnelle manquante &mdash; <strong style="color:#C0392B">CRITIQUE</strong>
+          </div>
+          <div class="mt-2 flex gap-2">
             <div class="neo-card-sm px-3 py-1 text-xs font-mono font-bold" style="background:#8E44AD;color:#fff;border-color:#8E44AD">Rapport HTML</div>
             <div class="neo-card-sm px-3 py-1 text-xs font-mono font-bold">Export DOCX</div>
           </div>
         </div>
       </div>
+
+      <!-- Wireframe 3: Campaign Progress -->
+      <div class="neo-card p-5">
+        <div class="font-mono text-xs font-bold mb-3" style="color:#8E44AD">PAGE &mdash; PROGRESSION CAMPAGNE</div>
+        <div class="p-4 bg-neo-gray neo-border-2">
+          <div class="flex items-center justify-between mb-3">
+            <div class="font-grotesk font-bold text-sm">Campagne Q2 2026</div>
+            <span class="tag-bloc">EN COURS</span>
+          </div>
+          <div class="mb-3">
+            <div class="flex justify-between text-xs font-space text-gray-500 mb-1"><span>Progression</span><span>247 / 500 audits</span></div>
+            <div class="h-4 bg-white neo-border-2"><div style="width:49%;height:100%;background:linear-gradient(90deg,#8E44AD,#AF7AC5)"></div></div>
+          </div>
+          <div class="grid grid-cols-4 gap-2 text-center text-xs font-space">
+            <div class="p-2 bg-white neo-border-2"><div class="font-bold text-lg" style="color:#C0392B">38</div>Alarmant</div>
+            <div class="p-2 bg-white neo-border-2"><div class="font-bold text-lg" style="color:#E67E22">89</div>Attention</div>
+            <div class="p-2 bg-white neo-border-2"><div class="font-bold text-lg" style="color:#F1C40F">74</div>Bon</div>
+            <div class="p-2 bg-white neo-border-2"><div class="font-bold text-lg" style="color:#1D6A45">46</div>Excellent</div>
+          </div>
+          <div class="mt-2 text-xs font-space text-gray-400 text-center">Temps restant estim&eacute; : ~45 min</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================ -->
-<!-- PART 11 — MVP CHECKLIST -->
+<!-- 14 / CAMPAIGN MODE PRICING -->
 <!-- ============================================ -->
+<section id="campaign-pricing" class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#8E44AD">14 / TARIFICATION CAMPAGNE</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Packs Checkup 360&deg;.</h2>
+      <p class="text-sm text-gray-500 font-space mb-6">Tarification mensuelle par volume d'audits. Le courtier choisit son pack selon la taille de son portefeuille.</p>
+    </div>
+    <div class="anim grid sm:grid-cols-3 gap-4">
+      <div class="neo-card p-6 text-center">
+        <div class="font-mono text-xs font-bold mb-3">PACK 100</div>
+        <div class="font-grotesk text-3xl font-bold mb-1" style="color:#8E44AD">149&euro;</div>
+        <div class="text-xs text-gray-500 font-space mb-3">/mois</div>
+        <div class="space-y-1 text-xs font-space text-gray-600">
+          <div>100 audits / mois</div>
+          <div class="font-bold" style="color:#8E44AD">1,49&euro; / audit</div>
+          <div>Rapports HTML + DOCX</div>
+          <div>Dossiers Augmented auto</div>
+        </div>
+      </div>
+      <div class="neo-card p-6 text-center pulse-purple" style="border-color:#8E44AD;border-width:3px">
+        <div class="flex items-center justify-center gap-2 mb-3"><span class="font-mono text-xs font-bold">PACK 250</span><span class="tag-bloc">POPULAIRE</span></div>
+        <div class="font-grotesk text-3xl font-bold mb-1" style="color:#8E44AD">299&euro;</div>
+        <div class="text-xs text-gray-500 font-space mb-3">/mois</div>
+        <div class="space-y-1 text-xs font-space text-gray-600">
+          <div>250 audits / mois</div>
+          <div class="font-bold" style="color:#8E44AD">1,20&euro; / audit</div>
+          <div>Rapports HTML + DOCX</div>
+          <div>Dossiers Augmented auto</div>
+          <div class="font-bold">Dashboard priorit&eacute;s</div>
+        </div>
+      </div>
+      <div class="neo-card p-6 text-center">
+        <div class="font-mono text-xs font-bold mb-3">PACK 500</div>
+        <div class="font-grotesk text-3xl font-bold mb-1" style="color:#8E44AD">499&euro;</div>
+        <div class="text-xs text-gray-500 font-space mb-3">/mois</div>
+        <div class="space-y-1 text-xs font-space text-gray-600">
+          <div>500 audits / mois</div>
+          <div class="font-bold" style="color:#8E44AD">1,00&euro; / audit</div>
+          <div>Rapports HTML + DOCX</div>
+          <div>Dossiers Augmented auto</div>
+          <div class="font-bold">Dashboard + API acc&egrave;s</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<section class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
+<!-- ============================================ -->
+<!-- 15 / CHECKLIST -->
+<!-- ============================================ -->
+<section id="checklist" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto text-white">
     <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 11 / SCOPE MVP</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Checklist MVP. <span class="tag-mvp">10 000&euro;</span></h2>
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">15 / CHECKLIST</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Tout ce qui sera livr&eacute;. <span class="tag-bloc">11 000&euro;</span></h2>
     </div>
     <div class="anim">
       <div class="space-y-2">
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">01</span><span class="text-sm font-space">Connecteur CRM (Brio/BrokerCloud) &mdash; extraction contrats client</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">02</span><span class="text-sm font-space">Base de donn&eacute;es IPID (218 garanties structur&eacute;es par branche)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">03</span><span class="text-sm font-space">Tables Supabase (audits, scores, gaps, reports, ipid_guarantees)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">04</span><span class="text-sm font-space">Moteur d'analyse 17 axes (Claude Sonnet, prompt structur&eacute;)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">05</span><span class="text-sm font-space">Scoring global 0-100 + scoring par axe</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">06</span><span class="text-sm font-space">Comparaison IPID (pr&eacute;sent / absent / sous-couvert / doublon)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">07</span><span class="text-sm font-space">Classification priorit&eacute;s (Critique / Important / Recommand&eacute;)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">08</span><span class="text-sm font-space">Top 3 priorit&eacute;s avec argumentaire</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">09</span><span class="text-sm font-space">G&eacute;n&eacute;ration rapport HTML (in-app, interactif)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">10</span><span class="text-sm font-space">G&eacute;n&eacute;ration rapport DOCX (t&eacute;l&eacute;chargeable, imprimable)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">11</span><span class="text-sm font-space">Branding rapports (logo, couleurs, coordonn&eacute;es courtier)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">12</span><span class="text-sm font-space">Cr&eacute;ation auto dossier Augmented sur lacune critique</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">13</span><span class="text-sm font-space">Mode campagne bulk (import CRM &rarr; audit 500 clients)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">14</span><span class="text-sm font-space">Dashboard priorit&eacute;s campagne (tri&eacute; par score / urgence)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">15</span><span class="text-sm font-space">Connexion Sentinel &rarr; Checkup (BESOIN_ASSURANCE)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">16</span><span class="text-sm font-space">Page liste des audits (search, filtre, tri)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">17</span><span class="text-sm font-space">Page d&eacute;tail audit (score cercle + barres axes + priorit&eacute;s)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">18</span><span class="text-sm font-space">Page aper&ccedil;u rapport (pr&eacute;visualisation avant export)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">19</span><span class="text-sm font-space">API endpoints (7 routes document&eacute;es)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">20</span><span class="text-sm font-space">RLS Supabase (isolation des donn&eacute;es par courtier)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">01</span><span class="text-sm font-space">Page liste des audits (search, filtres, tri par score/date/statut)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">02</span><span class="text-sm font-space">Page d&eacute;tail audit (score cercle + barres axes + top 3 priorit&eacute;s)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">03</span><span class="text-sm font-space">Report preview in-app + export DOCX + export PDF</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">04</span><span class="text-sm font-space">Campaign management page (lancer, suivre, r&eacute;sultats)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">05</span><span class="text-sm font-space">Settings (branding, CRM credentials, seuils, pr&eacute;f&eacute;rences)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">06</span><span class="text-sm font-space">Port pipeline_ICU.js &rarr; TypeScript strict</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">07</span><span class="text-sm font-space">Int&eacute;gration Brio connector dans l'architecture Next.js</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">08</span><span class="text-sm font-space">Tables Supabase + RLS (audits, scores, gaps, reports, campaigns, ipid)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">09</span><span class="text-sm font-space">Persistance compl&egrave;te : historique audits, versioning rapports</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">10</span><span class="text-sm font-space">Mode campagne bulk : import CRM &rarr; audit N clients &rarr; r&eacute;sultats</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">11</span><span class="text-sm font-space">Progress tracking temps r&eacute;el + r&eacute;sultats partiels si interruption</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">12</span><span class="text-sm font-space">Notification email quand campagne termin&eacute;e</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">13</span><span class="text-sm font-space">Auth Supabase + onboarding wizard</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">14</span><span class="text-sm font-space">Multi-tenant : isolation donn&eacute;es, quotas par courtier</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">15</span><span class="text-sm font-space">Connexion Sentinel &rarr; Checkup (BESOIN_ASSURANCE)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">16</span><span class="text-sm font-space">Connexion Checkup &rarr; Augmented (lacunes critiques)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">17</span><span class="text-sm font-space">Rebrand BrokerONE (couleurs, rapports, exports)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">18</span><span class="text-sm font-space">Calibration scoring avec Bruno sur vrais portefeuilles</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">19</span><span class="text-sm font-space">Edge cases (0 contrats, 20+ contrats, CRM incomplet, produit inconnu)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">20</span><span class="text-sm font-space">Tests complets + documentation + performance (audit &lt;45s, campagne 100 &lt;2h)</span></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================ -->
-<!-- TRANSITION — MVP → PRODUCTION -->
+<!-- 16 / TIMELINE -->
 <!-- ============================================ -->
-
-<section id="transition" class="py-24 px-4 part-divider" style="background:linear-gradient(135deg,#8E44AD 0%,#C0392B 100%);border-top:3px solid #0a0a0a">
-  <div class="max-w-3xl mx-auto text-center text-white relative z-10">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">TRANSITION</div>
-      <div class="flex items-center justify-center gap-4 mb-6">
-        <span class="tag-mvp" style="background:#fff;color:#8E44AD">MVP 10 000&euro; &#10003;</span>
-        <span class="font-grotesk text-2xl font-bold">&rarr;</span>
-        <span class="tag-prod" style="background:#fff;color:#C0392B">PRODUCTION 5 500&euro;</span>
-      </div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">De "&ccedil;a marche"<br>&agrave; "c'est fiable".</h2>
-      <p class="text-lg font-space leading-relaxed" style="color:rgba(255,255,255,.8)">Le MVP prouve le concept. La production garantit que 500 audits tournent sans timeout, que les rapports sont imprimables, que le scoring est calibr&eacute; sur de vrais portefeuilles.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 12 — PRODUCTION: REBRAND + IPID -->
-<!-- ============================================ -->
-
-<section id="rebrand" class="py-20 px-4" style="background:#1E3A5F;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 12 / REBRAND + IPID DATABASE</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Couleurs BrokerONE + IPID fiable &agrave; 100%.</h2>
-      <p class="text-lg font-space" style="color:rgba(255,255,255,.7)">Les rapports, le dashboard, les exports &mdash; tout passe &agrave; l'identit&eacute; BrokerONE. Et la base IPID est v&eacute;rifi&eacute;e, enrichie, versionn&eacute;e.</p>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">REBRAND + IPID D&Eacute;TAILS</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Ce qui change.</h2>
-    </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-prod">PROD</span><div><h4 class="font-bold text-sm mb-1">Rapports d'audit brand&eacute;s</h4><p class="text-xs text-gray-500 font-space">Couleurs BrokerONE (#1E3A5F, #C0392B) dans les rapports HTML et DOCX. Header avec logo, palette coh&eacute;rente.</p></div></div>
-      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-prod">PROD</span><div><h4 class="font-bold text-sm mb-1">Dashboard + exports aux couleurs BrokerONE</h4><p class="text-xs text-gray-500 font-space">Toutes les vues d'audit (liste, d&eacute;tail, campagne) et fichiers DOCX/PDF export&eacute;s avec l'identit&eacute; BrokerONE.</p></div></div>
-      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-prod">PROD</span><div><h4 class="font-bold text-sm mb-1">V&eacute;rification des 218 garanties IPID</h4><p class="text-xs text-gray-500 font-space">Chaque garantie v&eacute;rifi&eacute;e manuellement : est-ce exact ? Est-ce &agrave; jour ? Recoupement avec les IPID officiels des assureurs.</p></div></div>
-      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-prod">PROD</span><div><h4 class="font-bold text-sm mb-1">Ajout garanties manquantes + versioning</h4><p class="text-xs text-gray-500 font-space">Compl&eacute;ter la base pour les cas courants. Version control r&eacute;glementaire avec historique des modifications et audit trail.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 13 — PRODUCTION: REPORT POLISH + CAMPAIGN -->
-<!-- ============================================ -->
-
-<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:#C0392B">PART 13 / REPORT POLISH + CAMPAIGN HARDENING</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Rapports pro + 500 audits sans broncher.</h2>
-    </div>
-    <div class="anim space-y-3 mb-8">
-      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-prod">PROD</span><div><h4 class="font-bold text-sm mb-1">Page de couverture + Table des mati&egrave;res</h4><p class="text-xs text-gray-500 font-space">Logo du courtier, nom du client, score global en gros. Sommaire automatique avec liens. Premi&egrave;re impression pro.</p></div></div>
-      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-prod">PROD</span><div><h4 class="font-bold text-sm mb-1">Graphes embarqu&eacute;s + Formatage A4 print-ready</h4><p class="text-xs text-gray-500 font-space">Radar chart des 17 axes, bar charts, jauge score global &mdash; directement dans le DOCX. Marges, sauts de page, en-t&ecirc;tes/pieds de page pour impression sans retouche.</p></div></div>
-    </div>
-    <div class="anim grid sm:grid-cols-2 gap-4">
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Bulk 500 sans timeout</h4></div><p class="text-xs text-gray-500 font-space">Traitement par batch avec queue. Chaque audit est ind&eacute;pendant. Un &eacute;chec ne bloque pas les autres.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Progress tracking</h4></div><p class="text-xs text-gray-500 font-space">Barre de progression en temps r&eacute;el. "47/500 audits termin&eacute;s". Temps restant estim&eacute;.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">R&eacute;sultats partiels</h4></div><p class="text-xs text-gray-500 font-space">Si la campagne est interrompue, les audits d&eacute;j&agrave; termin&eacute;s sont conserv&eacute;s. Reprise possible.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Notification email</h4></div><p class="text-xs text-gray-500 font-space">Le courtier lance 500 audits et ferme son navigateur. Email quand c'est termin&eacute; avec r&eacute;sum&eacute;.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 14 — PRODUCTION: SCORING + UI -->
-<!-- ============================================ -->
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:#C0392B">PART 14 / SCORING CALIBRATION + UI POLISH</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Un score qui a du sens. Une interface &agrave; la hauteur.</h2>
-    </div>
-    <div class="anim space-y-3 mb-8">
-      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-prod">PROD</span><div><h4 class="font-bold text-sm mb-1">Tests sur vrais portefeuilles</h4><p class="text-xs text-gray-500 font-space">Passer les clients tests de Bruno dans le moteur d'audit. V&eacute;rifier que les scores correspondent &agrave; l'intuition m&eacute;tier.</p></div></div>
-      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-prod">PROD</span><div><h4 class="font-bold text-sm mb-1">Ajustement des poids par axe</h4><p class="text-xs text-gray-500 font-space">Calibrer les poids avec Bruno : couverture > prix > franchise ? Ou l'inverse selon le profil client ?</p></div></div>
-      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-prod">PROD</span><div><h4 class="font-bold text-sm mb-1">Validation des priorit&eacute;s</h4><p class="text-xs text-gray-500 font-space">Le top 3 priorit&eacute;s identifi&eacute; par l'IA correspond-il &agrave; ce que Bruno recommanderait ? Ajuster le prompt et les r&egrave;gles si n&eacute;cessaire.</p></div></div>
-    </div>
-    <div class="anim grid sm:grid-cols-3 gap-5">
-      <div class="neo-card p-5"><div class="text-2xl mb-2">&#128241;</div><h4 class="font-bold text-sm mb-2">Responsive</h4><p class="text-xs text-gray-500 font-space">Dashboard d'audit, d&eacute;tail client, r&eacute;sultats de campagne &mdash; tout fonctionne sur mobile et tablette.</p></div>
-      <div class="neo-card p-5"><div class="text-2xl mb-2">&#127919;</div><h4 class="font-bold text-sm mb-2">Score anim&eacute;</h4><p class="text-xs text-gray-500 font-space">Cercle anim&eacute; pour le score global (0-100). Couleur dynamique : rouge &lt;40, orange 40-70, vert &gt;70.</p></div>
-      <div class="neo-card p-5"><div class="text-2xl mb-2">&#128202;</div><h4 class="font-bold text-sm mb-2">Charts par axe</h4><p class="text-xs text-gray-500 font-space">Radar chart des 17 axes, bar charts comparatifs, breakdown d&eacute;taill&eacute; par cat&eacute;gorie de garantie.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 15 — PRODUCTION: SECURITY + EDGE CASES + PERF + MULTI-TENANT -->
-<!-- ============================================ -->
-
-<section class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 15 / S&Eacute;CURIT&Eacute; + EDGE CASES + PERF + MULTI-TENANT</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Robustesse production.</h2>
-    </div>
-    <div class="anim grid sm:grid-cols-2 gap-4 mb-8">
-      <div class="p-4 flex items-start gap-4" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">PROD</span><div><h4 class="font-bold text-sm mb-1 text-white">Rate limit + rapports immutables</h4><p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Quotas par courtier pour contr&ocirc;ler les co&ucirc;ts API. Rapports horodat&eacute;s + hash d'int&eacute;grit&eacute; pour valeur juridique.</p></div></div>
-      <div class="p-4 flex items-start gap-4" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">PROD</span><div><h4 class="font-bold text-sm mb-1 text-white">Edge cases</h4><p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Client 0 contrats, 20+ contrats, produit inconnu, CRM incomplet. Chaque cas g&eacute;r&eacute; proprement avec message clair.</p></div></div>
-      <div class="p-4 flex items-start gap-4" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">PROD</span><div><h4 class="font-bold text-sm mb-1 text-white">Multi-tenant</h4><p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Campagnes simultan&eacute;es, r&eacute;sultats isol&eacute;s par courtier (RLS), quotas par plan.</p></div></div>
-      <div class="p-4 flex items-start gap-4" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">PROD</span><div><h4 class="font-bold text-sm mb-1 text-white">Performance</h4><p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Audit &lt;45s, campagne 100 &lt;2h, DOCX &lt;5s. Batch processing avec queue.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 16 — PRODUCTION: TESTS & DOCS -->
-<!-- ============================================ -->
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:#C0392B">PART 16 / TESTS & DOCUMENTATION</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Tester et documenter.</h2>
-    </div>
-    <div class="anim grid sm:grid-cols-2 gap-4">
-      <div class="neo-card p-5"><div class="text-2xl mb-2">&#128269;</div><h4 class="font-bold text-sm mb-2">Tests vrais portefeuilles</h4><p class="text-xs text-gray-500 font-space">Passer les clients tests de Bruno dans Checkup. V&eacute;rifier que les scores et priorit&eacute;s correspondent &agrave; la r&eacute;alit&eacute; m&eacute;tier.</p></div>
-      <div class="neo-card p-5"><div class="text-2xl mb-2">&#128200;</div><h4 class="font-bold text-sm mb-2">V&eacute;rification scoring</h4><p class="text-xs text-gray-500 font-space">Comparer les scores Checkup avec l'avis expert de Bruno. Ajuster si &eacute;cart significatif.</p></div>
-      <div class="neo-card p-5"><div class="text-2xl mb-2">&#128214;</div><h4 class="font-bold text-sm mb-2">Guide interpr&eacute;tation scores</h4><p class="text-xs text-gray-500 font-space">Documentation : que signifie un score de 35 vs 85 ? Comment lire le d&eacute;tail par axe ? Comment pr&eacute;senter les r&eacute;sultats au client ?</p></div>
-      <div class="neo-card p-5"><div class="text-2xl mb-2">&#128640;</div><h4 class="font-bold text-sm mb-2">Guide campagnes</h4><p class="text-xs text-gray-500 font-space">Comment lancer une campagne, choisir le bon pack, interpr&eacute;ter les r&eacute;sultats batch. Mapping des garanties IPID document&eacute;.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 17 — PRODUCTION CHECKLIST -->
-<!-- ============================================ -->
-
-<section class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 17 / CHECKLIST PRODUCTION</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Tout ce qui sera livr&eacute;. <span class="tag-prod">5 500&euro;</span></h2>
-    </div>
-    <div class="anim">
-      <div class="space-y-2">
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">01</span><span class="text-sm font-space">Rebrand BrokerONE &mdash; rapports, dashboard, exports</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">02</span><span class="text-sm font-space">V&eacute;rification des 218 garanties IPID (exactitude, mise &agrave; jour)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">03</span><span class="text-sm font-space">Ajout garanties manquantes + version control r&eacute;glementaire</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">04</span><span class="text-sm font-space">Rapport DOCX pro : cover page, ToC, logo courtier, graphes embarqu&eacute;s</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">05</span><span class="text-sm font-space">Formatage A4 print-ready (marges, sauts de page, headers/footers)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">06</span><span class="text-sm font-space">Campaign mode hardened : bulk 500 sans timeout, batch processing</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">07</span><span class="text-sm font-space">Progress tracking temps r&eacute;el + r&eacute;sultats partiels si interrupt</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">08</span><span class="text-sm font-space">Notification email quand campagne termin&eacute;e</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">09</span><span class="text-sm font-space">Calibration scoring sur vrais portefeuilles + ajustement poids par axe</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">10</span><span class="text-sm font-space">UI responsive + score anim&eacute; (cercle) + charts par axe + loading states</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">11</span><span class="text-sm font-space">Rate limit cr&eacute;ation audit (contr&ocirc;le co&ucirc;ts Claude API)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">12</span><span class="text-sm font-space">Rapports immutables apr&egrave;s g&eacute;n&eacute;ration (horodatage + hash)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">13</span><span class="text-sm font-space">Edge cases : client 0 contrats, 20+ contrats, produit inconnu, CRM incomplet</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">14</span><span class="text-sm font-space">Performance : audit &lt;45s, campagne 100 &lt;2h, DOCX &lt;5s</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">15</span><span class="text-sm font-space">Multi-tenant : campagnes simultan&eacute;es, r&eacute;sultats isol&eacute;s, quotas</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">16</span><span class="text-sm font-space">Tests vrais portefeuilles + v&eacute;rification scoring</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">17</span><span class="text-sm font-space">Documentation : guide scores, guide campagnes, mapping IPID</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">18</span><span class="text-sm font-space">Validation top 3 priorit&eacute;s avec Bruno (pertinence m&eacute;tier)</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- COMBINED TIMELINE + BUDGET -->
-<!-- ============================================ -->
-
 <section id="timeline" class="py-20 px-4" style="background:#8E44AD;border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto text-white">
     <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">TIMELINE COMBIN&Eacute;E</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">34 jours, 7 sprints.</h2>
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">16 / TIMELINE</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">18-24 jours, 3-4 sprints.</h2>
     </div>
   </div>
 </section>
@@ -1273,125 +724,122 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 <section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4" style="color:#8E44AD">PLANNING MVP</div>
-      <h2 class="font-grotesk text-3xl sm:text-4xl font-bold mb-6">Phase 1 &mdash; MVP (22 jours, 4 sprints)</h2>
+      <div class="section-number mb-4" style="color:#8E44AD">PLANNING</div>
+      <h2 class="font-grotesk text-3xl sm:text-4xl font-bold mb-6">Sprint par sprint.</h2>
     </div>
-    <div class="anim neo-card p-6 sm:p-8 mb-8">
+    <div class="anim neo-card p-6 sm:p-8">
       <div class="space-y-4">
         <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
           <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#8E44AD">S1</div>
-          <div class="flex-1"><h4 class="font-bold text-sm mb-1">Jours 1-6 : Fondations</h4><p class="text-sm text-gray-500 font-space">Tables Supabase + RLS. Connecteur CRM. Base IPID (218 garanties). Normalisation donn&eacute;es contrats.</p></div>
-          <div class="text-xs text-gray-400 font-mono flex-shrink-0">6 jours</div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <h4 class="font-bold text-sm">Jours 1-7 : Frontend + Port TS</h4>
+              <span class="tag-demo">D&Eacute;MO</span>
+            </div>
+            <p class="text-sm text-gray-500 font-space">Pages audit list + audit detail + report preview. Port du pipeline en TypeScript. Int&eacute;gration dans Next.js. Premier audit fonctionnel via l'UI.</p>
+          </div>
+          <div class="text-xs text-gray-400 font-mono flex-shrink-0">~7 jours</div>
         </div>
         <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
           <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#8E44AD">S2</div>
-          <div class="flex-1"><h4 class="font-bold text-sm mb-1">Jours 7-12 : Moteur d'analyse</h4><p class="text-sm text-gray-500 font-space">Prompts Claude Sonnet 17 axes. Scoring global + par axe. Comparaison IPID. Classification priorit&eacute;s. Top 3.</p></div>
-          <div class="text-xs text-gray-400 font-mono flex-shrink-0">6 jours</div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <h4 class="font-bold text-sm">Jours 8-13 : Supabase + Campagnes</h4>
+              <span class="tag-demo">D&Eacute;MO</span>
+            </div>
+            <p class="text-sm text-gray-500 font-space">Tables Supabase + RLS. Persistance des audits/scores/rapports. Campaign management : lancer un batch, progress tracking, r&eacute;sultats. Notification email.</p>
+          </div>
+          <div class="text-xs text-gray-400 font-mono flex-shrink-0">~6 jours</div>
         </div>
         <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
           <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#8E44AD">S3</div>
-          <div class="flex-1"><h4 class="font-bold text-sm mb-1">Jours 13-18 : Rapports + Campagnes</h4><p class="text-sm text-gray-500 font-space">Template rapport HTML. G&eacute;n&eacute;rateur DOCX brand&eacute;. Mode campagne bulk. Dashboard priorit&eacute;s.</p></div>
-          <div class="text-xs text-gray-400 font-mono flex-shrink-0">6 jours</div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <h4 class="font-bold text-sm">Jours 14-19 : Multi-tenant + Connexions</h4>
+              <span class="tag-demo">D&Eacute;MO</span>
+            </div>
+            <p class="text-sm text-gray-500 font-space">Auth + onboarding + settings. Isolation multi-tenant. Connexions Sentinel &rarr; Checkup &rarr; Augmented. Campaign pricing int&eacute;gr&eacute;.</p>
+          </div>
+          <div class="text-xs text-gray-400 font-mono flex-shrink-0">~6 jours</div>
         </div>
         <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
           <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#8E44AD">S4</div>
-          <div class="flex-1"><h4 class="font-bold text-sm mb-1">Jours 19-22 : UI + Connexions + Tests</h4><p class="text-sm text-gray-500 font-space">Pages dashboard. Connexions Sentinel &rarr; Checkup &rarr; Augmented. Tests complets.</p></div>
-          <div class="text-xs text-gray-400 font-mono flex-shrink-0">4 jours</div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <h4 class="font-bold text-sm">Jours 20-24 : Production + Calibration</h4>
+              <span class="tag-demo">D&Eacute;MO FINALE</span>
+            </div>
+            <p class="text-sm text-gray-500 font-space">Rebrand BrokerONE. Calibration scoring avec Bruno (vrais portefeuilles). Edge cases, tests, perf. Documentation.</p>
+          </div>
+          <div class="text-xs text-gray-400 font-mono flex-shrink-0">~5 jours</div>
         </div>
       </div>
       <div class="mt-6 p-4 text-center" style="border:3px solid #8E44AD;background:rgba(142,68,173,.05)">
-        <div class="font-grotesk text-2xl font-bold" style="color:#8E44AD">10 000&euro; HT</div>
-        <div class="text-sm text-gray-500 font-space">~22 jours &bull; 4 sprints &bull; 20 livrables</div>
-      </div>
-    </div>
-
-    <div class="anim">
-      <div class="section-number mb-4" style="color:#C0392B">PLANNING PRODUCTION</div>
-      <h2 class="font-grotesk text-3xl sm:text-4xl font-bold mb-6">Phase 2 &mdash; Production (12 jours, 3 sprints)</h2>
-    </div>
-    <div class="anim neo-card p-6 sm:p-8">
-      <div class="space-y-4">
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
-          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">S5</div>
-          <div class="flex-1"><h4 class="font-bold text-sm mb-1">Jours 23-26 : Rebrand + IPID + Reports</h4><p class="text-sm text-gray-500 font-space">Couleurs BrokerONE dans rapports/dashboard/exports. V&eacute;rification et enrichissement base IPID. Rapports DOCX pro (cover, ToC, graphes, A4).</p></div>
-          <div class="text-xs text-gray-400 font-mono flex-shrink-0">4 jours</div>
-        </div>
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
-          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">S6</div>
-          <div class="flex-1"><h4 class="font-bold text-sm mb-1">Jours 27-30 : Campaign + Scoring + UI</h4><p class="text-sm text-gray-500 font-space">Hardening campaign mode (500 bulk, progress, partial results, email notif). Calibration scoring sur vrais portefeuilles. UI polish.</p></div>
-          <div class="text-xs text-gray-400 font-mono flex-shrink-0">4 jours</div>
-        </div>
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
-          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">S7</div>
-          <div class="flex-1"><h4 class="font-bold text-sm mb-1">Jours 31-34 : S&eacute;curit&eacute; + Edge Cases + Tests + Doc</h4><p class="text-sm text-gray-500 font-space">Rate limiting, immutabilit&eacute; rapports, edge cases, multi-tenant. Tests vrais portefeuilles. Documentation.</p></div>
-          <div class="text-xs text-gray-400 font-mono flex-shrink-0">4 jours</div>
-        </div>
-      </div>
-      <div class="mt-6 p-4 text-center" style="border:3px solid #C0392B;background:rgba(192,57,43,.05)">
-        <div class="font-grotesk text-2xl font-bold" style="color:#C0392B">5 500&euro; HT</div>
-        <div class="text-sm text-gray-500 font-space">~12 jours &bull; 3 sprints &bull; 18 livrables</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">TOTAL CHECKUP</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">R&eacute;cap complet.</h2>
-    </div>
-    <div class="anim">
-      <div class="grid sm:grid-cols-3 gap-5">
-        <div class="neo-card p-6 text-center" style="border-top:4px solid #8E44AD"><div class="font-mono text-xs font-bold mb-2" style="color:#8E44AD">MVP</div><div class="font-grotesk text-3xl font-bold mb-2">10 000&euro;</div><div class="text-xs text-gray-500 font-space">17 axes, 218 IPID, scoring, rapports, cross-sell, campaigns, CRM</div><div class="mt-2"><span class="tag-mvp">22 JOURS</span></div></div>
-        <div class="neo-card p-6 text-center" style="border-top:4px solid #C0392B"><div class="font-mono text-xs font-bold mb-2" style="color:#C0392B">PRODUCTION</div><div class="font-grotesk text-3xl font-bold mb-2">5 500&euro;</div><div class="text-xs text-gray-500 font-space">Rebrand, IPID enrichi, rapports pro, campaign hardened, scoring calibr&eacute;</div><div class="mt-2"><span class="tag-prod">12 JOURS</span></div></div>
-        <div class="neo-card p-6 text-center" style="border-top:4px solid #0a0a0a"><div class="font-mono text-xs font-bold mb-2">TOTAL</div><div class="font-grotesk text-3xl font-bold mb-2">15 500&euro;</div><div class="text-xs text-gray-500 font-space">Module Checkup complet, pr&ecirc;t pour des campagnes d'audit massives</div><div class="mt-2"><span class="tag-done">34 JOURS</span></div></div>
+        <div class="font-grotesk text-2xl font-bold" style="color:#8E44AD">D&eacute;mo &agrave; chaque fin de sprint</div>
+        <div class="text-sm text-gray-500 font-space">Bruno voit l'avancement et peut ajuster en continu</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================ -->
-<!-- NEXT STEPS + CONCLUSION -->
+<!-- 17 / BUDGET -->
 <!-- ============================================ -->
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
+<section id="budget" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto text-white">
     <div class="anim">
-      <div class="section-number mb-4">PROCHAINE &Eacute;TAPE</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Ce qu'on fait maintenant.</h2>
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">17 / BUDGET</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">11 000&euro; HT.</h2>
     </div>
-    <div class="anim neo-card p-6 sm:p-8">
-      <div class="space-y-4">
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
-          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#0a0a0a">1</div>
-          <div><h4 class="font-bold text-sm mb-1">Tu valides le scope complet</h4><p class="text-sm text-gray-500 font-space">20 livrables MVP + 18 livrables Production. Si tu veux ajouter, retirer ou reprioriser, on ajuste.</p></div>
-        </div>
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
-          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#0a0a0a">2</div>
-          <div><h4 class="font-bold text-sm mb-1">Acc&egrave;s CRM n&eacute;cessaire</h4><p class="text-sm text-gray-500 font-space">J'ai besoin d'un acc&egrave;s API au CRM (Brio ou BrokerCloud) pour tester l'extraction de contrats. Cl&eacute; API + documentation.</p></div>
-        </div>
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
-          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#0a0a0a">3</div>
-          <div><h4 class="font-bold text-sm mb-1">Je d&eacute;marre le Sprint 1 (MVP)</h4><p class="text-sm text-gray-500 font-space">Premi&egrave;re livraison en 6 jours : tables + connecteur CRM + base IPID. Tu pourras voir les premiers audits fonctionner.</p></div>
-        </div>
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
-          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#0a0a0a">4</div>
-          <div><h4 class="font-bold text-sm mb-1">Clients tests pour calibration (Production)</h4><p class="text-sm text-gray-500 font-space">Pour la phase production, j'ai besoin de 5-10 vrais portefeuilles clients vari&eacute;s pour calibrer le scoring.</p></div>
+    <div class="anim">
+      <div class="p-6 sm:p-8" style="border:3px solid rgba(255,255,255,.2)">
+        <div class="grid sm:grid-cols-2 gap-6">
+          <div>
+            <div class="font-mono text-xs mb-4 font-bold" style="color:#8E44AD">D&Eacute;COMPOSITION</div>
+            <div class="space-y-3 text-sm font-space" style="color:rgba(255,255,255,.7)">
+              <div class="flex justify-between"><span>Bloc 1 &mdash; Frontend Next.js</span><span class="font-mono font-bold">~3 500&euro;</span></div>
+              <div class="flex justify-between"><span>Bloc 2 &mdash; Port TypeScript</span><span class="font-mono font-bold">~1 200&euro;</span></div>
+              <div class="flex justify-between"><span>Bloc 3 &mdash; Supabase persistence</span><span class="font-mono font-bold">~1 500&euro;</span></div>
+              <div class="flex justify-between"><span>Bloc 4 &mdash; Campaign mode</span><span class="font-mono font-bold">~1 500&euro;</span></div>
+              <div class="flex justify-between"><span>Bloc 5 &mdash; Multi-tenant + auth</span><span class="font-mono font-bold">~1 800&euro;</span></div>
+              <div class="flex justify-between"><span>Bloc 6 &mdash; Production</span><span class="font-mono font-bold">~1 500&euro;</span></div>
+              <div class="pt-3 flex justify-between font-bold text-white" style="border-top:1px solid rgba(255,255,255,.2)"><span>TOTAL</span><span class="font-mono text-lg" style="color:#8E44AD">11 000&euro; HT</span></div>
+            </div>
+          </div>
+          <div>
+            <div class="font-mono text-xs mb-4 font-bold" style="color:#1D6A45">&Eacute;CONOMIE</div>
+            <div class="p-4 mb-4" style="border:2px solid #1D6A45;background:rgba(29,106,69,.1)">
+              <div class="font-grotesk text-2xl font-bold mb-2" style="color:#1D6A45">-4 500&euro;</div>
+              <div class="text-sm font-space" style="color:rgba(255,255,255,.6)">R&eacute;duit de <span style="text-decoration:line-through">15 500&euro;</span> &agrave; <strong class="text-white">11 000&euro;</strong> gr&acirc;ce au pipeline IA, Brio connector et reports fournis par Bruno.</div>
+            </div>
+            <div class="space-y-2 text-xs font-space" style="color:rgba(255,255,255,.5)">
+              <div>&#10003; Pipeline IA = pas besoin de coder le moteur</div>
+              <div>&#10003; Brio connector = pas besoin de reverse-engineer l'API</div>
+              <div>&#10003; Reports HTML+DOCX = templates r&eacute;utilisables</div>
+              <div>&#10003; IPID 218 = base de donn&eacute;es pr&ecirc;te</div>
+              <div>&#10003; Validateur JSON = logique m&eacute;tier solide</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CONCLUSION -->
-<section class="py-24 px-4" style="background:#8E44AD;border-top:3px solid #0a0a0a">
-  <div class="max-w-3xl mx-auto text-center text-white">
+<!-- ============================================ -->
+<!-- 18 / CONCLUSION -->
+<!-- ============================================ -->
+<section class="py-24 px-4 part-divider" style="background:linear-gradient(135deg,#8E44AD 0%,#6C3483 100%);border-top:3px solid #0a0a0a">
+  <div class="max-w-3xl mx-auto text-center text-white relative z-10">
     <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">CONCLUSION</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Chaque lacune = une opportunit&eacute;.</h2>
-      <p class="text-lg font-space mb-4 leading-relaxed" style="color:rgba(255,255,255,.8)">Chaque lacune d&eacute;tect&eacute;e = une opportunit&eacute; de conseil.<br>Chaque opportunit&eacute; = du revenu.</p>
-      <p class="text-lg font-space mb-8 leading-relaxed" style="color:rgba(255,255,255,.6)">Checkup transforme l'audit portefeuille &mdash; une t&acirc;che que personne ne fait &mdash; en un avantage concurrentiel syst&eacute;matique. Le courtier qui audite ses 500 clients en 1 journ&eacute;e est celui qui garde ses clients et en gagne de nouveaux.</p>
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">18 / CONCLUSION</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le moteur existe.<br>Je construis le produit.</h2>
+      <p class="text-lg font-space mb-4 leading-relaxed" style="color:rgba(255,255,255,.8)">Bruno a fourni le pipeline IA, le connecteur CRM, les rapports, le r&eacute;f&eacute;rentiel IPID, les tests.<br>C'est un travail consid&eacute;rable qui &eacute;conomise 4 500&euro;.</p>
+      <p class="text-lg font-space mb-8 leading-relaxed" style="color:rgba(255,255,255,.6)">Il me reste &agrave; construire ce qui manque : un vrai frontend, de la persistance, des campagnes, de l'auth, des connexions inter-modules. Transformer un CLI en produit SaaS que les courtiers utiliseront tous les jours.</p>
+      <div class="p-4 mb-8" style="border:2px solid rgba(255,255,255,.3);background:rgba(255,255,255,.05)">
+        <div class="font-grotesk text-3xl font-bold mb-2">11 000&euro; HT &bull; 18-24 jours</div>
+        <div class="text-sm font-space" style="color:rgba(255,255,255,.6)">6 blocs &bull; 20 livrables &bull; D&eacute;mo &agrave; chaque sprint</div>
+      </div>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
         <a href="https://calendly.com/baptiste-visionia/30min" target="_blank" class="neo-btn bg-white px-6 py-3 font-space text-sm inline-flex items-center gap-2" style="color:#8E44AD">&#128222; Planifier un call</a>
         <a href="mailto:baptiste.fort.pro@gmail.com" class="neo-btn px-6 py-3 font-space text-sm inline-flex items-center gap-2" style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.3)">&#9993; R&eacute;pondre par email</a>
@@ -1404,8 +852,8 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 <!-- FOOTER -->
 <footer class="py-10 px-4 bg-neo-black text-white" style="border-top:3px solid #0a0a0a">
   <div class="max-w-5xl mx-auto text-center">
-    <div class="neo-card-sm px-6 py-3 inline-block font-mono text-sm mb-3" style="background:#8E44AD;border-color:#8E44AD">Checkup MVP + Production &mdash; Broker<span style="color:rgba(255,255,255,.6)">ONE</span></div>
-    <p class="text-gray-500 text-sm font-space">MVP + Production &bull; 15 500&euro; HT &bull; Avril 2026 &bull; Baptiste Fort &rarr; Bruno</p>
+    <div class="neo-card-sm px-6 py-3 inline-block font-mono text-sm mb-3" style="background:#8E44AD;border-color:#8E44AD">Checkup 360&deg; &mdash; Broker<span style="color:rgba(255,255,255,.6)">ONE</span></div>
+    <p class="text-gray-500 text-sm font-space">11 000&euro; HT &bull; 18-24 jours &bull; Pipeline IA + Brio + Reports fournis &bull; Avril 2026 &bull; Baptiste Fort &rarr; Bruno</p>
   </div>
 </footer>
 

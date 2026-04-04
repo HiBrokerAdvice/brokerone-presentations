@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BrokerONE Connect — MVP pour Bruno</title>
+<title>BrokerONE Connect — Scaffolding fourni, APIs a construire</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
-tailwind.config={theme:{extend:{fontFamily:{'inter':['Inter','sans-serif'],'grotesk':['Space Grotesk','sans-serif'],'mono':['JetBrains Mono','monospace'],'space':['Space Mono','monospace']},colors:{'neo':{'black':'#0a0a0a','white':'#fefefe','gray':'#f5f5f5','dark':'#0a0a0a'}}}}}</script>
+tailwind.config={theme:{extend:{fontFamily:{'inter':['Inter','sans-serif'],'grotesk':['Space Grotesk','sans-serif'],'mono':['JetBrains Mono','monospace'],'space':['Space Mono','monospace']},colors:{'neo':{'black':'#0a0a0a','white':'#fefefe','gray':'#f5f5f5','dark':'#0a0a0a'}}}}}
+</script>
 <style>
 *{scroll-behavior:smooth;margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:hidden}
@@ -32,11 +33,15 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 .back-top{position:fixed;bottom:24px;right:24px;z-index:100;opacity:0;transform:translateY(20px);transition:all .3s;pointer-events:none}
 .back-top.show{opacity:1;transform:translateY(0);pointer-events:auto}
 .click-burst{pointer-events:none;position:fixed;z-index:9999}
-.check-done{color:#1D6A45;font-weight:700}.check-todo{color:#999}
-.tag-mvp{background:#E74C3C;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700;display:inline-block}
-.tag-prod{background:#C0392B;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700;display:inline-block}
+.tag-fourni{background:#1D6A45;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700;display:inline-block}
+.tag-stubbe{background:#E74C3C;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700;display:inline-block}
+.tag-bloc{background:#0a0a0a;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700;display:inline-block}
+.tag-demo{background:#F39C12;color:#fff;font-size:10px;padding:3px 10px;font-family:'Space Mono',monospace;font-weight:700;display:inline-block;letter-spacing:.05em}
 @keyframes count-up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .stat-card:hover .stat-number{animation:count-up .3s ease}
+@keyframes pulse-border{0%,100%{border-color:#E74C3C}50%{border-color:#C0392B}}
+.stub-highlight{border-left:4px solid #E74C3C;background:rgba(231,76,60,.04)}
+.fourni-highlight{border-left:4px solid #1D6A45;background:rgba(29,106,69,.04)}
 </style>
 </head>
 <body>
@@ -49,19 +54,19 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
   <div class="flex items-center justify-between h-14">
     <div class="flex items-center gap-3">
       <div class="neo-card-sm px-3 py-1 font-mono text-sm font-bold" style="background:#E74C3C;color:#fff;border-color:#E74C3C">C</div>
-      <span class="font-grotesk font-bold text-sm hidden sm:block">Connect Connect MVP &mdash; Présentation Brunomdash; MVP + Production</span>
+      <span class="font-grotesk font-bold text-sm hidden sm:block">Connect &mdash; Scaffolding + Build</span>
     </div>
     <div class="hidden lg:flex items-center gap-1 text-xs font-space">
-      <a href="#probleme" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Problème</a>
-      <a href="#solution" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Solution</a>
-      <a href="#reseaux" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">4 Réseaux</a>
-      <a href="#visuels" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Visuels</a>
-      <a href="#engagement" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Engagement</a>
+      <a href="#fourni" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Fourni</a>
+      <a href="#manque" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Manque</a>
+      <a href="#probleme" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Probl&egrave;me</a>
+      <a href="#blocs" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">8 Blocs</a>
+      <a href="#reseaux" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">4 R&eacute;seaux</a>
+      <a href="#wireframes" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Wireframes</a>
       <a href="#ambassadeur" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Ambassadeurs</a>
-      <a href="#technique" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Technique</a>
-      <a href="#scope" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Scope</a>
+      <a href="#budget" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Budget</a>
     </div>
-    <div class="font-mono text-xs text-gray-400">45+ sections</div>
+    <div class="font-mono text-xs text-gray-400">28 sections</div>
   </div>
 </div>
 </nav>
@@ -69,37 +74,27 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 <!-- TICKER -->
 <div class="fixed top-[56px] left-0 right-0 z-40 text-white py-1.5 ticker-wrap" style="background:#E74C3C;border-bottom:3px solid #0a0a0a">
 <div class="ticker marquee">
-  <span class="mx-8 text-xs font-space">CONNECT &mdash; RÉSEAUX SOCIAUX & ACQUISITION</span>
+  <span class="mx-8 text-xs font-space">CONNECT &mdash; 11 500&euro; &mdash; SCAFFOLDING FOURNI, API &Agrave; CONSTRUIRE</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">MODULE 6/6</span>
+  <span class="mx-8 text-xs font-space">DB SCHEMA &#10003; &bull; API SHELLS &#10003; &bull; UI SHELLS &#10003; &bull; TYPES &#10003;</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">FACEBOOK &bull; INSTAGRAM &bull; LINKEDIN &bull; GOOGLE</span>
+  <span class="mx-8 text-xs font-space">OAUTH &#10007; &bull; PUBLISHING &#10007; &bull; ENGAGEMENT &#10007; &bull; VISUELS &#10007;</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">VISUELS PERSONNALISÉS</span>
+  <span class="mx-8 text-xs font-space">22-28 JOURS &bull; 4 SPRINTS</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">CALENDRIER ÉDITORIAL</span>
+  <span class="mx-8 text-xs font-space">CONNECT &mdash; 11 500&euro; &mdash; SCAFFOLDING FOURNI, API &Agrave; CONSTRUIRE</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">ENGAGEMENT TRACKING</span>
+  <span class="mx-8 text-xs font-space">DB SCHEMA &#10003; &bull; API SHELLS &#10003; &bull; UI SHELLS &#10003; &bull; TYPES &#10003;</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">BOUCLE VERTUEUSE BOUCLÉE</span>
+  <span class="mx-8 text-xs font-space">OAUTH &#10007; &bull; PUBLISHING &#10007; &bull; ENGAGEMENT &#10007; &bull; VISUELS &#10007;</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">CONNECT &mdash; RÉSEAUX SOCIAUX & ACQUISITION</span>
-  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">MODULE 6/6</span>
-  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">FACEBOOK &bull; INSTAGRAM &bull; LINKEDIN &bull; GOOGLE</span>
-  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">VISUELS PERSONNALISÉS</span>
-  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">CALENDRIER ÉDITORIAL</span>
-  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">ENGAGEMENT TRACKING</span>
-  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">BOUCLE VERTUEUSE BOUCLÉE</span>
+  <span class="mx-8 text-xs font-space">22-28 JOURS &bull; 4 SPRINTS</span>
 </div>
 </div>
 
-<!-- 01 — HELLO -->
+<!-- ============================================ -->
+<!-- 01 / HELLO -->
+<!-- ============================================ -->
 <section class="min-h-screen flex items-center justify-center pt-32 pb-20 px-4 relative overflow-hidden">
   <div class="absolute inset-0 stripe-bg opacity-30"></div>
   <div class="max-w-3xl mx-auto relative z-10">
@@ -109,318 +104,448 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
         <div class="neo-card-sm px-4 py-2 font-mono text-lg font-bold" style="background:#E74C3C;color:#fff;border-color:#E74C3C">Connect</div>
         <div class="text-gray-400 font-space text-sm">Module 6 / 6 de BrokerONE</div>
       </div>
-      <h1 class="font-grotesk text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] mb-8">Réseaux sociaux<br>& acquisition<br>de leads.</h1>
+      <h1 class="font-grotesk text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] mb-8">Scaffolding fourni.<br>APIs &agrave; construire.</h1>
       <div class="text-lg sm:text-xl text-gray-500 font-space leading-relaxed mb-8 space-y-4">
-        <p>Connect automatise la présence du courtier sur 4 réseaux sociaux, personnalise chaque publication avec son branding, et transforme les <strong class="text-neo-black">ambassadeurs satisfaits en visibilité</strong>.</p>
-        <p>C'est le module qui <strong class="text-neo-black" style="color:#E74C3C">ferme la boucle vertueuse</strong> : satisfaction &rarr; visibilité &rarr; nouveaux prospects &rarr; Sentinel capture &rarr; la boucle recommence.</p>
+        <p>Connect ferme la boucle vertueuse. Bruno a fourni le scaffolding &mdash; DB schema, types, routes, UI shells. <strong class="text-neo-black">L'architecture est solide.</strong></p>
+        <p>Le vrai travail : <strong class="text-neo-black" style="color:#E74C3C">4 APIs r&eacute;seaux sociaux</strong>, OAuth r&eacute;el, publication r&eacute;elle, engagement r&eacute;el. Chaque appel API dans le code actuel retourne <code class="font-mono text-sm bg-neo-gray px-2 py-0.5">"STUB_TOKEN"</code> ou <code class="font-mono text-sm bg-neo-gray px-2 py-0.5">console.log</code>.</p>
       </div>
     </div>
-    <div class="anim"><a href="#probleme" class="neo-btn text-white px-8 py-3 font-space text-sm inline-flex items-center gap-2" style="background:#E74C3C">C'est parti &#8595;</a></div>
+    <div class="anim"><a href="#exec" class="neo-btn text-white px-8 py-3 font-space text-sm inline-flex items-center gap-2" style="background:#E74C3C">Voir l'analyse &#8595;</a></div>
   </div>
 </section>
 
-<!-- 02 — EXEC SUMMARY -->
-<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+<!-- ============================================ -->
+<!-- 02 / EXEC SUMMARY -->
+<!-- ============================================ -->
+<section id="exec" class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim"><div class="section-number mb-4" style="color:#E74C3C">02 / EN 2 MINUTES</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">L'essentiel.</h2></div>
-    <div class="anim neo-card p-6 sm:p-8" style="border-left:6px solid #E74C3C">
-      <div class="space-y-4">
-        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#E74C3C;min-width:32px">1</div><div><h4 class="font-bold text-sm mb-1">Quoi</h4><p class="text-sm text-gray-500 font-space">Publication automatisée sur Facebook, Instagram, LinkedIn et Google Business. Visuels personnalisés par courtier. Calendrier éditorial. Métriques d'engagement. Amplification des ambassadeurs.</p></div></div>
-        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#E74C3C;min-width:32px">2</div><div><h4 class="font-bold text-sm mb-1">Pourquoi</h4><p class="text-sm text-gray-500 font-space">Les courtiers n'ont pas le temps de gérer 4 réseaux. Le contenu doit être conforme à la réglementation assurance. Les ambassadeurs identifiés par Advice ne sont jamais exploités sans Connect.</p></div></div>
-        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#E74C3C;min-width:32px">3</div><div><h4 class="font-bold text-sm mb-1">Combien</h4><p class="text-sm text-gray-500 font-space"><strong>8 500€ HT</strong> &mdash; ~20 jours. Add-on facturé aux courtiers : 20€ TTC/mois/cabinet (prix fixe, pas par utilisateur).</p></div></div>
-        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#E74C3C;min-width:32px">4</div><div><h4 class="font-bold text-sm mb-1">Rôle dans BrokerONE</h4><p class="text-sm text-gray-500 font-space">Ferme la boucle vertueuse. Advice identifie les ambassadeurs &rarr; Connect publie leurs témoignages &rarr; visibilité &rarr; nouveaux prospects &rarr; Sentinel capture. Le cercle est complet.</p></div></div>
+    <div class="anim">
+      <div class="grid sm:grid-cols-2 gap-0 mb-6" style="border:3px solid #0a0a0a;box-shadow:6px 6px 0 #0a0a0a">
+        <div class="p-6" style="background:rgba(29,106,69,.05);border-right:2px solid #0a0a0a">
+          <div class="font-mono text-xs mb-4 font-bold" style="color:#1D6A45">FOURNI PAR BRUNO &#10003;</div>
+          <div class="space-y-3 text-sm font-space">
+            <div><strong style="color:#1D6A45">&#10003;</strong> DB schema &mdash; 6 tables + RLS</div>
+            <div><strong style="color:#1D6A45">&#10003;</strong> API route shells &mdash; 12 endpoints + Zod</div>
+            <div><strong style="color:#1D6A45">&#10003;</strong> UI shells &mdash; 6 pages dashboard</div>
+            <div><strong style="color:#1D6A45">&#10003;</strong> TypeScript types complets</div>
+            <div><strong style="color:#1D6A45">&#10003;</strong> Auth middleware + rate limiting</div>
+            <div><strong style="color:#1D6A45">&#10003;</strong> AES-256-GCM encryption util</div>
+          </div>
+        </div>
+        <div class="p-6" style="background:rgba(231,76,60,.05)">
+          <div class="font-mono text-xs mb-4 font-bold" style="color:#E74C3C">STUBB&Eacute; &mdash; &Agrave; CONSTRUIRE &#10007;</div>
+          <div class="space-y-3 text-sm font-space text-neo-black">
+            <div><strong style="color:#E74C3C">&#10007;</strong> OAuth r&eacute;el &mdash; 4 providers</div>
+            <div><strong style="color:#E74C3C">&#10007;</strong> Publication r&eacute;elle &mdash; 4 r&eacute;seaux</div>
+            <div><strong style="color:#E74C3C">&#10007;</strong> Collecte engagement r&eacute;elle</div>
+            <div><strong style="color:#E74C3C">&#10007;</strong> G&eacute;n&eacute;ration visuels r&eacute;elle</div>
+            <div><strong style="color:#E74C3C">&#10007;</strong> Contenu IA &mdash; aucun</div>
+            <div><strong style="color:#E74C3C">&#10007;</strong> Flux ambassadeur &mdash; aucun</div>
+          </div>
+        </div>
+      </div>
+      <div class="neo-card p-6" style="border-left:6px solid #E74C3C">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <div class="font-grotesk text-3xl font-bold" style="color:#E74C3C">11 500&euro; HT</div>
+            <div class="text-sm text-gray-500 font-space">R&eacute;duit de 13 000&euro; &mdash; le scaffolding &eacute;conomise ~3-4 jours de setup</div>
+          </div>
+          <div class="text-center">
+            <div class="font-grotesk text-2xl font-bold">22-28 jours</div>
+            <div class="text-sm text-gray-500 font-space">4 sprints &bull; 8 blocs</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 03-05 — LE PROBLÈME -->
-<section id="probleme" class="py-20 px-4" style="background:#E74C3C;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim"><div class="section-number mb-4" style="color:rgba(255,255,255,.4)">03 / LE PROBLÈME</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le courtier invisible.</h2><p class="text-lg font-space" style="color:rgba(255,255,255,.8)">Un courtier sans présence sociale n'existe pas pour les nouveaux prospects. Et gérer 4 réseaux manuellement, personne n'a le temps.</p></div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+<!-- ============================================ -->
+<!-- 03 / CE QUE BRUNO A FOURNI -->
+<!-- ============================================ -->
+<section id="fourni" class="py-20 px-4" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
-    <div class="anim"><div class="section-number mb-4">04 / LE QUOTIDIEN</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">4 problèmes concrets.</h2></div>
+    <div class="anim"><div class="section-number mb-4" style="color:#1D6A45">03 / CE QUE BRUNO A FOURNI</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le scaffolding est solide.</h2><p class="text-lg text-gray-500 font-space leading-relaxed mb-8">Bruno a fait du bon travail d'architecture. Les tables sont bien con&ccedil;ues, les types sont stricts, la validation Zod est en place. C'est une fondation <strong class="text-neo-black">s&eacute;rieuse</strong> sur laquelle construire.</p></div>
     <div class="anim grid sm:grid-cols-2 gap-5">
-      <div class="neo-card p-6"><div class="text-2xl mb-3">&#9203;</div><h3 class="font-grotesk font-bold mb-2">Pas le temps</h3><p class="text-sm text-gray-500 font-space">Créer du contenu pour Facebook, puis l'adapter pour Instagram, LinkedIn et Google Business. C'est 2-3 heures par semaine que le courtier n'a pas.</p><div class="mt-3 p-2 bg-neo-gray text-xs font-space"><strong style="color:#E74C3C">Résultat :</strong> les comptes sont morts depuis 6 mois.</div></div>
-      <div class="neo-card p-6"><div class="text-2xl mb-3">&#128221;</div><h3 class="font-grotesk font-bold mb-2">Contenu non conforme</h3><p class="text-sm text-gray-500 font-space">L'assurance est réglementée. On ne peut pas écrire n'importe quoi. Pas de promesses de rendement, pas de garanties absolues, mentions obligatoires.</p><div class="mt-3 p-2 bg-neo-gray text-xs font-space"><strong style="color:#E74C3C">Risque :</strong> publication non conforme = problème FSMA/ACPR.</div></div>
-      <div class="neo-card p-6"><div class="text-2xl mb-3">&#127912;</div><h3 class="font-grotesk font-bold mb-2">Contenu générique</h3><p class="text-sm text-gray-500 font-space">Des posts identiques pour tous les courtiers. Pas de logo, pas de couleurs du cabinet. Le client ne reconnaît pas son courtier.</p><div class="mt-3 p-2 bg-neo-gray text-xs font-space"><strong style="color:#E74C3C">Résultat :</strong> zéro engagement, zéro conversion.</div></div>
-      <div class="neo-card p-6"><div class="text-2xl mb-3">&#11088;</div><h3 class="font-grotesk font-bold mb-2">Ambassadeurs gâchés</h3><p class="text-sm text-gray-500 font-space">Advice identifie des clients satisfaits, mais personne ne fait rien avec. Leurs témoignages restent dans un tableau. Jamais publiés.</p><div class="mt-3 p-2 bg-neo-gray text-xs font-space"><strong style="color:#E74C3C">Coût :</strong> visibilité perdue, nouveaux clients qui ne viendront pas.</div></div>
+      <div class="neo-card p-6 fourni-highlight">
+        <div class="flex items-center gap-2 mb-3"><span class="tag-fourni">FOURNI &#10003;</span><h3 class="font-grotesk font-bold">6 tables PostgreSQL</h3></div>
+        <div class="space-y-2 text-sm font-space text-gray-600">
+          <div class="p-2 bg-neo-gray font-mono text-xs">connections &mdash; tokens OAuth par r&eacute;seau</div>
+          <div class="p-2 bg-neo-gray font-mono text-xs">templates &mdash; mod&egrave;les de contenu</div>
+          <div class="p-2 bg-neo-gray font-mono text-xs">publications &mdash; posts planifi&eacute;s/publi&eacute;s</div>
+          <div class="p-2 bg-neo-gray font-mono text-xs">visuels &mdash; images g&eacute;n&eacute;r&eacute;es</div>
+          <div class="p-2 bg-neo-gray font-mono text-xs">engagement_stats &mdash; m&eacute;triques</div>
+          <div class="p-2 bg-neo-gray font-mono text-xs">activity_log &mdash; audit trail</div>
+        </div>
+        <div class="mt-3 p-2 text-xs font-space" style="background:rgba(29,106,69,.08)"><strong style="color:#1D6A45">RLS actif</strong> sur les 6 tables. Bonne isolation par courtier.</div>
+      </div>
+      <div class="neo-card p-6 fourni-highlight">
+        <div class="flex items-center gap-2 mb-3"><span class="tag-fourni">FOURNI &#10003;</span><h3 class="font-grotesk font-bold">12 API routes</h3></div>
+        <div class="space-y-2 text-sm font-space text-gray-600">
+          <div class="p-2 bg-neo-gray font-mono text-xs">POST /api/connections/[provider]/connect</div>
+          <div class="p-2 bg-neo-gray font-mono text-xs">POST /api/publications/create</div>
+          <div class="p-2 bg-neo-gray font-mono text-xs">POST /api/publications/publish</div>
+          <div class="p-2 bg-neo-gray font-mono text-xs">GET /api/engagement/stats</div>
+          <div class="p-2 bg-neo-gray font-mono text-xs">POST /api/visuels/generate</div>
+          <div class="p-2 bg-neo-gray font-mono text-xs">+ 7 autres endpoints...</div>
+        </div>
+        <div class="mt-3 p-2 text-xs font-space" style="background:rgba(29,106,69,.08)"><strong style="color:#1D6A45">Zod validation</strong> sur tous les body/params. C'est bien fait.</div>
+      </div>
+      <div class="neo-card p-6 fourni-highlight">
+        <div class="flex items-center gap-2 mb-3"><span class="tag-fourni">FOURNI &#10003;</span><h3 class="font-grotesk font-bold">6 pages UI</h3></div>
+        <div class="space-y-2 text-sm font-space text-gray-600">
+          <div>Dashboard &mdash; layout + placeholders</div>
+          <div>Publications &mdash; liste + formulaire cr&eacute;ation</div>
+          <div>Engagement &mdash; grille stats vide</div>
+          <div>Connexions &mdash; cards par r&eacute;seau</div>
+          <div>Contenu &mdash; biblioth&egrave;que templates</div>
+          <div>Param&egrave;tres &mdash; config courtier</div>
+        </div>
+      </div>
+      <div class="neo-card p-6 fourni-highlight">
+        <div class="flex items-center gap-2 mb-3"><span class="tag-fourni">FOURNI &#10003;</span><h3 class="font-grotesk font-bold">Infrastructure</h3></div>
+        <div class="space-y-2 text-sm font-space text-gray-600">
+          <div>TypeScript types &mdash; strict, complets</div>
+          <div>Auth middleware &mdash; Supabase SSR</div>
+          <div>Rate limiting &mdash; par IP + par user</div>
+          <div>AES-256-GCM &mdash; utilitaire chiffrement</div>
+          <div>Error handling patterns</div>
+          <div>Env var validation</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- ============================================ -->
+<!-- 04 / HONNÊTETÉ : C'EST DU SCAFFOLDING -->
+<!-- ============================================ -->
 <section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
-    <div class="anim"><div class="section-number mb-4">05 / AVANT / APRÈS</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Ce que Connect change.</h2></div>
-    <div class="anim">
-      <div class="grid sm:grid-cols-2 gap-0" style="border:3px solid #0a0a0a;box-shadow:6px 6px 0 #0a0a0a">
-        <div class="p-6" style="background:rgba(231,76,60,.05);border-right:2px solid #0a0a0a">
-          <div class="font-mono text-xs mb-4 font-bold" style="color:#E74C3C">AVANT &mdash; MANUEL</div>
-          <div class="space-y-3 text-sm font-space text-gray-400">
-            <div>&#10007; 2-3h/semaine pour gérer les réseaux</div>
-            <div>&#10007; Contenu générique identique pour tous</div>
-            <div>&#10007; Pas de branding courtier</div>
-            <div>&#10007; Aucune mesure d'engagement</div>
-            <div>&#10007; Ambassadeurs jamais exploités</div>
-            <div>&#10007; Publications irrégulières</div>
-            <div>&#10007; Risque de contenu non conforme</div>
-          </div>
+    <div class="anim"><div class="section-number mb-4" style="color:#E74C3C">04 / HONN&Ecirc;TET&Eacute;</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Mais rien ne parle aux APIs.</h2></div>
+    <div class="anim neo-card p-6 sm:p-8" style="border-left:6px solid #E74C3C">
+      <p class="text-gray-600 font-space mb-6">Chaque fonction qui devrait appeler Meta, LinkedIn ou Google est stubb&eacute;e. Voici ce que le code fait vraiment aujourd'hui :</p>
+      <div class="space-y-3">
+        <div class="p-4 stub-highlight">
+          <div class="flex items-center gap-2 mb-1"><span class="tag-stubbe">STUBB&Eacute;</span><span class="font-bold text-sm">OAuth connect</span></div>
+          <div class="font-mono text-xs text-gray-500 p-2 bg-neo-gray mt-2">return { access_token: "STUB_TOKEN", provider: "facebook" }</div>
         </div>
-        <div class="p-6" style="background:rgba(29,106,69,.05)">
-          <div class="font-mono text-xs mb-4 font-bold" style="color:#1D6A45">APRÈS &mdash; CONNECT</div>
-          <div class="space-y-3 text-sm font-space text-neo-black">
-            <div><strong>&#10003; 0 minute</strong> &mdash; tout est automatique</div>
-            <div><strong>&#10003; 1 article = N visuels</strong> personnalisés</div>
-            <div><strong>&#10003; Logo + couleurs</strong> de chaque courtier</div>
-            <div><strong>&#10003; Métriques</strong> par post, réseau, mois</div>
-            <div><strong>&#10003; Ambassadeurs &rarr; posts auto</strong></div>
-            <div><strong>&#10003; Calendrier éditorial</strong> planifié</div>
-            <div><strong>&#10003; Contenu validé</strong> et conforme</div>
-          </div>
+        <div class="p-4 stub-highlight">
+          <div class="flex items-center gap-2 mb-1"><span class="tag-stubbe">STUBB&Eacute;</span><span class="font-bold text-sm">Publication</span></div>
+          <div class="font-mono text-xs text-gray-500 p-2 bg-neo-gray mt-2">console.log("Would publish to:", provider) // ne poste rien</div>
         </div>
+        <div class="p-4 stub-highlight">
+          <div class="flex items-center gap-2 mb-1"><span class="tag-stubbe">STUBB&Eacute;</span><span class="font-bold text-sm">Collecte engagement</span></div>
+          <div class="font-mono text-xs text-gray-500 p-2 bg-neo-gray mt-2">return { likes: 0, views: 0, comments: 0 } // donn&eacute;es fix&eacute;es</div>
+        </div>
+        <div class="p-4 stub-highlight">
+          <div class="flex items-center gap-2 mb-1"><span class="tag-stubbe">STUBB&Eacute;</span><span class="font-bold text-sm">G&eacute;n&eacute;ration visuels</span></div>
+          <div class="font-mono text-xs text-gray-500 p-2 bg-neo-gray mt-2">return { url: "/placeholder.png" } // pas de g&eacute;n&eacute;ration r&eacute;elle</div>
+        </div>
+      </div>
+      <div class="mt-6 p-4 text-sm font-space" style="background:rgba(231,76,60,.05);border:2px solid rgba(231,76,60,.15)"><strong style="color:#E74C3C">Estimation :</strong> le code fourni repr&eacute;sente ~15-20% du travail total. C'est du scaffolding propre, mais le c&#339;ur &mdash; l'int&eacute;gration avec les APIs r&eacute;elles &mdash; reste &agrave; construire int&eacute;gralement.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 05 / CE QUI MANQUE -->
+<!-- ============================================ -->
+<section id="manque" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto text-white">
+    <div class="anim"><div class="section-number mb-4" style="color:rgba(255,255,255,.4)">05 / CE QUI MANQUE</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Tout ce qui parle au monde r&eacute;el.</h2></div>
+    <div class="anim space-y-3">
+      <div class="p-4 flex items-start gap-4" style="border:2px solid rgba(231,76,60,.4)">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#E74C3C">1</div>
+        <div><h4 class="font-bold text-sm mb-1">OAuth r&eacute;el &mdash; 4 providers</h4><p class="text-sm font-space" style="color:rgba(255,255,255,.6)">Meta (FB+IG), LinkedIn, Google Business. Vrais flows OAuth2 avec callback, &eacute;change de code, stockage chiffr&eacute;, token refresh, gestion de r&eacute;vocation.</p></div>
+      </div>
+      <div class="p-4 flex items-start gap-4" style="border:2px solid rgba(231,76,60,.4)">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#E74C3C">2</div>
+        <div><h4 class="font-bold text-sm mb-1">Publication r&eacute;elle &mdash; 4 r&eacute;seaux</h4><p class="text-sm font-space" style="color:rgba(255,255,255,.6)">Poster image + texte sur Facebook Pages, Instagram Feed, LinkedIn Pages, Google Business. Chaque API a ses propres formats, limites, et particularit&eacute;s.</p></div>
+      </div>
+      <div class="p-4 flex items-start gap-4" style="border:2px solid rgba(231,76,60,.4)">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#E74C3C">3</div>
+        <div><h4 class="font-bold text-sm mb-1">Collecte engagement r&eacute;elle</h4><p class="text-sm font-space" style="color:rgba(255,255,255,.6)">R&eacute;cup&eacute;rer les m&eacute;triques (vues, likes, commentaires, partages) depuis 4 APIs diff&eacute;rentes, chacune avec son propre format de r&eacute;ponse.</p></div>
+      </div>
+      <div class="p-4 flex items-start gap-4" style="border:2px solid rgba(231,76,60,.4)">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#E74C3C">4</div>
+        <div><h4 class="font-bold text-sm mb-1">G&eacute;n&eacute;ration visuels r&eacute;elle</h4><p class="text-sm font-space" style="color:rgba(255,255,255,.6)">Cr&eacute;er des images personnalis&eacute;es par courtier (logo, couleurs) dans les bons formats pour chaque r&eacute;seau. Sharp/Puppeteer/Canvas.</p></div>
+      </div>
+      <div class="p-4 flex items-start gap-4" style="border:2px solid rgba(231,76,60,.4)">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#E74C3C">5</div>
+        <div><h4 class="font-bold text-sm mb-1">Flux ambassadeur &amp; IA</h4><p class="text-sm font-space" style="color:rgba(255,255,255,.6)">Int&eacute;gration Advice&rarr;Connect, g&eacute;n&eacute;ration de contenu assist&eacute;e par IA, transformation des t&eacute;moignages en posts sociaux.</p></div>
+      </div>
+      <div class="p-4 flex items-start gap-4" style="border:2px solid rgba(231,76,60,.4)">
+        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#E74C3C">6</div>
+        <div><h4 class="font-bold text-sm mb-1">Frontend wiring</h4><p class="text-sm font-space" style="color:rgba(255,255,255,.6)">Connecter les 6 pages UI &agrave; des donn&eacute;es r&eacute;elles. Formulaires qui soumettent, charts qui affichent de vrais metrics, calendrier qui planifie vraiment.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 06-08 — LA SOLUTION -->
-<section id="solution" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
+<!-- ============================================ -->
+<!-- 06 / LE PROBLÈME -->
+<!-- ============================================ -->
+<section id="probleme" class="py-20 px-4" style="background:#E74C3C;border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto text-white">
-    <div class="anim"><div class="section-number mb-4" style="color:rgba(255,255,255,.4)">06 / LA SOLUTION</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Comment Connect fonctionne.</h2></div>
-    <div class="anim space-y-4">
-      <div class="flex items-start gap-4 p-4" style="border:2px solid rgba(255,255,255,.15)"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#E74C3C">1</div><div><h4 class="font-bold text-sm mb-1">L'admin crée un article</h4><p class="text-sm font-space" style="color:rgba(255,255,255,.6)">Depuis le back-office : titre, texte, image, catégorie. Templates avec variables JSON ({nom_courtier}, {ville}, {specialite}).</p></div></div>
-      <div class="flex items-start gap-4 p-4" style="border:2px solid rgba(255,255,255,.15)"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#E74C3C">2</div><div><h4 class="font-bold text-sm mb-1">Connect génère N visuels</h4><p class="text-sm font-space" style="color:rgba(255,255,255,.6)">Un visuel unique par courtier : son logo, ses couleurs, son nom, sa ville. Pré-généré avant la date de publication.</p></div></div>
-      <div class="flex items-start gap-4 p-4" style="border:2px solid rgba(255,255,255,.15)"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#E74C3C">3</div><div><h4 class="font-bold text-sm mb-1">Planification</h4><p class="text-sm font-space" style="color:rgba(255,255,255,.6)">Date et heure programmées. Filtrage par compagnie, branche, zone géographique. Seuls les courtiers concernés reçoivent le post.</p></div></div>
-      <div class="flex items-start gap-4 p-4" style="border:2px solid rgba(255,255,255,.15)"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#E74C3C">4</div><div><h4 class="font-bold text-sm mb-1">Publication simultanée</h4><p class="text-sm font-space" style="color:rgba(255,255,255,.6)">Cron déclenche à la date prévue. Post le visuel personnalisé sur chaque réseau connecté de chaque courtier. Rate limiting respecté.</p></div></div>
-      <div class="flex items-start gap-4 p-4" style="border:2px solid rgba(255,255,255,.15)"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#E74C3C">5</div><div><h4 class="font-bold text-sm mb-1">Collecte d'engagement</h4><p class="text-sm font-space" style="color:rgba(255,255,255,.6)">Chaque nuit, les métriques sont collectées : vues, likes, commentaires, partages, taux d'engagement. Dashboard dédié.</p></div></div>
+    <div class="anim"><div class="section-number mb-4" style="color:rgba(255,255,255,.4)">06 / LE PROBL&Egrave;ME</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le courtier invisible.</h2><p class="text-lg font-space" style="color:rgba(255,255,255,.8)">Un courtier sans pr&eacute;sence sociale n'existe pas pour les nouveaux prospects. G&eacute;rer 4 r&eacute;seaux manuellement? Personne n'a le temps. Le contenu doit &ecirc;tre personnalis&eacute;, conforme, et r&eacute;gulier.</p></div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 07 / 4 PROBLÈMES CONCRETS -->
+<!-- ============================================ -->
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim"><div class="section-number mb-4">07 / LE QUOTIDIEN</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">4 probl&egrave;mes concrets.</h2></div>
+    <div class="anim grid sm:grid-cols-2 gap-5">
+      <div class="neo-card p-6"><div class="text-2xl mb-3">&#9203;</div><h3 class="font-grotesk font-bold mb-2">Pas le temps</h3><p class="text-sm text-gray-500 font-space">Cr&eacute;er du contenu pour 4 r&eacute;seaux, adapter le format de chaque post. C'est 2-3 heures par semaine que le courtier n'a pas.</p><div class="mt-3 p-2 bg-neo-gray text-xs font-space"><strong style="color:#E74C3C">R&eacute;sultat :</strong> les comptes sont morts depuis 6 mois.</div></div>
+      <div class="neo-card p-6"><div class="text-2xl mb-3">&#128221;</div><h3 class="font-grotesk font-bold mb-2">Contenu g&eacute;n&eacute;rique</h3><p class="text-sm text-gray-500 font-space">Des posts identiques pour tous les courtiers. Pas de logo, pas de couleurs du cabinet. Le client ne reconna&icirc;t pas son courtier.</p><div class="mt-3 p-2 bg-neo-gray text-xs font-space"><strong style="color:#E74C3C">R&eacute;sultat :</strong> z&eacute;ro engagement, z&eacute;ro conversion.</div></div>
+      <div class="neo-card p-6"><div class="text-2xl mb-3">&#127912;</div><h3 class="font-grotesk font-bold mb-2">Pas de branding</h3><p class="text-sm text-gray-500 font-space">Chaque courtier a son logo, ses couleurs, sa ville. Mais les posts sur les r&eacute;seaux sont tous les m&ecirc;mes. Aucune diff&eacute;renciation.</p><div class="mt-3 p-2 bg-neo-gray text-xs font-space"><strong style="color:#E74C3C">R&eacute;sultat :</strong> le courtier ne partage pas &mdash; ce n'est pas &agrave; son image.</div></div>
+      <div class="neo-card p-6"><div class="text-2xl mb-3">&#11088;</div><h3 class="font-grotesk font-bold mb-2">Ambassadeurs g&acirc;ch&eacute;s</h3><p class="text-sm text-gray-500 font-space">Advice identifie des clients satisfaits. Leurs t&eacute;moignages restent dans un tableau. Jamais publi&eacute;s. Jamais vus par personne.</p><div class="mt-3 p-2 bg-neo-gray text-xs font-space"><strong style="color:#E74C3C">Co&ucirc;t :</strong> visibilit&eacute; perdue, prospects qui ne viendront pas.</div></div>
     </div>
   </div>
 </section>
 
-<!-- 07-08 — 4 RÉSEAUX -->
-<section id="reseaux" class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+<!-- ============================================ -->
+<!-- 08 / BLOC 1 — REAL OAUTH -->
+<!-- ============================================ -->
+<section id="blocs" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto text-white">
+    <div class="anim"><div class="section-number mb-4" style="color:rgba(255,255,255,.4)">08 / BLOC 1 &mdash; CE QUE JE CONSTRUIS</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">OAuth r&eacute;el pour 4 r&eacute;seaux.</h2><div class="flex items-center gap-3 mb-6"><span class="tag-bloc">BLOC 1</span><span class="font-space text-sm" style="color:rgba(255,255,255,.5)">4-5 jours</span></div></div>
+    <div class="anim space-y-4">
+      <div class="p-4" style="border:2px solid rgba(255,255,255,.15)">
+        <h4 class="font-bold text-sm mb-2">Meta OAuth (Facebook + Instagram)</h4>
+        <p class="text-sm font-space mb-2" style="color:rgba(255,255,255,.6)">Un seul flow OAuth pour les deux. Scopes : <code class="font-mono text-xs">pages_manage_posts</code>, <code class="font-mono text-xs">pages_read_engagement</code>, <code class="font-mono text-xs">instagram_basic</code>, <code class="font-mono text-xs">instagram_content_publish</code>.</p>
+        <div class="text-xs font-space" style="color:rgba(255,255,255,.3)">Bruno a l'AES-256-GCM util &rarr; je l'utilise pour stocker les tokens.</div>
+      </div>
+      <div class="p-4" style="border:2px solid rgba(255,255,255,.15)">
+        <h4 class="font-bold text-sm mb-2">LinkedIn OAuth</h4>
+        <p class="text-sm font-space mb-2" style="color:rgba(255,255,255,.6)">OAuth 2.0 s&eacute;par&eacute;. Scopes : <code class="font-mono text-xs">w_member_social</code>, <code class="font-mono text-xs">r_organization_social</code>. S&eacute;lection de la page entreprise apr&egrave;s connexion.</p>
+      </div>
+      <div class="p-4" style="border:2px solid rgba(255,255,255,.15)">
+        <h4 class="font-bold text-sm mb-2">Google Business Profile OAuth</h4>
+        <p class="text-sm font-space mb-2" style="color:rgba(255,255,255,.6)">R&eacute;utilise la connexion Advice si le courtier a d&eacute;j&agrave; connect&eacute; Google pour les avis. Sinon, OAuth classique avec scope <code class="font-mono text-xs">business.manage</code>.</p>
+      </div>
+      <div class="p-4" style="border:2px solid rgba(255,255,255,.15)">
+        <h4 class="font-bold text-sm mb-2">Token lifecycle</h4>
+        <p class="text-sm font-space" style="color:rgba(255,255,255,.6)">Refresh automatique 48h avant expiration. D&eacute;tection de r&eacute;vocation. Dashboard &eacute;tat des connexions (vert/orange/rouge). Le courtier ne reconnecte jamais manuellement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 09 / BLOC 2 — REAL PUBLISHING -->
+<!-- ============================================ -->
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
-    <div class="anim"><div class="section-number mb-4" style="color:#E74C3C">07 / 4 RÉSEAUX</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">4 plateformes connectées.</h2></div>
+    <div class="anim"><div class="section-number mb-4" style="color:#E74C3C">09 / BLOC 2</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Publication r&eacute;elle sur 4 r&eacute;seaux.</h2><div class="flex items-center gap-3 mb-6"><span class="tag-bloc">BLOC 2</span><span class="font-space text-sm text-gray-400">4-5 jours</span></div></div>
     <div class="anim grid sm:grid-cols-2 gap-5">
       <div class="neo-card p-6">
         <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center text-white text-lg font-bold" style="background:#1877F2;border:2px solid #0a0a0a">f</div><h3 class="font-grotesk font-bold">Facebook</h3></div>
         <div class="space-y-2 text-sm font-space text-gray-600">
-          <div><strong>API :</strong> Meta Graph API v18+</div>
-          <div><strong>Auth :</strong> OAuth2 (pages_manage_posts, pages_read_engagement)</div>
-          <div><strong>Format :</strong> Image + texte sur la page du courtier</div>
-          <div><strong>Limites :</strong> 200 posts/heure (largement suffisant)</div>
-          <div><strong>Métriques :</strong> Portée, likes, commentaires, partages</div>
+          <div><strong>Upload :</strong> image via multipart + texte sur la page</div>
+          <div><strong>Format :</strong> 1200x630 ou 1080x1080</div>
+          <div><strong>Rate limit :</strong> 200 posts/heure (OK)</div>
+          <div><strong>Erreurs :</strong> token expir&eacute;, page d&eacute;publi&eacute;e, contenu flag</div>
         </div>
       </div>
       <div class="neo-card p-6">
         <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center text-white text-lg font-bold" style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border:2px solid #0a0a0a">&#9881;</div><h3 class="font-grotesk font-bold">Instagram</h3></div>
         <div class="space-y-2 text-sm font-space text-gray-600">
-          <div><strong>API :</strong> Meta Graph API (même token que Facebook)</div>
-          <div><strong>Auth :</strong> Même OAuth, scope instagram_basic + content_publish</div>
-          <div><strong>Format :</strong> Image obligatoire + légende (pas de text-only)</div>
-          <div><strong>Limites :</strong> 25 posts/jour par compte</div>
-          <div><strong>Métriques :</strong> Impressions, likes, commentaires, saves</div>
+          <div><strong>Upload :</strong> image obligatoire (pas de text-only)</div>
+          <div><strong>Format :</strong> 1080x1080 (carr&eacute; obligatoire)</div>
+          <div><strong>Rate limit :</strong> 25 posts/jour par compte</div>
+          <div><strong>Sp&eacute;cifique :</strong> upload via URL publique d'abord</div>
         </div>
       </div>
       <div class="neo-card p-6">
         <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center text-white text-lg font-bold" style="background:#0A66C2;border:2px solid #0a0a0a">in</div><h3 class="font-grotesk font-bold">LinkedIn</h3></div>
         <div class="space-y-2 text-sm font-space text-gray-600">
-          <div><strong>API :</strong> LinkedIn Marketing API v2</div>
-          <div><strong>Auth :</strong> OAuth 2.0 (w_member_social, r_organization_social)</div>
-          <div><strong>Format :</strong> Image + texte sur la page entreprise</div>
-          <div><strong>Limites :</strong> 100 posts/jour par organisation</div>
-          <div><strong>Métriques :</strong> Impressions, clics, réactions, commentaires</div>
+          <div><strong>Upload :</strong> register + upload binary + create post</div>
+          <div><strong>Format :</strong> 1200x627 optimal</div>
+          <div><strong>Rate limit :</strong> 100 posts/jour par org</div>
+          <div><strong>Sp&eacute;cifique :</strong> 3 &eacute;tapes pour un post avec image</div>
         </div>
       </div>
       <div class="neo-card p-6">
         <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center text-white text-lg font-bold" style="background:#4285F4;border:2px solid #0a0a0a">G</div><h3 class="font-grotesk font-bold">Google Business</h3></div>
         <div class="space-y-2 text-sm font-space text-gray-600">
-          <div><strong>API :</strong> Google Business Profile API</div>
-          <div><strong>Auth :</strong> OAuth 2.0 (business.manage)</div>
-          <div><strong>Format :</strong> Post avec image + texte + CTA optionnel</div>
-          <div><strong>Limites :</strong> Posts expirent après 7 jours</div>
-          <div><strong>Métriques :</strong> Vues, clics (via Search Console)</div>
+          <div><strong>Upload :</strong> post avec image + texte + CTA optionnel</div>
+          <div><strong>Sp&eacute;cifique :</strong> posts expirent apr&egrave;s 7 jours</div>
+          <div><strong>Rate limit :</strong> lib&eacute;ral mais monitoring</div>
+          <div><strong>Bonus :</strong> CTA "En savoir plus" vers site courtier</div>
+        </div>
+      </div>
+    </div>
+    <div class="anim mt-6 neo-card p-5" style="border-left:6px solid #E74C3C">
+      <h4 class="font-grotesk font-bold mb-2">Par r&eacute;seau, le texte est adapt&eacute;</h4>
+      <div class="grid sm:grid-cols-4 gap-3 text-xs font-space text-gray-500">
+        <div><strong class="text-neo-black">Facebook :</strong> texte long OK, hashtags mod&eacute;r&eacute;s, lien dans le texte</div>
+        <div><strong class="text-neo-black">Instagram :</strong> max 2200 chars, hashtags dans commentaire, pas de lien</div>
+        <div><strong class="text-neo-black">LinkedIn :</strong> ton professionnel, 3000 chars max, article format</div>
+        <div><strong class="text-neo-black">Google :</strong> court (1500 chars), CTA bouton, orientation locale</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 10 / BLOC 3 — VISUAL PERSONALIZATION -->
+<!-- ============================================ -->
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim"><div class="section-number mb-4">10 / BLOC 3</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Visuels personnalis&eacute;s par courtier.</h2><div class="flex items-center gap-3 mb-6"><span class="tag-bloc">BLOC 3</span><span class="font-space text-sm text-gray-400">2-3 jours</span></div></div>
+    <div class="anim neo-card p-6 sm:p-8">
+      <p class="text-gray-600 font-space mb-6">L'admin cr&eacute;e UN article. Connect g&eacute;n&egrave;re un visuel unique par courtier avec son logo et ses couleurs. Pr&eacute;-g&eacute;n&eacute;r&eacute; avant la date de publication.</p>
+      <div class="grid grid-cols-5 gap-3 mb-6">
+        <div class="text-center p-3 bg-white neo-border-2"><div class="w-full h-14 mb-2 flex items-center justify-center text-white text-[10px] font-bold" style="background:#1E3A5F">Logo A</div><div class="text-[9px] font-mono">Cabinet Dupont</div></div>
+        <div class="text-center p-3 bg-white neo-border-2"><div class="w-full h-14 mb-2 flex items-center justify-center text-white text-[10px] font-bold" style="background:#2C3E50">Logo B</div><div class="text-[9px] font-mono">Assur Martin</div></div>
+        <div class="text-center p-3 bg-white neo-border-2"><div class="w-full h-14 mb-2 flex items-center justify-center text-white text-[10px] font-bold" style="background:#27AE60">Logo C</div><div class="text-[9px] font-mono">Courtage Vert</div></div>
+        <div class="text-center p-3 bg-white neo-border-2"><div class="w-full h-14 mb-2 flex items-center justify-center text-white text-[10px] font-bold" style="background:#8E44AD">Logo D</div><div class="text-[9px] font-mono">AXA Bordeaux</div></div>
+        <div class="text-center p-3 bg-white neo-border-2"><div class="w-full h-14 mb-2 flex items-center justify-center text-white text-[10px] font-bold" style="background:#E74C3C">Logo E</div><div class="text-[9px] font-mono">InsurAdvice</div></div>
+      </div>
+      <h4 class="font-grotesk font-bold mb-3">Technologie</h4>
+      <div class="grid sm:grid-cols-3 gap-3 text-sm font-space text-gray-600">
+        <div class="p-3 bg-white neo-border-2"><strong>Sharp</strong> &mdash; resize, crop, overlay logo</div>
+        <div class="p-3 bg-white neo-border-2"><strong>Puppeteer</strong> &mdash; render HTML template en image</div>
+        <div class="p-3 bg-white neo-border-2"><strong>Canvas</strong> &mdash; fallback l&eacute;ger pour compositions simples</div>
+      </div>
+      <div class="mt-4">
+        <h4 class="font-grotesk font-bold mb-3">Formats de sortie</h4>
+        <div class="grid sm:grid-cols-3 gap-2">
+          <div class="p-2 bg-neo-gray font-mono text-xs">1080x1080 &mdash; Instagram + Facebook</div>
+          <div class="p-2 bg-neo-gray font-mono text-xs">1200x630 &mdash; Facebook link + LinkedIn</div>
+          <div class="p-2 bg-neo-gray font-mono text-xs">1200x900 &mdash; Google Business</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim"><div class="section-number mb-4">08 / ONBOARDING RÉSEAU</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Connexion en 1 clic.</h2></div>
-    <div class="anim neo-card p-6 sm:p-8">
-      <p class="text-gray-600 font-space mb-4">Pendant l'onboarding (ou dans les paramètres), le courtier connecte ses réseaux en un clic OAuth chacun :</p>
-      <div class="space-y-3">
-        <div class="flex items-center gap-4 p-3 bg-white neo-border-2"><div class="w-8 h-8 flex-shrink-0 flex items-center justify-center font-bold text-white" style="background:#1877F2">f</div><span class="font-space text-sm">Connecter Facebook &mdash; sélectionner la page à publier</span><div class="ml-auto tag-mvp">1 CLIC</div></div>
-        <div class="flex items-center gap-4 p-3 bg-white neo-border-2"><div class="w-8 h-8 flex-shrink-0 flex items-center justify-center font-bold text-white" style="background:#E4405F">&#9881;</div><span class="font-space text-sm">Connecter Instagram &mdash; même token Meta, automatique</span><div class="ml-auto tag-mvp">AUTO</div></div>
-        <div class="flex items-center gap-4 p-3 bg-white neo-border-2"><div class="w-8 h-8 flex-shrink-0 flex items-center justify-center font-bold text-white" style="background:#0A66C2">in</div><span class="font-space text-sm">Connecter LinkedIn &mdash; sélectionner la page entreprise</span><div class="ml-auto tag-mvp">1 CLIC</div></div>
-        <div class="flex items-center gap-4 p-3 bg-white neo-border-2"><div class="w-8 h-8 flex-shrink-0 flex items-center justify-center font-bold text-white" style="background:#4285F4">G</div><span class="font-space text-sm">Connecter Google Business &mdash; déjà fait si Advice est actif</span><div class="ml-auto tag-mvp">DÉJÀ</div></div>
-      </div>
-      <div class="mt-4 p-3 bg-neo-gray text-xs font-space"><strong>Refresh automatique :</strong> les tokens sont rafraîchis automatiquement par cron. Le courtier ne reconnecte jamais.</div>
-    </div>
-  </div>
-</section>
-
-<!-- 09-11 — VISUELS PERSONNALISÉS -->
-<section id="visuels" class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim"><div class="section-number mb-4" style="color:#E74C3C">09 / PERSONNALISATION</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Un article, 5 visuels uniques.</h2></div>
-    <div class="anim neo-card p-6 sm:p-8">
-      <p class="text-gray-600 font-space mb-6">L'admin crée UN seul article. Connect génère automatiquement un visuel unique pour chaque courtier avec son logo et ses couleurs. Le tout pré-généré avant la date de publication.</p>
-      <div class="grid grid-cols-5 gap-3 mb-6">
-        <div class="text-center p-3 bg-white neo-border-2"><div class="w-full h-14 mb-2" style="background:#1E3A5F"></div><div class="text-[9px] font-mono">Cabinet A</div></div>
-        <div class="text-center p-3 bg-white neo-border-2"><div class="w-full h-14 mb-2" style="background:#2C3E50"></div><div class="text-[9px] font-mono">Cabinet B</div></div>
-        <div class="text-center p-3 bg-white neo-border-2"><div class="w-full h-14 mb-2" style="background:#27AE60"></div><div class="text-[9px] font-mono">Cabinet C</div></div>
-        <div class="text-center p-3 bg-white neo-border-2"><div class="w-full h-14 mb-2" style="background:#8E44AD"></div><div class="text-[9px] font-mono">Cabinet D</div></div>
-        <div class="text-center p-3 bg-white neo-border-2"><div class="w-full h-14 mb-2" style="background:#E74C3C"></div><div class="text-[9px] font-mono">Cabinet E</div></div>
-      </div>
-      <h4 class="font-grotesk font-bold mb-3">Variables JSON disponibles</h4>
-      <div class="grid sm:grid-cols-3 gap-2">
-        <div class="p-2 bg-neo-gray font-mono text-xs">{nom_courtier}</div>
-        <div class="p-2 bg-neo-gray font-mono text-xs">{ville}</div>
-        <div class="p-2 bg-neo-gray font-mono text-xs">{specialite}</div>
-        <div class="p-2 bg-neo-gray font-mono text-xs">{logo_url}</div>
-        <div class="p-2 bg-neo-gray font-mono text-xs">{couleur_primaire}</div>
-        <div class="p-2 bg-neo-gray font-mono text-xs">{telephone}</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim"><div class="section-number mb-4">10 / TEMPLATES & CONTENU</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Bibliothèque de templates.</h2></div>
-    <div class="anim neo-card p-6 sm:p-8">
-      <div class="grid sm:grid-cols-2 gap-5">
-        <div><h4 class="font-grotesk font-bold mb-3">Types de contenu</h4><div class="space-y-2 text-sm font-space text-gray-600"><div>&#128221; Articles de fond (conseils assurance, actualité)</div><div>&#128161; Tips rapides (1 conseil en 1 image)</div><div>&#11088; Témoignages ambassadeurs (depuis Advice)</div><div>&#128197; Posts saisonniers (rentrée, hiver, été)</div><div>&#128184; Actualités produits (nouvelle offre compagnie)</div></div></div>
-        <div><h4 class="font-grotesk font-bold mb-3">Workflow éditorial</h4><div class="space-y-2 text-sm font-space text-gray-600"><div>1. Admin crée le brouillon</div><div>2. Prévisualisation par courtier</div><div>3. Planification (date + heure + filtre)</div><div>4. Pré-génération des visuels</div><div>5. Publication automatique au moment voulu</div></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
+<!-- ============================================ -->
+<!-- 11 / BLOC 4 — EDITORIAL CALENDAR -->
+<!-- ============================================ -->
 <section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
-    <div class="anim"><div class="section-number mb-4">11 / MULTIDIFFUSION</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le workflow de publication.</h2></div>
+    <div class="anim"><div class="section-number mb-4" style="color:#E74C3C">11 / BLOC 4</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Calendrier &eacute;ditorial + scheduling.</h2><div class="flex items-center gap-3 mb-6"><span class="tag-bloc">BLOC 4</span><span class="font-space text-sm text-gray-400">2-3 jours</span></div></div>
     <div class="anim neo-card p-6 sm:p-8">
-      <div class="space-y-3">
-        <div class="flex items-center gap-4 p-3 bg-neo-gray neo-border-2"><div class="w-8 h-8 flex-shrink-0 flex items-center justify-center font-mono font-bold text-sm text-white" style="background:#E74C3C">1</div><span class="font-space text-sm">Cron déclenche à la date/heure programmée</span></div>
-        <div class="flex items-center gap-4 p-3 bg-neo-gray neo-border-2"><div class="w-8 h-8 flex-shrink-0 flex items-center justify-center font-mono font-bold text-sm text-white" style="background:#E74C3C">2</div><span class="font-space text-sm">Filtre les courtiers concernés (compagnie, branche, zone)</span></div>
-        <div class="flex items-center gap-4 p-3 bg-neo-gray neo-border-2"><div class="w-8 h-8 flex-shrink-0 flex items-center justify-center font-mono font-bold text-sm text-white" style="background:#E74C3C">3</div><span class="font-space text-sm">Pour chaque courtier : récupère le visuel personnalisé pré-généré</span></div>
-        <div class="flex items-center gap-4 p-3 bg-neo-gray neo-border-2"><div class="w-8 h-8 flex-shrink-0 flex items-center justify-center font-mono font-bold text-sm text-white" style="background:#E74C3C">4</div><span class="font-space text-sm">Poste sur chaque réseau connecté (FB, IG, LinkedIn, GBP)</span></div>
-        <div class="flex items-center gap-4 p-3 bg-neo-gray neo-border-2"><div class="w-8 h-8 flex-shrink-0 flex items-center justify-center font-mono font-bold text-sm text-white" style="background:#E74C3C">5</div><span class="font-space text-sm">Retry 3x si échec. Erreurs loguées. Rate limiting respecté.</span></div>
-        <div class="flex items-center gap-4 p-3 bg-neo-gray neo-border-2"><div class="w-8 h-8 flex-shrink-0 flex items-center justify-center font-mono font-bold text-sm text-white" style="background:#E74C3C">6</div><span class="font-space text-sm">Log d'exécution : publication_id, courtier_id, réseau, statut, timestamp</span></div>
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div>
+          <h4 class="font-grotesk font-bold mb-3">Workflow</h4>
+          <div class="space-y-3">
+            <div class="flex items-center gap-3 p-3 bg-neo-gray neo-border-2"><div class="w-6 h-6 flex items-center justify-center text-xs font-bold text-white" style="background:#888">1</div><span class="font-space text-sm">Brouillon</span></div>
+            <div class="text-center text-gray-300">&#8595;</div>
+            <div class="flex items-center gap-3 p-3 bg-neo-gray neo-border-2"><div class="w-6 h-6 flex items-center justify-center text-xs font-bold text-white" style="background:#F39C12">2</div><span class="font-space text-sm">Planifi&eacute; (date + heure + cible)</span></div>
+            <div class="text-center text-gray-300">&#8595;</div>
+            <div class="flex items-center gap-3 p-3 bg-neo-gray neo-border-2"><div class="w-6 h-6 flex items-center justify-center text-xs font-bold text-white" style="background:#1D6A45">3</div><span class="font-space text-sm">Publi&eacute; (sur N r&eacute;seaux)</span></div>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-grotesk font-bold mb-3">Fonctionnalit&eacute;s</h4>
+          <div class="space-y-2 text-sm font-space text-gray-600">
+            <div class="flex items-start gap-2"><span style="color:#E74C3C">&#9654;</span> Vue calendrier mois / semaine</div>
+            <div class="flex items-start gap-2"><span style="color:#E74C3C">&#9654;</span> Drag &amp; drop pour replanifier</div>
+            <div class="flex items-start gap-2"><span style="color:#E74C3C">&#9654;</span> Filtrage cible : compagnie, branche, zone</div>
+            <div class="flex items-start gap-2"><span style="color:#E74C3C">&#9654;</span> Preview par r&eacute;seau avant publication</div>
+            <div class="flex items-start gap-2"><span style="color:#E74C3C">&#9654;</span> Cron qui d&eacute;clenche &agrave; l'heure pr&eacute;vue</div>
+            <div class="flex items-start gap-2"><span style="color:#E74C3C">&#9654;</span> Retry 3x si &eacute;chec + log d'ex&eacute;cution</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 12-14 — CALENDRIER & ENGAGEMENT -->
+<!-- ============================================ -->
+<!-- 12 / BLOC 5 — ENGAGEMENT COLLECTION -->
+<!-- ============================================ -->
 <section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
-    <div class="anim"><div class="section-number mb-4">12 / CALENDRIER ÉDITORIAL</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Planification centralisée.</h2></div>
-    <div class="anim neo-card p-6 sm:p-8">
-      <div class="space-y-3 text-sm font-space">
-        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> <strong>Vue calendrier</strong> &mdash; mois / semaine, drag & drop pour replanifier</div>
-        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> <strong>Statuts</strong> &mdash; brouillon, planifié, publié, archivé (badges couleurs)</div>
-        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> <strong>Filtrage cible</strong> &mdash; par compagnie, par branche, par zone géographique</div>
-        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> <strong>Preview par réseau</strong> &mdash; aperçu de ce que ça donne sur FB vs IG vs LinkedIn</div>
-        <div class="flex items-start gap-2"><span class="check-todo">&#9744;</span> <strong>Historique</strong> &mdash; toutes les publications passées avec statut et métriques</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="engagement" class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim"><div class="section-number mb-4" style="color:#E74C3C">13 / ENGAGEMENT</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Métriques d'engagement.</h2></div>
+    <div class="anim"><div class="section-number mb-4">12 / BLOC 5</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Collecte d'engagement r&eacute;elle.</h2><div class="flex items-center gap-3 mb-6"><span class="tag-bloc">BLOC 5</span><span class="font-space text-sm text-gray-400">2-3 jours</span></div></div>
     <div class="anim">
       <div class="grid sm:grid-cols-5 gap-4 mb-6">
         <div class="neo-card p-4 text-center stat-card"><div class="text-xs text-gray-400 font-space mb-1">Vues</div><div class="font-space font-bold text-2xl stat-number">12.4k</div></div>
         <div class="neo-card p-4 text-center stat-card"><div class="text-xs text-gray-400 font-space mb-1">Likes</div><div class="font-space font-bold text-2xl stat-number">847</div></div>
-        <div class="neo-card p-4 text-center stat-card"><div class="text-xs text-gray-400 font-space mb-1">Commentaires</div><div class="font-space font-bold text-2xl stat-number">124</div></div>
+        <div class="neo-card p-4 text-center stat-card"><div class="text-xs text-gray-400 font-space mb-1">Comments</div><div class="font-space font-bold text-2xl stat-number">124</div></div>
         <div class="neo-card p-4 text-center stat-card"><div class="text-xs text-gray-400 font-space mb-1">Partages</div><div class="font-space font-bold text-2xl stat-number">93</div></div>
         <div class="neo-card p-4 text-center stat-card"><div class="text-xs text-gray-400 font-space mb-1">Engagement</div><div class="font-space font-bold text-2xl stat-number" style="color:#1D6A45">5.1%</div></div>
       </div>
       <div class="neo-card p-6">
-        <p class="text-sm text-gray-500 font-space">Collecte nocturne automatique. Dashboard avec : métriques par réseau, tendances mensuelles, top posts, export CSV/Excel. Le courtier voit l'impact réel de chaque publication.</p>
+        <div class="space-y-3 text-sm font-space">
+          <div class="flex items-start gap-3"><span class="font-bold" style="color:#E74C3C;min-width:20px">&#9654;</span><strong>Cron nocturne</strong> &mdash; collecte &agrave; 2h du matin, chaque nuit, pour tous les posts des 30 derniers jours</div>
+          <div class="flex items-start gap-3"><span class="font-bold" style="color:#E74C3C;min-width:20px">&#9654;</span><strong>4 APIs diff&eacute;rentes</strong> &mdash; chacune retourne les m&eacute;triques dans un format diff&eacute;rent. Normalisation en interne.</div>
+          <div class="flex items-start gap-3"><span class="font-bold" style="color:#E74C3C;min-width:20px">&#9654;</span><strong>Inconsistances g&eacute;r&eacute;es</strong> &mdash; Meta change le format r&eacute;guli&egrave;rement. Parsing adaptatif avec fallback. Si un champ manque : "donn&eacute;e indisponible" plut&ocirc;t qu'un faux z&eacute;ro.</div>
+          <div class="flex items-start gap-3"><span class="font-bold" style="color:#E74C3C;min-width:20px">&#9654;</span><strong>Dashboard</strong> &mdash; m&eacute;triques par r&eacute;seau, tendances mensuelles, top posts, export CSV/Excel</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 14-16 — AMBASSADEURS -->
-<section id="ambassadeur" class="py-20 px-4" style="background:#E74C3C;border-top:3px solid #0a0a0a">
+<!-- ============================================ -->
+<!-- 13 / 4 RÉSEAUX DÉTAILLÉS -->
+<!-- ============================================ -->
+<section id="reseaux" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto text-white">
-    <div class="anim"><div class="section-number mb-4" style="color:rgba(255,255,255,.4)">14 / AMBASSADEURS</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">La connexion qui ferme la boucle.</h2><p class="text-lg font-space" style="color:rgba(255,255,255,.8)">Advice identifie les clients Premium. Connect transforme leurs témoignages en visibilité.</p></div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim"><div class="section-number mb-4">15 / LE FLUX AMBASSADEUR</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">De la satisfaction au post social.</h2></div>
-    <div class="anim neo-card p-6 sm:p-8">
-      <div class="space-y-4">
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">A</div><div><h4 class="font-bold text-sm mb-1">Advice identifie un ambassadeur Premium</h4><p class="text-sm text-gray-500 font-space">Score satisfaction élevé + avis Google positif + témoignage enthousiaste.</p></div></div>
-        <div class="text-center text-2xl" style="color:#E74C3C">&#8595;</div>
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#E74C3C">C</div><div><h4 class="font-bold text-sm mb-1">Connect reçoit le témoignage</h4><p class="text-sm text-gray-500 font-space">Le témoignage est transmis automatiquement. Connect crée un post personnalisé avec la citation du client, le logo et les couleurs du courtier.</p></div></div>
-        <div class="text-center text-2xl" style="color:#E74C3C">&#8595;</div>
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#1D6A45">&#10003;</div><div><h4 class="font-bold text-sm mb-1">Publication sur les 4 réseaux</h4><p class="text-sm text-gray-500 font-space">Facebook, Instagram, LinkedIn, Google Business. Le témoignage devient visible par des milliers de personnes. Nouveaux prospects voient le courtier recommandé par un vrai client.</p></div></div>
+    <div class="anim"><div class="section-number mb-4" style="color:rgba(255,255,255,.4)">13 / 4 R&Eacute;SEAUX D&Eacute;TAILL&Eacute;S</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Chaque API en d&eacute;tail.</h2></div>
+    <div class="anim space-y-4">
+      <div class="p-5" style="border:2px solid rgba(255,255,255,.15)">
+        <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 flex-shrink-0 flex items-center justify-center text-white font-bold" style="background:#1877F2">f</div><h4 class="font-bold">Meta Graph API v19+</h4></div>
+        <div class="grid sm:grid-cols-3 gap-4 text-xs font-space" style="color:rgba(255,255,255,.6)">
+          <div><strong class="text-white">Auth</strong><br>OAuth2 &rarr; short-lived token &rarr; exchange for long-lived (60j) &rarr; page token (permanent). S&eacute;lection de la Page &agrave; publier.</div>
+          <div><strong class="text-white">Publish</strong><br>POST /{page-id}/photos (image) ou /{page-id}/feed (lien). Upload multipart. R&eacute;ponse : post_id pour tracking.</div>
+          <div><strong class="text-white">Metrics</strong><br>GET /{post-id}/insights (post_impressions, post_reactions_by_type_total, post_clicks). Disponibles 24h apr&egrave;s publication.</div>
+        </div>
       </div>
-      <div class="mt-6 p-4 border-l-4 text-sm font-space" style="border-color:#E74C3C;background:rgba(231,76,60,.05)"><strong>La boucle :</strong> nouveau prospect voit le post &rarr; contacte le courtier par email &rarr; <strong>Sentinel capture l'email</strong> &rarr; la boucle recommence.</div>
+      <div class="p-5" style="border:2px solid rgba(255,255,255,.15)">
+        <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 flex-shrink-0 flex items-center justify-center text-white font-bold" style="background:#E4405F">&#9881;</div><h4 class="font-bold">Instagram Graph API</h4></div>
+        <div class="grid sm:grid-cols-3 gap-4 text-xs font-space" style="color:rgba(255,255,255,.6)">
+          <div><strong class="text-white">Auth</strong><br>M&ecirc;me token Meta. Scope suppl&eacute;mentaire : instagram_content_publish. IG Business Account li&eacute; &agrave; la Page Facebook.</div>
+          <div><strong class="text-white">Publish</strong><br>2 &eacute;tapes : POST /{ig-user}/media (cr&eacute;e container avec image_url) puis POST /{ig-user}/media_publish (publie). Image obligatoire.</div>
+          <div><strong class="text-white">Metrics</strong><br>GET /{media-id}/insights (impressions, reach, likes, comments, saved). Pas de "shares" sur IG.</div>
+        </div>
+      </div>
+      <div class="p-5" style="border:2px solid rgba(255,255,255,.15)">
+        <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 flex-shrink-0 flex items-center justify-center text-white font-bold" style="background:#0A66C2">in</div><h4 class="font-bold">LinkedIn Marketing API v2</h4></div>
+        <div class="grid sm:grid-cols-3 gap-4 text-xs font-space" style="color:rgba(255,255,255,.6)">
+          <div><strong class="text-white">Auth</strong><br>OAuth2 s&eacute;par&eacute; de Meta. Scopes : w_member_social, r_organization_social. Token 60j, refresh disponible.</div>
+          <div><strong class="text-white">Publish</strong><br>3 &eacute;tapes : registerUpload &rarr; PUT binary &rarr; POST ugcPosts. Texte : max 3000 chars. Format pro forc&eacute;.</div>
+          <div><strong class="text-white">Metrics</strong><br>GET /organizationalEntityShareStatistics (impressionCount, clickCount, likeCount, commentCount). D&eacute;lai 24-48h.</div>
+        </div>
+      </div>
+      <div class="p-5" style="border:2px solid rgba(255,255,255,.15)">
+        <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 flex-shrink-0 flex items-center justify-center text-white font-bold" style="background:#4285F4">G</div><h4 class="font-bold">Google Business Profile API</h4></div>
+        <div class="grid sm:grid-cols-3 gap-4 text-xs font-space" style="color:rgba(255,255,255,.6)">
+          <div><strong class="text-white">Auth</strong><br>OAuth2 Google. Scope : business.manage. R&eacute;utilisation du token Advice si d&eacute;j&agrave; connect&eacute;.</div>
+          <div><strong class="text-white">Publish</strong><br>POST /accounts/{id}/locations/{id}/localPosts. Image + texte + CTA (LEARN_MORE, CALL, etc). Posts expirent apr&egrave;s 7j.</div>
+          <div><strong class="text-white">Metrics</strong><br>GET /locations/{id}/localPosts/{id}/insights (viewCount). M&eacute;triques limit&eacute;es mais visibilit&eacute; locale forte.</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- 16-19 — TECHNIQUE -->
-<section id="technique" class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+<!-- ============================================ -->
+<!-- 14 / WIREFRAMES -->
+<!-- ============================================ -->
+<section id="wireframes" class="py-20 px-4" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
-    <div class="anim"><div class="section-number mb-4">16 / ARCHITECTURE</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Stack technique.</h2></div>
-    <div class="anim grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-      <div class="neo-card p-4 text-center"><div class="font-grotesk font-bold text-sm">Meta Graph API</div><div class="text-xs text-gray-500 font-space">Facebook + Instagram</div></div>
-      <div class="neo-card p-4 text-center"><div class="font-grotesk font-bold text-sm">LinkedIn API v2</div><div class="text-xs text-gray-500 font-space">Pages entreprise</div></div>
-      <div class="neo-card p-4 text-center"><div class="font-grotesk font-bold text-sm">GBP API</div><div class="text-xs text-gray-500 font-space">Google Business Profile</div></div>
-      <div class="neo-card p-4 text-center"><div class="font-grotesk font-bold text-sm">Supabase Storage</div><div class="text-xs text-gray-500 font-space">Visuels générés</div></div>
-      <div class="neo-card p-4 text-center"><div class="font-grotesk font-bold text-sm">Canvas / SVG</div><div class="text-xs text-gray-500 font-space">Génération visuels</div></div>
-      <div class="neo-card p-4 text-center"><div class="font-grotesk font-bold text-sm">Cron</div><div class="text-xs text-gray-500 font-space">Publication programmée</div></div>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim"><div class="section-number mb-4">17 / BASE DE DONNÉES</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">4 tables Connect.</h2></div>
-    <div class="anim grid sm:grid-cols-2 gap-4">
-      <div class="neo-card p-5" style="border-top:4px solid #E74C3C"><h4 class="font-bold text-sm mb-2 font-grotesk">publications</h4><p class="text-xs text-gray-500 font-space">Chaque publication : titre, contenu, template_id, statut (draft/scheduled/published), date programmée, filtres cible.</p></div>
-      <div class="neo-card p-5" style="border-top:4px solid #E74C3C"><h4 class="font-bold text-sm mb-2 font-grotesk">engagement_stats</h4><p class="text-xs text-gray-500 font-space">Métriques par publication × réseau × courtier : vues, likes, commentaires, partages, date collecte.</p></div>
-      <div class="neo-card p-5" style="border-top:4px solid #E74C3C"><h4 class="font-bold text-sm mb-2 font-grotesk">connect_config</h4><p class="text-xs text-gray-500 font-space">Config par courtier : réseaux connectés, tokens OAuth, page IDs, statut connexion.</p></div>
-      <div class="neo-card p-5" style="border-top:4px solid #E74C3C"><h4 class="font-bold text-sm mb-2 font-grotesk">templates</h4><p class="text-xs text-gray-500 font-space">Bibliothèque de templates : contenu, variables JSON, catégorie, images, statut.</p></div>
-    </div>
-    <div class="anim mt-4 p-3 bg-neo-gray text-xs font-space"><strong>RLS actif</strong> sur les 4 tables. Chaque courtier ne voit que ses publications et métriques. L'admin voit tout.</div>
-  </div>
-</section>
-
-<!-- 18 — WIREFRAMES -->
-<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim"><div class="section-number mb-4">18 / INTERFACE</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Aperçu des pages.</h2></div>
+    <div class="anim"><div class="section-number mb-4" style="color:#E74C3C">14 / WIREFRAMES</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Les pages Connect.</h2><p class="text-lg text-gray-500 font-space mb-6">Bruno a fourni les shells UI. Je les connecte aux donn&eacute;es r&eacute;elles.</p></div>
     <div class="anim grid sm:grid-cols-3 gap-5">
       <div>
         <div style="border:2px solid #0a0a0a;box-shadow:4px 4px 0 #0a0a0a;background:#fff;overflow:hidden">
           <div style="background:#1E3A5F;height:28px;display:flex;align-items:center;padding:0 10px;gap:6px"><div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4)"></div><div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4)"></div><div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4)"></div><span class="text-[9px] text-white/60 font-mono ml-2">Publications</span></div>
-          <div class="flex"><div style="background:#0f2236;width:44px;min-height:100%"></div><div class="p-3 flex-1 space-y-2"><div style="background:#E74C3C;opacity:.3;height:12px;width:60%;border-radius:3px"></div><div class="flex gap-1"><div style="border:1px solid #e2e8f0;border-radius:4px;background:#fff;padding:4px;flex:1"><div style="background:#E74C3C;opacity:.15;height:32px;width:100%;margin-bottom:4px;border-radius:3px"></div><div style="background:#e2e8f0;height:6px;width:80%;border-radius:3px;margin-bottom:2px"></div><div style="background:#e2e8f0;height:4px;width:50%;border-radius:3px"></div></div><div style="border:1px solid #e2e8f0;border-radius:4px;background:#fff;padding:4px;flex:1"><div style="background:#2980B9;opacity:.15;height:32px;width:100%;margin-bottom:4px;border-radius:3px"></div><div style="background:#e2e8f0;height:6px;width:80%;border-radius:3px;margin-bottom:2px"></div><div style="background:#e2e8f0;height:4px;width:60%;border-radius:3px"></div></div></div></div></div>
+          <div class="flex"><div style="background:#0f2236;width:44px;min-height:100%"></div><div class="p-3 flex-1 space-y-2"><div style="background:#E74C3C;opacity:.3;height:12px;width:60%;border-radius:3px"></div><div class="flex gap-1"><div style="border:1px solid #e2e8f0;border-radius:4px;background:#fff;padding:4px;flex:1"><div style="background:#E74C3C;opacity:.15;height:32px;width:100%;margin-bottom:4px;border-radius:3px"></div><div style="background:#e2e8f0;height:6px;width:80%;border-radius:3px;margin-bottom:2px"></div><div style="background:#e2e8f0;height:4px;width:50%;border-radius:3px"></div></div><div style="border:1px solid #e2e8f0;border-radius:4px;background:#fff;padding:4px;flex:1"><div style="background:#0A66C2;opacity:.15;height:32px;width:100%;margin-bottom:4px;border-radius:3px"></div><div style="background:#e2e8f0;height:6px;width:80%;border-radius:3px;margin-bottom:2px"></div><div style="background:#e2e8f0;height:4px;width:60%;border-radius:3px"></div></div></div></div></div>
         </div>
         <div class="mt-2 font-mono text-xs text-center" style="color:#E74C3C">Publications</div>
       </div>
       <div>
         <div style="border:2px solid #0a0a0a;box-shadow:4px 4px 0 #0a0a0a;background:#fff;overflow:hidden">
           <div style="background:#1E3A5F;height:28px;display:flex;align-items:center;padding:0 10px;gap:6px"><div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4)"></div><div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4)"></div><div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4)"></div><span class="text-[9px] text-white/60 font-mono ml-2">Calendrier</span></div>
-          <div class="flex"><div style="background:#0f2236;width:44px;min-height:100%"></div><div class="p-3 flex-1"><div class="grid grid-cols-7 gap-1"><div class="h-2 bg-gray-100" style="grid-column:span 7;margin-bottom:4px"></div><div class="h-8 bg-gray-50 border border-gray-100"></div><div class="h-8 bg-gray-50 border border-gray-100"></div><div class="h-8 bg-gray-50 border border-gray-100 relative"><div class="w-full h-2 absolute bottom-0" style="background:#E74C3C;opacity:.4"></div></div><div class="h-8 bg-gray-50 border border-gray-100"></div><div class="h-8 bg-gray-50 border border-gray-100 relative"><div class="w-full h-2 absolute bottom-0" style="background:#2980B9;opacity:.4"></div></div><div class="h-8 bg-gray-50 border border-gray-100"></div><div class="h-8 bg-gray-50 border border-gray-100"></div></div></div></div>
+          <div class="flex"><div style="background:#0f2236;width:44px;min-height:100%"></div><div class="p-3 flex-1"><div class="grid grid-cols-7 gap-1"><div class="h-2 bg-gray-100" style="grid-column:span 7;margin-bottom:4px"></div><div class="h-8 bg-gray-50 border border-gray-100"></div><div class="h-8 bg-gray-50 border border-gray-100"></div><div class="h-8 bg-gray-50 border border-gray-100 relative"><div class="w-full h-2 absolute bottom-0" style="background:#E74C3C;opacity:.4"></div></div><div class="h-8 bg-gray-50 border border-gray-100"></div><div class="h-8 bg-gray-50 border border-gray-100 relative"><div class="w-full h-2 absolute bottom-0" style="background:#0A66C2;opacity:.4"></div></div><div class="h-8 bg-gray-50 border border-gray-100"></div><div class="h-8 bg-gray-50 border border-gray-100"></div></div></div></div>
         </div>
         <div class="mt-2 font-mono text-xs text-center" style="color:#E74C3C">Calendrier</div>
       </div>
@@ -435,394 +560,88 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
   </div>
 </section>
 
-<!-- 19 — CONNEXIONS -->
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim"><div class="section-number mb-4">19 / CONNEXIONS INTER-AGENTS</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Connect dans l'écosystème.</h2></div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5 flex items-center gap-4"><div class="neo-card-sm px-2 py-0.5 text-xs font-bold text-white" style="background:#C0392B;border-color:#C0392B">Advice</div><div class="text-xl">&rarr;</div><div class="neo-card-sm px-2 py-0.5 text-xs font-bold text-white" style="background:#E74C3C;border-color:#E74C3C">Connect</div><div class="flex-1 text-sm font-space text-gray-500">Ambassadeur Premium identifié &rarr; témoignage transmis &rarr; post social créé</div></div>
-      <div class="neo-card p-5 flex items-center gap-4"><div class="neo-card-sm px-2 py-0.5 text-xs font-bold text-white" style="background:#E74C3C;border-color:#E74C3C">Connect</div><div class="text-xl">&rarr;</div><div class="neo-card-sm px-2 py-0.5 text-xs font-bold text-white" style="background:#2980B9;border-color:#2980B9">Sentinel</div><div class="flex-1 text-sm font-space text-gray-500">Visibilité &rarr; nouveau prospect email &rarr; Sentinel capture automatiquement</div></div>
-    </div>
-    <div class="anim mt-6 p-4 border-l-4 text-sm font-space" style="border-color:#E74C3C;background:rgba(231,76,60,.05)"><strong>Connect est le seul module qui génère de l'acquisition.</strong> Tous les autres modules optimisent le parcours interne. Connect crée de la visibilité externe qui ramène de nouveaux prospects.</div>
-  </div>
-</section>
-
-<!-- 20-22 — SCOPE -->
-<section id="scope" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
+<!-- ============================================ -->
+<!-- 15 / AMBASSADOR FLOW -->
+<!-- ============================================ -->
+<section id="ambassadeur" class="py-20 px-4" style="background:#E74C3C;border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto text-white">
-    <div class="anim"><div class="section-number mb-4" style="color:rgba(255,255,255,.4)">20 / CHECKLIST MVP</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Tout ce qui sera livré.</h2></div>
-    <div class="anim space-y-2">
-      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">01</span><span class="text-sm font-space">OAuth Facebook (Meta Graph API) + sélection page</span></div>
-      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">02</span><span class="text-sm font-space">OAuth Instagram (même token Meta, auto-detection)</span></div>
-      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">03</span><span class="text-sm font-space">OAuth LinkedIn (page entreprise)</span></div>
-      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">04</span><span class="text-sm font-space">OAuth Google Business (réutilise connexion Advice si déjà fait)</span></div>
-      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">05</span><span class="text-sm font-space">Publication multi-réseau simultanée (image + texte)</span></div>
-      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">06</span><span class="text-sm font-space">Templates avec variables JSON ({nom}, {ville}, {logo}, {couleur})</span></div>
-      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">07</span><span class="text-sm font-space">Visuels personnalisés par courtier (logo + couleurs)</span></div>
-      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">08</span><span class="text-sm font-space">Pré-génération des visuels avant publication</span></div>
-      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">09</span><span class="text-sm font-space">Calendrier éditorial (planification date/heure)</span></div>
-      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">10</span><span class="text-sm font-space">Filtrage cible (compagnie, branche, zone)</span></div>
-      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">11</span><span class="text-sm font-space">Cron de publication programmée avec retry</span></div>
-      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">12</span><span class="text-sm font-space">Collecte nocturne des métriques d'engagement</span></div>
-      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">13</span><span class="text-sm font-space">Dashboard engagement (vues, likes, commentaires, partages, taux)</span></div>
-      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">14</span><span class="text-sm font-space">Export CSV/Excel des métriques</span></div>
-      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">15</span><span class="text-sm font-space">Connexion Advice &rarr; Connect (ambassadeurs Premium)</span></div>
-      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">16</span><span class="text-sm font-space">Post auto testimonial ambassadeur (logo + citation + couleurs)</span></div>
-      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">17</span><span class="text-sm font-space">4 tables PostgreSQL + RLS</span></div>
-      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">18</span><span class="text-sm font-space">Token refresh automatique (cron)</span></div>
-      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">19</span><span class="text-sm font-space">Back-office admin (création articles, templates, planification)</span></div>
-      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">20</span><span class="text-sm font-space">Rate limiting par plateforme respecté</span></div>
-    </div>
+    <div class="anim"><div class="section-number mb-4" style="color:rgba(255,255,255,.4)">15 / BLOC 6 &mdash; AMBASSADEURS</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Advice &rarr; Connect.</h2><div class="flex items-center gap-3 mb-6"><span class="tag-bloc" style="background:#fff;color:#E74C3C">BLOC 6</span><span class="font-space text-sm" style="color:rgba(255,255,255,.5)">1-2 jours</span></div><p class="text-lg font-space" style="color:rgba(255,255,255,.8)">Advice identifie les clients Premium. Connect transforme leurs t&eacute;moignages en posts sociaux. La boucle vertueuse se ferme.</p></div>
   </div>
 </section>
 
 <section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
-    <div class="anim"><div class="section-number mb-4">21 / HORS SCOPE MVP</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Pas inclus dans le MVP.</h2></div>
-    <div class="anim neo-card p-6 sm:p-8">
-      <div class="space-y-3 text-sm font-space text-gray-500">
-        <div class="flex items-start gap-2"><span style="color:#E74C3C">&#10007;</span> Gestion des DM / messages privés</div>
-        <div class="flex items-start gap-2"><span style="color:#E74C3C">&#10007;</span> Réponse aux commentaires</div>
-        <div class="flex items-start gap-2"><span style="color:#E74C3C">&#10007;</span> Publicité payante (Meta Ads, LinkedIn Ads)</div>
-        <div class="flex items-start gap-2"><span style="color:#E74C3C">&#10007;</span> Gestion d'influenceurs</div>
-        <div class="flex items-start gap-2"><span style="color:#E74C3C">&#10007;</span> Stories / Reels (uniquement posts feed)</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 22-24 — TIMELINE -->
-<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim"><div class="section-number mb-4" style="color:#E74C3C">22 / TIMELINE</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">20 jours, 3 sprints.</h2></div>
+    <div class="anim"><div class="section-number mb-4">16 / LE FLUX</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">De la satisfaction au post social.</h2></div>
     <div class="anim neo-card p-6 sm:p-8">
       <div class="space-y-4">
-        <div class="flex items-start gap-4 p-4 bg-white neo-border-2"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#E74C3C">S1</div><div><h4 class="font-bold text-sm mb-1">Jours 1-7 : OAuth + Publishing engine</h4><p class="text-sm text-gray-500 font-space">Connexion 4 réseaux. Publication multi-réseau. Templates. Rate limiting.</p></div><div class="text-xs text-gray-400 font-mono flex-shrink-0">7 jours</div></div>
-        <div class="flex items-start gap-4 p-4 bg-white neo-border-2"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#E74C3C">S2</div><div><h4 class="font-bold text-sm mb-1">Jours 8-14 : Visuels + Calendrier + Multidiffusion</h4><p class="text-sm text-gray-500 font-space">Personnalisation par courtier. Calendrier éditorial. Cron publication. Filtrage cible.</p></div><div class="text-xs text-gray-400 font-mono flex-shrink-0">7 jours</div></div>
-        <div class="flex items-start gap-4 p-4 bg-white neo-border-2"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#E74C3C">S3</div><div><h4 class="font-bold text-sm mb-1">Jours 15-20 : Engagement + Ambassadeurs + Tests</h4><p class="text-sm text-gray-500 font-space">Collecte métriques. Dashboard. Connexion Advice&rarr;Connect. Post ambassadeur. Tests E2E.</p></div><div class="text-xs text-gray-400 font-mono flex-shrink-0">6 jours</div></div>
+        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">A</div><div><h4 class="font-bold text-sm mb-1">Advice identifie un ambassadeur Premium</h4><p class="text-sm text-gray-500 font-space">Score satisfaction &eacute;lev&eacute; + avis Google positif + t&eacute;moignage enthousiaste.</p></div></div>
+        <div class="text-center text-2xl" style="color:#E74C3C">&#8595;</div>
+        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#E74C3C">C</div><div><h4 class="font-bold text-sm mb-1">Connect cr&eacute;e le visuel t&eacute;moignage</h4><p class="text-sm text-gray-500 font-space">Citation client + &eacute;toiles + logo du courtier + couleurs du cabinet. Anonymisation configurable (pr&eacute;nom complet / initiale / anonyme). Le courtier approuve avant publication.</p></div></div>
+        <div class="text-center text-2xl" style="color:#E74C3C">&#8595;</div>
+        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#1D6A45">&#10003;</div><div><h4 class="font-bold text-sm mb-1">Publication sur les 4 r&eacute;seaux</h4><p class="text-sm text-gray-500 font-space">Facebook, Instagram, LinkedIn, Google Business. Le t&eacute;moignage devient visible. Nouveaux prospects voient un vrai client qui recommande le courtier.</p></div></div>
       </div>
-      <div class="mt-6 p-4 text-center" style="border:3px solid #E74C3C;background:rgba(231,76,60,.05)">
-        <div class="font-grotesk text-2xl font-bold" style="color:#E74C3C">8 500€ HT</div>
-        <div class="text-sm text-gray-500 font-space">~20 jours &bull; 3 sprints &bull; 20 livrables</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================ -->
-<!-- TRANSITION MVP → PRODUCTION -->
-<!-- ============================================ -->
-<section class="py-24 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
-  <div class="max-w-3xl mx-auto text-center text-white">
-    <div class="anim">
-      <div class="font-mono text-xs mb-6" style="color:rgba(255,255,255,.3)">TRANSITION</div>
-      <h2 class="font-grotesk text-4xl sm:text-6xl font-bold mb-6">MVP livré.<br><span style="color:#E74C3C">Place à la production.</span></h2>
-      <p class="text-lg font-space mb-8" style="color:rgba(255,255,255,.5)">4 réseaux connectés. Visuels personnalisés. Calendrier éditorial. Engagement tracking. Ambassadeurs amplifiés.<br><strong class="text-white">Maintenant on durcit, on polish, on sécurise.</strong></p>
-      <div class="flex justify-center gap-4">
-        <div class="p-4 text-center" style="border:2px solid rgba(255,255,255,.2)"><div class="font-grotesk text-2xl font-bold" style="color:#1D6A45">8 500€</div><div class="text-xs font-space" style="color:rgba(255,255,255,.4)">MVP &#10003;</div></div>
-        <div class="p-4 text-center" style="border:2px solid rgba(255,255,255,.2)"><div class="font-grotesk text-2xl font-bold" style="color:#E74C3C">4 500€</div><div class="text-xs font-space" style="color:rgba(255,255,255,.4)">Production &#9654;</div></div>
-        <div class="p-4 text-center" style="border:2px solid #E74C3C"><div class="font-grotesk text-2xl font-bold text-white">13 000€</div><div class="text-xs font-space" style="color:rgba(255,255,255,.4)">Total</div></div>
-      </div>
+      <div class="mt-6 p-4 border-l-4 text-sm font-space" style="border-color:#E74C3C;background:rgba(231,76,60,.05)"><strong>La boucle :</strong> prospect voit le post &rarr; contacte le courtier &rarr; <strong>Sentinel capture l'email</strong> &rarr; le courtier livre un bon service &rarr; <strong>Advice r&eacute;colte un nouvel avis</strong> &rarr; la boucle recommence.</div>
     </div>
   </div>
 </section>
 
 <!-- ============================================ -->
-<!-- PRODUCTION CONTENT -->
+<!-- 17 / BLOC 7 — FRONTEND WIRING -->
 <!-- ============================================ -->
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">04 / MVP vs PRODUCTION</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Ce qui manque pour la prod.</h2>
-      <p class="text-lg text-gray-500 font-space leading-relaxed mb-8">Le MVP prouve que les 4 r&eacute;seaux fonctionnent. La production fait en sorte que tout fonctionne <strong class="text-neo-black">m&ecirc;me quand Meta change son API, quand un courtier perd sa connexion, quand 50 comptes publient en m&ecirc;me temps</strong>.</p>
-    </div>
-    <div class="anim">
-      <div class="grid sm:grid-cols-2 gap-0" style="border:3px solid #0a0a0a;box-shadow:6px 6px 0 #0a0a0a">
-        <div class="p-6" style="background:rgba(29,106,69,.05);border-right:2px solid #0a0a0a">
-          <div class="font-mono text-xs mb-4 font-bold" style="color:#1D6A45">MVP &#10003; FAIT</div>
-          <div class="space-y-3 text-sm font-space text-gray-500">
-            <div>&#10003; 4 r&eacute;seaux connect&eacute;s (Facebook, Insta, LinkedIn, GBP)</div>
-            <div>&#10003; Visuels auto personnalis&eacute;s</div>
-            <div>&#10003; Calendrier &eacute;ditorial basique</div>
-            <div>&#10003; Multi-diffusion fonctionnelle</div>
-            <div>&#10003; Engagement tracking basique</div>
-            <div>&#10003; Ambassadeur flow depuis Advice</div>
-            <div>&#10003; 1 courtier de test</div>
-          </div>
-        </div>
-        <div class="p-6" style="background:rgba(231,76,60,.05)">
-          <div class="font-mono text-xs mb-4 font-bold" style="color:#E74C3C">PRODUCTION &mdash; &Agrave; FAIRE</div>
-          <div class="space-y-3 text-sm font-space text-neo-black">
-            <div><strong>&#9744; Rebrand BrokerONE</strong> (admin, templates par d&eacute;faut)</div>
-            <div><strong>&#9744; Templates visuels enrichis</strong> (saisonniers, qualit&eacute;+)</div>
-            <div><strong>&#9744; R&eacute;silience API</strong> (abstraction, d&eacute;gradation, retry)</div>
-            <div><strong>&#9744; UI polish</strong> (calendrier responsive, preview/r&eacute;seau)</div>
-            <div><strong>&#9744; S&eacute;curit&eacute; OAuth</strong> (4 providers, refresh, r&eacute;vocation)</div>
-            <div><strong>&#9744; Edge cases</strong> (d&eacute;connexion, rate limits, fallbacks)</div>
-            <div><strong>&#9744; Multi-tenant</strong> (200 connexions, staggering)</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- 05 — REBRAND -->
-<!-- ============================================ -->
-
-<section id="rebrand" class="py-20 px-4" style="background:#1E3A5F;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">05 / REBRAND BROKERONE</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Nouvelle identit&eacute;.</h2>
-      <p class="text-lg font-space" style="color:rgba(255,255,255,.7)">L'interface admin et tous les templates par d&eacute;faut passent aux couleurs et &agrave; l'identit&eacute; BrokerONE.</p>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">06 / CE QUI CHANGE</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Rebrand Connect.</h2>
-    </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-prod">PROD</span><div><h4 class="font-bold text-sm mb-1">Interface admin</h4><p class="text-xs text-gray-500 font-space">Couleurs BrokerONE (#1E3A5F, #C0392B, #F1F3F6) appliqu&eacute;es sur tout le back-office Connect : calendrier, &eacute;diteur de posts, analytics.</p></div></div>
-      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-prod">PROD</span><div><h4 class="font-bold text-sm mb-1">Templates par d&eacute;faut</h4><p class="text-xs text-gray-500 font-space">Les templates visuels de base portent l'identit&eacute; BrokerONE. Le courtier peut ensuite personnaliser avec ses propres couleurs et logo.</p></div></div>
-      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-prod">PROD</span><div><h4 class="font-bold text-sm mb-1">Watermark &amp; attribution</h4><p class="text-xs text-gray-500 font-space">"Propuls&eacute; par BrokerONE" discret sur les visuels g&eacute;n&eacute;r&eacute;s. D&eacute;sactivable en option premium.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- 07-08 — VISUAL TEMPLATE SYSTEM -->
-<!-- ============================================ -->
-
-<section id="templates" class="py-20 px-4" style="background:#E74C3C;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">07 / VISUAL TEMPLATE SYSTEM</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Des visuels qui font pro.</h2>
-      <p class="text-lg font-space" style="color:rgba(255,255,255,.8)">Un courtier qui publie sur LinkedIn ou Instagram a besoin de visuels de qualit&eacute; professionnelle. Pas un visuel g&eacute;n&eacute;rique qui fait "template gratuit".</p>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">08 / TEMPLATES D&Eacute;TAILL&Eacute;S</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Biblioth&egrave;que enrichie.</h2>
-    </div>
-    <div class="anim grid sm:grid-cols-2 gap-4">
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Plus de designs</h4></div><p class="text-xs text-gray-500 font-space">Biblioth&egrave;que &eacute;largie : citations, infographies, t&eacute;moignages clients, promotions, annonces. Chaque format adapt&eacute; au ratio de chaque r&eacute;seau.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Templates saisonniers</h4></div><p class="text-xs text-gray-500 font-space">No&euml;l, rentr&eacute;e, nouvelle ann&eacute;e, f&ecirc;tes nationales, journ&eacute;es th&eacute;matiques (assurance, &eacute;pargne). Automatiquement sugg&eacute;r&eacute;s dans le calendrier.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Qualit&eacute; visuelle</h4></div><p class="text-xs text-gray-500 font-space">Export haute r&eacute;solution (1080x1080, 1200x630, 1080x1920). Typographies nettes. Palette coh&eacute;rente avec la charte du courtier.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Lisibilit&eacute; du texte</h4></div><p class="text-xs text-gray-500 font-space">Test automatis&eacute; du contraste texte/fond. Ombre port&eacute;e adapt&eacute;e. Pas de texte blanc sur fond clair ou l'inverse. Chaque visuel est lisible.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- 09-10 — API RESILIENCE -->
-<!-- ============================================ -->
-
-<section id="api-resilience" class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:#E74C3C">09 / API R&Eacute;SILIENCE</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Meta change tout le temps.</h2>
-      <p class="text-lg text-gray-500 font-space leading-relaxed mb-8">L'API Facebook/Instagram change plusieurs fois par an. LinkedIn aussi. Google Business Profile a ses propres caprices. <strong class="text-neo-black">Le syst&egrave;me doit encaisser sans tomber.</strong></p>
-    </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Couche d'abstraction</h4></div><p class="text-xs text-gray-500 font-space">Interface unifi&eacute;e pour publier sur les 4 r&eacute;seaux. Si Meta change son endpoint, on ne modifie qu'un seul fichier &mdash; pas toute l'app.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">D&eacute;gradation gracieuse</h4></div><p class="text-xs text-gray-500 font-space">Si un r&eacute;seau est down, les 3 autres continuent. Le post est mis en file d'attente pour le r&eacute;seau en panne. Notification au courtier : "Instagram temporairement indisponible, publication report&eacute;e".</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Auto-retry intelligent</h4></div><p class="text-xs text-gray-500 font-space">Backoff exponentiel (30s, 2min, 10min). Diff&eacute;renciation entre erreur temporaire (retry) et erreur permanente (notification). Pas de spam d'appels API.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">10 / API VERSIONING</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Pr&eacute;parer les changements.</h2>
-    </div>
-    <div class="anim neo-card p-6 sm:p-8" style="border-left:6px solid #E74C3C">
-      <div class="space-y-4 text-sm font-space">
-        <div class="flex items-start gap-3"><span class="font-bold" style="color:#E74C3C;min-width:20px">&#9654;</span><span><strong>Meta Graph API</strong> &mdash; Version pin&eacute;e (v19.0+). Alerte quand une nouvelle version sort. Migration plan&eacute;e avant d&eacute;pr&eacute;cation.</span></div>
-        <div class="flex items-start gap-3"><span class="font-bold" style="color:#E74C3C;min-width:20px">&#9654;</span><span><strong>LinkedIn API</strong> &mdash; Version track&eacute;e. Rate limit 100 posts/jour g&eacute;r&eacute; c&ocirc;t&eacute; app (pas d&eacute;couvert au moment du post).</span></div>
-        <div class="flex items-start gap-3"><span class="font-bold" style="color:#E74C3C;min-width:20px">&#9654;</span><span><strong>Google Business Profile API</strong> &mdash; Endpoints v&eacute;rifi&eacute;s. Fallback si API deprecated (passage au nouveau format).</span></div>
-        <div class="flex items-start gap-3"><span class="font-bold" style="color:#E74C3C;min-width:20px">&#9654;</span><span><strong>Instagram</strong> &mdash; Contrainte sp&eacute;cifique : image obligatoire (pas de text-only). Le syst&egrave;me force un visuel si pas d'image fournie.</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- 11-12 — UI POLISH -->
-<!-- ============================================ -->
-
-<section id="ui-polish" class="py-20 px-4" style="background:#E74C3C;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">11 / UI POLISH</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">L'interface au niveau pro.</h2>
-      <p class="text-lg font-space" style="color:rgba(255,255,255,.8)">Un post Facebook ne s'affiche pas comme un post LinkedIn. Un courtier doit voir exactement ce que ses clients verront &mdash; sur chaque r&eacute;seau.</p>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">12 / D&Eacute;TAILS UI</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Chaque d&eacute;tail compte.</h2>
-    </div>
-    <div class="anim grid sm:grid-cols-2 gap-4">
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Calendrier responsive</h4></div><p class="text-xs text-gray-500 font-space">Vue mois/semaine/jour. Sur mobile : vue liste. Drag & drop sur desktop. Code couleur par r&eacute;seau. Indicateur de statut (planifi&eacute;, publi&eacute;, &eacute;chou&eacute;).</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Preview par r&eacute;seau</h4></div><p class="text-xs text-gray-500 font-space">Avant de publier, le courtier voit son post tel qu'il appara&icirc;tra sur Facebook (card), Instagram (carr&eacute;), LinkedIn (article), Google (post GMB). Chacun a son propre format.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Charts d'engagement anim&eacute;s</h4></div><p class="text-xs text-gray-500 font-space">Graphiques de performance par r&eacute;seau avec animations fluides. Comparaison p&eacute;riodes. Hover d&eacute;taill&eacute; avec m&eacute;triques exactes.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Loading states</h4></div><p class="text-xs text-gray-500 font-space">Skeleton loaders sur le calendrier, les previews, les stats. Indicateur de progression lors de la publication (1/4, 2/4...). Pas de page blanche.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- 13 — SÉCURITÉ -->
-<!-- ============================================ -->
-
-<section id="securite" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">13 / S&Eacute;CURIT&Eacute; OAUTH</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">4 providers, 200 tokens.</h2>
-      <p class="text-lg font-space" style="color:rgba(255,255,255,.7)">Chaque courtier connecte jusqu'&agrave; 4 comptes sociaux. C'est 4 tokens OAuth &agrave; g&eacute;rer par courtier. &Agrave; 50 courtiers, &ccedil;a fait 200 tokens vivants en parall&egrave;le.</p>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">14 / GESTION DES TOKENS</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Token management.</h2>
-    </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Refresh scheduling</h4></div><p class="text-xs text-gray-500 font-space">Cron job qui v&eacute;rifie l'expiration de chaque token. Refresh automatique 48h avant expiration. Pas de surprise le jour o&ugrave; le courtier veut publier.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">R&eacute;vocation handling</h4></div><p class="text-xs text-gray-500 font-space">Si un courtier r&eacute;voque l'acc&egrave;s depuis Facebook/LinkedIn : d&eacute;tection imm&eacute;diate, d&eacute;sactivation propre du r&eacute;seau, invitation &agrave; reconnecter dans l'app.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Isolation des tokens</h4></div><p class="text-xs text-gray-500 font-space">Chaque token chiffr&eacute; AES-256-GCM. RLS strict : un courtier ne peut jamais acc&eacute;der aux tokens d'un autre. M&ecirc;me en cas de faille, isolation totale.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Dashboard connexions</h4></div><p class="text-xs text-gray-500 font-space">Le courtier voit l'&eacute;tat de chaque connexion : vert (OK), orange (expire bient&ocirc;t), rouge (expir&eacute;/r&eacute;voqu&eacute;). Bouton reconnecter en 1 clic.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- 15 — EDGE CASES -->
-<!-- ============================================ -->
-
-<section id="edge-cases" class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:#E74C3C">15 / EDGE CASES</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Quand &ccedil;a ne se passe pas bien.</h2>
-      <p class="text-lg text-gray-500 font-space leading-relaxed mb-8">Les r&eacute;seaux sociaux sont impr&eacute;visibles. Chaque cas limite est anticip&eacute;.</p>
-    </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">R&eacute;seau d&eacute;connect&eacute; en pleine campagne</h4></div><p class="text-xs text-gray-500 font-space">Le courtier lance une publication multi-r&eacute;seaux. Facebook tombe au milieu. <strong>Fix :</strong> Les 3 autres publient normalement. Le post Facebook passe en file d'attente. Retry auto. Notification : "Facebook publi&eacute; avec 15 min de retard".</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Upload image &eacute;choue</h4></div><p class="text-xs text-gray-500 font-space">Probl&egrave;me r&eacute;seau pendant l'upload du visuel. <strong>Fix :</strong> Retry 3x. Si &eacute;chec total, fallback vers publication text-only (sauf Instagram qui exige une image &rarr; report&eacute; + notification).</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">LinkedIn rate limit (100 posts/jour)</h4></div><p class="text-xs text-gray-500 font-space">Avec 50 courtiers qui publient 2-3 fois/jour, on approche la limite. <strong>Fix :</strong> Compteur par app. Staggering des publications. Si limite atteinte : file d'attente + publication au prochain cr&eacute;neau libre.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Instagram : pas de text-only</h4></div><p class="text-xs text-gray-500 font-space">Instagram n'accepte pas les publications sans image. <strong>Fix :</strong> Si le courtier n'ajoute pas d'image, g&eacute;n&eacute;ration automatique d'un visuel &agrave; partir du texte (template + couleurs du courtier). Jamais de publication &eacute;chou&eacute;e.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- 16 — MULTI-TENANT -->
-<!-- ============================================ -->
-
-<section id="multi-tenant" class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">16 / MULTI-TENANT</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">50 courtiers &times; 4 r&eacute;seaux.</h2>
-      <p class="text-lg text-gray-500 font-space leading-relaxed mb-8">200 connexions OAuth. Des dizaines de publications par jour. Le syst&egrave;me doit scaler sans effort.</p>
-    </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">200 connexions OAuth g&eacute;r&eacute;es</h4></div><p class="text-xs text-gray-500 font-space">50 courtiers &times; 4 r&eacute;seaux = 200 tokens vivants. Chaque token a son cycle de vie (cr&eacute;ation, refresh, expiration, r&eacute;vocation). Le syst&egrave;me g&egrave;re tout automatiquement.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Publication staggering</h4></div><p class="text-xs text-gray-500 font-space">Si 10 courtiers planifient un post &agrave; 9h00, le syst&egrave;me &eacute;tale les publications sur 9h00-9h15 pour &eacute;viter les rate limits. Chaque courtier voit "publi&eacute; &agrave; 9h00" dans son calendrier.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Isolation des donn&eacute;es</h4></div><p class="text-xs text-gray-500 font-space">RLS strict. Chaque courtier ne voit que ses posts, ses stats, ses connexions. V&eacute;rification cross-tenant avec 5+ courtiers de test.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- 17 — ENGAGEMENT DATA -->
-<!-- ============================================ -->
-
 <section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
+    <div class="anim"><div class="section-number mb-4" style="color:#E74C3C">17 / BLOC 7</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Frontend wiring.</h2><div class="flex items-center gap-3 mb-6"><span class="tag-bloc">BLOC 7</span><span class="font-space text-sm text-gray-400">3-4 jours</span></div></div>
     <div class="anim">
-      <div class="section-number mb-4">17 / ENGAGEMENT DATA RELIABILITY</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Des donn&eacute;es fiables.</h2>
-    </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">API inconsistencies</h4></div><p class="text-xs text-gray-500 font-space">Meta change le format des m&eacute;triques r&eacute;guli&egrave;rement. <strong>Fix :</strong> Parsing adaptatif avec fallback. Si un champ manque, on affiche "donn&eacute;e indisponible" plut&ocirc;t qu'un chiffre faux.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Data gaps</h4></div><p class="text-xs text-gray-500 font-space">R&eacute;seau down pendant la collecte des stats. <strong>Fix :</strong> Retry plus tard. Indicateur visuel "donn&eacute;es du 15 mars manquantes". Pas de trou dans les graphiques, interpolation indiqu&eacute;e.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Historical backfill</h4></div><p class="text-xs text-gray-500 font-space">Quand un courtier connecte un r&eacute;seau, on r&eacute;cup&egrave;re l'historique des 30 derniers jours (posts existants + engagement). Le dashboard n'est pas vide d&egrave;s le jour 1.</p></div>
+      <p class="text-lg text-gray-500 font-space leading-relaxed mb-6">Les 6 pages UI de Bruno existent mais affichent des donn&eacute;es vides ou fausses. Ce bloc les connecte aux APIs r&eacute;elles.</p>
+      <div class="space-y-3">
+        <div class="neo-card p-5 flex items-start gap-4"><span class="tag-stubbe">SHELL</span><div><h4 class="font-bold text-sm mb-1">Dashboard &rarr; Donn&eacute;es r&eacute;elles</h4><p class="text-xs text-gray-500 font-space">Stats d'engagement agr&eacute;g&eacute;es, derni&egrave;res publications, &eacute;tat des connexions, prochains posts planifi&eacute;s.</p></div></div>
+        <div class="neo-card p-5 flex items-start gap-4"><span class="tag-stubbe">SHELL</span><div><h4 class="font-bold text-sm mb-1">Publications &rarr; Formulaire fonctionnel</h4><p class="text-xs text-gray-500 font-space">Cr&eacute;ation de post, s&eacute;lection r&eacute;seaux, upload image, pr&eacute;visualisation par r&eacute;seau, planification.</p></div></div>
+        <div class="neo-card p-5 flex items-start gap-4"><span class="tag-stubbe">SHELL</span><div><h4 class="font-bold text-sm mb-1">Engagement &rarr; Charts r&eacute;els</h4><p class="text-xs text-gray-500 font-space">Graphiques par r&eacute;seau avec donn&eacute;es collect&eacute;es. Tendances mensuelles. Top posts. Export CSV/Excel.</p></div></div>
+        <div class="neo-card p-5 flex items-start gap-4"><span class="tag-stubbe">SHELL</span><div><h4 class="font-bold text-sm mb-1">Connexions &rarr; OAuth fonctionnel</h4><p class="text-xs text-gray-500 font-space">Boutons "Connecter" qui lancent le vrai OAuth. &Eacute;tat vert/orange/rouge. Bouton "Reconnecter".</p></div></div>
+        <div class="neo-card p-5 flex items-start gap-4"><span class="tag-stubbe">SHELL</span><div><h4 class="font-bold text-sm mb-1">Contenu &rarr; Templates fonctionnels</h4><p class="text-xs text-gray-500 font-space">Biblioth&egrave;que avec variables JSON. Pr&eacute;visualisation avec donn&eacute;es r&eacute;elles du courtier.</p></div></div>
+        <div class="neo-card p-5 flex items-start gap-4"><span class="tag-stubbe">SHELL</span><div><h4 class="font-bold text-sm mb-1">Param&egrave;tres &rarr; Config r&eacute;elle</h4><p class="text-xs text-gray-500 font-space">Branding courtier (logo, couleurs), pr&eacute;f&eacute;rences de publication, gestion des connexions.</p></div></div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================ -->
-<!-- 18 — AMBASSADOR FLOW -->
+<!-- 18 / BLOC 8 — PRODUCTION -->
 <!-- ============================================ -->
-
 <section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:#E74C3C">18 / AMBASSADOR FLOW POLISH</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">De l'avis au post social.</h2>
-      <p class="text-lg text-gray-500 font-space leading-relaxed mb-8">Le MVP connecte Advice &rarr; Connect. La production rend le flux fluide et s&eacute;curis&eacute;.</p>
-    </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Formatage des t&eacute;moignages</h4></div><p class="text-xs text-gray-500 font-space">L'avis client est transform&eacute; en visuel professionnel. Citation bien format&eacute;e, &eacute;toiles, avatar anonymis&eacute;. Adapt&eacute; au format de chaque r&eacute;seau.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Options d'anonymisation</h4></div><p class="text-xs text-gray-500 font-space">Le courtier choisit : pr&eacute;nom complet, pr&eacute;nom + initiale, initiales seules, ou totalement anonyme. Conforme RGPD.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Approbation courtier</h4></div><p class="text-xs text-gray-500 font-space">Avant publication, le courtier voit le visuel final et valide. Pas de publication automatique sans accord. Bouton "Approuver et publier" / "Modifier" / "Rejeter".</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- 19 — TESTS & DOC -->
-<!-- ============================================ -->
-
-<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">19 / TESTS & DOCUMENTATION</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">V&eacute;rifier. Documenter.</h2>
-    </div>
-    <div class="anim grid sm:grid-cols-2 gap-6">
+    <div class="anim"><div class="section-number mb-4">18 / BLOC 8</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Production &amp; r&eacute;silience.</h2><div class="flex items-center gap-3 mb-6"><span class="tag-bloc">BLOC 8</span><span class="font-space text-sm text-gray-400">2-3 jours</span></div></div>
+    <div class="anim grid sm:grid-cols-2 gap-5">
       <div class="neo-card p-6">
-        <div class="font-mono text-xs font-bold mb-4" style="color:#E74C3C">TESTS</div>
-        <div class="space-y-3 text-sm font-space">
-          <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> Publication test sur les 4 r&eacute;seaux</div>
-          <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> Collecte d'engagement v&eacute;rifi&eacute;e</div>
-          <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> Pr&eacute;cision du calendrier (planning respect&eacute;)</div>
-          <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> Qualit&eacute; des visuels g&eacute;n&eacute;r&eacute;s</div>
-          <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> Edge cases (d&eacute;connexion, rate limit, fallback)</div>
+        <h3 class="font-grotesk font-bold mb-3">Rebrand BrokerONE</h3>
+        <div class="space-y-2 text-sm font-space text-gray-600">
+          <div>Couleurs BrokerONE (#1E3A5F, #C0392B, #F1F3F6)</div>
+          <div>Templates par d&eacute;faut rebrand&eacute;s</div>
+          <div>Watermark "Propuls&eacute; par BrokerONE"</div>
         </div>
       </div>
       <div class="neo-card p-6">
-        <div class="font-mono text-xs font-bold mb-4" style="color:#E74C3C">DOCUMENTATION</div>
-        <div class="space-y-3 text-sm font-space">
-          <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> Guide admin : cr&eacute;ation de contenu</div>
-          <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> Guide courtier : connecter ses r&eacute;seaux</div>
-          <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> Guide cr&eacute;ation de templates visuels</div>
+        <h3 class="font-grotesk font-bold mb-3">Multi-tenant (200 OAuth)</h3>
+        <div class="space-y-2 text-sm font-space text-gray-600">
+          <div>50 courtiers x 4 r&eacute;seaux = 200 tokens</div>
+          <div>Publication staggering (9h00&rarr;9h15)</div>
+          <div>Isolation RLS stricte v&eacute;rifi&eacute;e</div>
+        </div>
+      </div>
+      <div class="neo-card p-6">
+        <h3 class="font-grotesk font-bold mb-3">API r&eacute;silience</h3>
+        <div class="space-y-2 text-sm font-space text-gray-600">
+          <div>Couche d'abstraction unifi&eacute;e</div>
+          <div>D&eacute;gradation gracieuse (1 r&eacute;seau down &ne; tout tombe)</div>
+          <div>Backoff exponentiel (30s, 2min, 10min)</div>
+        </div>
+      </div>
+      <div class="neo-card p-6">
+        <h3 class="font-grotesk font-bold mb-3">Tests &amp; documentation</h3>
+        <div class="space-y-2 text-sm font-space text-gray-600">
+          <div>Publication test sur les 4 r&eacute;seaux</div>
+          <div>Edge cases (d&eacute;connexion, rate limit, fallback)</div>
+          <div>Guide admin + guide courtier</div>
         </div>
       </div>
     </div>
@@ -830,101 +649,250 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 </section>
 
 <!-- ============================================ -->
-<!-- CHECKLIST COMPLÈTE -->
+<!-- 19 / CONNEXIONS INTER-MODULES -->
 <!-- ============================================ -->
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim"><div class="section-number mb-4">19 / &Eacute;COSYST&Egrave;ME</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Connect dans BrokerONE.</h2></div>
+    <div class="anim space-y-3">
+      <div class="neo-card p-5 flex items-center gap-4"><div class="neo-card-sm px-2 py-0.5 text-xs font-bold text-white" style="background:#C0392B;border-color:#C0392B">Advice</div><div class="text-xl">&rarr;</div><div class="neo-card-sm px-2 py-0.5 text-xs font-bold text-white" style="background:#E74C3C;border-color:#E74C3C">Connect</div><div class="flex-1 text-sm font-space text-gray-500">Ambassadeur Premium identifi&eacute; &rarr; t&eacute;moignage &rarr; post social</div></div>
+      <div class="neo-card p-5 flex items-center gap-4"><div class="neo-card-sm px-2 py-0.5 text-xs font-bold text-white" style="background:#E74C3C;border-color:#E74C3C">Connect</div><div class="text-xl">&rarr;</div><div class="neo-card-sm px-2 py-0.5 text-xs font-bold text-white" style="background:#2980B9;border-color:#2980B9">Sentinel</div><div class="flex-1 text-sm font-space text-gray-500">Visibilit&eacute; &rarr; nouveau prospect email &rarr; capture automatique</div></div>
+      <div class="neo-card p-5 flex items-center gap-4"><div class="neo-card-sm px-2 py-0.5 text-xs font-bold text-white" style="background:#2980B9;border-color:#2980B9">Sentinel</div><div class="text-xl">&rarr;</div><div class="neo-card-sm px-2 py-0.5 text-xs font-bold text-white" style="background:#C0392B;border-color:#C0392B">Advice</div><div class="flex-1 text-sm font-space text-gray-500">Client servi &rarr; campagne satisfaction &rarr; nouvel ambassadeur potentiel</div></div>
+    </div>
+    <div class="anim mt-6 p-4 border-l-4 text-sm font-space" style="border-color:#E74C3C;background:rgba(231,76,60,.05)"><strong>Connect est le seul module qui g&eacute;n&egrave;re de l'acquisition externe.</strong> Les autres modules optimisent le parcours interne. Connect cr&eacute;e la visibilit&eacute; qui ram&egrave;ne de nouveaux prospects.</div>
+  </div>
+</section>
 
+<!-- ============================================ -->
+<!-- 20 / EDGE CASES -->
+<!-- ============================================ -->
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim"><div class="section-number mb-4" style="color:#E74C3C">20 / EDGE CASES</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Quand &ccedil;a ne se passe pas bien.</h2></div>
+    <div class="anim space-y-3">
+      <div class="neo-card p-5"><h4 class="font-bold text-sm mb-2">R&eacute;seau down en pleine publication</h4><p class="text-xs text-gray-500 font-space">Les 3 autres publient normalement. Le post en &eacute;chec passe en file d'attente. Retry auto. Notification : "Facebook publi&eacute; avec 15 min de retard".</p></div>
+      <div class="neo-card p-5"><h4 class="font-bold text-sm mb-2">Upload image &eacute;choue</h4><p class="text-xs text-gray-500 font-space">Retry 3x. Si &eacute;chec total : publication text-only (sauf Instagram qui exige une image &rarr; report&eacute; + notification au courtier).</p></div>
+      <div class="neo-card p-5"><h4 class="font-bold text-sm mb-2">LinkedIn rate limit (100 posts/jour)</h4><p class="text-xs text-gray-500 font-space">Compteur par app. Staggering des publications. Si limite atteinte : file d'attente + publication au prochain cr&eacute;neau libre.</p></div>
+      <div class="neo-card p-5"><h4 class="font-bold text-sm mb-2">Token r&eacute;voqu&eacute; par le courtier</h4><p class="text-xs text-gray-500 font-space">D&eacute;tection imm&eacute;diate. D&eacute;sactivation propre du r&eacute;seau. Badge rouge dans le dashboard. Invitation &agrave; reconnecter en 1 clic.</p></div>
+      <div class="neo-card p-5"><h4 class="font-bold text-sm mb-2">Meta change son API</h4><p class="text-xs text-gray-500 font-space">Version pin&eacute;e (v19.0+). Couche d'abstraction : si Meta change un endpoint, on ne modifie qu'un seul fichier.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 21 / CHECKLIST -->
+<!-- ============================================ -->
 <section class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">20 / CHECKLIST COMPL&Egrave;TE</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Tout ce qui sera livr&eacute;.</h2>
-    </div>
-    <div class="anim">
-      <div class="space-y-2">
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">01</span><span class="text-sm font-space">Rebrand BrokerONE dans l'interface admin Connect</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">02</span><span class="text-sm font-space">Templates visuels par d&eacute;faut rebrand&eacute;s + watermark BrokerONE</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">03</span><span class="text-sm font-space">Biblioth&egrave;que de templates &eacute;largie (citations, infographies, promos, saisonniers)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">04</span><span class="text-sm font-space">Qualit&eacute; visuelle (haute r&eacute;solution, test de lisibilit&eacute; texte/fond)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">05</span><span class="text-sm font-space">Couche d'abstraction API (interface unifi&eacute;e 4 r&eacute;seaux)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">06</span><span class="text-sm font-space">D&eacute;gradation gracieuse (1 r&eacute;seau down &ne; tout tombe)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">07</span><span class="text-sm font-space">Auto-retry intelligent avec backoff exponentiel</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">08</span><span class="text-sm font-space">Calendrier responsive + preview par r&eacute;seau + charts anim&eacute;s + loading states</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">09</span><span class="text-sm font-space">OAuth token refresh scheduling (48h avant expiration)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">10</span><span class="text-sm font-space">R&eacute;vocation handling + dashboard &eacute;tat des connexions</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">11</span><span class="text-sm font-space">Edge cases : d&eacute;connexion mid-campaign, upload fail, rate limits, Instagram no-text</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">12</span><span class="text-sm font-space">Multi-tenant : 200 connexions, publication staggering, isolation RLS</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">13</span><span class="text-sm font-space">Engagement data : parsing adaptatif, data gaps, historical backfill 30j</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">14</span><span class="text-sm font-space">Ambassador flow : formatage t&eacute;moignages, anonymisation, approbation courtier</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">15</span><span class="text-sm font-space">Tests : publication 4 r&eacute;seaux + engagement + calendrier + visuels + edge cases</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">16</span><span class="text-sm font-space">Documentation : guide admin + guide courtier + guide templates</span></div>
-      </div>
+    <div class="anim"><div class="section-number mb-4" style="color:rgba(255,255,255,.4)">21 / CHECKLIST</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">~22 livrables.</h2></div>
+    <div class="anim space-y-2">
+      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc" style="background:#E74C3C">01</span><span class="text-sm font-space">OAuth Meta r&eacute;el (Facebook + Instagram) + s&eacute;lection page</span></div>
+      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc" style="background:#E74C3C">02</span><span class="text-sm font-space">OAuth LinkedIn r&eacute;el + s&eacute;lection page entreprise</span></div>
+      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc" style="background:#E74C3C">03</span><span class="text-sm font-space">OAuth Google Business (r&eacute;utilisation Advice si existant)</span></div>
+      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc" style="background:#E74C3C">04</span><span class="text-sm font-space">Token storage AES-256-GCM + refresh automatique + r&eacute;vocation</span></div>
+      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc" style="background:#E74C3C">05</span><span class="text-sm font-space">Publication r&eacute;elle Facebook (image + texte sur Page)</span></div>
+      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc" style="background:#E74C3C">06</span><span class="text-sm font-space">Publication r&eacute;elle Instagram (container + publish, image obligatoire)</span></div>
+      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc" style="background:#E74C3C">07</span><span class="text-sm font-space">Publication r&eacute;elle LinkedIn (registerUpload + binary + ugcPost)</span></div>
+      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc" style="background:#E74C3C">08</span><span class="text-sm font-space">Publication r&eacute;elle Google Business (localPost + CTA)</span></div>
+      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc" style="background:#E74C3C">09</span><span class="text-sm font-space">Formatage texte par r&eacute;seau (longueur, ton, hashtags, liens)</span></div>
+      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc" style="background:#E74C3C">10</span><span class="text-sm font-space">G&eacute;n&eacute;ration visuels personnalis&eacute;s (Sharp/Puppeteer/Canvas)</span></div>
+      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc" style="background:#E74C3C">11</span><span class="text-sm font-space">3 formats de sortie (1080x1080, 1200x630, 1200x900)</span></div>
+      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc" style="background:#E74C3C">12</span><span class="text-sm font-space">Calendrier &eacute;ditorial (vue mois/semaine, drag &amp; drop, filtrage cible)</span></div>
+      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc" style="background:#E74C3C">13</span><span class="text-sm font-space">Cron publication programm&eacute;e + retry 3x + log d'ex&eacute;cution</span></div>
+      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc" style="background:#E74C3C">14</span><span class="text-sm font-space">Collecte nocturne m&eacute;triques d'engagement (4 APIs)</span></div>
+      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc" style="background:#E74C3C">15</span><span class="text-sm font-space">Dashboard engagement (charts, tendances, top posts, export)</span></div>
+      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc" style="background:#E74C3C">16</span><span class="text-sm font-space">Flux ambassadeur Advice &rarr; Connect (t&eacute;moignage &rarr; post)</span></div>
+      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc" style="background:#E74C3C">17</span><span class="text-sm font-space">Wiring des 6 pages UI aux donn&eacute;es r&eacute;elles</span></div>
+      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc" style="background:#E74C3C">18</span><span class="text-sm font-space">Rebrand BrokerONE (couleurs, templates, watermark)</span></div>
+      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc" style="background:#E74C3C">19</span><span class="text-sm font-space">Multi-tenant : 200 connexions OAuth + publication staggering</span></div>
+      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc" style="background:#E74C3C">20</span><span class="text-sm font-space">API r&eacute;silience : abstraction, d&eacute;gradation gracieuse, backoff</span></div>
+      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc" style="background:#E74C3C">21</span><span class="text-sm font-space">Edge cases : d&eacute;connexion, rate limits, fallbacks, r&eacute;vocation</span></div>
+      <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc" style="background:#E74C3C">22</span><span class="text-sm font-space">Tests E2E (4 r&eacute;seaux) + documentation admin/courtier</span></div>
     </div>
   </div>
 </section>
 
 <!-- ============================================ -->
-<!-- TIMELINE & BUDGET -->
+<!-- 22 / HORS SCOPE -->
 <!-- ============================================ -->
-
-<section id="livraison" class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:#E74C3C">21 / TIMELINE</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">10 jours, 2 sprints.</h2>
-    </div>
-    <div class="anim neo-card p-6 sm:p-8">
-      <div class="space-y-4">
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#E74C3C">S1</div><div><h4 class="font-bold text-sm mb-1">Jours 1-5 : Rebrand + Visual Templates + API R&eacute;silience + UI</h4><p class="text-sm text-gray-500 font-space">Branding BrokerONE, biblioth&egrave;que templates enrichie, couche d'abstraction API, d&eacute;gradation gracieuse, calendrier responsive, previews par r&eacute;seau, loading states.</p></div><div class="text-xs text-gray-400 font-mono flex-shrink-0">5 jours</div></div>
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#E74C3C">S2</div><div><h4 class="font-bold text-sm mb-1">Jours 6-10 : S&eacute;curit&eacute; + Edge Cases + Multi-tenant + Ambassador + Tests</h4><p class="text-sm text-gray-500 font-space">OAuth token management, refresh scheduling, edge cases (d&eacute;connexion, rate limits, fallbacks), multi-tenant 200 connexions, ambassador flow polish, tests E2E, documentation.</p></div><div class="text-xs text-gray-400 font-mono flex-shrink-0">5 jours</div></div>
-      </div>
-      <div class="mt-6 p-4 text-center" style="border:3px solid #E74C3C;background:rgba(231,76,60,.05)">
-        <div class="font-grotesk text-2xl font-bold" style="color:#E74C3C">4 500&euro; HT</div>
-        <div class="text-sm text-gray-500 font-space">~10 jours &bull; 2 sprints &bull; 16 livrables</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">22 / TOTAL CONNECT</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">R&eacute;cap complet Connect.</h2>
-    </div>
-    <div class="anim">
-      <div class="grid sm:grid-cols-3 gap-5">
-        <div class="neo-card p-6 text-center" style="border-top:4px solid #1D6A45"><div class="font-mono text-xs font-bold mb-2" style="color:#1D6A45">MVP &#10003;</div><div class="font-grotesk text-3xl font-bold mb-2">8 500&euro;</div><div class="text-xs text-gray-500 font-space">4 r&eacute;seaux, visuels auto, calendrier, multi-diffusion, engagement, ambassadeur</div><div class="mt-2 tag-done inline-block">LIVR&Eacute;</div></div>
-        <div class="neo-card p-6 text-center" style="border-top:4px solid #E74C3C"><div class="font-mono text-xs font-bold mb-2" style="color:#E74C3C">PRODUCTION</div><div class="font-grotesk text-3xl font-bold mb-2">4 500&euro;</div><div class="text-xs text-gray-500 font-space">Rebrand, templates, r&eacute;silience API, s&eacute;curit&eacute; OAuth, multi-tenant, tests</div><div class="mt-2 tag-prod inline-block">&Agrave; FAIRE</div></div>
-        <div class="neo-card p-6 text-center" style="border-top:4px solid #0a0a0a"><div class="font-mono text-xs font-bold mb-2">TOTAL</div><div class="font-grotesk text-3xl font-bold mb-2">13 000&euro;</div><div class="text-xs text-gray-500 font-space">Module Connect complet, pr&ecirc;t pour 50 courtiers</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- NEXT STEPS -->
 <section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">23 / PROCHAINE &Eacute;TAPE</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Ce qu'on fait maintenant.</h2>
-    </div>
+    <div class="anim"><div class="section-number mb-4">22 / HORS SCOPE</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Pas inclus.</h2></div>
     <div class="anim neo-card p-6 sm:p-8">
-      <div class="space-y-4">
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#0a0a0a">1</div><div><h4 class="font-bold text-sm mb-1">Tu valides la checklist production</h4><p class="text-sm text-gray-500 font-space">16 points list&eacute;s ci-dessus. Si tu veux ajouter ou retirer quelque chose, on ajuste.</p></div></div>
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#0a0a0a">2</div><div><h4 class="font-bold text-sm mb-1">Je d&eacute;marre le Sprint 1 (rebrand + templates + API)</h4><p class="text-sm text-gray-500 font-space">Premier livrable en 5 jours : branding BrokerONE, templates enrichis, API r&eacute;siliente.</p></div></div>
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#0a0a0a">3</div><div><h4 class="font-bold text-sm mb-1">Recette finale ensemble</h4><p class="text-sm text-gray-500 font-space">On teste avec tes vrais comptes sociaux. Publication sur les 4 r&eacute;seaux. Si tout est OK, on ouvre aux courtiers.</p></div></div>
+      <div class="space-y-3 text-sm font-space text-gray-500">
+        <div class="flex items-start gap-2"><span style="color:#E74C3C">&#10007;</span> Gestion des DM / messages priv&eacute;s</div>
+        <div class="flex items-start gap-2"><span style="color:#E74C3C">&#10007;</span> R&eacute;ponse aux commentaires</div>
+        <div class="flex items-start gap-2"><span style="color:#E74C3C">&#10007;</span> Publicit&eacute; payante (Meta Ads, LinkedIn Ads)</div>
+        <div class="flex items-start gap-2"><span style="color:#E74C3C">&#10007;</span> Stories / Reels (uniquement posts feed)</div>
+        <div class="flex items-start gap-2"><span style="color:#E74C3C">&#10007;</span> TikTok, Twitter/X, YouTube</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CONCLUSION -->
+<!-- ============================================ -->
+<!-- 23 / TIMELINE -->
+<!-- ============================================ -->
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim"><div class="section-number mb-4" style="color:#E74C3C">23 / TIMELINE</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">4 sprints, 22-28 jours.</h2></div>
+    <div class="anim neo-card p-6 sm:p-8">
+      <div class="space-y-4">
+        <div class="flex items-start gap-4 p-4 bg-white neo-border-2">
+          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#E74C3C">S1</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-sm mb-1">Jours 1-7 : OAuth + Publishing engine</h4>
+            <p class="text-sm text-gray-500 font-space">BLOC 1 (OAuth 4 r&eacute;seaux) + BLOC 2 (publication r&eacute;elle image+texte). Les deux fondations sans lesquelles rien d'autre ne marche.</p>
+          </div>
+          <div class="flex flex-col items-end gap-1 flex-shrink-0"><div class="text-xs text-gray-400 font-mono">6-7 jours</div><span class="tag-demo">D&Eacute;MO</span></div>
+        </div>
+        <div class="flex items-start gap-4 p-4 bg-white neo-border-2">
+          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#E74C3C">S2</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-sm mb-1">Jours 8-13 : Visuels + Calendrier</h4>
+            <p class="text-sm text-gray-500 font-space">BLOC 3 (visuels personnalis&eacute;s) + BLOC 4 (calendrier &eacute;ditorial, scheduling, cron). Les posts sont beaux et planifi&eacute;s.</p>
+          </div>
+          <div class="flex flex-col items-end gap-1 flex-shrink-0"><div class="text-xs text-gray-400 font-mono">5-6 jours</div><span class="tag-demo">D&Eacute;MO</span></div>
+        </div>
+        <div class="flex items-start gap-4 p-4 bg-white neo-border-2">
+          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#E74C3C">S3</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-sm mb-1">Jours 14-19 : Engagement + Ambassadeurs + Wiring</h4>
+            <p class="text-sm text-gray-500 font-space">BLOC 5 (collecte m&eacute;triques) + BLOC 6 (flux ambassadeur) + BLOC 7 (wiring des 6 pages UI).</p>
+          </div>
+          <div class="flex flex-col items-end gap-1 flex-shrink-0"><div class="text-xs text-gray-400 font-mono">5-6 jours</div><span class="tag-demo">D&Eacute;MO</span></div>
+        </div>
+        <div class="flex items-start gap-4 p-4 bg-white neo-border-2">
+          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#E74C3C">S4</div>
+          <div class="flex-1">
+            <h4 class="font-bold text-sm mb-1">Jours 20-28 : Production + Tests</h4>
+            <p class="text-sm text-gray-500 font-space">BLOC 8 (rebrand, multi-tenant 200 OAuth, r&eacute;silience API, edge cases, tests E2E, documentation).</p>
+          </div>
+          <div class="flex flex-col items-end gap-1 flex-shrink-0"><div class="text-xs text-gray-400 font-mono">5-7 jours</div><span class="tag-demo">D&Eacute;MO FINALE</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 24 / BUDGET -->
+<!-- ============================================ -->
+<section id="budget" class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim"><div class="section-number mb-4" style="color:#E74C3C">24 / BUDGET</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">11 500&euro; HT.</h2></div>
+    <div class="anim">
+      <div class="neo-card p-6 sm:p-8" style="border-left:6px solid #E74C3C">
+        <div class="grid sm:grid-cols-3 gap-6 mb-6">
+          <div class="text-center p-4" style="border:2px solid #e2e8f0">
+            <div class="font-mono text-xs mb-2 text-gray-400">PRIX INITIAL</div>
+            <div class="font-grotesk text-2xl font-bold text-gray-300 line-through">13 000&euro;</div>
+          </div>
+          <div class="text-center p-4" style="border:2px solid #1D6A45;background:rgba(29,106,69,.05)">
+            <div class="font-mono text-xs mb-2" style="color:#1D6A45">R&Eacute;DUCTION SCAFFOLDING</div>
+            <div class="font-grotesk text-2xl font-bold" style="color:#1D6A45">-1 500&euro;</div>
+          </div>
+          <div class="text-center p-4" style="border:3px solid #E74C3C;background:rgba(231,76,60,.05)">
+            <div class="font-mono text-xs mb-2" style="color:#E74C3C">PRIX FINAL</div>
+            <div class="font-grotesk text-3xl font-bold" style="color:#E74C3C">11 500&euro;</div>
+          </div>
+        </div>
+        <div class="p-4 bg-neo-gray text-sm font-space">
+          <strong>Pourquoi la r&eacute;duction :</strong> Le scaffolding de Bruno (DB schema, types, Zod validation, UI shells, auth middleware, encryption util) &eacute;conomise ~3-4 jours de setup. L'architecture est solide et je peux construire directement dessus sans tout refaire.
+        </div>
+      </div>
+      <div class="mt-6 neo-card p-5">
+        <h4 class="font-grotesk font-bold mb-3">D&eacute;composition par bloc</h4>
+        <div class="space-y-2">
+          <div class="flex items-center justify-between p-2 bg-neo-gray text-sm font-space"><span>BLOC 1 &mdash; OAuth r&eacute;el (4 providers)</span><span class="font-mono text-xs">4-5j</span></div>
+          <div class="flex items-center justify-between p-2 bg-neo-gray text-sm font-space"><span>BLOC 2 &mdash; Publishing engine (4 r&eacute;seaux)</span><span class="font-mono text-xs">4-5j</span></div>
+          <div class="flex items-center justify-between p-2 bg-neo-gray text-sm font-space"><span>BLOC 3 &mdash; Visuels personnalis&eacute;s</span><span class="font-mono text-xs">2-3j</span></div>
+          <div class="flex items-center justify-between p-2 bg-neo-gray text-sm font-space"><span>BLOC 4 &mdash; Calendrier + scheduling</span><span class="font-mono text-xs">2-3j</span></div>
+          <div class="flex items-center justify-between p-2 bg-neo-gray text-sm font-space"><span>BLOC 5 &mdash; Engagement collection</span><span class="font-mono text-xs">2-3j</span></div>
+          <div class="flex items-center justify-between p-2 bg-neo-gray text-sm font-space"><span>BLOC 6 &mdash; Ambassador flow</span><span class="font-mono text-xs">1-2j</span></div>
+          <div class="flex items-center justify-between p-2 bg-neo-gray text-sm font-space"><span>BLOC 7 &mdash; Frontend wiring (6 pages)</span><span class="font-mono text-xs">3-4j</span></div>
+          <div class="flex items-center justify-between p-2 bg-neo-gray text-sm font-space"><span>BLOC 8 &mdash; Production (rebrand, multi-tenant, tests)</span><span class="font-mono text-xs">2-3j</span></div>
+          <div class="flex items-center justify-between p-3 text-sm font-space font-bold" style="border:2px solid #0a0a0a"><span>TOTAL</span><span class="font-mono">22-28 jours</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 25 / CE QUE LE SCAFFOLDING ÉCONOMISE -->
+<!-- ============================================ -->
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim"><div class="section-number mb-4">25 / TRANSPARENCE</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Ce que le scaffolding &eacute;conomise.</h2></div>
+    <div class="anim neo-card p-6 sm:p-8">
+      <div class="space-y-4 text-sm font-space">
+        <div class="flex items-start gap-3"><span class="tag-fourni">&#10003;</span><span><strong>DB schema :</strong> les 6 tables sont bien con&ccedil;ues. Je n'ai pas &agrave; r&eacute;fl&eacute;chir &agrave; la structure des donn&eacute;es. ~1 jour &eacute;conomis&eacute;.</span></div>
+        <div class="flex items-start gap-3"><span class="tag-fourni">&#10003;</span><span><strong>Types TypeScript :</strong> interfaces compl&egrave;tes pour connections, publications, engagement. Pas de r&eacute;daction de types. ~0.5 jour &eacute;conomis&eacute;.</span></div>
+        <div class="flex items-start gap-3"><span class="tag-fourni">&#10003;</span><span><strong>Route shells + Zod :</strong> endpoints d&eacute;j&agrave; d&eacute;finis avec validation. Je remplis le corps des fonctions. ~0.5 jour &eacute;conomis&eacute;.</span></div>
+        <div class="flex items-start gap-3"><span class="tag-fourni">&#10003;</span><span><strong>UI shells :</strong> les 6 pages existent. Layout, navigation, composants de base. ~1 jour &eacute;conomis&eacute;.</span></div>
+        <div class="flex items-start gap-3"><span class="tag-fourni">&#10003;</span><span><strong>AES-256-GCM util :</strong> chiffrement pr&ecirc;t &agrave; l'emploi pour les tokens OAuth. ~0.5 jour &eacute;conomis&eacute;.</span></div>
+      </div>
+      <div class="mt-6 p-4 text-sm font-space" style="border:2px solid #1D6A45;background:rgba(29,106,69,.05)">
+        <strong style="color:#1D6A45">Total &eacute;conomis&eacute; : ~3-4 jours de setup.</strong> C'est honn&ecirc;te. Le scaffolding est propre mais repr&eacute;sente ~15-20% du travail total. Les 80% restants &mdash; l'int&eacute;gration avec 4 APIs r&eacute;elles &mdash; sont ce qui prend du temps.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 26 / PROCHAINE ÉTAPE -->
+<!-- ============================================ -->
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim"><div class="section-number mb-4">26 / PROCHAINE &Eacute;TAPE</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Ce qu'on fait maintenant.</h2></div>
+    <div class="anim neo-card p-6 sm:p-8">
+      <div class="space-y-4">
+        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#0a0a0a">1</div><div><h4 class="font-bold text-sm mb-1">Tu valides le scope et le budget</h4><p class="text-sm text-gray-500 font-space">22 livrables, 22-28 jours, 11 500&euro;. Si tu veux ajouter ou retirer quelque chose, on ajuste.</p></div></div>
+        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#0a0a0a">2</div><div><h4 class="font-bold text-sm mb-1">Tu fournis les cl&eacute;s API des 4 providers</h4><p class="text-sm text-gray-500 font-space">Apps Meta (Facebook+Instagram), LinkedIn, Google. Je t'envoie la liste exacte des scopes et configurations n&eacute;cessaires.</p></div></div>
+        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#0a0a0a">3</div><div><h4 class="font-bold text-sm mb-1">Je d&eacute;marre le Sprint 1 (OAuth + Publishing)</h4><p class="text-sm text-gray-500 font-space">D&eacute;mo en 7 jours : un vrai post publi&eacute; sur les 4 r&eacute;seaux depuis Connect.</p></div></div>
+        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#0a0a0a">4</div><div><h4 class="font-bold text-sm mb-1">D&eacute;mo &agrave; chaque sprint</h4><p class="text-sm text-gray-500 font-space">4 d&eacute;mos en 4 semaines. Tu vois le progr&egrave;s. Tu valides. On avance ensemble.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 27 / RÉCAP VISUEL -->
+<!-- ============================================ -->
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim"><div class="section-number mb-4" style="color:#E74C3C">27 / R&Eacute;CAP</div><h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">En un coup d'&#339;il.</h2></div>
+    <div class="anim grid sm:grid-cols-4 gap-4">
+      <div class="neo-card p-5 text-center stat-card"><div class="stat-number font-grotesk text-3xl font-bold" style="color:#E74C3C">4</div><div class="text-xs text-gray-500 font-space mt-1">r&eacute;seaux sociaux</div></div>
+      <div class="neo-card p-5 text-center stat-card"><div class="stat-number font-grotesk text-3xl font-bold" style="color:#E74C3C">8</div><div class="text-xs text-gray-500 font-space mt-1">blocs de travail</div></div>
+      <div class="neo-card p-5 text-center stat-card"><div class="stat-number font-grotesk text-3xl font-bold" style="color:#E74C3C">22</div><div class="text-xs text-gray-500 font-space mt-1">livrables</div></div>
+      <div class="neo-card p-5 text-center stat-card"><div class="stat-number font-grotesk text-3xl font-bold" style="color:#E74C3C">4</div><div class="text-xs text-gray-500 font-space mt-1">d&eacute;mos</div></div>
+    </div>
+    <div class="anim mt-6 grid sm:grid-cols-2 gap-0" style="border:3px solid #0a0a0a;box-shadow:6px 6px 0 #0a0a0a">
+      <div class="p-6 text-center" style="border-right:2px solid #0a0a0a;background:rgba(231,76,60,.03)">
+        <div class="font-mono text-xs mb-2 text-gray-400">BUDGET</div>
+        <div class="font-grotesk text-4xl font-bold" style="color:#E74C3C">11 500&euro;</div>
+        <div class="text-xs text-gray-500 font-space mt-1">HT &bull; r&eacute;duit de 13 000&euro;</div>
+      </div>
+      <div class="p-6 text-center" style="background:rgba(10,10,10,.03)">
+        <div class="font-mono text-xs mb-2 text-gray-400">DUR&Eacute;E</div>
+        <div class="font-grotesk text-4xl font-bold">22-28j</div>
+        <div class="text-xs text-gray-500 font-space mt-1">4 sprints &bull; d&eacute;mo chaque semaine</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 28 / CONCLUSION -->
+<!-- ============================================ -->
 <section class="py-24 px-4" style="background:#E74C3C;border-top:3px solid #0a0a0a">
   <div class="max-w-3xl mx-auto text-center text-white">
     <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">24 / C'EST &Agrave; TOI</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Connect pr&ecirc;t pour les courtiers.</h2>
-      <p class="text-lg font-space mb-8 leading-relaxed" style="color:rgba(255,255,255,.8)">10 jours de travail. 16 livrables concrets.<br>Le module Connect passe de "les 4 r&eacute;seaux marchent" &agrave; "c'est fiable &agrave; l'&eacute;chelle".<br><strong class="text-white">50 courtiers &times; 4 r&eacute;seaux = 200 connexions g&eacute;r&eacute;es.</strong></p>
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">28 / CONCLUSION</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Chaque client satisfait<br>devient visible.</h2>
+      <p class="text-lg font-space mb-8 leading-relaxed" style="color:rgba(255,255,255,.8)">Advice identifie les ambassadeurs.<br>Connect publie leurs t&eacute;moignages sur 4 r&eacute;seaux.<br>De nouveaux prospects d&eacute;couvrent le courtier.<br>Sentinel capture leurs emails.<br><strong class="text-white">La boucle vertueuse est boucl&eacute;e.</strong></p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
         <a href="https://calendly.com/baptiste-visionia/30min" target="_blank" class="neo-btn bg-white px-6 py-3 font-space text-sm inline-flex items-center gap-2" style="color:#E74C3C">&#128222; Planifier un call</a>
         <a href="mailto:baptiste.fort.pro@gmail.com" class="neo-btn px-6 py-3 font-space text-sm inline-flex items-center gap-2" style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.3)">&#9993; R&eacute;pondre par email</a>
@@ -935,42 +903,10 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 </section>
 
 <!-- FOOTER -->
-
-<!-- COMBINED BUDGET -->
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:#E74C3C">BUDGET TOTAL</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Récap complet Connect.</h2>
-    </div>
-    <div class="anim grid sm:grid-cols-3 gap-5">
-      <div class="neo-card p-6 text-center" style="border-top:4px solid #1D6A45"><div class="font-mono text-xs font-bold mb-2" style="color:#1D6A45">MVP</div><div class="font-grotesk text-3xl font-bold mb-2">8 500€</div><div class="text-xs text-gray-500 font-space">4 réseaux, visuels auto, calendrier, engagement, ambassadeurs</div><div class="mt-2 font-mono text-[10px] px-2 py-1 inline-block" style="background:#1D6A45;color:#fff">~20 JOURS</div></div>
-      <div class="neo-card p-6 text-center" style="border-top:4px solid #E74C3C"><div class="font-mono text-xs font-bold mb-2" style="color:#E74C3C">PRODUCTION</div><div class="font-grotesk text-3xl font-bold mb-2">4 500€</div><div class="text-xs text-gray-500 font-space">Rebrand, templates, API résilience, sécurité, multi-tenant</div><div class="mt-2 font-mono text-[10px] px-2 py-1 inline-block" style="background:#E74C3C;color:#fff">~10 JOURS</div></div>
-      <div class="neo-card p-6 text-center" style="border-top:4px solid #0a0a0a"><div class="font-mono text-xs font-bold mb-2">TOTAL</div><div class="font-grotesk text-3xl font-bold mb-2">13 000€</div><div class="text-xs text-gray-500 font-space">Module Connect complet, prêt pour 50 courtiers</div><div class="mt-2 font-mono text-[10px] px-2 py-1 inline-block" style="background:#0a0a0a;color:#fff">~30 JOURS</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- CONCLUSION -->
-<section class="py-24 px-4" style="background:#E74C3C;border-top:3px solid #0a0a0a">
-  <div class="max-w-3xl mx-auto text-center text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">C'EST À TOI</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">La boucle est bouclée.</h2>
-      <p class="text-lg font-space mb-8 leading-relaxed" style="color:rgba(255,255,255,.8)">Chaque client satisfait devient visible.<br>Chaque post génère de nouveaux prospects.<br>Chaque prospect est capturé par Sentinel.<br><strong class="text-white">La boucle vertueuse tourne toute seule.</strong></p>
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-        <a href="https://calendly.com/baptiste-visionia/30min" target="_blank" class="neo-btn bg-white px-6 py-3 font-space text-sm inline-flex items-center gap-2" style="color:#E74C3C">&#128222; Planifier un call</a>
-        <a href="mailto:baptiste.fort.pro@gmail.com" class="neo-btn px-6 py-3 font-space text-sm inline-flex items-center gap-2" style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.3)">&#9993; Répondre par email</a>
-      </div>
-      <div class="font-mono text-sm" style="color:rgba(255,255,255,.4)">Baptiste Fort — Avril 2026</div>
-    </div>
-  </div>
-</section>
-
 <footer class="py-10 px-4 bg-neo-black text-white" style="border-top:3px solid #0a0a0a">
   <div class="max-w-5xl mx-auto text-center">
-    <div class="neo-card-sm px-6 py-3 inline-block font-mono text-sm mb-3" style="background:#E74C3C;border-color:#E74C3C">Connect Complete &mdash; Broker<span style="color:rgba(255,255,255,.6)">ONE</span></div>
-    <p class="text-gray-500 text-sm font-space">MVP + Production &bull; 13 000€ &bull; Avril 2026 &bull; Baptiste Fort → Bruno</p>
+    <div class="neo-card-sm px-6 py-3 inline-block font-mono text-sm mb-3" style="background:#E74C3C;border-color:#E74C3C">Connect &mdash; Broker<span style="color:rgba(255,255,255,.6)">ONE</span></div>
+    <p class="text-gray-500 text-sm font-space">Scaffolding fourni, APIs &agrave; construire &bull; 11 500&euro; &bull; 22-28 jours &bull; Avril 2026 &bull; Baptiste Fort &rarr; Bruno</p>
   </div>
 </footer>
 

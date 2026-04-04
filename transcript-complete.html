@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BrokerONE Transcript — MVP + Production</title>
+<title>BrokerONE Transcript — 65% du code fourni</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -25,7 +25,7 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .anim{opacity:0;transform:translateY(18px);transition:opacity .45s ease,transform .45s ease}
 .anim.v{opacity:1;transform:translateY(0)}
-.marquee{animation:marquee 35s linear infinite}
+.marquee{animation:marquee 30s linear infinite}
 .stripe-bg{background-image:repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(198,93,7,.03) 10px,rgba(198,93,7,.03) 20px)}
 .ticker-wrap{overflow:hidden}.ticker{display:inline-flex;white-space:nowrap}
 .progress-bar{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#C65D07,#E8751A);z-index:200;transition:width .1s}
@@ -33,18 +33,19 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 .back-top{position:fixed;bottom:24px;right:24px;z-index:100;opacity:0;transform:translateY(20px);transition:all .3s;pointer-events:none}
 .back-top.show{opacity:1;transform:translateY(0);pointer-events:auto}
 .click-burst{pointer-events:none;position:fixed;z-index:9999}
-.tag-mvp{background:#C65D07;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
-.tag-prod{background:#C0392B;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
+.tag-fourni{background:#1D6A45;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
+.tag-partiel{background:#C65D07;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
+.tag-todo{background:#C0392B;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
 .tag-tech{background:#1E3A5F;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
 .tag-done{background:#0a0a0a;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
-.tag-scope{background:#1D6A45;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
-.tag-out{background:#999;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
+.tag-bloc{background:#C65D07;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
+.tag-demo{background:#8B5CF6;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700}
 @keyframes count-up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .stat-card:hover .stat-number{animation:count-up .3s ease}
 .score-bar{height:24px;border:2px solid #0a0a0a;position:relative;overflow:hidden}
 .score-fill{height:100%;transition:width .6s cubic-bezier(.16,1,.3,1)}
-.transition-divider{position:relative;overflow:hidden}
-.transition-divider::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(192,57,43,.06) 20px,rgba(192,57,43,.06) 40px)}
+.code-line{font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.6;color:#e2e8f0;padding:0 16px}
+.code-line .kw{color:#C65D07}.code-line .fn{color:#60a5fa}.code-line .str{color:#34d399}.code-line .cm{color:#64748b}.code-line .num{color:#fbbf24}
 </style>
 </head>
 <body>
@@ -58,20 +59,20 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
   <div class="flex items-center justify-between h-14">
     <div class="flex items-center gap-3">
       <div class="neo-card-sm px-3 py-1 font-mono text-sm font-bold" style="background:#C65D07;color:#fff;border-color:#C65D07">T</div>
-      <span class="font-grotesk font-bold text-sm hidden sm:block">Transcript &mdash; MVP + Production</span>
+      <span class="font-grotesk font-bold text-sm hidden sm:block">Transcript &mdash; 65% fourni par Bruno</span>
     </div>
     <div class="hidden lg:flex items-center gap-1 text-xs font-space">
-      <a href="#problem" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Probleme</a>
-      <a href="#solution" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Solution</a>
+      <a href="#exec" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Exec</a>
+      <a href="#fourni" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Fourni</a>
       <a href="#leexi" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Leexi</a>
-      <a href="#mifid" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">MiFID</a>
-      <a href="#befr" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">BE / FR</a>
-      <a href="#documents" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Documents</a>
-      <a href="#technical" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Technique</a>
-      <a href="#transition" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold" style="color:#C0392B">Production</a>
-      <a href="#timeline" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Budget</a>
+      <a href="#scoring" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Scoring</a>
+      <a href="#prompts" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Prompts</a>
+      <a href="#manque" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Manque</a>
+      <a href="#construis" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">Blocs</a>
+      <a href="#wireframes" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold">UI</a>
+      <a href="#timeline" class="px-3 py-1.5 hover:bg-neo-gray transition-colors font-bold" style="color:#C65D07">Budget</a>
     </div>
-    <div class="font-mono text-xs text-gray-400">MVP + PROD</div>
+    <div class="font-mono text-xs text-gray-400">4 500&euro; HT</div>
   </div>
 </div>
 </nav>
@@ -79,31 +80,29 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 <!-- TICKER -->
 <div class="fixed top-[56px] left-0 right-0 z-40 text-white py-1.5 ticker-wrap" style="background:#C65D07;border-bottom:3px solid #0a0a0a">
 <div class="ticker marquee">
-  <span class="mx-8 text-xs font-space">TRANSCRIPT &mdash; MVP + PRODUCTION &mdash; 10 500&euro;</span>
+  <span class="mx-8 text-xs font-space">TRANSCRIPT &mdash; 4 500&euro; &mdash; 65% DU CODE FOURNI PAR BRUNO</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">LEEXI INSIDE</span>
+  <span class="mx-8 text-xs font-space">LEEXI CONNECTOR 100%</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">MiFID SCORING</span>
+  <span class="mx-8 text-xs font-space">MiFID SCORING 100%</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">FSMA / ACPR</span>
+  <span class="mx-8 text-xs font-space">TOUS LES PROMPTS 100%</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">CHAQUE APPEL = PREUVE</span>
+  <span class="mx-8 text-xs font-space">BRIO CRM 100%</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">FR / NL / DE</span>
+  <span class="mx-8 text-xs font-space">DE 10 500&euro; &Agrave; 4 500&euro; &mdash; -57%</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">REBRAND BROKERONE</span>
+  <span class="mx-8 text-xs font-space">TRANSCRIPT &mdash; 4 500&euro; &mdash; 65% DU CODE FOURNI PAR BRUNO</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">TRANSCRIPT &mdash; MVP + PRODUCTION &mdash; 10 500&euro;</span>
+  <span class="mx-8 text-xs font-space">LEEXI CONNECTOR 100%</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">LEEXI INSIDE</span>
+  <span class="mx-8 text-xs font-space">MiFID SCORING 100%</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">MiFID SCORING</span>
+  <span class="mx-8 text-xs font-space">TOUS LES PROMPTS 100%</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">FSMA / ACPR</span>
+  <span class="mx-8 text-xs font-space">BRIO CRM 100%</span>
   <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">CHAQUE APPEL = PREUVE</span>
-  <span class="mx-8 text-xs font-space" style="color:rgba(255,255,255,.5)">&#9733;</span>
-  <span class="mx-8 text-xs font-space">FR / NL / DE</span>
+  <span class="mx-8 text-xs font-space">DE 10 500&euro; &Agrave; 4 500&euro; &mdash; -57%</span>
 </div>
 </div>
 
@@ -115,18 +114,18 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
   <div class="max-w-3xl mx-auto relative z-10">
     <div class="anim">
       <div class="section-number mb-6">01 / HELLO</div>
-      <div class="flex items-center gap-3 mb-6">
-        <span class="tag-mvp">MVP</span>
-        <span class="tag-prod">PRODUCTION</span>
+      <div class="flex items-center gap-3 mb-6 flex-wrap">
+        <span class="tag-fourni">65-70% FOURNI</span>
         <span class="tag-tech">TRANSCRIPT</span>
+        <span class="tag-done">LE PLUS AVANC&Eacute;</span>
       </div>
       <h1 class="font-grotesk text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] mb-8">
-        Transcript.<br>Call compliance.
+        Le module le plus<br>avanc&eacute;.
       </h1>
       <div class="text-lg sm:text-xl text-gray-500 font-space leading-relaxed mb-8 space-y-4">
-        <p>Chaque appel t&eacute;l&eacute;phonique trait&eacute; par un courtier contient du conseil. Aujourd'hui, ce conseil <strong class="text-neo-black">ne laisse aucune trace</strong>.</p>
-        <p>Transcript int&egrave;gre les transcriptions Leexi, extrait les donn&eacute;es r&eacute;glementaires, g&eacute;n&egrave;re les documents FSMA/ACPR, et produit un <strong class="text-neo-black">scoring MiFID d&eacute;terministe</strong>.</p>
-        <p>Ce document couvre le <strong class="text-neo-black">MVP complet</strong> et la <strong class="text-neo-black">phase production</strong> &mdash; du prototype au produit robuste pour de vrais courtiers.</p>
+        <p>Bruno a fourni <strong class="text-neo-black">65-70% du code</strong> de Transcript. C'est le module o&ugrave; il reste le moins &agrave; construire.</p>
+        <p>Leexi connector, scoring MiFID, tous les prompts, g&eacute;n&eacute;rateur DOCX, envoi email, Brio CRM &mdash; <strong class="text-neo-black">tout le backend existe</strong>.</p>
+        <p>Il reste l'habillage : les templates DOCX manquants, le frontend Next.js, la persistence Supabase, et le d&eacute;ploiement.</p>
       </div>
     </div>
     <div class="anim">
@@ -141,462 +140,127 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 <section id="exec" class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4" style="color:#C65D07">02 / EN 2 MINUTES</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">L'essentiel.</h2>
+      <div class="section-number mb-4" style="color:#C65D07">02 / EXEC SUMMARY</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">En 2 minutes.</h2>
     </div>
     <div class="anim neo-card p-6 sm:p-8" style="border-left:6px solid #C65D07">
       <div class="space-y-4">
-        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#C65D07;min-width:32px">1</div><div><h4 class="font-bold text-sm mb-1">Quoi</h4><p class="text-sm text-gray-500 font-space">Transformer chaque appel t&eacute;l&eacute;phonique en preuve de conformit&eacute; auditable. Transcription automatique, extraction IA, scoring MiFID d&eacute;terministe, documents FSMA/ACPR pr&eacute;-remplis. Puis passer en production : rebrand, calibration, RGPD, multi-tenant.</p></div></div>
-        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#C65D07;min-width:32px">2</div><div><h4 class="font-bold text-sm mb-1">Partenaire</h4><p class="text-sm text-gray-500 font-space"><strong>Leexi</strong> &mdash; plateforme d'enregistrement et transcription d'appels. Licence incluse dans l'add-on Transcript &agrave; <strong>50&euro;/mois/utilisateur</strong>.</p></div></div>
-        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#C65D07;min-width:32px">3</div><div><h4 class="font-bold text-sm mb-1">Combien</h4><p class="text-sm text-gray-500 font-space"><span class="tag-mvp">MVP</span> <strong>7 000&euro; HT</strong> (~16 jours) + <span class="tag-prod">PROD</span> <strong>3 500&euro; HT</strong> (~8 jours) = <strong>10 500&euro; HT total</strong></p></div></div>
-        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#C65D07;min-width:32px">4</div><div><h4 class="font-bold text-sm mb-1">R&eacute;sultat</h4><p class="text-sm text-gray-500 font-space">Le courtier passe un appel. Il retrouve dans BrokerONE : la transcription, les donn&eacute;es extraites, le score de conformit&eacute;, et le document pr&ecirc;t &agrave; signer. Calibr&eacute;, s&eacute;curis&eacute;, multi-tenant.</p></div></div>
+        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#1D6A45;min-width:90px"><span class="tag-fourni">FOURNI</span></div><div><p class="text-sm text-gray-600 font-space"><strong>Leexi connector</strong> &mdash; 320 lignes, auth, fetch, normalize, pagination, rate limiting</p></div></div>
+        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#1D6A45;min-width:90px"><span class="tag-fourni">FOURNI</span></div><div><p class="text-sm text-gray-600 font-space"><strong>Scoring MiFID BE + FR</strong> &mdash; 100% d&eacute;terministe, v&eacute;rifi&eacute; contre Excel, FSMA + ACPR</p></div></div>
+        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#1D6A45;min-width:90px"><span class="tag-fourni">FOURNI</span></div><div><p class="text-sm text-gray-600 font-space"><strong>Tous les prompts</strong> &mdash; 5 modules BE (FR+NL) + 8 modules FR</p></div></div>
+        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#C65D07;min-width:90px"><span class="tag-partiel">PARTIEL</span></div><div><p class="text-sm text-gray-600 font-space"><strong>G&eacute;n&eacute;rateur DOCX</strong> &mdash; 780 lignes, framework + modules C/D. Templates A/B/E &agrave; compl&eacute;ter</p></div></div>
+        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#1D6A45;min-width:90px"><span class="tag-fourni">FOURNI</span></div><div><p class="text-sm text-gray-600 font-space"><strong>Email MS365 + Gmail</strong> &mdash; envoi bilingue FR/NL, 2 emails (public + confidentiel)</p></div></div>
+        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#1D6A45;min-width:90px"><span class="tag-fourni">FOURNI</span></div><div><p class="text-sm text-gray-600 font-space"><strong>Brio CRM</strong> &mdash; auth, HTTP client, metrics, quota management</p></div></div>
+      </div>
+      <div class="mt-6 pt-6" style="border-top:2px solid #e2e8f0">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <div class="flex items-center gap-3">
+            <span class="font-grotesk text-3xl font-bold" style="color:#C65D07">4 500&euro; HT</span>
+            <span class="text-sm text-gray-400 font-space line-through">10 500&euro;</span>
+            <span class="tag-fourni">-57%</span>
+          </div>
+          <div class="text-sm text-gray-500 font-space">10-14 jours &bull; 2-3 sprints</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================ -->
-<!-- PART 1 : THE PROBLEM -->
+<!-- 03 / CE QUE BRUNO A FOURNI — OVERVIEW -->
 <!-- ============================================ -->
-
-<section id="problem" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
+<section id="fourni" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto text-white">
     <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 1 / LE PROBL&Egrave;ME</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le conseil par t&eacute;l&eacute;phone<br>est invisible.</h2>
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">03 / CE QUE BRUNO A FOURNI</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">L'inventaire complet.</h2>
+      <p class="text-lg font-space mb-6" style="color:rgba(255,255,255,.7)">Bruno a fourni 10+ fichiers couvrant tout le pipeline backend. Voici ce qui existe, fichier par fichier, avec le pourcentage de compl&eacute;tude.</p>
     </div>
-    <div class="anim grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-      <div class="p-5" style="border:2px solid rgba(255,255,255,.2)"><div class="font-space font-bold text-3xl mb-2" style="color:#C65D07">60%</div><div class="text-xs font-space" style="color:rgba(255,255,255,.5)">du conseil en assurance passe par t&eacute;l&eacute;phone</div></div>
-      <div class="p-5" style="border:2px solid rgba(255,255,255,.2)"><div class="font-space font-bold text-3xl mb-2" style="color:#C65D07">0%</div><div class="text-xs font-space" style="color:rgba(255,255,255,.5)">de tra&ccedil;abilit&eacute; sur ces appels</div></div>
-      <div class="p-5" style="border:2px solid rgba(255,255,255,.2)"><div class="font-space font-bold text-3xl mb-2" style="color:#C65D07">100%</div><div class="text-xs font-space" style="color:rgba(255,255,255,.5)">de risque en cas de litige</div></div>
+    <div class="anim grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="p-5" style="border:2px solid rgba(255,255,255,.2)">
+        <div class="flex items-center gap-2 mb-2"><span class="tag-fourni">100%</span></div>
+        <div class="font-bold text-sm mb-1">Leexi connector</div>
+        <div class="text-xs font-space" style="color:rgba(255,255,255,.5)">320 lignes &bull; leexi_connector.js</div>
+      </div>
+      <div class="p-5" style="border:2px solid rgba(255,255,255,.2)">
+        <div class="flex items-center gap-2 mb-2"><span class="tag-fourni">100%</span></div>
+        <div class="font-bold text-sm mb-1">Scoring MiFID BE</div>
+        <div class="text-xs font-space" style="color:rgba(255,255,255,.5)">scoring_engine_module_B.js</div>
+      </div>
+      <div class="p-5" style="border:2px solid rgba(255,255,255,.2)">
+        <div class="flex items-center gap-2 mb-2"><span class="tag-fourni">100%</span></div>
+        <div class="font-bold text-sm mb-1">Scoring profil risque FR</div>
+        <div class="text-xs font-space" style="color:rgba(255,255,255,.5)">scoring_engine_profil_risque_FR.js</div>
+      </div>
+      <div class="p-5" style="border:2px solid rgba(255,255,255,.2)">
+        <div class="flex items-center gap-2 mb-2"><span class="tag-fourni">100%</span></div>
+        <div class="font-bold text-sm mb-1">Tous les prompts</div>
+        <div class="text-xs font-space" style="color:rgba(255,255,255,.5)">5 modules BE + 8 modules FR</div>
+      </div>
+      <div class="p-5" style="border:2px solid rgba(255,255,255,.2)">
+        <div class="flex items-center gap-2 mb-2"><span class="tag-fourni">100%</span></div>
+        <div class="font-bold text-sm mb-1">Pipeline orchestrateur</div>
+        <div class="text-xs font-space" style="color:rgba(255,255,255,.5)">600 lignes &bull; pipeline_entry.js</div>
+      </div>
+      <div class="p-5" style="border:2px solid rgba(255,255,255,.2)">
+        <div class="flex items-center gap-2 mb-2"><span class="tag-fourni">100%</span></div>
+        <div class="font-bold text-sm mb-1">Email MS365 + Gmail</div>
+        <div class="text-xs font-space" style="color:rgba(255,255,255,.5)">email_module.js</div>
+      </div>
+      <div class="p-5" style="border:2px solid rgba(255,255,255,.2)">
+        <div class="flex items-center gap-2 mb-2"><span class="tag-fourni">100%</span></div>
+        <div class="font-bold text-sm mb-1">Brio CRM</div>
+        <div class="text-xs font-space" style="color:rgba(255,255,255,.5)">4 fichiers &bull; auth + HTTP + metrics</div>
+      </div>
+      <div class="p-5" style="border:2px solid rgba(255,255,255,.2)">
+        <div class="flex items-center gap-2 mb-2"><span class="tag-fourni">100%</span></div>
+        <div class="font-bold text-sm mb-1">Courtier config</div>
+        <div class="text-xs font-space" style="color:rgba(255,255,255,.5)">39 variables &bull; schema + demo</div>
+      </div>
+      <div class="p-5" style="border:2px solid rgba(255,255,255,.2)">
+        <div class="flex items-center gap-2 mb-2"><span class="tag-partiel">~60%</span></div>
+        <div class="font-bold text-sm mb-1">G&eacute;n&eacute;rateur DOCX</div>
+        <div class="text-xs font-space" style="color:rgba(255,255,255,.5)">780 lignes &bull; C/D + rapport fait</div>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 04 / LEEXI CONNECTOR — D&Eacute;TAIL -->
+<!-- ============================================ -->
+<section id="leexi" class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
     <div class="anim">
+      <div class="section-number mb-4">04 / LEEXI CONNECTOR &mdash; 100% FOURNI</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">320 lignes.<br>Rien &agrave; refaire.</h2>
+    </div>
+    <div class="anim neo-card p-6 sm:p-8">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="tag-fourni">FOURNI 100%</span>
+        <span class="font-mono text-xs text-gray-400">leexi_connector.js &bull; 320 lignes</span>
+      </div>
       <div class="space-y-3">
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span style="color:#C65D07;font-weight:700">&#9888;</span><span class="text-sm font-space">Le conseil en assurance se fait de plus en plus par t&eacute;l&eacute;phone, pas par email</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span style="color:#C65D07;font-weight:700">&#9888;</span><span class="text-sm font-space">Un appel t&eacute;l&eacute;phonique ne laisse AUCUNE trace &mdash; c'est la parole du courtier contre celle du client</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span style="color:#C65D07;font-weight:700">&#9888;</span><span class="text-sm font-space">FSMA et ACPR exigent la tra&ccedil;abilit&eacute; de TOUT le conseil donn&eacute;</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span style="color:#C65D07;font-weight:700">&#9888;</span><span class="text-sm font-space">MiFID impose une &eacute;valuation de l'ad&eacute;quation du conseil (suitability)</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">PART 1 / AVANT vs APR&Egrave;S</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le m&ecirc;me appel.</h2>
-    </div>
-    <div class="anim">
-      <div class="grid sm:grid-cols-2 gap-0" style="border:3px solid #0a0a0a;box-shadow:6px 6px 0 #0a0a0a">
-        <div class="p-6" style="background:rgba(198,93,7,.03);border-right:2px solid #0a0a0a">
-          <div class="font-mono text-xs mb-4 font-bold" style="color:#C65D07">AVANT &mdash; SANS TRANSCRIPT</div>
-          <div class="space-y-3 text-sm font-space text-gray-500">
-            <div>&#9742; Le courtier appelle le client</div>
-            <div>&#128172; Conseil donn&eacute; oralement pendant 20 min</div>
-            <div>&#128221; Le courtier note 3 lignes de m&eacute;moire sur un post-it</div>
-            <div>&#128683; Aucun document g&eacute;n&eacute;r&eacute;</div>
-            <div>&#128683; Aucun score de conformit&eacute;</div>
-            <div>&#128683; En cas de litige : aucune preuve</div>
-          </div>
-        </div>
-        <div class="p-6" style="background:rgba(29,106,69,.03)">
-          <div class="font-mono text-xs mb-4 font-bold" style="color:#1D6A45">APR&Egrave;S &mdash; AVEC TRANSCRIPT</div>
-          <div class="space-y-3 text-sm font-space text-neo-black">
-            <div>&#9742; Le courtier appelle (Leexi enregistre)</div>
-            <div>&#128196; Transcription automatique en 5 min</div>
-            <div>&#129302; IA extrait : identit&eacute;, objet, engagements, questions</div>
-            <div>&#9989; Score MiFID calcul&eacute; : 82/100 &#10003;</div>
-            <div>&#9989; Document FSMA/ACPR pr&eacute;-rempli</div>
-            <div>&#9989; Le courtier valide en 2 min &rarr; preuve archiv&eacute;e</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 2 : THE SOLUTION PIPELINE -->
-<!-- ============================================ -->
-
-<section id="solution" class="py-20 px-4" style="background:#C65D07;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 2 / LA SOLUTION</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le pipeline Transcript.</h2>
-      <p class="text-lg font-space" style="color:rgba(255,255,255,.8)">7 &eacute;tapes, du coup de fil au document sign&eacute;.</p>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">PART 2 / PIPELINE D&Eacute;TAILL&Eacute;</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">7 &eacute;tapes.</h2>
-    </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5 flex items-start gap-4">
-        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C65D07">1</div>
-        <div><h4 class="font-bold text-sm mb-1">Le courtier passe un appel</h4><p class="text-xs text-gray-500 font-space">N'importe quel t&eacute;l&eacute;phone : mobile, fixe, VoIP. Leexi enregistre automatiquement.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C65D07">2</div>
-        <div><h4 class="font-bold text-sm mb-1">Leexi g&eacute;n&egrave;re la transcription</h4><p class="text-xs text-gray-500 font-space">Transcription automatique post-appel. 95%+ de pr&eacute;cision en fran&ccedil;ais, 90%+ en n&eacute;erlandais.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C65D07">3</div>
-        <div><h4 class="font-bold text-sm mb-1">Transcript re&ccedil;oit la transcription</h4><p class="text-xs text-gray-500 font-space">Webhook Leexi &rarr; BrokerONE. R&eacute;ception automatique, aucune action du courtier.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C65D07">4</div>
-        <div><h4 class="font-bold text-sm mb-1">IA extrait les donn&eacute;es r&eacute;glementaires</h4><p class="text-xs text-gray-500 font-space">Claude Sonnet analyse la transcription et extrait : identit&eacute; client, objet de l'appel, engagements pris, questions pos&eacute;es, informations transmises.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C65D07">5</div>
-        <div><h4 class="font-bold text-sm mb-1">Scoring MiFID d&eacute;terministe</h4><p class="text-xs text-gray-500 font-space">Pas d'IA ici &mdash; r&egrave;gles fixes, r&eacute;sultats reproductibles. Score 0-100 sur 5 crit&egrave;res pond&eacute;r&eacute;s.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C65D07">6</div>
-        <div><h4 class="font-bold text-sm mb-1">Documents FSMA/ACPR pr&eacute;-remplis</h4><p class="text-xs text-gray-500 font-space">G&eacute;n&eacute;ration automatique au format r&eacute;glementaire belge ou fran&ccedil;ais. Pr&eacute;-rempli avec les donn&eacute;es extraites.</p></div>
-      </div>
-      <div class="neo-card p-5 flex items-start gap-4">
-        <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C65D07">7</div>
-        <div><h4 class="font-bold text-sm mb-1">Le courtier revoit et valide</h4><p class="text-xs text-gray-500 font-space">2 minutes de relecture au lieu de 20 minutes de r&eacute;daction. Validation = archivage comme preuve de conformit&eacute;.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">PART 2 / FLUX VISUEL</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Du t&eacute;l&eacute;phone au document.</h2>
-    </div>
-    <div class="anim">
-      <div class="neo-card p-6 sm:p-8">
-        <div class="flex flex-col sm:flex-row items-center gap-3 text-center text-xs font-space font-bold">
-          <div class="neo-card-sm px-4 py-3 flex-1 w-full">&#9742; Appel<br><span class="font-normal text-gray-400">mobile / fixe / VoIP</span></div>
-          <div class="text-gray-300 text-lg hidden sm:block">&#8594;</div><div class="text-gray-300 text-lg sm:hidden">&#8595;</div>
-          <div class="neo-card-sm px-4 py-3 flex-1 w-full" style="border-color:#C65D07">&#127897; Leexi<br><span class="font-normal text-gray-400">enregistre + transcrit</span></div>
-          <div class="text-gray-300 text-lg hidden sm:block">&#8594;</div><div class="text-gray-300 text-lg sm:hidden">&#8595;</div>
-          <div class="neo-card-sm px-4 py-3 flex-1 w-full" style="border-color:#C65D07">&#129302; Claude IA<br><span class="font-normal text-gray-400">extrait les donn&eacute;es</span></div>
-          <div class="text-gray-300 text-lg hidden sm:block">&#8594;</div><div class="text-gray-300 text-lg sm:hidden">&#8595;</div>
-          <div class="neo-card-sm px-4 py-3 flex-1 w-full" style="border-color:#1E3A5F">&#9889; Scoring<br><span class="font-normal text-gray-400">MiFID d&eacute;terministe</span></div>
-          <div class="text-gray-300 text-lg hidden sm:block">&#8594;</div><div class="text-gray-300 text-lg sm:hidden">&#8595;</div>
-          <div class="neo-card-sm px-4 py-3 flex-1 w-full" style="background:#1D6A45;color:#fff;border-color:#1D6A45">&#128196; Document<br><span class="font-normal" style="color:rgba(255,255,255,.6)">FSMA / ACPR</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 3 : LEEXI INTEGRATION -->
-<!-- ============================================ -->
-
-<section id="leexi" class="py-20 px-4" style="background:#1E3A5F;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 3 / LEEXI</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Partenaire transcription.</h2>
-      <p class="text-lg font-space" style="color:rgba(255,255,255,.7)">Leexi g&egrave;re l'enregistrement et la transcription. Transcript g&egrave;re la conformit&eacute;. Chacun son m&eacute;tier.</p>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">PART 3 / QU'EST-CE QUE LEEXI</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Enregistrement + transcription.</h2>
-    </div>
-    <div class="anim grid sm:grid-cols-2 gap-5">
-      <div class="neo-card p-5"><h4 class="font-bold text-sm mb-2">Plateforme SaaS</h4><p class="text-xs text-gray-500 font-space">Leexi est une plateforme d'enregistrement d'appels et de transcription automatique. Utilis&eacute;e par +500 entreprises en France et Belgique.</p></div>
-      <div class="neo-card p-5"><h4 class="font-bold text-sm mb-2">Licence incluse</h4><p class="text-xs text-gray-500 font-space">La licence Leexi est incluse dans l'add-on Transcript &agrave; <strong>50&euro;/mois/utilisateur</strong>. Pas de contrat s&eacute;par&eacute; pour le courtier.</p></div>
-      <div class="neo-card p-5"><h4 class="font-bold text-sm mb-2">Tout t&eacute;l&eacute;phone</h4><p class="text-xs text-gray-500 font-space">Mobile, t&eacute;l&eacute;phone fixe, VoIP, softphone. Leexi s'adapte &agrave; l'infrastructure existante du courtier.</p></div>
-      <div class="neo-card p-5"><h4 class="font-bold text-sm mb-2">RGPD conforme</h4><p class="text-xs text-gray-500 font-space">Gestion du consentement &agrave; l'enregistrement int&eacute;gr&eacute;e. Donn&eacute;es h&eacute;berg&eacute;es en Europe. Conforme RGPD.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">PART 3 / INT&Eacute;GRATION TECHNIQUE</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Webhook &rarr; BrokerONE.</h2>
-    </div>
-    <div class="anim neo-card p-6 sm:p-8">
-      <div class="space-y-4">
-        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-lg" style="color:#C65D07;min-width:28px">&#8226;</div><div><h4 class="font-bold text-sm mb-1">API Webhook</h4><p class="text-xs text-gray-500 font-space">Leexi envoie un webhook &agrave; BrokerONE d&egrave;s qu'une transcription est pr&ecirc;te. Payload : transcription compl&egrave;te, m&eacute;tadonn&eacute;es (dur&eacute;e, participants, langue).</p></div></div>
-        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-lg" style="color:#C65D07;min-width:28px">&#8226;</div><div><h4 class="font-bold text-sm mb-1">Pr&eacute;cision transcription</h4><p class="text-xs text-gray-500 font-space">95%+ en fran&ccedil;ais, 90%+ en n&eacute;erlandais. Suffisant pour l'extraction r&eacute;glementaire (le courtier valide dans tous les cas).</p></div></div>
-        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-lg" style="color:#C65D07;min-width:28px">&#8226;</div><div><h4 class="font-bold text-sm mb-1">D&eacute;tection de langue</h4><p class="text-xs text-gray-500 font-space">Leexi d&eacute;tecte la langue de l'appel. BrokerONE adapte le traitement (FR/NL/DE) et les documents g&eacute;n&eacute;r&eacute;s.</p></div></div>
-        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-lg" style="color:#C65D07;min-width:28px">&#8226;</div><div><h4 class="font-bold text-sm mb-1">Consentement</h4><p class="text-xs text-gray-500 font-space">Leexi g&egrave;re l'annonce d'enregistrement en d&eacute;but d'appel. Conforme RGPD. Le courtier n'a rien &agrave; faire.</p></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 4 : MiFID SCORING -->
-<!-- ============================================ -->
-
-<section id="mifid" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 4 / MiFID SCORING</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">D&eacute;terministe.<br>Pas d'IA.</h2>
-      <p class="text-lg font-space mb-6" style="color:rgba(255,255,255,.7)">Le scoring MiFID est r&egrave;glementaire. Il doit &ecirc;tre <strong class="text-white">reproductible</strong> : m&ecirc;me transcription = m&ecirc;me score, toujours. C'est pourquoi le scoring est d&eacute;terministe (r&egrave;gles fixes en JavaScript), pas IA.</p>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">PART 4 / CRIT&Egrave;RES DE SCORING</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">5 crit&egrave;res, 100 points.</h2>
-    </div>
-    <div class="anim space-y-4">
-      <div class="neo-card p-5">
-        <div class="flex items-center justify-between mb-2"><h4 class="font-bold text-sm">Informations pr&eacute;contractuelles transmises</h4><span class="tag-mvp">25 pts</span></div>
-        <p class="text-xs text-gray-500 font-space mb-3">Le courtier a-t-il communiqu&eacute; les informations obligatoires avant de donner son conseil ?</p>
-        <div class="score-bar"><div class="score-fill" style="width:25%;background:#C65D07"></div></div>
-      </div>
-      <div class="neo-card p-5">
-        <div class="flex items-center justify-between mb-2"><h4 class="font-bold text-sm">Besoins du client recueillis</h4><span class="tag-mvp">25 pts</span></div>
-        <p class="text-xs text-gray-500 font-space mb-3">Le courtier a-t-il pos&eacute; les questions n&eacute;cessaires pour comprendre les besoins et la situation du client ?</p>
-        <div class="score-bar"><div class="score-fill" style="width:25%;background:#C65D07"></div></div>
-      </div>
-      <div class="neo-card p-5">
-        <div class="flex items-center justify-between mb-2"><h4 class="font-bold text-sm">Garanties expliqu&eacute;es</h4><span class="tag-mvp">20 pts</span></div>
-        <p class="text-xs text-gray-500 font-space mb-3">Les garanties propos&eacute;es ont-elles &eacute;t&eacute; clairement expliqu&eacute;es au client ?</p>
-        <div class="score-bar"><div class="score-fill" style="width:20%;background:#C65D07"></div></div>
-      </div>
-      <div class="neo-card p-5">
-        <div class="flex items-center justify-between mb-2"><h4 class="font-bold text-sm">Alternatives mentionn&eacute;es</h4><span class="tag-mvp">15 pts</span></div>
-        <p class="text-xs text-gray-500 font-space mb-3">Le courtier a-t-il pr&eacute;sent&eacute; plusieurs options ou uniquement une seule recommandation ?</p>
-        <div class="score-bar"><div class="score-fill" style="width:15%;background:#C65D07"></div></div>
-      </div>
-      <div class="neo-card p-5">
-        <div class="flex items-center justify-between mb-2"><h4 class="font-bold text-sm">Risques expliqu&eacute;s</h4><span class="tag-mvp">15 pts</span></div>
-        <p class="text-xs text-gray-500 font-space mb-3">Les exclusions, limitations et risques ont-ils &eacute;t&eacute; abord&eacute;s ?</p>
-        <div class="score-bar"><div class="score-fill" style="width:15%;background:#C65D07"></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">PART 4 / SEUILS &amp; AFFICHAGE</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Score visuel.</h2>
-    </div>
-    <div class="anim grid sm:grid-cols-3 gap-5">
-      <div class="neo-card p-6 text-center" style="border-top:4px solid #E74C3C">
-        <div class="font-grotesk text-4xl font-bold mb-2" style="color:#E74C3C">&lt;50</div>
-        <div class="font-mono text-xs font-bold mb-2" style="color:#E74C3C">NON CONFORME</div>
-        <p class="text-xs text-gray-500 font-space">L'appel ne respecte pas les exigences minimales. Le courtier doit recontacter le client ou compl&eacute;ter le dossier.</p>
-      </div>
-      <div class="neo-card p-6 text-center" style="border-top:4px solid #C65D07">
-        <div class="font-grotesk text-4xl font-bold mb-2" style="color:#C65D07">50-75</div>
-        <div class="font-mono text-xs font-bold mb-2" style="color:#C65D07">PARTIEL</div>
-        <p class="text-xs text-gray-500 font-space">Certains &eacute;l&eacute;ments manquent. Le courtier peut compl&eacute;ter les sections manquantes avant validation.</p>
-      </div>
-      <div class="neo-card p-6 text-center" style="border-top:4px solid #1D6A45">
-        <div class="font-grotesk text-4xl font-bold mb-2" style="color:#1D6A45">&gt;75</div>
-        <div class="font-mono text-xs font-bold mb-2" style="color:#1D6A45">CONFORME</div>
-        <p class="text-xs text-gray-500 font-space">L'appel couvre tous les points r&eacute;glementaires essentiels. Pr&ecirc;t &agrave; &ecirc;tre archiv&eacute; comme preuve.</p>
-      </div>
-    </div>
-    <div class="anim mt-8">
-      <div class="neo-card p-6">
-        <div class="font-mono text-xs font-bold mb-3">EXEMPLE &mdash; SCORE 82/100</div>
-        <div class="score-bar mb-2" style="height:32px"><div class="score-fill flex items-center justify-end pr-3" style="width:82%;background:linear-gradient(90deg,#C65D07,#1D6A45)"><span class="font-mono text-xs font-bold text-white">82</span></div></div>
-        <div class="flex justify-between text-xs font-space text-gray-400">
-          <span>0 &mdash; Non conforme</span>
-          <span>50 &mdash; Partiel</span>
-          <span>75 &mdash; Conforme</span>
-          <span>100</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 5 : BELGIUM vs FRANCE -->
-<!-- ============================================ -->
-
-<section id="befr" class="py-20 px-4" style="background:#C65D07;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 5 / BELGIQUE vs FRANCE</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Deux pays,<br>deux conformit&eacute;s.</h2>
-      <p class="text-lg font-space" style="color:rgba(255,255,255,.8)">Transcript g&egrave;re nativement les exigences belges ET fran&ccedil;aises. Le bon r&eacute;f&eacute;rentiel est appliqu&eacute; automatiquement.</p>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">PART 5 / BELGIQUE</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">FSMA &amp; bilinguisme.</h2>
-    </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-scope">BE</span><div><h4 class="font-bold text-sm mb-1">Scoring MiFID / ASSURMIFID</h4><p class="text-xs text-gray-500 font-space">Crit&egrave;res adapt&eacute;s au r&eacute;f&eacute;rentiel belge ASSURMIFID. Les pond&eacute;rations tiennent compte des sp&eacute;cificit&eacute;s FSMA.</p></div></div>
-      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-scope">BE</span><div><h4 class="font-bold text-sm mb-1">Documents FSMA pr&eacute;-remplis</h4><p class="text-xs text-gray-500 font-space">G&eacute;n&eacute;ration au format exig&eacute; par la FSMA avec toutes les sections obligatoires.</p></div></div>
-      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-scope">BE</span><div><h4 class="font-bold text-sm mb-1">D&eacute;tection FR/NL automatique</h4><p class="text-xs text-gray-500 font-space">Leexi d&eacute;tecte la langue. Si l'appel est en n&eacute;erlandais, le document est g&eacute;n&eacute;r&eacute; en n&eacute;erlandais. Appels bilingues g&eacute;r&eacute;s.</p></div></div>
-      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-scope">BE</span><div><h4 class="font-bold text-sm mb-1">Traitement bilingue natif</h4><p class="text-xs text-gray-500 font-space">Un courtier bruxellois peut commencer un appel en fran&ccedil;ais et basculer en n&eacute;erlandais. Transcript g&egrave;re les deux segments.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">PART 5 / FRANCE</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">ACPR &amp; Loi Cazenave.</h2>
-    </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-mvp">FR</span><div><h4 class="font-bold text-sm mb-1">Documents ACPR pr&eacute;-remplis</h4><p class="text-xs text-gray-500 font-space">G&eacute;n&eacute;ration au format conforme aux exigences ACPR. Sections obligatoires pr&eacute;-remplies depuis la transcription.</p></div></div>
-      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-mvp">FR</span><div><h4 class="font-bold text-sm mb-1">Alertes VAD (Loi Cazenave)</h4><p class="text-xs text-gray-500 font-space">D&eacute;tection automatique si l'appel constitue une vente &agrave; distance. Si d&eacute;tect&eacute; &rarr; exigences compl&eacute;mentaires signal&eacute;es : droit de r&eacute;tractation, confirmation &eacute;crite obligatoire.</p></div></div>
-      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-mvp">FR</span><div><h4 class="font-bold text-sm mb-1">Si vente &agrave; distance d&eacute;tect&eacute;e</h4><p class="text-xs text-gray-500 font-space">Le courtier est alert&eacute;. Checklist sp&eacute;cifique VAD affich&eacute;e. Le document g&eacute;n&eacute;r&eacute; inclut les mentions l&eacute;gales suppl&eacute;mentaires.</p></div></div>
-      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-mvp">FR</span><div><h4 class="font-bold text-sm mb-1">DDA compliance native</h4><p class="text-xs text-gray-500 font-space">Les exigences de la Directive sur la Distribution d'Assurances sont int&eacute;gr&eacute;es dans le scoring et les documents.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 6 : DOCUMENT GENERATION -->
-<!-- ============================================ -->
-
-<section id="documents" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 6 / DOCUMENTS</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">G&eacute;n&eacute;ration automatique.</h2>
-      <p class="text-lg font-space" style="color:rgba(255,255,255,.7)">Le courtier ne r&eacute;dige rien. Il relit et valide.</p>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">PART 6 / CONTENU DU DOCUMENT</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">9 sections auto-remplies.</h2>
-    </div>
-    <div class="anim neo-card p-6 sm:p-8">
-      <div class="space-y-3 text-sm font-space">
-        <div class="flex items-start gap-3"><span class="tag-done">&#10003;</span><span>Date et heure de l'appel</span></div>
-        <div class="flex items-start gap-3"><span class="tag-done">&#10003;</span><span>Participants identifi&eacute;s (courtier + client)</span></div>
-        <div class="flex items-start gap-3"><span class="tag-done">&#10003;</span><span>Objet / motif de l'appel</span></div>
-        <div class="flex items-start gap-3"><span class="tag-done">&#10003;</span><span>Besoins discut&eacute;s et situation du client</span></div>
-        <div class="flex items-start gap-3"><span class="tag-done">&#10003;</span><span>Conseil donn&eacute; et recommandations</span></div>
-        <div class="flex items-start gap-3"><span class="tag-done">&#10003;</span><span>Engagements pris (par le courtier et par le client)</span></div>
-        <div class="flex items-start gap-3"><span class="tag-done">&#10003;</span><span>Actions de suivi planifi&eacute;es</span></div>
-        <div class="flex items-start gap-3"><span class="tag-done">&#10003;</span><span>Score MiFID et d&eacute;tail par crit&egrave;re</span></div>
-        <div class="flex items-start gap-3"><span class="tag-done">&#10003;</span><span>Mentions l&eacute;gales (VAD si applicable)</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">PART 6 / FORMATS D'EXPORT</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">HTML + DOCX.</h2>
-    </div>
-    <div class="anim grid sm:grid-cols-2 gap-5">
-      <div class="neo-card p-6">
-        <div class="font-mono text-xs font-bold mb-3" style="color:#C65D07">HTML &mdash; PR&Eacute;VISUALISATION</div>
-        <p class="text-xs text-gray-500 font-space mb-3">Le courtier pr&eacute;visualise le document directement dans BrokerONE. Il peut modifier les sections extraites avant de valider.</p>
-        <div class="p-3 text-xs font-mono bg-neo-gray neo-border-2" style="word-break:break-all">
-          <span style="color:#C65D07">&lt;section</span> id="objet"<span style="color:#C65D07">&gt;</span><br>
-          &nbsp;&nbsp;Souscription assurance auto...<br>
-          <span style="color:#C65D07">&lt;/section&gt;</span>
-        </div>
-      </div>
-      <div class="neo-card p-6">
-        <div class="font-mono text-xs font-bold mb-3" style="color:#1E3A5F">DOCX &mdash; T&Eacute;L&Eacute;CHARGEMENT</div>
-        <p class="text-xs text-gray-500 font-space mb-3">Export Word pour archivage, impression, ou envoi au client. Format FSMA (BE) ou ACPR (FR) selon la configuration.</p>
-        <div class="p-3 text-xs font-mono bg-neo-gray neo-border-2 text-center">
-          <div class="text-3xl mb-2">&#128196;</div>
-          <div class="font-bold">appel_2026-04-01_dupont.docx</div>
-          <div class="text-gray-400 mt-1">Format FSMA conforme</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 7 : TECHNICAL -->
-<!-- ============================================ -->
-
-<section id="technical" class="py-20 px-4" style="background:#1E3A5F;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 7 / TECHNIQUE</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Architecture technique.</h2>
-      <p class="text-lg font-space" style="color:rgba(255,255,255,.7)">M&ecirc;me stack que les autres modules BrokerONE. Int&eacute;gration Leexi par webhook.</p>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">PART 7 / STACK &amp; INT&Eacute;GRATIONS</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Ce qui tourne sous le capot.</h2>
-    </div>
-    <div class="anim grid sm:grid-cols-2 gap-4">
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-tech">STACK</span><h4 class="font-bold text-sm">Next.js + TypeScript</h4></div><p class="text-xs text-gray-500 font-space">M&ecirc;me framework que Advice, Sentinel, Augmented. Coh&eacute;rence BrokerONE.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-tech">STACK</span><h4 class="font-bold text-sm">Supabase (PostgreSQL)</h4></div><p class="text-xs text-gray-500 font-space">Base de donn&eacute;es, auth, RLS. Tables d&eacute;di&eacute;es Transcript + partage du profil courtier.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-mvp">API</span><h4 class="font-bold text-sm">Leexi Webhook</h4></div><p class="text-xs text-gray-500 font-space">R&eacute;ception automatique des transcriptions. Endpoint s&eacute;curis&eacute; avec signature HMAC.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-mvp">IA</span><h4 class="font-bold text-sm">Claude Sonnet</h4></div><p class="text-xs text-gray-500 font-space">Extraction des donn&eacute;es r&eacute;glementaires depuis la transcription. Prompt structur&eacute; avec output JSON.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-scope">ENGINE</span><h4 class="font-bold text-sm">Scoring d&eacute;terministe</h4></div><p class="text-xs text-gray-500 font-space">Moteur JavaScript/TypeScript pur. R&egrave;gles fixes, pas d'IA. Reproductible &agrave; 100%.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-scope">ENGINE</span><h4 class="font-bold text-sm">D&eacute;tection de langue</h4></div><p class="text-xs text-gray-500 font-space">FR / NL / DE automatique. Bas&eacute; sur les m&eacute;tadonn&eacute;es Leexi + confirmation IA.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">PART 7 / BASE DE DONN&Eacute;ES</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">3 tables + API.</h2>
-    </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5">
-        <div class="flex items-center gap-2 mb-2"><span class="tag-tech">TABLE</span><h4 class="font-bold text-sm font-mono">transcript_calls</h4></div>
-        <p class="text-xs text-gray-500 font-space">Appels re&ccedil;us de Leexi. Champs : id, courtier_id, leexi_call_id, transcription, language, duration, participants, status, created_at.</p>
-      </div>
-      <div class="neo-card p-5">
-        <div class="flex items-center gap-2 mb-2"><span class="tag-tech">TABLE</span><h4 class="font-bold text-sm font-mono">transcript_scores</h4></div>
-        <p class="text-xs text-gray-500 font-space">Scores MiFID. Champs : id, call_id, total_score, precontractual_score, needs_score, guarantees_score, alternatives_score, risks_score, is_compliant, scored_at.</p>
-      </div>
-      <div class="neo-card p-5">
-        <div class="flex items-center gap-2 mb-2"><span class="tag-tech">TABLE</span><h4 class="font-bold text-sm font-mono">transcript_documents</h4></div>
-        <p class="text-xs text-gray-500 font-space">Documents g&eacute;n&eacute;r&eacute;s. Champs : id, call_id, type (fsma/acpr), content_html, content_docx_url, validated, validated_at, validated_by.</p>
+        <div class="flex items-start gap-3"><span style="color:#1D6A45;font-weight:700;font-size:14px">&#10003;</span><div><h4 class="font-bold text-sm">Authentification API Leexi</h4><p class="text-xs text-gray-500 font-space">Token management, refresh automatique, gestion des erreurs d'auth</p></div></div>
+        <div class="flex items-start gap-3"><span style="color:#1D6A45;font-weight:700;font-size:14px">&#10003;</span><div><h4 class="font-bold text-sm">Fetch des transcriptions</h4><p class="text-xs text-gray-500 font-space">R&eacute;cup&eacute;ration compl&egrave;te des enregistrements avec m&eacute;tadonn&eacute;es (dur&eacute;e, participants, langue)</p></div></div>
+        <div class="flex items-start gap-3"><span style="color:#1D6A45;font-weight:700;font-size:14px">&#10003;</span><div><h4 class="font-bold text-sm">Normalisation des donn&eacute;es</h4><p class="text-xs text-gray-500 font-space">Format unifi&eacute; ind&eacute;pendant du format brut Leexi. Pr&ecirc;t &agrave; brancher sur le pipeline</p></div></div>
+        <div class="flex items-start gap-3"><span style="color:#1D6A45;font-weight:700;font-size:14px">&#10003;</span><div><h4 class="font-bold text-sm">D&eacute;tection des speakers</h4><p class="text-xs text-gray-500 font-space">Identification courtier vs client dans la transcription</p></div></div>
+        <div class="flex items-start gap-3"><span style="color:#1D6A45;font-weight:700;font-size:14px">&#10003;</span><div><h4 class="font-bold text-sm">Pagination + rate limiting</h4><p class="text-xs text-gray-500 font-space">Gestion des grandes listes d'appels, respect des quotas API Leexi</p></div></div>
       </div>
     </div>
     <div class="anim mt-6">
-      <div class="neo-card p-5">
-        <div class="font-mono text-xs font-bold mb-3" style="color:#C65D07">API ENDPOINTS</div>
-        <div class="space-y-2 text-xs font-mono">
-          <div class="flex items-center gap-3"><span class="tag-scope">POST</span><span>/api/transcript/webhook</span><span class="text-gray-400 font-space">&mdash; r&eacute;ception Leexi</span></div>
-          <div class="flex items-center gap-3"><span class="tag-tech">POST</span><span>/api/transcript/analyze</span><span class="text-gray-400 font-space">&mdash; extraction IA</span></div>
-          <div class="flex items-center gap-3"><span class="tag-tech">POST</span><span>/api/transcript/score</span><span class="text-gray-400 font-space">&mdash; scoring MiFID</span></div>
-          <div class="flex items-center gap-3"><span class="tag-tech">POST</span><span>/api/transcript/document</span><span class="text-gray-400 font-space">&mdash; g&eacute;n&eacute;ration document</span></div>
-          <div class="flex items-center gap-3"><span class="tag-mvp">GET</span><span>/api/transcript/calls</span><span class="text-gray-400 font-space">&mdash; liste des appels</span></div>
-          <div class="flex items-center gap-3"><span class="tag-mvp">GET</span><span>/api/transcript/calls/[id]</span><span class="text-gray-400 font-space">&mdash; d&eacute;tail appel</span></div>
+      <div class="neo-card p-6" style="background:#0a0a0a;color:#e2e8f0">
+        <div class="font-mono text-xs font-bold mb-3" style="color:#C65D07">EXTRAIT &mdash; leexi_connector.js</div>
+        <div class="space-y-0">
+          <div class="code-line"><span class="kw">class</span> <span class="fn">LeeXiConnector</span> {</div>
+          <div class="code-line">&nbsp;&nbsp;<span class="fn">constructor</span>(config) {</div>
+          <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">this</span>.baseUrl = config.apiUrl;</div>
+          <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">this</span>.rateLimiter = <span class="kw">new</span> <span class="fn">RateLimiter</span>(<span class="num">100</span>, <span class="num">60000</span>);</div>
+          <div class="code-line">&nbsp;&nbsp;}</div>
+          <div class="code-line">&nbsp;&nbsp;<span class="kw">async</span> <span class="fn">fetchTranscription</span>(callId) { <span class="cm">/* ... */</span> }</div>
+          <div class="code-line">&nbsp;&nbsp;<span class="kw">async</span> <span class="fn">normalizeData</span>(raw) { <span class="cm">/* ... */</span> }</div>
+          <div class="code-line">&nbsp;&nbsp;<span class="fn">detectSpeakers</span>(segments) { <span class="cm">/* ... */</span> }</div>
+          <div class="code-line">}</div>
         </div>
       </div>
     </div>
@@ -604,13 +268,506 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 </section>
 
 <!-- ============================================ -->
-<!-- PART 8 : UI WIREFRAMES -->
+<!-- 05 / SCORING ENGINES — D&Eacute;TAIL -->
 <!-- ============================================ -->
+<section id="scoring" class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">05 / SCORING ENGINES &mdash; 100% FOURNI</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">D&eacute;terministe.<br>V&eacute;rifi&eacute; contre Excel.</h2>
+    </div>
+    <div class="anim grid sm:grid-cols-2 gap-5">
+      <!-- BE -->
+      <div class="neo-card p-6">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="tag-fourni">100%</span>
+          <span class="tag-tech">BELGIQUE</span>
+        </div>
+        <h4 class="font-bold text-sm mb-3">scoring_engine_module_B.js</h4>
+        <div class="space-y-2 text-xs font-space text-gray-500">
+          <div class="flex items-center gap-2"><span style="color:#1D6A45;font-weight:700">&#10003;</span> P1 + P2 : 1000 points chacun</div>
+          <div class="flex items-center gap-2"><span style="color:#1D6A45;font-weight:700">&#10003;</span> 14 questions d'&eacute;valuation</div>
+          <div class="flex items-center gap-2"><span style="color:#1D6A45;font-weight:700">&#10003;</span> 3 profils de risque</div>
+          <div class="flex items-center gap-2"><span style="color:#1D6A45;font-weight:700">&#10003;</span> Alertes d'inad&eacute;quation</div>
+          <div class="flex items-center gap-2"><span style="color:#1D6A45;font-weight:700">&#10003;</span> R&eacute;f&eacute;rentiel FSMA / ASSURMIFID</div>
+          <div class="flex items-center gap-2"><span style="color:#1D6A45;font-weight:700">&#10003;</span> V&eacute;rifi&eacute; contre fichier Excel de r&eacute;f&eacute;rence</div>
+        </div>
+      </div>
+      <!-- FR -->
+      <div class="neo-card p-6">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="tag-fourni">100%</span>
+          <span class="tag-tech">FRANCE</span>
+        </div>
+        <h4 class="font-bold text-sm mb-3">scoring_engine_profil_risque_FR.js</h4>
+        <div class="space-y-2 text-xs font-space text-gray-500">
+          <div class="flex items-center gap-2"><span style="color:#1D6A45;font-weight:700">&#10003;</span> 20 questions d'&eacute;valuation</div>
+          <div class="flex items-center gap-2"><span style="color:#1D6A45;font-weight:700">&#10003;</span> 6 cat&eacute;gories DDA</div>
+          <div class="flex items-center gap-2"><span style="color:#1D6A45;font-weight:700">&#10003;</span> 7 profils de risque</div>
+          <div class="flex items-center gap-2"><span style="color:#1D6A45;font-weight:700">&#10003;</span> Alertes ACPR 2024-R-03</div>
+          <div class="flex items-center gap-2"><span style="color:#1D6A45;font-weight:700">&#10003;</span> DDA compliance native</div>
+          <div class="flex items-center gap-2"><span style="color:#1D6A45;font-weight:700">&#10003;</span> V&eacute;rifi&eacute; contre fichier Excel de r&eacute;f&eacute;rence</div>
+        </div>
+      </div>
+    </div>
+    <div class="anim mt-6">
+      <div class="neo-card p-5" style="border-left:6px solid #1D6A45">
+        <p class="text-sm font-space text-gray-600"><strong class="text-neo-black">Pourquoi c'est critique :</strong> Le scoring MiFID est r&eacute;glementaire. Il <strong>doit</strong> &ecirc;tre reproductible &mdash; m&ecirc;me transcription = m&ecirc;me score, toujours. C'est pourquoi Bruno l'a cod&eacute; en r&egrave;gles d&eacute;terministes pures (pas d'IA). Ce code est <strong>termin&eacute; et test&eacute;</strong>.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- ============================================ -->
+<!-- 06 / PROMPTS + MODULE T + PIPELINE -->
+<!-- ============================================ -->
+<section id="prompts" class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">06 / PROMPTS, MODULE T, PIPELINE &mdash; 100% FOURNI</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le cerveau du syst&egrave;me<br>est &eacute;crit.</h2>
+    </div>
+    <!-- Prompts -->
+    <div class="anim neo-card p-6 sm:p-8 mb-5">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="tag-fourni">FOURNI 100%</span>
+        <h4 class="font-bold text-sm">Prompts Claude Sonnet 4</h4>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div>
+          <div class="font-mono text-xs font-bold mb-3" style="color:#1E3A5F">BELGIQUE &mdash; 5 MODULES (FR + NL)</div>
+          <div class="space-y-1 text-xs font-space text-gray-500">
+            <div class="flex items-center gap-2"><span class="tag-fourni" style="font-size:9px">A</span> Identification client + objet</div>
+            <div class="flex items-center gap-2"><span class="tag-fourni" style="font-size:9px">B</span> Besoins + situation financi&egrave;re</div>
+            <div class="flex items-center gap-2"><span class="tag-fourni" style="font-size:9px">C</span> Conseil donn&eacute; + justification</div>
+            <div class="flex items-center gap-2"><span class="tag-fourni" style="font-size:9px">D</span> Engagements + prochaines &eacute;tapes</div>
+            <div class="flex items-center gap-2"><span class="tag-fourni" style="font-size:9px">E</span> Informations pr&eacute;contractuelles</div>
+          </div>
+        </div>
+        <div>
+          <div class="font-mono text-xs font-bold mb-3" style="color:#C65D07">FRANCE &mdash; 8 MODULES</div>
+          <div class="space-y-1 text-xs font-space text-gray-500">
+            <div class="flex items-center gap-2"><span class="tag-fourni" style="font-size:9px">1</span> IARD Auto</div>
+            <div class="flex items-center gap-2"><span class="tag-fourni" style="font-size:9px">2</span> IARD Habitation</div>
+            <div class="flex items-center gap-2"><span class="tag-fourni" style="font-size:9px">3</span> IARD Sant&eacute;</div>
+            <div class="flex items-center gap-2"><span class="tag-fourni" style="font-size:9px">4</span> IARD Emprunteur</div>
+            <div class="flex items-center gap-2"><span class="tag-fourni" style="font-size:9px">5</span> Vie</div>
+            <div class="flex items-center gap-2"><span class="tag-fourni" style="font-size:9px">6</span> Pr&eacute;voyance</div>
+            <div class="flex items-center gap-2"><span class="tag-fourni" style="font-size:9px">7</span> Professionnel</div>
+            <div class="flex items-center gap-2"><span class="tag-fourni" style="font-size:9px">8</span> Parcours de conseil</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Module T -->
+    <div class="anim neo-card p-6 sm:p-8 mb-5">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="tag-fourni">FOURNI ~90%</span>
+        <h4 class="font-bold text-sm">Module T &mdash; R&egrave;gles d&eacute;terministes</h4>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div>
+          <div class="font-mono text-xs font-bold mb-2" style="color:#1E3A5F">BELGIQUE &mdash; FSMA</div>
+          <div class="text-xs font-space text-gray-500">20+ r&egrave;gles d&eacute;terministes. D&eacute;tection des obligations FSMA non respect&eacute;es. Alertes automatiques.</div>
+        </div>
+        <div>
+          <div class="font-mono text-xs font-bold mb-2" style="color:#C65D07">FRANCE</div>
+          <div class="text-xs font-space text-gray-500">20+ r&egrave;gles. Loi Lemoine, Cazenave (VAD), Industrie Verte ESG. R&egrave;gles sp&eacute;cifiques ACPR.</div>
+        </div>
+      </div>
+    </div>
+    <!-- Pipeline + Router -->
+    <div class="anim grid sm:grid-cols-2 gap-5">
+      <div class="neo-card p-6">
+        <div class="flex items-center gap-2 mb-3"><span class="tag-fourni">100%</span></div>
+        <h4 class="font-bold text-sm mb-2">Pipeline orchestrateur</h4>
+        <div class="text-xs font-space text-gray-500">
+          <strong>pipeline_entry.js</strong> &mdash; 600 lignes. Webhook, mode manuel, extraction Claude en parall&egrave;le, Module T, &eacute;criture Brio CRM, forward vers Advice.
+        </div>
+      </div>
+      <div class="neo-card p-6">
+        <div class="flex items-center gap-2 mb-3"><span class="tag-fourni">100%</span></div>
+        <h4 class="font-bold text-sm mb-2">Routeur LLM</h4>
+        <div class="text-xs font-space text-gray-500">
+          <strong>router_module_0.js</strong> &mdash; Claude Sonnet 4, d&eacute;tection FR/NL, routage vers le bon module. 5 transcriptions synth&eacute;tiques de test incluses.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 07 / DOCX + EMAIL + BRIO + CONFIG -->
+<!-- ============================================ -->
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">07 / DOCX, EMAIL, BRIO, CONFIG</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le reste du backend.</h2>
+    </div>
+    <!-- DOCX -->
+    <div class="anim neo-card p-6 sm:p-8 mb-5">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="tag-partiel">PARTIEL ~60%</span>
+        <h4 class="font-bold text-sm">G&eacute;n&eacute;rateur DOCX &mdash; 780 lignes</h4>
+      </div>
+      <div class="space-y-2 text-xs font-space text-gray-500">
+        <div class="flex items-center gap-2"><span style="color:#1D6A45;font-weight:700">&#10003;</span> En-t&ecirc;te courtier avec logo</div>
+        <div class="flex items-center gap-2"><span style="color:#1D6A45;font-weight:700">&#10003;</span> Bloc client</div>
+        <div class="flex items-center gap-2"><span style="color:#1D6A45;font-weight:700">&#10003;</span> Tables de champs dynamiques</div>
+        <div class="flex items-center gap-2"><span style="color:#1D6A45;font-weight:700">&#10003;</span> Rapport confidentiel courtier</div>
+        <div class="flex items-center gap-2"><span style="color:#1D6A45;font-weight:700">&#10003;</span> Signatures</div>
+        <div class="flex items-center gap-2"><span style="color:#1D6A45;font-weight:700">&#10003;</span> Headers + footers</div>
+        <div class="flex items-center gap-2"><span style="color:#1D6A45;font-weight:700">&#10003;</span> Templates modules C + D (BE)</div>
+        <div class="flex items-center gap-2"><span style="color:#C65D07;font-weight:700">&#9679;</span> Templates modules A, B, E (BE) &mdash; <strong>TODO</strong></div>
+        <div class="flex items-center gap-2"><span style="color:#C65D07;font-weight:700">&#9679;</span> Templates pour tous les modules FR &mdash; <strong>TODO</strong></div>
+      </div>
+      <div class="mt-3 p-3 bg-neo-gray neo-border-2 text-xs font-space" style="color:#C65D07">
+        Le framework DOCX est solid (780 lignes). Il reste &agrave; ajouter les templates de contenu pour les modules manquants. Le plus gros du travail d'architecture est fait.
+      </div>
+    </div>
+    <!-- Email + Brio + Config -->
+    <div class="anim grid sm:grid-cols-3 gap-5">
+      <div class="neo-card p-5">
+        <div class="flex items-center gap-2 mb-3"><span class="tag-fourni">100%</span></div>
+        <h4 class="font-bold text-sm mb-2">Email module</h4>
+        <div class="text-xs font-space text-gray-500">MS365 Graph + Gmail. Bilingue FR/NL. 2 emails : rapport public (client) + rapport confidentiel (courtier).</div>
+      </div>
+      <div class="neo-card p-5">
+        <div class="flex items-center gap-2 mb-3"><span class="tag-fourni">100%</span></div>
+        <h4 class="font-bold text-sm mb-2">Brio CRM</h4>
+        <div class="text-xs font-space text-gray-500">4 fichiers. Auth, HTTP client, metrics, quota management. Write-back des r&eacute;sultats dans le CRM existant.</div>
+      </div>
+      <div class="neo-card p-5">
+        <div class="flex items-center gap-2 mb-3"><span class="tag-fourni">100%</span></div>
+        <h4 class="font-bold text-sm mb-2">Courtier config</h4>
+        <div class="text-xs font-space text-gray-500">39 variables de configuration par courtier. Schema + config d&eacute;mo fournis. Pays, langue, r&eacute;f&eacute;rentiel, logo, seuils.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 08 / FONCTIONNALIT&Eacute;S ADDITIONNELLES FOURNIES -->
+<!-- ============================================ -->
 <section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4">PART 8 / UI &mdash; LISTE DES APPELS</div>
+      <div class="section-number mb-4">08 / FOURNI &Eacute;GALEMENT</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Ce qui existe aussi.</h2>
+    </div>
+    <div class="anim space-y-3">
+      <div class="neo-card p-5 flex items-start gap-4">
+        <span class="tag-fourni">100%</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Forward vers Advice</h4>
+          <p class="text-xs text-gray-500 font-space">D&eacute;tection automatique de r&eacute;clamation client + d&eacute;tection ambassadeur. Si d&eacute;tect&eacute;, l'appel est transmis au module Advice pour suivi.</p>
+        </div>
+      </div>
+      <div class="neo-card p-5 flex items-start gap-4">
+        <span class="tag-fourni">100%</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Express webhook server</h4>
+          <p class="text-xs text-gray-500 font-space">server.js &mdash; serveur Express port 3005 pr&ecirc;t &agrave; recevoir les webhooks Leexi. &Agrave; remplacer par un endpoint Next.js API.</p>
+        </div>
+      </div>
+      <div class="neo-card p-5 flex items-start gap-4">
+        <span class="tag-fourni">100%</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Scoring config JSONs</h4>
+          <p class="text-xs text-gray-500 font-space">Fichiers de configuration des poids de scoring. Pond&eacute;rations par crit&egrave;re, seuils vert/orange/rouge, param&egrave;tres par pays.</p>
+        </div>
+      </div>
+      <div class="neo-card p-5 flex items-start gap-4">
+        <span class="tag-fourni">100%</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Fichiers Excel de r&eacute;f&eacute;rence</h4>
+          <p class="text-xs text-gray-500 font-space">Utilis&eacute;s pour valider les calculs de scoring. Le moteur produit les m&ecirc;mes r&eacute;sultats que les calculs Excel manuels.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 09 / BARRE DE COMPL&Eacute;TUDE VISUELLE -->
+<!-- ============================================ -->
+<section class="py-20 px-4" style="background:#C65D07;border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto text-white">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">09 / VUE D'ENSEMBLE</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Compl&eacute;tude par composant.</h2>
+    </div>
+    <div class="anim space-y-4">
+      <div>
+        <div class="flex items-center justify-between text-sm font-space mb-1"><span>Leexi connector</span><span class="font-bold">100%</span></div>
+        <div class="score-bar" style="border-color:rgba(255,255,255,.3)"><div class="score-fill" style="width:100%;background:#1D6A45"></div></div>
+      </div>
+      <div>
+        <div class="flex items-center justify-between text-sm font-space mb-1"><span>Scoring MiFID BE</span><span class="font-bold">100%</span></div>
+        <div class="score-bar" style="border-color:rgba(255,255,255,.3)"><div class="score-fill" style="width:100%;background:#1D6A45"></div></div>
+      </div>
+      <div>
+        <div class="flex items-center justify-between text-sm font-space mb-1"><span>Scoring profil risque FR</span><span class="font-bold">100%</span></div>
+        <div class="score-bar" style="border-color:rgba(255,255,255,.3)"><div class="score-fill" style="width:100%;background:#1D6A45"></div></div>
+      </div>
+      <div>
+        <div class="flex items-center justify-between text-sm font-space mb-1"><span>Prompts (BE 5 + FR 8)</span><span class="font-bold">100%</span></div>
+        <div class="score-bar" style="border-color:rgba(255,255,255,.3)"><div class="score-fill" style="width:100%;background:#1D6A45"></div></div>
+      </div>
+      <div>
+        <div class="flex items-center justify-between text-sm font-space mb-1"><span>Module T (r&egrave;gles d&eacute;terministes)</span><span class="font-bold">~90%</span></div>
+        <div class="score-bar" style="border-color:rgba(255,255,255,.3)"><div class="score-fill" style="width:90%;background:#1D6A45"></div></div>
+      </div>
+      <div>
+        <div class="flex items-center justify-between text-sm font-space mb-1"><span>Pipeline orchestrateur</span><span class="font-bold">100%</span></div>
+        <div class="score-bar" style="border-color:rgba(255,255,255,.3)"><div class="score-fill" style="width:100%;background:#1D6A45"></div></div>
+      </div>
+      <div>
+        <div class="flex items-center justify-between text-sm font-space mb-1"><span>Email (MS365 + Gmail)</span><span class="font-bold">100%</span></div>
+        <div class="score-bar" style="border-color:rgba(255,255,255,.3)"><div class="score-fill" style="width:100%;background:#1D6A45"></div></div>
+      </div>
+      <div>
+        <div class="flex items-center justify-between text-sm font-space mb-1"><span>Brio CRM</span><span class="font-bold">100%</span></div>
+        <div class="score-bar" style="border-color:rgba(255,255,255,.3)"><div class="score-fill" style="width:100%;background:#1D6A45"></div></div>
+      </div>
+      <div>
+        <div class="flex items-center justify-between text-sm font-space mb-1"><span>Courtier config (39 vars)</span><span class="font-bold">100%</span></div>
+        <div class="score-bar" style="border-color:rgba(255,255,255,.3)"><div class="score-fill" style="width:100%;background:#1D6A45"></div></div>
+      </div>
+      <div>
+        <div class="flex items-center justify-between text-sm font-space mb-1"><span>DOCX g&eacute;n&eacute;rateur</span><span class="font-bold">~60%</span></div>
+        <div class="score-bar" style="border-color:rgba(255,255,255,.3)"><div class="score-fill" style="width:60%;background:linear-gradient(90deg,#1D6A45 60%,rgba(255,255,255,.2) 60%)"></div></div>
+      </div>
+      <div>
+        <div class="flex items-center justify-between text-sm font-space mb-1"><span style="color:rgba(255,255,255,.5)">Frontend / Dashboard</span><span class="font-bold" style="color:rgba(255,255,255,.5)">0%</span></div>
+        <div class="score-bar" style="border-color:rgba(255,255,255,.15)"><div class="score-fill" style="width:0%;background:#C0392B"></div></div>
+      </div>
+      <div>
+        <div class="flex items-center justify-between text-sm font-space mb-1"><span style="color:rgba(255,255,255,.5)">Supabase persistence</span><span class="font-bold" style="color:rgba(255,255,255,.5)">0%</span></div>
+        <div class="score-bar" style="border-color:rgba(255,255,255,.15)"><div class="score-fill" style="width:0%;background:#C0392B"></div></div>
+      </div>
+      <div>
+        <div class="flex items-center justify-between text-sm font-space mb-1"><span style="color:rgba(255,255,255,.5)">Multi-tenant + d&eacute;ploiement</span><span class="font-bold" style="color:rgba(255,255,255,.5)">0%</span></div>
+        <div class="score-bar" style="border-color:rgba(255,255,255,.15)"><div class="score-fill" style="width:0%;background:#C0392B"></div></div>
+      </div>
+    </div>
+    <div class="anim mt-8 text-center">
+      <div class="inline-block p-4" style="border:2px solid rgba(255,255,255,.3)">
+        <div class="font-grotesk text-5xl font-bold">65-70%</div>
+        <div class="font-space text-sm mt-1" style="color:rgba(255,255,255,.7)">du code total d&eacute;j&agrave; &eacute;crit par Bruno</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 10 / CE QUI MANQUE -->
+<!-- ============================================ -->
+<section id="manque" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto text-white">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">10 / CE QUI MANQUE</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Les 30-35% restants.</h2>
+      <p class="text-lg font-space mb-6" style="color:rgba(255,255,255,.7)">Le backend est presque complet. Ce qui manque, c'est l'habillage : les templates DOCX restants, le frontend utilisateur, la persistence en base, et la mise en production.</p>
+    </div>
+    <div class="anim space-y-3">
+      <div class="p-4 flex items-start gap-4" style="border:2px solid rgba(255,255,255,.2)">
+        <span class="tag-todo">TODO</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Templates DOCX restants</h4>
+          <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Modules A, B, E pour la Belgique. Tous les modules fran&ccedil;ais (IARD, Vie, Pr&eacute;voyance, Pro). Le framework g&eacute;n&eacute;rateur existe (780 lignes), il faut remplir le contenu.</p>
+        </div>
+      </div>
+      <div class="p-4 flex items-start gap-4" style="border:2px solid rgba(255,255,255,.2)">
+        <span class="tag-todo">TODO</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Supabase persistence</h4>
+          <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Tables d&eacute;di&eacute;es Transcript, RLS, audit trail. Stocker les sessions, scores, documents g&eacute;n&eacute;r&eacute;s.</p>
+        </div>
+      </div>
+      <div class="p-4 flex items-start gap-4" style="border:2px solid rgba(255,255,255,.2)">
+        <span class="tag-todo">TODO</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Frontend / Dashboard Next.js</h4>
+          <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Page liste des appels, page d&eacute;tail avec transcription + donn&eacute;es extraites + score + document. Int&eacute;gration dans l'app BrokerONE.</p>
+        </div>
+      </div>
+      <div class="p-4 flex items-start gap-4" style="border:2px solid rgba(255,255,255,.2)">
+        <span class="tag-todo">TODO</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Multi-tenant management</h4>
+          <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Gestion de N courtiers avec chacun leur config, leur scoring, leur branding. Isolation des donn&eacute;es.</p>
+        </div>
+      </div>
+      <div class="p-4 flex items-start gap-4" style="border:2px solid rgba(255,255,255,.2)">
+        <span class="tag-todo">TODO</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">D&eacute;ploiement + rebrand BrokerONE</h4>
+          <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Port du JS vers TypeScript, int&eacute;gration Vercel, couleurs BrokerONE, tests E2E, calibration scoring sur appels r&eacute;els.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 11 / CE QUE JE CONSTRUIS — BLOC 1 -->
+<!-- ============================================ -->
+<section id="construis" class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#C65D07">11 / CE QUE JE CONSTRUIS &mdash; BLOC 1</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Compl&eacute;ter les DOCX.</h2>
+      <div class="flex items-center gap-3 mb-6">
+        <span class="tag-bloc">BLOC 1</span>
+        <span class="font-space text-sm text-gray-500">2-3 jours</span>
+      </div>
+    </div>
+    <div class="anim neo-card p-6 sm:p-8" style="border-left:6px solid #C65D07">
+      <p class="text-sm font-space text-gray-600 mb-4">Le g&eacute;n&eacute;rateur DOCX (780 lignes) cr&eacute;e d&eacute;j&agrave; l'en-t&ecirc;te, le bloc client, les tableaux, le rapport confidentiel, les signatures. <strong>Il faut ajouter les templates de contenu</strong> pour les modules manquants.</p>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div>
+          <div class="font-mono text-xs font-bold mb-3" style="color:#1E3A5F">BELGIQUE &mdash; 3 TEMPLATES</div>
+          <div class="space-y-2 text-xs font-space text-gray-500">
+            <div class="flex items-center gap-2"><span class="tag-todo" style="font-size:9px">A</span> Identification + objet</div>
+            <div class="flex items-center gap-2"><span class="tag-todo" style="font-size:9px">B</span> Besoins + situation</div>
+            <div class="flex items-center gap-2"><span class="tag-todo" style="font-size:9px">E</span> Informations pr&eacute;contractuelles</div>
+            <div class="mt-2 text-gray-400" style="font-size:10px">C + D d&eacute;j&agrave; faits par Bruno</div>
+          </div>
+        </div>
+        <div>
+          <div class="font-mono text-xs font-bold mb-3" style="color:#C65D07">FRANCE &mdash; 8 TEMPLATES</div>
+          <div class="space-y-2 text-xs font-space text-gray-500">
+            <div class="flex items-center gap-2"><span class="tag-todo" style="font-size:9px">1-4</span> IARD (auto, hab, sant&eacute;, empr)</div>
+            <div class="flex items-center gap-2"><span class="tag-todo" style="font-size:9px">5</span> Vie</div>
+            <div class="flex items-center gap-2"><span class="tag-todo" style="font-size:9px">6</span> Pr&eacute;voyance</div>
+            <div class="flex items-center gap-2"><span class="tag-todo" style="font-size:9px">7</span> Professionnel</div>
+            <div class="flex items-center gap-2"><span class="tag-todo" style="font-size:9px">8</span> Parcours de conseil</div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4 p-3 bg-neo-gray neo-border-2 text-xs font-space" style="color:#1D6A45">
+        Le framework g&eacute;n&eacute;rateur est solid. Ajouter un template = d&eacute;finir les sections et les champs. Pas de refonte n&eacute;cessaire.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 12 / CE QUE JE CONSTRUIS — BLOC 2 -->
+<!-- ============================================ -->
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#C65D07">12 / CE QUE JE CONSTRUIS &mdash; BLOC 2</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Frontend Next.js.</h2>
+      <div class="flex items-center gap-3 mb-6">
+        <span class="tag-bloc">BLOC 2</span>
+        <span class="font-space text-sm text-gray-500">3-4 jours</span>
+      </div>
+    </div>
+    <div class="anim space-y-5">
+      <div class="neo-card p-6">
+        <h4 class="font-bold text-sm mb-3">Page liste des appels &mdash; /transcript</h4>
+        <div class="space-y-2 text-xs font-space text-gray-500">
+          <div class="flex items-center gap-2"><span class="tag-bloc" style="font-size:9px">UI</span> Tableau : date, client, dur&eacute;e, score MiFID, statut</div>
+          <div class="flex items-center gap-2"><span class="tag-bloc" style="font-size:9px">UI</span> Filtres par date, score, statut (en attente, valid&eacute;, alerte)</div>
+          <div class="flex items-center gap-2"><span class="tag-bloc" style="font-size:9px">UI</span> Badge couleur sur le score (vert/orange/rouge)</div>
+          <div class="flex items-center gap-2"><span class="tag-bloc" style="font-size:9px">UI</span> Pagination + recherche client</div>
+        </div>
+      </div>
+      <div class="neo-card p-6">
+        <h4 class="font-bold text-sm mb-3">Page d&eacute;tail appel &mdash; /transcript/[id]</h4>
+        <div class="space-y-2 text-xs font-space text-gray-500">
+          <div class="flex items-center gap-2"><span class="tag-bloc" style="font-size:9px">UI</span> Panneau gauche : transcription compl&egrave;te avec speakers identifi&eacute;s</div>
+          <div class="flex items-center gap-2"><span class="tag-bloc" style="font-size:9px">UI</span> Panneau droit : donn&eacute;es extraites par l'IA (client, objet, besoins, conseil)</div>
+          <div class="flex items-center gap-2"><span class="tag-bloc" style="font-size:9px">UI</span> Score MiFID global + d&eacute;tail par crit&egrave;re</div>
+          <div class="flex items-center gap-2"><span class="tag-bloc" style="font-size:9px">UI</span> Pr&eacute;visualisation document + bouton t&eacute;l&eacute;chargement DOCX</div>
+          <div class="flex items-center gap-2"><span class="tag-bloc" style="font-size:9px">UI</span> Bouton validation &rarr; archivage comme preuve</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 13 / CE QUE JE CONSTRUIS — BLOC 3 -->
+<!-- ============================================ -->
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#C65D07">13 / CE QUE JE CONSTRUIS &mdash; BLOC 3</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Supabase + TypeScript.</h2>
+      <div class="flex items-center gap-3 mb-6">
+        <span class="tag-bloc">BLOC 3</span>
+        <span class="font-space text-sm text-gray-500">2-3 jours</span>
+      </div>
+    </div>
+    <div class="anim neo-card p-6 sm:p-8">
+      <div class="space-y-4">
+        <div class="flex items-start gap-4">
+          <div class="w-8 h-8 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#1E3A5F">DB</div>
+          <div><h4 class="font-bold text-sm mb-1">Tables Supabase d&eacute;di&eacute;es</h4><p class="text-xs text-gray-500 font-space">transcript_sessions, transcript_scores, transcript_documents, transcript_audit. RLS strict par courtier.</p></div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-8 h-8 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#1E3A5F">TS</div>
+          <div><h4 class="font-bold text-sm mb-1">Port JS &rarr; TypeScript</h4><p class="text-xs text-gray-500 font-space">Les fichiers de Bruno sont en JS. Je les porte en TypeScript strict pour coh&eacute;rence avec le reste de BrokerONE.</p></div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-8 h-8 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#1E3A5F">API</div>
+          <div><h4 class="font-bold text-sm mb-1">Int&eacute;gration Next.js API routes</h4><p class="text-xs text-gray-500 font-space">Remplacer le serveur Express par des API routes Next.js. Endpoint webhook Leexi, analyse, scoring, document, CRUD.</p></div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-8 h-8 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white text-xs" style="background:#1E3A5F">LOG</div>
+          <div><h4 class="font-bold text-sm mb-1">Audit trail</h4><p class="text-xs text-gray-500 font-space">Chaque action (r&eacute;ception, analyse, scoring, validation, consultation) est logu&eacute;e. Tra&ccedil;abilit&eacute; pour audit FSMA/ACPR.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 14 / CE QUE JE CONSTRUIS — BLOC 4 -->
+<!-- ============================================ -->
+<section class="py-20 px-4" style="background:#1E3A5F;border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto text-white">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">14 / CE QUE JE CONSTRUIS &mdash; BLOC 4</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Production.</h2>
+      <div class="flex items-center gap-3 mb-6">
+        <span class="tag-bloc">BLOC 4</span>
+        <span class="font-space text-sm" style="color:rgba(255,255,255,.6)">2-3 jours</span>
+      </div>
+    </div>
+    <div class="anim space-y-3">
+      <div class="p-4" style="border:2px solid rgba(255,255,255,.2)">
+        <div class="flex items-center gap-2 mb-2"><span class="tag-bloc">PROD</span><h4 class="font-bold text-sm">Rebrand BrokerONE</h4></div>
+        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Couleurs #1E3A5F, #C0392B. Dashboard, documents, exports au branding BrokerONE.</p>
+      </div>
+      <div class="p-4" style="border:2px solid rgba(255,255,255,.2)">
+        <div class="flex items-center gap-2 mb-2"><span class="tag-bloc">PROD</span><h4 class="font-bold text-sm">Multi-tenant</h4></div>
+        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">N courtiers, chacun sa config (39 variables), ses transcriptions isol&eacute;es, son branding. RLS strict.</p>
+      </div>
+      <div class="p-4" style="border:2px solid rgba(255,255,255,.2)">
+        <div class="flex items-center gap-2 mb-2"><span class="tag-bloc">PROD</span><h4 class="font-bold text-sm">Calibration scoring</h4></div>
+        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Tester avec de vraies transcriptions. Ajuster les poids. V&eacute;rifier que les seuils vert/orange/rouge ont du sens sur le terrain.</p>
+      </div>
+      <div class="p-4" style="border:2px solid rgba(255,255,255,.2)">
+        <div class="flex items-center gap-2 mb-2"><span class="tag-bloc">PROD</span><h4 class="font-bold text-sm">Tests E2E</h4></div>
+        <p class="text-xs font-space" style="color:rgba(255,255,255,.5)">Pipeline complet : appel Leexi &rarr; transcription &rarr; extraction &rarr; scoring &rarr; document &rarr; email. Avec edge cases (bruit, courts, bilingue).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 15 / WIREFRAMES -->
+<!-- ============================================ -->
+<section id="wireframes" class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">15 / WIREFRAMES &mdash; LISTE DES APPELS</div>
       <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Page principale.</h2>
     </div>
     <div class="anim neo-card p-6 sm:p-8">
@@ -624,24 +781,24 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
           <span class="w-24 text-center">Statut</span>
         </div>
         <div class="flex items-center gap-3 p-3 mb-1 bg-white neo-border-2 text-xs font-space">
-          <span class="w-24 font-mono">01/04/26</span>
+          <span class="w-24 font-mono">02/04/26</span>
           <span class="flex-1 font-bold">M. Dupont</span>
           <span class="w-16 text-center text-gray-400">18:42</span>
-          <span class="w-20 text-center"><span class="inline-block px-2 py-0.5 font-mono font-bold text-white" style="background:#1D6A45">82</span></span>
+          <span class="w-20 text-center"><span class="inline-block px-2 py-0.5 font-mono font-bold text-white" style="background:#1D6A45">847/1000</span></span>
           <span class="w-24 text-center"><span class="tag-done">Valid&eacute;</span></span>
         </div>
         <div class="flex items-center gap-3 p-3 mb-1 bg-white neo-border-2 text-xs font-space">
-          <span class="w-24 font-mono">31/03/26</span>
+          <span class="w-24 font-mono">01/04/26</span>
           <span class="flex-1 font-bold">Mme Janssens</span>
           <span class="w-16 text-center text-gray-400">24:15</span>
-          <span class="w-20 text-center"><span class="inline-block px-2 py-0.5 font-mono font-bold text-white" style="background:#C65D07">63</span></span>
-          <span class="w-24 text-center"><span class="tag-mvp">&Agrave; revoir</span></span>
+          <span class="w-20 text-center"><span class="inline-block px-2 py-0.5 font-mono font-bold text-white" style="background:#C65D07">623/1000</span></span>
+          <span class="w-24 text-center"><span class="tag-partiel">&Agrave; revoir</span></span>
         </div>
         <div class="flex items-center gap-3 p-3 bg-white neo-border-2 text-xs font-space">
-          <span class="w-24 font-mono">31/03/26</span>
+          <span class="w-24 font-mono">01/04/26</span>
           <span class="flex-1 font-bold">M. Van den Berg</span>
           <span class="w-16 text-center text-gray-400">12:08</span>
-          <span class="w-20 text-center"><span class="inline-block px-2 py-0.5 font-mono font-bold text-white" style="background:#E74C3C">38</span></span>
+          <span class="w-20 text-center"><span class="inline-block px-2 py-0.5 font-mono font-bold text-white" style="background:#E74C3C">384/1000</span></span>
           <span class="w-24 text-center"><span style="background:#E74C3C;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700">Alerte</span></span>
         </div>
       </div>
@@ -649,11 +806,14 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
   </div>
 </section>
 
+<!-- ============================================ -->
+<!-- 16 / WIREFRAME — D&Eacute;TAIL APPEL -->
+<!-- ============================================ -->
 <section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4">PART 8 / UI &mdash; D&Eacute;TAIL APPEL</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Page d&eacute;tail.</h2>
+      <div class="section-number mb-4">16 / WIREFRAMES &mdash; D&Eacute;TAIL APPEL</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Transcription + score.</h2>
     </div>
     <div class="anim neo-card p-6 sm:p-8">
       <div class="font-mono text-xs font-bold mb-4" style="color:#C65D07">WIREFRAME &mdash; /transcript/[id]</div>
@@ -679,8 +839,8 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
           </div>
           <div class="neo-border-2 p-4 bg-white">
             <div class="font-mono text-xs font-bold mb-3" style="color:#1D6A45">SCORE MiFID</div>
-            <div class="score-bar mb-2"><div class="score-fill flex items-center justify-end pr-2" style="width:82%;background:#1D6A45"><span class="font-mono text-xs font-bold text-white">82</span></div></div>
-            <div class="text-xs font-space text-gray-400">Conforme</div>
+            <div class="score-bar mb-2"><div class="score-fill flex items-center justify-end pr-2" style="width:85%;background:#1D6A45"><span class="font-mono text-xs font-bold text-white">847</span></div></div>
+            <div class="text-xs font-space text-gray-400">Conforme &bull; P1: 432 + P2: 415</div>
           </div>
           <div class="neo-border-2 p-4 bg-white text-center">
             <div class="font-mono text-xs font-bold mb-2">DOCUMENT</div>
@@ -696,40 +856,26 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 </section>
 
 <!-- ============================================ -->
-<!-- PART 9 : CONNECTIONS -->
+<!-- 17 / PIPELINE VISUEL -->
 <!-- ============================================ -->
-
 <section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4" style="color:#C65D07">PART 9 / CONNEXIONS</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Module standalone,<br>mais connect&eacute;.</h2>
-    </div>
-    <div class="anim neo-card p-6 sm:p-8" style="border-left:6px solid #C65D07">
-      <div class="space-y-4">
-        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#C65D07;min-width:32px">1</div><div><h4 class="font-bold text-sm mb-1">Standalone</h4><p class="text-sm text-gray-500 font-space">Transcript ne d&eacute;pend d'aucun autre module BrokerONE. Il peut &ecirc;tre activ&eacute; seul. Pas besoin de Sentinel ou Advice.</p></div></div>
-        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#C65D07;min-width:32px">2</div><div><h4 class="font-bold text-sm mb-1">Transcript &rarr; Augmented</h4><p class="text-sm text-gray-500 font-space">Si un appel r&eacute;v&egrave;le un nouveau besoin d'assurance du client, Transcript peut cr&eacute;er une opportunit&eacute; dans Augmented (vente crois&eacute;e automatique).</p></div></div>
-        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#C65D07;min-width:32px">3</div><div><h4 class="font-bold text-sm mb-1">Enrichissement profil client</h4><p class="text-sm text-gray-500 font-space">Les donn&eacute;es extraites des appels enrichissent le profil client commun BrokerONE. Utile pour les futurs dossiers conseil.</p></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">PART 9 / &Eacute;COSYST&Egrave;ME BROKERONE</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">O&ugrave; se place Transcript.</h2>
+      <div class="section-number mb-4">17 / PIPELINE</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Du t&eacute;l&eacute;phone au document.</h2>
     </div>
     <div class="anim">
       <div class="neo-card p-6 sm:p-8">
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-center text-xs font-space font-bold">
-          <div class="neo-card-sm px-3 py-4" style="opacity:.5"><span class="tag-done mb-2 inline-block">LIVR&Eacute;</span><br>Advice<br><span class="font-normal text-gray-400">Avis &amp; r&eacute;putation</span></div>
-          <div class="neo-card-sm px-3 py-4" style="opacity:.5"><span class="tag-done mb-2 inline-block">LIVR&Eacute;</span><br>Sentinel<br><span class="font-normal text-gray-400">Emails &amp; alertes</span></div>
-          <div class="neo-card-sm px-3 py-4" style="opacity:.5"><span class="tag-done mb-2 inline-block">LIVR&Eacute;</span><br>Augmented<br><span class="font-normal text-gray-400">Vente crois&eacute;e</span></div>
-          <div class="neo-card-sm px-3 py-4" style="opacity:.5"><span class="tag-done mb-2 inline-block">LIVR&Eacute;</span><br>Dossier<br><span class="font-normal text-gray-400">Conseil client</span></div>
-          <div class="neo-card-sm px-3 py-4" style="border-color:#C65D07;border-width:3px;background:rgba(198,93,7,.05)"><span class="tag-mvp mb-2 inline-block">MODULE 5</span><br>Transcript<br><span class="font-normal text-gray-400">Appels &amp; conformit&eacute;</span></div>
-          <div class="neo-card-sm px-3 py-4" style="opacity:.3"><span class="tag-out mb-2 inline-block">FUTUR</span><br>Module 6<br><span class="font-normal text-gray-400">&agrave; d&eacute;finir</span></div>
+        <div class="flex flex-col sm:flex-row items-center gap-3 text-center text-xs font-space font-bold">
+          <div class="neo-card-sm px-4 py-3 flex-1 w-full">&#9742; Appel<br><span class="font-normal text-gray-400">mobile / fixe / VoIP</span></div>
+          <div class="text-gray-300 text-lg hidden sm:block">&#8594;</div><div class="text-gray-300 text-lg sm:hidden">&#8595;</div>
+          <div class="neo-card-sm px-4 py-3 flex-1 w-full" style="border-color:#1D6A45"><span class="tag-fourni" style="font-size:8px;margin-bottom:4px;display:inline-block">FOURNI</span><br>Leexi<br><span class="font-normal text-gray-400">connector 320 lignes</span></div>
+          <div class="text-gray-300 text-lg hidden sm:block">&#8594;</div><div class="text-gray-300 text-lg sm:hidden">&#8595;</div>
+          <div class="neo-card-sm px-4 py-3 flex-1 w-full" style="border-color:#1D6A45"><span class="tag-fourni" style="font-size:8px;margin-bottom:4px;display:inline-block">FOURNI</span><br>Claude IA<br><span class="font-normal text-gray-400">13 prompts</span></div>
+          <div class="text-gray-300 text-lg hidden sm:block">&#8594;</div><div class="text-gray-300 text-lg sm:hidden">&#8595;</div>
+          <div class="neo-card-sm px-4 py-3 flex-1 w-full" style="border-color:#1D6A45"><span class="tag-fourni" style="font-size:8px;margin-bottom:4px;display:inline-block">FOURNI</span><br>Scoring<br><span class="font-normal text-gray-400">MiFID d&eacute;terministe</span></div>
+          <div class="text-gray-300 text-lg hidden sm:block">&#8594;</div><div class="text-gray-300 text-lg sm:hidden">&#8595;</div>
+          <div class="neo-card-sm px-4 py-3 flex-1 w-full" style="border-color:#C65D07"><span class="tag-partiel" style="font-size:8px;margin-bottom:4px;display:inline-block">~60%</span><br>Document<br><span class="font-normal text-gray-400">DOCX g&eacute;n&eacute;r&eacute;</span></div>
         </div>
       </div>
     </div>
@@ -737,406 +883,240 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 </section>
 
 <!-- ============================================ -->
-<!-- PART 10 : MVP CHECKLIST + OUT OF SCOPE -->
+<!-- 18 / &Eacute;COSYST&Egrave;ME -->
 <!-- ============================================ -->
-
-<section id="scope" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 10 / MVP CHECKLIST</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">18 livrables MVP.</h2>
-    </div>
-    <div class="anim">
-      <div class="space-y-2">
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">01</span><span class="text-sm font-space">Int&eacute;gration webhook Leexi (r&eacute;ception transcriptions)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">02</span><span class="text-sm font-space">Extraction IA des donn&eacute;es r&eacute;glementaires (Claude Sonnet)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">03</span><span class="text-sm font-space">Scoring MiFID/ASSURMIFID d&eacute;terministe (5 crit&egrave;res, 0-100)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">04</span><span class="text-sm font-space">G&eacute;n&eacute;ration documents FSMA (Belgique)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">05</span><span class="text-sm font-space">G&eacute;n&eacute;ration documents ACPR (France)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">06</span><span class="text-sm font-space">D&eacute;tection automatique VAD (Loi Cazenave) avec alertes</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">07</span><span class="text-sm font-space">D&eacute;tection de langue automatique (FR/NL/DE)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">08</span><span class="text-sm font-space">Traitement bilingue des appels belges</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">09</span><span class="text-sm font-space">Export HTML (pr&eacute;visualisation) + DOCX (t&eacute;l&eacute;chargement)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">10</span><span class="text-sm font-space">Dashboard liste des appels avec filtres</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">11</span><span class="text-sm font-space">Page d&eacute;tail appel (transcription + extraction + score + document)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">12</span><span class="text-sm font-space">Validation courtier avec archivage</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">13</span><span class="text-sm font-space">Tables Supabase d&eacute;di&eacute;es avec RLS</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">14</span><span class="text-sm font-space">6 endpoints API</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">15</span><span class="text-sm font-space">Connexion optionnelle vers Augmented (opportunit&eacute;s)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">16</span><span class="text-sm font-space">Enrichissement profil client commun</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">17</span><span class="text-sm font-space">DDA compliance native (France)</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-mvp">18</span><span class="text-sm font-space">Configuration par courtier (pays, langue par d&eacute;faut, r&eacute;f&eacute;rentiel)</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:#999">PART 10 / SCOPE &mdash; OUT</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Ce qui n'est PAS inclus.</h2>
-    </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5 flex items-start gap-4" style="opacity:.6"><span class="tag-out">OUT</span><div><h4 class="font-bold text-sm mb-1">Transcription en temps r&eacute;el pendant l'appel</h4><p class="text-xs text-gray-500 font-space">Leexi g&egrave;re la transcription post-appel. La transcription en direct n'est pas dans le scope. Si Leexi le propose un jour, on pourra l'int&eacute;grer.</p></div></div>
-      <div class="neo-card p-5 flex items-start gap-4" style="opacity:.6"><span class="tag-out">OUT</span><div><h4 class="font-bold text-sm mb-1">Analyse de sentiment des appels</h4><p class="text-xs text-gray-500 font-space">D&eacute;tecter la frustration ou la satisfaction du client pendant l'appel. Int&eacute;ressant mais futur &mdash; pas n&eacute;cessaire pour la conformit&eacute;.</p></div></div>
-      <div class="neo-card p-5 flex items-start gap-4" style="opacity:.6"><span class="tag-out">OUT</span><div><h4 class="font-bold text-sm mb-1">Int&eacute;gration avec syst&egrave;mes t&eacute;l&eacute;phoniques</h4><p class="text-xs text-gray-500 font-space">Leexi g&egrave;re la couche t&eacute;l&eacute;phonique. BrokerONE ne s'int&egrave;gre pas directement avec les PBX ou centrales t&eacute;l&eacute;phoniques.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- TRANSITION : MVP -> PRODUCTION -->
-<!-- ============================================ -->
-
-<section id="transition" class="py-24 px-4 transition-divider" style="background:#C0392B;border-top:3px solid #0a0a0a">
-  <div class="max-w-3xl mx-auto text-center text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">TRANSITION</div>
-      <div class="flex items-center justify-center gap-4 mb-6">
-        <span class="tag-mvp">MVP 7 000&euro;</span>
-        <span class="font-grotesk text-3xl font-bold">&#8594;</span>
-        <span class="tag-prod">PRODUCTION 3 500&euro;</span>
-      </div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Du prototype<br>au produit.</h2>
-      <p class="text-lg font-space leading-relaxed mb-6" style="color:rgba(255,255,255,.8)">Le MVP prouve que l'analyse de transcriptions fonctionne.<br>La production garantit que le scoring est fiable, les documents sont professionnels,<br>et les donn&eacute;es sont prot&eacute;g&eacute;es <strong class="text-white">m&ecirc;me avec du bruit, des appels courts, ou du multilingue</strong>.</p>
-      <div class="inline-block p-4" style="border:2px solid rgba(255,255,255,.3)">
-        <div class="font-mono text-xs mb-2" style="color:rgba(255,255,255,.5)">TOUT CE QUI SUIT EST</div>
-        <div class="font-grotesk text-2xl font-bold">Phase Production</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 11 : PRODUCTION — REBRAND + DOCUMENTS -->
-<!-- ============================================ -->
-
-<section id="rebrand" class="py-20 px-4" style="background:#1E3A5F;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 11 / REBRAND BROKERONE</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Nouvelle identit&eacute; +<br>documents professionnels.</h2>
-      <p class="text-lg font-space" style="color:rgba(255,255,255,.7)">Les documents g&eacute;n&eacute;r&eacute;s et le dashboard passent aux couleurs BrokerONE. Les templates FSMA/ACPR deviennent professionnels.</p>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">PART 11 / CE QUI CHANGE</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Rebrand + templates pro.</h2>
-    </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-prod">PROD</span><div><h4 class="font-bold text-sm mb-1">Documents FSMA/ACPR</h4><p class="text-xs text-gray-500 font-space">Couleurs BrokerONE (#1E3A5F, #C0392B) dans les documents g&eacute;n&eacute;r&eacute;s. En-t&ecirc;tes, pieds de page, mise en forme professionnelle.</p></div></div>
-      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-prod">PROD</span><div><h4 class="font-bold text-sm mb-1">Dashboard Transcript</h4><p class="text-xs text-gray-500 font-space">Interface d'analyse des appels aux couleurs BrokerONE. Sidebar, header, boutons, badges &mdash; coh&eacute;rent avec les autres modules.</p></div></div>
-      <div class="neo-card p-5 flex items-start gap-4"><span class="tag-prod">PROD</span><div><h4 class="font-bold text-sm mb-1">Exports HTML + DOCX</h4><p class="text-xs text-gray-500 font-space">Les fichiers export&eacute;s portent le branding BrokerONE + logo du courtier. Professionnels, pr&ecirc;ts &agrave; archiver.</p></div></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">En-t&ecirc;tes de conformit&eacute;</h4></div><p class="text-xs text-gray-500 font-space">R&eacute;f&eacute;rence r&eacute;glementaire (FSMA ou ACPR), date, num&eacute;ro de dossier, identifiant courtier. Format officiel.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Logo courtier int&eacute;gr&eacute;</h4></div><p class="text-xs text-gray-500 font-space">Chaque document porte le logo du courtier (upload&eacute; dans les param&egrave;tres). Positionnement propre, r&eacute;solution adapt&eacute;e.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Mise en forme professionnelle</h4></div><p class="text-xs text-gray-500 font-space">Typographie soign&eacute;e, marges correctes, tableaux align&eacute;s. Le document doit pouvoir &ecirc;tre pr&eacute;sent&eacute; lors d'un audit sans rougir.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 12 : PRODUCTION — MiFID SCORING CALIBRATION -->
-<!-- ============================================ -->
-
-<section id="scoring-cal" class="py-20 px-4" style="background:#C65D07;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 12 / MiFID CALIBRATION</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Calibration sur le r&eacute;el.</h2>
-      <p class="text-lg font-space" style="color:rgba(255,255,255,.8)">Le scoring d&eacute;terministe est en place. Mais les poids ont &eacute;t&eacute; d&eacute;finis th&eacute;oriquement. Il faut les <strong>valider avec de vrais appels</strong> pour que le score ait du sens.</p>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">PART 12 / AJUSTER LES POIDS</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Calibration.</h2>
-    </div>
-    <div class="anim neo-card p-6 sm:p-8">
-      <p class="text-gray-600 font-space mb-4">Le scoring MiFID utilise des pond&eacute;rations d&eacute;terministes. La calibration consiste &agrave; :</p>
-      <div class="space-y-3 text-sm font-space">
-        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> Tester avec 20+ transcriptions r&eacute;elles (appels vari&eacute;s : courts, longs, bons, mauvais)</div>
-        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> Comparer le score g&eacute;n&eacute;r&eacute; avec une &eacute;valuation humaine de chaque appel</div>
-        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> Ajuster les poids des crit&egrave;res (identification, devoir de conseil, information pr&eacute;contractuelle...)</div>
-        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> Valider que les seuils (vert / orange / rouge) correspondent &agrave; la r&eacute;alit&eacute; terrain</div>
-        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> Documenter les r&egrave;gles de scoring finales (explicable au courtier)</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 13 : PRODUCTION — LEEXI EDGE CASES -->
-<!-- ============================================ -->
-
-<section id="edge-cases" class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:#C0392B">PART 13 / LEEXI EDGE CASES</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Quand Leexi gal&egrave;re.</h2>
-      <p class="text-lg text-gray-500 font-space leading-relaxed mb-8">Le MVP fonctionne avec des transcriptions propres. En production, les appels sont rarement parfaits.</p>
-    </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Bruit de fond (low quality)</h4></div><p class="text-xs text-gray-500 font-space">Appels depuis une voiture, open space, mauvaise connexion. La transcription est partielle ou incoh&eacute;rente. <strong>Fix :</strong> D&eacute;tection du taux de confiance Leexi. Si &lt;60%, avertissement "transcription basse qualit&eacute;" + scoring adapt&eacute;.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Appels tr&egrave;s courts (&lt;2 min)</h4></div><p class="text-xs text-gray-500 font-space">Message vocal, appel raccroch&eacute;, mauvais num&eacute;ro. Pas assez de mati&egrave;re pour scorer. <strong>Fix :</strong> Seuil minimum de dur&eacute;e. En-dessous, pas de scoring MiFID, juste la transcription brute.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Langues mixtes (FR + NL)</h4></div><p class="text-xs text-gray-500 font-space">Courtier belge qui switch entre fran&ccedil;ais et n&eacute;erlandais dans le m&ecirc;me appel. <strong>Fix :</strong> D&eacute;tection par segment (pas par appel entier). Scoring adapt&eacute; au contenu, quelle que soit la langue.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Appels de groupe / conf&eacute;rence</h4></div><p class="text-xs text-gray-500 font-space">3+ participants, attribution speaker erron&eacute;e. <strong>Fix :</strong> D&eacute;tection multi-speaker. Si &gt;2 speakers, mode "conf&eacute;rence" avec scoring adapt&eacute; ou d&eacute;sactiv&eacute;.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 14 : PRODUCTION — UI POLISH + SECURITY/GDPR -->
-<!-- ============================================ -->
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">PART 14 / UI POLISH</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">L'interface au niveau pro.</h2>
-    </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Responsive complet</h4></div><p class="text-xs text-gray-500 font-space">Dashboard, liste d'appels, d&eacute;tail transcription &mdash; tout fonctionne sur mobile et tablette. Un courtier doit pouvoir v&eacute;rifier un appel depuis son t&eacute;l&eacute;phone.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Timeline d'appel</h4></div><p class="text-xs text-gray-500 font-space">Visualisation chronologique de l'appel : qui parle quand, dur&eacute;e par speaker, moments cl&eacute;s identifi&eacute;s. Barre de progression interactive.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Score visualis&eacute;</h4></div><p class="text-xs text-gray-500 font-space">Jauge visuelle du score MiFID global + d&eacute;tail par crit&egrave;re (radar chart ou barres). Vert/orange/rouge imm&eacute;diatement lisible.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Highlighting des passages cl&eacute;s</h4></div><p class="text-xs text-gray-500 font-space">Dans la transcription, les passages qui impactent le score MiFID sont surlign&eacute;s (identification client, devoir de conseil, VAD...). Clic pour jumper au passage.</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="securite" class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto text-white">
-    <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 14 / S&Eacute;CURIT&Eacute; &amp; RGPD</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Donn&eacute;es sensibles.</h2>
-      <p class="text-lg font-space" style="color:rgba(255,255,255,.7)">Les transcriptions contiennent des donn&eacute;es personnelles (noms, adresses, num&eacute;ros de contrat). La conformit&eacute; RGPD n'est pas optionnelle.</p>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">PART 14 / DATA RETENTION</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Politique de r&eacute;tention.</h2>
-    </div>
-    <div class="anim">
-      <div class="grid sm:grid-cols-2 gap-4">
-        <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Dur&eacute;e de r&eacute;tention configurable</h4></div><p class="text-xs text-gray-500 font-space">Chaque courtier d&eacute;finit combien de temps les transcriptions sont conserv&eacute;es (3 mois, 6 mois, 12 mois). Par d&eacute;faut : 6 mois.</p></div>
-        <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Auto-delete</h4></div><p class="text-xs text-gray-500 font-space">Cron job qui supprime automatiquement les transcriptions expir&eacute;es. Suppression compl&egrave;te (base + stockage). Log de suppression pour audit.</p></div>
-        <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Audit d'acc&egrave;s</h4></div><p class="text-xs text-gray-500 font-space">Log de qui acc&egrave;de &agrave; quelle transcription, quand. Tra&ccedil;abilit&eacute; compl&egrave;te en cas de contr&ocirc;le CNIL/APD.</p></div>
-        <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Droit &agrave; l'effacement</h4></div><p class="text-xs text-gray-500 font-space">Bouton "Supprimer d&eacute;finitivement" sur chaque transcription. Suppression imm&eacute;diate, irr&eacute;versible, confirm&eacute;e.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 15 : PRODUCTION — MULTI-TENANT + VAD TUNING -->
-<!-- ============================================ -->
-
-<section id="multi-tenant" class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">PART 15 / MULTI-TENANT</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">N courtiers avec Leexi.</h2>
-      <p class="text-lg text-gray-500 font-space leading-relaxed mb-8">Le MVP tourne avec 1 compte Leexi. La production doit supporter plusieurs courtiers, chacun avec son propre acc&egrave;s Leexi et ses transcriptions isol&eacute;es.</p>
-    </div>
-    <div class="anim space-y-3">
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Connexion Leexi par courtier</h4></div><p class="text-xs text-gray-500 font-space">Chaque courtier connecte son propre compte Leexi (API key ou OAuth). Les transcriptions sont automatiquement associ&eacute;es au bon courtier.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Isolation des transcriptions</h4></div><p class="text-xs text-gray-500 font-space">RLS strict : aucune transcription n'est visible par un autre courtier. V&eacute;rifi&eacute; avec tests cross-tenant.</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-2"><span class="tag-prod">PROD</span><h4 class="font-bold text-sm">Configuration ind&eacute;pendante</h4></div><p class="text-xs text-gray-500 font-space">Chaque courtier peut configurer : dur&eacute;e de r&eacute;tention, seuils de score, langue par d&eacute;faut, mod&egrave;le de document (FSMA ou ACPR).</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">PART 15 / VAD CAZENAVE (FRANCE)</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">R&eacute;duire les faux positifs.</h2>
-    </div>
-    <div class="anim neo-card p-6 sm:p-8">
-      <p class="text-gray-600 font-space mb-4">La d&eacute;tection de vente &agrave; distance (Loi Cazenave) g&eacute;n&egrave;re des alertes. En production, il faut affiner pour &eacute;viter les faux positifs :</p>
-      <div class="space-y-3 text-sm font-space">
-        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> Affiner les crit&egrave;res de d&eacute;tection VAD (contexte de l'appel, pas juste les mots-cl&eacute;s)</div>
-        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> Distinction entre appel de suivi (pas VAD) et appel de vente initiale (VAD)</div>
-        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> Tester sur 20+ appels r&eacute;els pour mesurer le taux de faux positifs</div>
-        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> Permettre au courtier de marquer "faux positif" pour am&eacute;liorer la d&eacute;tection</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================ -->
-<!-- PART 16 : PRODUCTION — TESTS & DOCUMENTATION -->
-<!-- ============================================ -->
-
 <section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4">PART 16 / TESTS</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Tests end-to-end.</h2>
+      <div class="section-number mb-4">18 / &Eacute;COSYST&Egrave;ME BROKERONE</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Connexions.</h2>
     </div>
-    <div class="anim neo-card p-6 sm:p-8">
-      <div class="space-y-3 text-sm font-space">
-        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> <strong>E2E avec vraies transcriptions Leexi :</strong> appel r&eacute;el &rarr; transcription &rarr; scoring &rarr; document &rarr; export</div>
-        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> <strong>Validation scoring :</strong> 20+ appels not&eacute;s par un humain vs. score algorithme. Taux de concordance &gt;80%</div>
-        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> <strong>Documents g&eacute;n&eacute;r&eacute;s :</strong> v&eacute;rification du contenu, de la mise en forme, des donn&eacute;es courtier/client</div>
-        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> <strong>Edge cases :</strong> bruit, appels courts, mixte FR/NL, conf&eacute;rence, Leexi down</div>
-        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> <strong>RGPD :</strong> auto-delete fonctionne, audit trail complet, droit &agrave; l'effacement ok</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
-  <div class="max-w-4xl mx-auto">
-    <div class="anim">
-      <div class="section-number mb-4">PART 16 / DOCUMENTATION</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Guides et docs.</h2>
-    </div>
-    <div class="anim neo-card p-6 sm:p-8">
-      <div class="space-y-3 text-sm font-space">
-        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> <strong>Guide courtier pour le setup appels</strong> &mdash; comment configurer Leexi, quels appels sont enregistr&eacute;s, consentement client</div>
-        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> <strong>Explication du scoring MiFID</strong> &mdash; chaque crit&egrave;re expliqu&eacute; en langage courtier (pas technique). "Pourquoi j'ai eu 72/100 ?"</div>
-        <div class="flex items-start gap-2"><span class="tag-prod">PROD</span> <strong>Configuration Leexi</strong> &mdash; proc&eacute;dure de connexion, troubleshooting, FAQ</div>
+    <div class="anim neo-card p-6 sm:p-8" style="border-left:6px solid #C65D07">
+      <div class="space-y-4">
+        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#C65D07;min-width:32px">1</div><div><h4 class="font-bold text-sm mb-1">Standalone</h4><p class="text-sm text-gray-500 font-space">Transcript fonctionne sans les autres modules. Il peut &ecirc;tre activ&eacute; seul.</p></div></div>
+        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#C65D07;min-width:32px">2</div><div><h4 class="font-bold text-sm mb-1">Transcript &rarr; Advice</h4><p class="text-sm text-gray-500 font-space">D&eacute;j&agrave; cod&eacute; par Bruno : d&eacute;tection r&eacute;clamation + ambassadeur, forward automatique vers le module Advice.</p></div></div>
+        <div class="flex items-start gap-4"><div class="font-grotesk font-bold text-2xl" style="color:#C65D07;min-width:32px">3</div><div><h4 class="font-bold text-sm mb-1">Transcript &rarr; Brio CRM</h4><p class="text-sm text-gray-500 font-space">D&eacute;j&agrave; cod&eacute; par Bruno : write-back des r&eacute;sultats (score, statut, documents) dans le CRM existant.</p></div></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================ -->
-<!-- PART 17 : PRODUCTION CHECKLIST -->
+<!-- 19 / CHECKLIST -->
 <!-- ============================================ -->
-
 <section class="py-20 px-4" style="background:#0a0a0a;border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto text-white">
     <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">PART 17 / PRODUCTION CHECKLIST</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">16 livrables production.</h2>
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">19 / CHECKLIST</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">15 livrables.</h2>
     </div>
     <div class="anim">
       <div class="space-y-2">
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">01</span><span class="text-sm font-space">Rebrand BrokerONE &mdash; documents, dashboard, exports</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">02</span><span class="text-sm font-space">Templates FSMA/ACPR professionnels &mdash; logo courtier, en-t&ecirc;tes conformit&eacute;, mise en forme</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">03</span><span class="text-sm font-space">Calibration scoring MiFID &mdash; tests sur 20+ appels r&eacute;els, ajustement poids</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">04</span><span class="text-sm font-space">Leexi bruit de fond &mdash; d&eacute;tection qualit&eacute;, avertissement, scoring adapt&eacute;</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">05</span><span class="text-sm font-space">Leexi appels courts &mdash; seuil minimum, pas de scoring si &lt;2 min</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">06</span><span class="text-sm font-space">Leexi langues mixtes &mdash; d&eacute;tection par segment FR/NL</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">07</span><span class="text-sm font-space">Leexi appels de groupe &mdash; mode conf&eacute;rence, multi-speaker</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">08</span><span class="text-sm font-space">Responsive mobile/tablette &mdash; dashboard, d&eacute;tail appel, transcription</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">09</span><span class="text-sm font-space">Timeline d'appel &mdash; visualisation chronologique, speakers, moments cl&eacute;s</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">10</span><span class="text-sm font-space">Score MiFID visualis&eacute; &mdash; jauge, d&eacute;tail par crit&egrave;re, couleurs</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">11</span><span class="text-sm font-space">Highlighting passages cl&eacute;s &mdash; surlignage dans la transcription</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">12</span><span class="text-sm font-space">R&eacute;tention RGPD &mdash; dur&eacute;e configurable, auto-delete, log suppression</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">13</span><span class="text-sm font-space">Audit d'acc&egrave;s &mdash; tra&ccedil;abilit&eacute; des consultations de transcriptions</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">14</span><span class="text-sm font-space">Multi-tenant Leexi &mdash; connexion par courtier, isolation, config ind&eacute;pendante</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">15</span><span class="text-sm font-space">VAD Cazenave tuning &mdash; r&eacute;duction faux positifs, feedback courtier</span></div>
-        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-prod">16</span><span class="text-sm font-space">Tests E2E + validation scoring + documents + RGPD + edge cases</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">01</span><span class="text-sm font-space">Templates DOCX : modules A, B, E (Belgique)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">02</span><span class="text-sm font-space">Templates DOCX : 8 modules France (IARD, Vie, Pr&eacute;voyance, Pro, Parcours)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">03</span><span class="text-sm font-space">Page /transcript &mdash; liste des appels avec filtres et scores</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">04</span><span class="text-sm font-space">Page /transcript/[id] &mdash; transcription + extraction + score + document</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">05</span><span class="text-sm font-space">Tables Supabase d&eacute;di&eacute;es avec RLS strict</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">06</span><span class="text-sm font-space">Audit trail (chaque action logu&eacute;e)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">07</span><span class="text-sm font-space">Port JS &rarr; TypeScript (int&eacute;gration Next.js)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">08</span><span class="text-sm font-space">API routes Next.js (webhook, analyze, score, document, CRUD)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">09</span><span class="text-sm font-space">Validation courtier + archivage comme preuve</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">10</span><span class="text-sm font-space">Rebrand BrokerONE (dashboard + documents + exports)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">11</span><span class="text-sm font-space">Multi-tenant : config par courtier, isolation des donn&eacute;es</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">12</span><span class="text-sm font-space">Calibration scoring sur vraies transcriptions</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">13</span><span class="text-sm font-space">Tests E2E pipeline complet (Leexi &rarr; document)</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">14</span><span class="text-sm font-space">Edge cases : bruit, appels courts, bilingue FR/NL, Leexi down</span></div>
+        <div class="p-3 flex items-center gap-3" style="border:1px solid rgba(255,255,255,.15)"><span class="tag-bloc">15</span><span class="text-sm font-space">D&eacute;ploiement Vercel + configuration production</span></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================ -->
-<!-- COMBINED TIMELINE + BUDGET -->
+<!-- 20 / TIMELINE -->
 <!-- ============================================ -->
-
 <section id="timeline" class="py-20 px-4" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4" style="color:#C65D07">TIMELINE &amp; BUDGET</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">24 jours, 5 sprints.</h2>
+      <div class="section-number mb-4" style="color:#C65D07">20 / TIMELINE</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">10-14 jours, 2-3 sprints.</h2>
     </div>
     <div class="anim neo-card p-6 sm:p-8">
-      <!-- MVP SPRINTS -->
-      <div class="font-mono text-xs font-bold mb-4 flex items-center gap-2"><span class="tag-mvp">MVP</span> 16 jours &mdash; 7 000&euro; HT</div>
-      <div class="space-y-3 mb-6">
+      <div class="space-y-4">
+        <!-- Sprint 1 -->
         <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
           <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C65D07">S1</div>
-          <div class="flex-1"><h4 class="font-bold text-sm mb-1">Jours 1-5 : Leexi + Transcription</h4><p class="text-sm text-gray-500 font-space">Int&eacute;gration webhook Leexi. R&eacute;ception et stockage des transcriptions. Extraction IA avec Claude Sonnet. Tables Supabase + RLS.</p></div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <h4 class="font-bold text-sm">Jours 1-5 : DOCX + Supabase + TypeScript</h4>
+              <span class="tag-demo">D&Eacute;MO</span>
+            </div>
+            <p class="text-xs text-gray-500 font-space">Compl&eacute;ter les templates DOCX manquants. Tables Supabase + RLS. Port JS &rarr; TypeScript. API routes Next.js.</p>
+          </div>
           <div class="text-xs text-gray-400 font-mono flex-shrink-0">5 jours</div>
         </div>
+        <!-- Sprint 2 -->
         <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
           <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C65D07">S2</div>
-          <div class="flex-1"><h4 class="font-bold text-sm mb-1">Jours 6-11 : MiFID + Documents</h4><p class="text-sm text-gray-500 font-space">Moteur de scoring d&eacute;terministe. G&eacute;n&eacute;ration documents FSMA et ACPR. Export HTML + DOCX. D&eacute;tection VAD.</p></div>
-          <div class="text-xs text-gray-400 font-mono flex-shrink-0">6 jours</div>
-        </div>
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
-          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C65D07">S3</div>
-          <div class="flex-1"><h4 class="font-bold text-sm mb-1">Jours 12-16 : Dashboard + Langues + Tests</h4><p class="text-sm text-gray-500 font-space">Interface utilisateur (liste + d&eacute;tail). D&eacute;tection de langue FR/NL/DE. Traitement bilingue. Tests. Recette.</p></div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <h4 class="font-bold text-sm">Jours 6-10 : Frontend + int&eacute;gration</h4>
+              <span class="tag-demo">D&Eacute;MO</span>
+            </div>
+            <p class="text-xs text-gray-500 font-space">Pages /transcript et /transcript/[id]. Score MiFID visuel. Pr&eacute;visualisation + t&eacute;l&eacute;chargement DOCX. Validation courtier.</p>
+          </div>
           <div class="text-xs text-gray-400 font-mono flex-shrink-0">5 jours</div>
         </div>
-      </div>
-      <!-- PROD SPRINTS -->
-      <div class="font-mono text-xs font-bold mb-4 flex items-center gap-2"><span class="tag-prod">PRODUCTION</span> 8 jours &mdash; 3 500&euro; HT</div>
-      <div class="space-y-3">
+        <!-- Sprint 3 -->
         <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
-          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">S4</div>
-          <div class="flex-1"><h4 class="font-bold text-sm mb-1">Jours 17-20 : Rebrand + Documents + Scoring</h4><p class="text-sm text-gray-500 font-space">Couleurs BrokerONE dans les documents et le dashboard. Templates FSMA/ACPR professionnels. Calibration du scoring MiFID sur de vrais appels.</p></div>
-          <div class="text-xs text-gray-400 font-mono flex-shrink-0">4 jours</div>
-        </div>
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
-          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C0392B">S5</div>
-          <div class="flex-1"><h4 class="font-bold text-sm mb-1">Jours 21-24 : Edge Cases + S&eacute;curit&eacute; + Multi-tenant + Tests</h4><p class="text-sm text-gray-500 font-space">Gestion bruit/courts/mixtes/groupe. RGPD (r&eacute;tention, auto-delete, audit). Multi-tenant Leexi. VAD tuning. Tests E2E. Documentation.</p></div>
-          <div class="text-xs text-gray-400 font-mono flex-shrink-0">4 jours</div>
+          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#C65D07">S3</div>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <h4 class="font-bold text-sm">Jours 11-14 : Production + tests</h4>
+              <span class="tag-demo">D&Eacute;MO</span>
+            </div>
+            <p class="text-xs text-gray-500 font-space">Rebrand BrokerONE. Multi-tenant. Calibration scoring. Tests E2E. Edge cases. D&eacute;ploiement.</p>
+          </div>
+          <div class="text-xs text-gray-400 font-mono flex-shrink-0">2-4 jours</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ============================================ -->
+<!-- 21 / BUDGET -->
+<!-- ============================================ -->
 <section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4">BUDGET TOTAL</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">R&eacute;cap complet Transcript.</h2>
+      <div class="section-number mb-4" style="color:#C65D07">21 / BUDGET</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">4 500&euro; HT.</h2>
     </div>
     <div class="anim">
-      <div class="grid sm:grid-cols-3 gap-5">
-        <div class="neo-card p-6 text-center" style="border-top:4px solid #C65D07"><div class="font-mono text-xs font-bold mb-2" style="color:#C65D07">MVP</div><div class="font-grotesk text-3xl font-bold mb-2">7 000&euro;</div><div class="text-xs text-gray-500 font-space">~16 jours &bull; 3 sprints &bull; 18 livrables</div><div class="mt-2"><span class="tag-mvp">MVP</span></div></div>
-        <div class="neo-card p-6 text-center" style="border-top:4px solid #C0392B"><div class="font-mono text-xs font-bold mb-2" style="color:#C0392B">PRODUCTION</div><div class="font-grotesk text-3xl font-bold mb-2">3 500&euro;</div><div class="text-xs text-gray-500 font-space">~8 jours &bull; 2 sprints &bull; 16 livrables</div><div class="mt-2"><span class="tag-prod">PROD</span></div></div>
-        <div class="neo-card p-6 text-center" style="border-top:4px solid #0a0a0a"><div class="font-mono text-xs font-bold mb-2">TOTAL</div><div class="font-grotesk text-3xl font-bold mb-2">10 500&euro;</div><div class="text-xs text-gray-500 font-space">~24 jours &bull; 5 sprints &bull; 34 livrables</div><div class="mt-2 text-xs font-space text-gray-400">+ 50&euro;/mois/user (Leexi)</div></div>
+      <div class="neo-card p-6 sm:p-8" style="border-left:6px solid #C65D07">
+        <div class="flex flex-col sm:flex-row items-start gap-6">
+          <div class="flex-1">
+            <div class="font-mono text-xs font-bold mb-2 flex items-center gap-2" style="color:#C65D07">PRIX INITIAL</div>
+            <div class="font-grotesk text-3xl font-bold mb-1 line-through" style="color:#999">10 500&euro;</div>
+            <div class="text-xs font-space text-gray-400">MVP 7 000&euro; + Production 3 500&euro;</div>
+          </div>
+          <div class="flex-1">
+            <div class="font-mono text-xs font-bold mb-2 flex items-center gap-2" style="color:#1D6A45">PRIX R&Eacute;DUIT</div>
+            <div class="font-grotesk text-5xl font-bold mb-1" style="color:#C65D07">4 500&euro;</div>
+            <div class="text-xs font-space text-gray-500">10-14 jours &bull; 2-3 sprints &bull; 15 livrables</div>
+          </div>
+          <div class="flex-1">
+            <div class="font-mono text-xs font-bold mb-2" style="color:#C0392B">R&Eacute;DUCTION</div>
+            <div class="font-grotesk text-5xl font-bold mb-1" style="color:#C0392B">-57%</div>
+            <div class="text-xs font-space text-gray-500">Plus grosse r&eacute;duction de tous les modules</div>
+          </div>
+        </div>
+        <div class="mt-6 pt-6" style="border-top:2px solid #e2e8f0">
+          <div class="text-sm font-space text-gray-600">
+            <strong class="text-neo-black">Pourquoi -57% :</strong> Bruno a fourni 65-70% du code. Le scoring MiFID (le composant le plus complexe et le plus critique) est termin&eacute; et test&eacute;. Tous les prompts sont &eacute;crits. Le connector Leexi fonctionne. Le pipeline est orchestr&eacute;. Il reste l'habillage : les templates DOCX manquants, le frontend, la persistence, et le d&eacute;ploiement.
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================ -->
-<!-- NEXT STEPS + CONCLUSION -->
+<!-- 22 / CE QUI EST D&Eacute;J&Agrave; TEST&Eacute; -->
 <!-- ============================================ -->
-
 <section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
   <div class="max-w-4xl mx-auto">
     <div class="anim">
-      <div class="section-number mb-4">PROCHAINE &Eacute;TAPE</div>
+      <div class="section-number mb-4">22 / CE QUI EST D&Eacute;J&Agrave; TEST&Eacute;</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le scoring fonctionne.</h2>
+    </div>
+    <div class="anim neo-card p-6 sm:p-8">
+      <div class="space-y-3 text-sm font-space">
+        <div class="flex items-start gap-2"><span class="tag-fourni">TEST&Eacute;</span> <strong>Scoring BE :</strong> 14 questions, 3 profils, r&eacute;sultats identiques &agrave; l'Excel de r&eacute;f&eacute;rence</div>
+        <div class="flex items-start gap-2"><span class="tag-fourni">TEST&Eacute;</span> <strong>Scoring FR :</strong> 20 questions, 7 profils, alertes ACPR 2024-R-03 correctes</div>
+        <div class="flex items-start gap-2"><span class="tag-fourni">TEST&Eacute;</span> <strong>Routeur :</strong> 5 transcriptions synth&eacute;tiques, d&eacute;tection FR/NL correcte</div>
+        <div class="flex items-start gap-2"><span class="tag-fourni">TEST&Eacute;</span> <strong>Pipeline :</strong> extraction Claude en parall&egrave;le, Module T d&eacute;terministe, forward Advice</div>
+        <div class="flex items-start gap-2"><span class="tag-fourni">TEST&Eacute;</span> <strong>DOCX :</strong> modules C + D g&eacute;n&egrave;rent correctement (en-t&ecirc;te, client, signatures)</div>
+      </div>
+      <div class="mt-4 p-3 bg-neo-gray neo-border-2 text-xs font-space" style="color:#1D6A45">
+        Le coeur logique du syst&egrave;me a d&eacute;j&agrave; &eacute;t&eacute; valid&eacute;. Ce n'est pas un prototype &mdash; c'est du code test&eacute; contre des r&eacute;f&eacute;rentiels Excel.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 23 / OUT OF SCOPE -->
+<!-- ============================================ -->
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#999">23 / OUT OF SCOPE</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Ce qui n'est PAS inclus.</h2>
+    </div>
+    <div class="anim space-y-3">
+      <div class="neo-card p-5 flex items-start gap-4" style="opacity:.6"><span style="background:#999;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700">OUT</span><div><h4 class="font-bold text-sm mb-1">Transcription en temps r&eacute;el</h4><p class="text-xs text-gray-500 font-space">Leexi g&egrave;re la transcription post-appel. Le temps r&eacute;el n'est pas dans le scope.</p></div></div>
+      <div class="neo-card p-5 flex items-start gap-4" style="opacity:.6"><span style="background:#999;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700">OUT</span><div><h4 class="font-bold text-sm mb-1">Analyse de sentiment</h4><p class="text-xs text-gray-500 font-space">D&eacute;tection frustration/satisfaction du client. Int&eacute;ressant mais futur.</p></div></div>
+      <div class="neo-card p-5 flex items-start gap-4" style="opacity:.6"><span style="background:#999;color:#fff;font-size:10px;padding:2px 8px;font-family:'Space Mono',monospace;font-weight:700">OUT</span><div><h4 class="font-bold text-sm mb-1">Int&eacute;gration PBX / centrales t&eacute;l&eacute;phoniques</h4><p class="text-xs text-gray-500 font-space">Leexi g&egrave;re la couche t&eacute;l&eacute;phonique. BrokerONE ne s'int&egrave;gre pas directement avec les PBX.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 24 / PROCHAINE &Eacute;TAPE -->
+<!-- ============================================ -->
+<section class="py-20 px-4" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4">24 / PROCHAINE &Eacute;TAPE</div>
       <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Ce qu'on fait maintenant.</h2>
     </div>
     <div class="anim neo-card p-6 sm:p-8">
       <div class="space-y-4">
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#0a0a0a">1</div><div><h4 class="font-bold text-sm mb-1">Tu valides le scope MVP + Production</h4><p class="text-sm text-gray-500 font-space">18 livrables MVP + 16 livrables production. Si tu veux ajouter ou retirer quelque chose, on ajuste.</p></div></div>
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#0a0a0a">2</div><div><h4 class="font-bold text-sm mb-1">Tu fournis 20+ transcriptions r&eacute;elles</h4><p class="text-sm text-gray-500 font-space">Pour la calibration du scoring MiFID. Des appels vari&eacute;s : bons, moyens, mauvais, courts, longs.</p></div></div>
-        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2"><div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#0a0a0a">3</div><div><h4 class="font-bold text-sm mb-1">Je d&eacute;marre le Sprint 1</h4><p class="text-sm text-gray-500 font-space">Int&eacute;gration Leexi + transcription. Premier livrable visible en 5 jours.</p></div></div>
+        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
+          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#0a0a0a">1</div>
+          <div><h4 class="font-bold text-sm mb-1">Tu valides le scope</h4><p class="text-sm text-gray-500 font-space">15 livrables, 4 500&euro;, 10-14 jours. Si tu veux ajuster, on en parle.</p></div>
+        </div>
+        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
+          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#0a0a0a">2</div>
+          <div><h4 class="font-bold text-sm mb-1">Tu fournis 20+ transcriptions r&eacute;elles</h4><p class="text-sm text-gray-500 font-space">Pour la calibration du scoring MiFID. Des appels vari&eacute;s : bons, moyens, mauvais, courts, longs, bilingues.</p></div>
+        </div>
+        <div class="flex items-start gap-4 p-4 bg-neo-gray neo-border-2">
+          <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center font-mono font-bold text-white" style="background:#0a0a0a">3</div>
+          <div><h4 class="font-bold text-sm mb-1">Je d&eacute;marre le Sprint 1</h4><p class="text-sm text-gray-500 font-space">DOCX + Supabase + TypeScript. Premier livrable visible en 5 jours.</p></div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ============================================ -->
+<!-- 25 / CONCLUSION -->
+<!-- ============================================ -->
 <section class="py-24 px-4" style="background:#C65D07;border-top:3px solid #0a0a0a">
   <div class="max-w-3xl mx-auto text-center text-white">
     <div class="anim">
-      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">CONCLUSION</div>
-      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Chaque appel devient<br>une preuve de conformit&eacute;.</h2>
-      <p class="text-lg font-space mb-4 leading-relaxed" style="color:rgba(255,255,255,.8)">Automatiquement.</p>
-      <p class="text-lg font-space mb-8 leading-relaxed" style="color:rgba(255,255,255,.7)">Le courtier ne change rien &agrave; sa fa&ccedil;on de travailler.<br>Il passe ses appels comme d'habitude.<br>Transcript fait le reste &mdash; du MVP au produit calibr&eacute;, s&eacute;curis&eacute;, professionnel.<br><strong class="text-white">Les premiers courtiers peuvent commencer &agrave; scorer leurs appels.</strong></p>
+      <div class="section-number mb-4" style="color:rgba(255,255,255,.4)">25 / CONCLUSION</div>
+      <h2 class="font-grotesk text-4xl sm:text-5xl font-bold mb-6">Le backend existe.<br>Le scoring fonctionne.<br>Les prompts sont pr&ecirc;ts.</h2>
+      <p class="text-lg font-space mb-8 leading-relaxed" style="color:rgba(255,255,255,.8)">Il reste l'habillage et le d&eacute;ploiement.</p>
+      <div class="grid sm:grid-cols-3 gap-4 mb-8 text-left">
+        <div class="p-4" style="border:2px solid rgba(255,255,255,.3)">
+          <div class="font-mono text-xs mb-2" style="color:rgba(255,255,255,.5)">FOURNI</div>
+          <div class="font-grotesk text-2xl font-bold">65-70%</div>
+          <div class="text-xs font-space mt-1" style="color:rgba(255,255,255,.6)">du code fourni par Bruno</div>
+        </div>
+        <div class="p-4" style="border:2px solid rgba(255,255,255,.3)">
+          <div class="font-mono text-xs mb-2" style="color:rgba(255,255,255,.5)">PRIX</div>
+          <div class="font-grotesk text-2xl font-bold">4 500&euro;</div>
+          <div class="text-xs font-space mt-1" style="color:rgba(255,255,255,.6)">r&eacute;duit de 10 500&euro; (-57%)</div>
+        </div>
+        <div class="p-4" style="border:2px solid rgba(255,255,255,.3)">
+          <div class="font-mono text-xs mb-2" style="color:rgba(255,255,255,.5)">DUR&Eacute;E</div>
+          <div class="font-grotesk text-2xl font-bold">10-14j</div>
+          <div class="text-xs font-space mt-1" style="color:rgba(255,255,255,.6)">2-3 sprints avec d&eacute;mos</div>
+        </div>
+      </div>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
         <a href="https://calendly.com/baptiste-visionia/30min" target="_blank" class="neo-btn bg-white px-6 py-3 font-space text-sm inline-flex items-center gap-2" style="color:#C65D07">&#128222; Planifier un call</a>
         <a href="mailto:baptiste.fort.pro@gmail.com" class="neo-btn px-6 py-3 font-space text-sm inline-flex items-center gap-2" style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.3)">&#9993; R&eacute;pondre par email</a>
@@ -1149,8 +1129,8 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
 <!-- FOOTER -->
 <footer class="py-10 px-4 bg-neo-black text-white" style="border-top:3px solid #0a0a0a">
   <div class="max-w-5xl mx-auto text-center">
-    <div class="neo-card-sm px-6 py-3 inline-block font-mono text-sm mb-3" style="background:#C65D07;border-color:#C65D07">Transcript MVP + Production &mdash; Broker<span style="color:rgba(255,255,255,.6)">ONE</span></div>
-    <p class="text-gray-500 text-sm font-space">MVP + Production &bull; 10 500&euro; HT &bull; Avril 2026 &bull; Baptiste Fort &rarr; Bruno</p>
+    <div class="neo-card-sm px-6 py-3 inline-block font-mono text-sm mb-3" style="background:#C65D07;border-color:#C65D07">Transcript &mdash; 65% fourni &mdash; Broker<span style="color:rgba(255,255,255,.6)">ONE</span></div>
+    <p class="text-gray-500 text-sm font-space">4 500&euro; HT &bull; 10-14 jours &bull; Avril 2026 &bull; Baptiste Fort &rarr; Bruno</p>
   </div>
 </footer>
 
