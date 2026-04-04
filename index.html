@@ -19,24 +19,16 @@ h2{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;margi
 .card:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 #0a0a0a}
 .badge{display:inline-block;padding:2px 10px;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;color:#fff;margin-bottom:10px}
 .tag{display:inline-block;padding:2px 8px;font-family:'Space Mono',monospace;font-size:9px;font-weight:700;margin-left:6px}
-.card h3{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:4px}
-.card .price{font-family:'Space Mono',monospace;font-size:1.1rem;font-weight:700;margin-bottom:4px}
-.card .old-price{font-family:'Space Mono',monospace;font-size:.85rem;text-decoration:line-through;color:#999}
-.card p{font-size:12px;color:#666;line-height:1.5;margin-top:6px}
+.card h3{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:6px}
+.card p{font-size:12px;color:#666;line-height:1.5}
 .footer{text-align:center;font-family:'Space Mono',monospace;font-size:11px;color:#aaa;margin-top:40px}
-.summary{border:3px solid #0a0a0a;box-shadow:6px 6px 0 #0a0a0a;padding:20px 30px;background:#0a0a0a;color:#fff;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
-.summary .label{font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,.5);letter-spacing:.05em}
-.summary .amount{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700}
-.note{font-family:'Space Mono',monospace;font-size:11px;color:#888;margin-top:6px;margin-bottom:20px}
-.economy{display:inline-block;padding:2px 8px;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;background:#1D6A45;color:#fff}
 </style>
 </head>
 <body>
 <div class="container">
   <h1>Broker<span>ONE</span></h1>
-  <div class="subtitle">Présentations par module — Baptiste Fort → Bruno<br>Prix mis à jour avec le code fourni par Bruno</div>
+  <div class="subtitle">Présentations par module — Baptiste Fort → Bruno</div>
 
-  <!-- PRIORITAIRE -->
   <h2>&#9654; Prioritaire — prochaines étapes</h2>
 
   <div class="grid">
@@ -45,25 +37,16 @@ h2{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;margi
       <span class="tag" style="background:#1D6A45;color:#fff">MVP PAYÉ ✓</span>
       <span class="tag" style="background:#0a0a0a;color:#fff">CODE V2 FOURNI</span>
       <h3>Advice Production</h3>
-      <div class="price" style="color:#C0392B">5 500€</div>
-      <p>Merge v1+v2, rebrand, multilingue NL, GDPR, M365, setup serveur inclus. 14-17 jours.</p>
+      <p>Merge v1+v2, rebrand BrokerONE, multilingue NL, GDPR, M365 multi-tenant, setup serveur inclus.</p>
     </a>
     <a href="sentinel-complete.html" class="card" style="border-left:6px solid #2980B9">
       <div class="badge" style="background:#2980B9">SENTINEL</div>
       <span class="tag" style="background:#1D6A45;color:#fff">BACKEND FOURNI</span>
       <h3>Sentinel</h3>
-      <div class="price" style="color:#2980B9">7 500€</div>
-      <div class="old-price">10 000€</div>
-      <p>Pipeline fourni par Bruno (classifier, handlers, connectors). Reste: dashboard, Supabase, multi-tenant. 18-22 jours.</p>
+      <p>Dispatcher email intelligent. Pipeline backend fourni par Bruno. Reste : dashboard, Supabase, multi-tenant.</p>
     </a>
   </div>
 
-  <div class="summary">
-    <div><div class="label">PROCHAINE FACTURE</div><div class="amount">13 000€ <span style="font-size:.8rem;color:rgba(255,255,255,.5)">HT</span></div></div>
-    <div style="text-align:right"><div class="label">ADVICE 5 500 + SENTINEL 7 500</div><div style="font-family:'Space Mono';font-size:11px;color:rgba(255,255,255,.4);margin-top:4px">MVP Advice (7 500€) déjà payé</div></div>
-  </div>
-
-  <!-- MODULES SUIVANTS -->
   <h2>&#9655; Modules suivants</h2>
 
   <div class="grid">
@@ -71,51 +54,29 @@ h2{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;margi
       <div class="badge" style="background:#1D6A45">AUGMENTED</div>
       <span class="tag" style="background:#1D6A45;color:#fff">ENGINE + KNOWLEDGE FOURNIS</span>
       <h3>Augmented</h3>
-      <div class="price" style="color:#1D6A45">14 000€</div>
-      <div class="old-price">20 000€</div>
-      <p>Engine IA + 290K tokens knowledge packs fournis. Reste: frontend, PDF, auth. 22-28 jours.</p>
+      <p>Devoir de conseil automatisé. Engine IA + 290K tokens de knowledge packs réglementaires fournis par Bruno.</p>
     </a>
     <a href="checkup-complete.html" class="card">
       <div class="badge" style="background:#8E44AD">CHECKUP</div>
       <span class="tag" style="background:#1D6A45;color:#fff">PIPELINE + BRIO FOURNIS</span>
       <h3>Checkup</h3>
-      <div class="price" style="color:#8E44AD">11 000€</div>
-      <div class="old-price">15 500€</div>
-      <p>Pipeline IA + IPID 218 + Brio CRM + reports fournis. Reste: frontend, campaign mode. 18-24 jours.</p>
+      <p>Audit portefeuille 360°. Pipeline IA + IPID 218 garanties + Brio CRM + reports HTML/DOCX fournis.</p>
     </a>
     <a href="transcript-complete.html" class="card">
       <div class="badge" style="background:#C65D07">TRANSCRIPT</div>
       <span class="tag" style="background:#1D6A45;color:#fff">65-70% FOURNI</span>
-      <span class="economy">-57%</span>
       <h3>Transcript</h3>
-      <div class="price" style="color:#C65D07">4 500€</div>
-      <div class="old-price">10 500€</div>
-      <p>Le plus avancé. Leexi, scoring MiFID, prompts, DOCX, email — quasi tout existe. 10-14 jours.</p>
+      <p>Conformité des appels. Le plus avancé : Leexi, scoring MiFID, prompts, DOCX, email — quasi tout existe.</p>
     </a>
     <a href="connect-complete.html" class="card">
       <div class="badge" style="background:#E74C3C">CONNECT</div>
       <span class="tag" style="background:#999;color:#fff">SCAFFOLDING</span>
       <h3>Connect</h3>
-      <div class="price" style="color:#E74C3C">11 500€</div>
-      <div class="old-price">13 000€</div>
-      <p>Scaffolding fourni (DB, types, shells). APIs réelles à construire (4 réseaux). 22-28 jours.</p>
+      <p>Réseaux sociaux & acquisition. Scaffolding fourni. APIs réelles à construire (4 réseaux).</p>
     </a>
   </div>
 
-  <div class="note">Chaque prix tient compte du code fourni par Bruno. Analyse détaillée dans chaque présentation.</div>
-
-  <div class="summary">
-    <div>
-      <div class="label">TOTAL TOUS MODULES</div>
-      <div class="amount">54 000€ <span style="font-size:.8rem;color:rgba(255,255,255,.5)">HT</span></div>
-    </div>
-    <div style="text-align:right">
-      <div class="label">ANCIEN TOTAL : 74 500€ — ÉCONOMIE : 20 500€ (-28%)</div>
-      <div style="font-family:'Space Mono';font-size:11px;color:rgba(255,255,255,.4);margin-top:4px">MVP Advice payé (7 500€) — Reste 46 500€ à facturer</div>
-    </div>
-  </div>
-
-  <div class="footer">Baptiste Fort → Bruno — Avril 2026<br>Prix mis à jour après analyse du code fourni par Bruno</div>
+  <div class="footer">Baptiste Fort → Bruno — Avril 2026</div>
 </div>
 </body>
 </html>
