@@ -188,6 +188,49 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
       <div class="neo-card p-4 text-center stat-card"><div class="text-xs text-gray-400 font-space mb-1">Dur&eacute;e</div><div class="font-space font-bold text-2xl stat-number">14-17j</div><div class="text-xs font-space text-gray-400">3 SPRINTS + BUFFER</div></div>
       <div class="neo-card p-4 text-center stat-card"><div class="text-xs text-gray-400 font-space mb-1">Livrables</div><div class="font-space font-bold text-2xl stat-number">19</div><div class="text-xs font-space text-gray-400">ITEMS</div></div>
     </div>
+
+    <!-- CALLOUT : CE QUE CE DEVIS COUVRE -->
+    <div class="anim neo-card p-6 sm:p-8 mt-8" style="border-left:6px solid #C0392B;background:#fff">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="tag-prod">IMPORTANT</span>
+        <div class="section-number" style="color:#C0392B">CE QUE CE DEVIS COUVRE</div>
+      </div>
+      <h3 class="font-grotesk text-2xl sm:text-3xl font-bold mb-2">Ce que ce devis couvre</h3>
+      <p class="text-sm text-gray-500 font-space mb-6">(et que tu n'imagines peut-&ecirc;tre pas)</p>
+      <div class="grid sm:grid-cols-2 gap-3 mb-6">
+        <div class="p-3 flex items-start gap-3 bg-neo-gray neo-border-2">
+          <span class="flex-shrink-0 font-bold" style="color:#C0392B">&#10003;</span>
+          <span class="text-sm font-space"><strong>Migration Supabase compl&egrave;te</strong> (de mon instance vers la tienne)</span>
+        </div>
+        <div class="p-3 flex items-start gap-3 bg-neo-gray neo-border-2">
+          <span class="flex-shrink-0 font-bold" style="color:#C0392B">&#10003;</span>
+          <span class="text-sm font-space"><strong>Multilingue NL complet</strong> (interface + emails + page tampon + templates)</span>
+        </div>
+        <div class="p-3 flex items-start gap-3 bg-neo-gray neo-border-2">
+          <span class="flex-shrink-0 font-bold" style="color:#C0392B">&#10003;</span>
+          <span class="text-sm font-space"><strong>Multi-tenant M365 test&eacute;</strong> avec de vrais comptes Azure AD</span>
+        </div>
+        <div class="p-3 flex items-start gap-3 bg-neo-gray neo-border-2">
+          <span class="flex-shrink-0 font-bold" style="color:#C0392B">&#10003;</span>
+          <span class="text-sm font-space"><strong>Setup serveur Hetzner</strong> + Nginx + SSL + DNS + migration du site vitrine</span>
+        </div>
+        <div class="p-3 flex items-start gap-3 bg-neo-gray neo-border-2">
+          <span class="flex-shrink-0 font-bold" style="color:#C0392B">&#10003;</span>
+          <span class="text-sm font-space"><strong>Politique GDPR compl&egrave;te</strong> + cron cleanup automatique</span>
+        </div>
+        <div class="p-3 flex items-start gap-3 bg-neo-gray neo-border-2">
+          <span class="flex-shrink-0 font-bold" style="color:#C0392B">&#10003;</span>
+          <span class="text-sm font-space"><strong>Tests E2E</strong> + onboarding 2-3 courtiers pilotes</span>
+        </div>
+        <div class="p-3 flex items-start gap-3 bg-neo-gray neo-border-2 sm:col-span-2">
+          <span class="flex-shrink-0 font-bold" style="color:#C0392B">&#10003;</span>
+          <span class="text-sm font-space"><strong>Rebrand visuel complet</strong> (couleurs, logo, emails, page tampon, favicon, OG images)</span>
+        </div>
+      </div>
+      <div class="p-4 neo-border-2" style="background:#0a0a0a;color:#fff">
+        <p class="text-sm font-space leading-relaxed">Ce n'est pas juste un rebrand. C'est le passage d'un <strong style="color:#C0392B">prototype</strong> &agrave; un <strong style="color:#1D6A45">produit que 50+ courtiers peuvent utiliser en conditions r&eacute;elles</strong>.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -442,6 +485,74 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
     </div>
     <div class="anim neo-card p-5" style="border-left:6px solid #1E3A5F">
       <p class="text-sm font-space text-gray-600"><strong>Ce serveur servira aussi pour les modules futurs.</strong> Un seul serveur, plusieurs apps, un seul co&ucirc;t d'h&eacute;bergement.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================ -->
+<!--  MVP vs PRODUCTION — TABLEAU COMPARATIF  -->
+<!-- ============================================ -->
+<section class="py-20 px-4 bg-neo-gray" style="border-top:3px solid #0a0a0a">
+  <div class="max-w-4xl mx-auto">
+    <div class="anim">
+      <div class="section-number mb-4" style="color:#C0392B">MVP vs PRODUCTION</div>
+      <h2 class="font-grotesk text-3xl sm:text-5xl font-bold mb-4 leading-tight">Le MVP c'&eacute;tait un prototype qui marche.<br><span style="color:#C0392B">Voici ce qu'il faut pour que &ccedil;a tienne en production.</span></h2>
+      <p class="text-gray-600 font-space mb-8">Ce que change concr&egrave;tement le passage de la v1 pay&eacute;e &agrave; la version production.</p>
+    </div>
+
+    <div class="anim neo-card overflow-hidden">
+      <!-- Header -->
+      <div class="grid grid-cols-3" style="background:#0a0a0a;color:#fff">
+        <div class="p-4 font-mono text-xs font-bold" style="letter-spacing:.05em">ASPECT</div>
+        <div class="p-4 font-mono text-xs font-bold border-l border-gray-700" style="letter-spacing:.05em">MVP (LIVR&Eacute;)</div>
+        <div class="p-4 font-mono text-xs font-bold border-l border-gray-700" style="letter-spacing:.05em;color:#C0392B">PRODUCTION (CE DEVIS)</div>
+      </div>
+      <!-- Rows -->
+      <div class="grid grid-cols-3 text-sm" style="border-top:2px solid #0a0a0a">
+        <div class="p-4 font-bold bg-neo-gray">Utilisateurs</div>
+        <div class="p-4 font-space text-gray-600" style="border-left:2px solid #0a0a0a">1 courtier de test</div>
+        <div class="p-4 font-space" style="border-left:2px solid #0a0a0a;color:#1D6A45"><strong>50+ courtiers en prod</strong></div>
+      </div>
+      <div class="grid grid-cols-3 text-sm" style="border-top:2px solid #0a0a0a">
+        <div class="p-4 font-bold bg-neo-gray">Langues</div>
+        <div class="p-4 font-space text-gray-600" style="border-left:2px solid #0a0a0a">FR uniquement</div>
+        <div class="p-4 font-space" style="border-left:2px solid #0a0a0a;color:#1D6A45"><strong>FR + NL complet</strong></div>
+      </div>
+      <div class="grid grid-cols-3 text-sm" style="border-top:2px solid #0a0a0a">
+        <div class="p-4 font-bold bg-neo-gray">Base de donn&eacute;es</div>
+        <div class="p-4 font-space text-gray-600" style="border-left:2px solid #0a0a0a">Mon Supabase</div>
+        <div class="p-4 font-space" style="border-left:2px solid #0a0a0a;color:#1D6A45"><strong>Ton Supabase (migration)</strong></div>
+      </div>
+      <div class="grid grid-cols-3 text-sm" style="border-top:2px solid #0a0a0a">
+        <div class="p-4 font-bold bg-neo-gray">Serveur</div>
+        <div class="p-4 font-space text-gray-600" style="border-left:2px solid #0a0a0a">Vercel (gratuit)</div>
+        <div class="p-4 font-space" style="border-left:2px solid #0a0a0a;color:#1D6A45"><strong>Hetzner production</strong></div>
+      </div>
+      <div class="grid grid-cols-3 text-sm" style="border-top:2px solid #0a0a0a">
+        <div class="p-4 font-bold bg-neo-gray">Microsoft 365</div>
+        <div class="p-4 font-space text-gray-600" style="border-left:2px solid #0a0a0a">1 compte test</div>
+        <div class="p-4 font-space" style="border-left:2px solid #0a0a0a;color:#1D6A45"><strong>Multi-tenant r&eacute;el</strong></div>
+      </div>
+      <div class="grid grid-cols-3 text-sm" style="border-top:2px solid #0a0a0a">
+        <div class="p-4 font-bold bg-neo-gray">GDPR</div>
+        <div class="p-4 font-space text-gray-600" style="border-left:2px solid #0a0a0a">Basique</div>
+        <div class="p-4 font-space" style="border-left:2px solid #0a0a0a;color:#1D6A45"><strong>Politique compl&egrave;te + cron</strong></div>
+      </div>
+      <div class="grid grid-cols-3 text-sm" style="border-top:2px solid #0a0a0a">
+        <div class="p-4 font-bold bg-neo-gray">Tests</div>
+        <div class="p-4 font-space text-gray-600" style="border-left:2px solid #0a0a0a">Manuels</div>
+        <div class="p-4 font-space" style="border-left:2px solid #0a0a0a;color:#1D6A45"><strong>E2E + courtiers pilotes</strong></div>
+      </div>
+      <div class="grid grid-cols-3 text-sm" style="border-top:2px solid #0a0a0a">
+        <div class="p-4 font-bold bg-neo-gray">Branding</div>
+        <div class="p-4 font-space text-gray-600" style="border-left:2px solid #0a0a0a">HiBroker (ancien)</div>
+        <div class="p-4 font-space" style="border-left:2px solid #0a0a0a;color:#1D6A45"><strong>BrokerONE (nouveau)</strong></div>
+      </div>
+    </div>
+
+    <div class="anim neo-card p-5 mt-6" style="border-left:6px solid #C0392B">
+      <p class="text-sm font-space text-gray-600">Chaque ligne de droite = du travail r&eacute;el, test&eacute; et livr&eacute; dans ce devis. <strong>Ce n'est pas "reprendre une app qui existe"</strong> &mdash; c'est la rendre utilisable par 50 courtiers, dans deux langues, sur ton infra, avec ton branding, tes comptes M365, ta politique GDPR.</p>
     </div>
   </div>
 </section>
@@ -1251,6 +1362,17 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
             <p class="text-sm font-space" style="color:#856404">Marge de s&eacute;curit&eacute; pour : retours des courtiers test, ajustements post-d&eacute;mo, impr&eacute;vus techniques.</p>
           </div>
           <div class="text-xs font-mono flex-shrink-0" style="color:#856404">0-4 jours</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOTE : DENSIT&Eacute; DU TRAVAIL R&Eacute;EL -->
+    <div class="anim neo-card p-6" style="border-left:6px solid #C0392B;background:#0a0a0a;color:#fff">
+      <div class="flex items-start gap-4">
+        <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center font-mono font-bold" style="background:#C0392B;color:#fff;border:2px solid #fff">!</div>
+        <div class="flex-1">
+          <div class="section-number mb-2" style="color:#C0392B">POURQUOI 14-17 JOURS SUFFISENT</div>
+          <p class="text-sm sm:text-base font-space leading-relaxed">14-17 jours peut sembler peu pour ce scope, mais <strong>ton code v2 + mon MVP v1 fournissent d&eacute;j&agrave; 80% des briques</strong>. Les 20% restants sont les plus critiques&nbsp;: migration, tests r&eacute;els, multi-tenant, multilingue. <strong style="color:#C0392B">Chaque jour compte.</strong></p>
         </div>
       </div>
     </div>
