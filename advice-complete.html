@@ -278,7 +278,7 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
     <div class="anim grid sm:grid-cols-3 gap-4">
       <div class="neo-card p-5"><div class="flex items-center gap-2 mb-3"><span class="tag-done">FOURNI &#10003;</span></div><h4 class="font-bold text-sm mb-2">3 endpoints backend</h4><p class="text-xs text-gray-500 font-space">POST /reclamation, POST /rgpd, POST /ambassador. Auth par shared secret + Zod validation.</p></div>
       <div class="neo-card p-5"><div class="flex items-center gap-2 mb-3"><span class="tag-done">FOURNI &#10003;</span></div><h4 class="font-bold text-sm mb-2">441 lignes de prompts IA</h4><p class="text-xs text-gray-500 font-space">AR ACPR 2024-R-02, r&eacute;ponse 3 tons, 6 templates RGPD (acc&egrave;s, portabilit&eacute;, rectification, opposition, directives, refus).</p></div>
-      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-3"><span class="tag-done">FOURNI &#10003;</span></div><h4 class="font-bold text-sm mb-2">4 tables SQL + RLS</h4><p class="text-xs text-gray-500 font-space">reclamations_advice, demandes_droits_advice, ambassadeurs_advice, audit_logs. Triggers + fonctions.</p></div>
+      <div class="neo-card p-5"><div class="flex items-center gap-2 mb-3"><span class="tag-done">FOURNI &#10003;</span></div><h4 class="font-bold text-sm mb-2">4 tables SQL + RLS</h4><p class="text-xs text-gray-500 font-space">reclamations_advice, demandes_droits_advice, ambassadeurs_advice, sentinel_logs. Triggers + fonctions.</p></div>
       <div class="neo-card p-5"><div class="flex items-center gap-2 mb-3"><span class="tag-done">FOURNI &#10003;</span></div><h4 class="font-bold text-sm mb-2">Types TS + Zod</h4><p class="text-xs text-gray-500 font-space">Interfaces TypeScript + validateurs Zod pour chaque endpoint et chaque table.</p></div>
       <div class="neo-card p-5"><div class="flex items-center gap-2 mb-3"><span class="tag-done">FOURNI &#10003;</span></div><h4 class="font-bold text-sm mb-2">Config dynamique FR/BE</h4><p class="text-xs text-gray-500 font-space">reg-config.ts : switch ACPR/CNIL (France) vs FSMA/APD (Belgique) automatique selon pays.</p></div>
       <div class="neo-card p-5"><div class="flex items-center gap-2 mb-3"><span class="tag-done">FOURNI &#10003;</span></div><h4 class="font-bold text-sm mb-2">Rate limiting</h4><p class="text-xs text-gray-500 font-space">Protection anti-abus configur&eacute;e sur chaque endpoint public.</p></div>
@@ -657,7 +657,7 @@ body{font-family:'Inter',sans-serif;background:#fefefe;color:#0a0a0a;overflow-x:
               <div class="flex items-start gap-3">
                 <div class="font-mono text-xs font-bold px-2 py-1" style="background:#C0392B;color:#fff">TABLE 4</div>
                 <div>
-                  <h5 class="font-bold text-sm">audit_logs</h5>
+                  <h5 class="font-bold text-sm">sentinel_logs</h5>
                   <p class="text-xs text-gray-500 font-space">Journal d'audit complet. Chaque appel vers les endpoints est trac&eacute;. Idempotence (pas de doublon si la m&ecirc;me donn&eacute;e arrive deux fois).</p>
                 </div>
               </div>
